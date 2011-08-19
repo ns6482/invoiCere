@@ -6,7 +6,7 @@ gem 'haml'
 gem "nifty-generators", :group => :development
 gem "friendly_id"
 gem "compass"
-
+gem "simple_form"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

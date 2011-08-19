@@ -1,7 +1,13 @@
+require 'subdomain' 
+
 VisioInvoiceV3::Application.routes.draw do
   devise_for :users
 
-  resources :companies
+  #resources :companies
+  resource :company, :only => [:new, :create]
+  constraints(Subdomain) do  
+     match '/' => 'dashboard#index'    
+  end  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -52,7 +58,7 @@ VisioInvoiceV3::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => "companies#index"
+   root :to => "home#index"
 
   # See how all your routes lay out with "rake routes"
 

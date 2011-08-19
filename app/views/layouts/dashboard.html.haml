@@ -1,0 +1,31 @@
+%html{html_attrs(lang = 'en')}
+!!!
+%head= render 'layouts/head'
+%body{:class => "two-col"}
+ #container
+  #header
+   #top-bar
+    #welcome_console
+    -if !current_user.nil?
+     -if !current_user.name.nil?
+      %strong="Welcome " + current_user.name
+    #settings_console
+     %ul{:class => "horizontal"}
+      - if can? :update, current_company
+       %li= link_to "Settings", edit_company_path
+      %li= render 'devise/menu/registration_items'
+      %li= render 'devise/menu/login_items'
+   =h yield(:header)
+   #tabs
+    =render_navigation(:context => :main)
+    =render_navigation(:context=> :quick)
+  #dashboard-content
+   #dashboard-left= yield(:left)
+   #dashboard-centre
+    -if show_title?
+     #form-title
+      %h3=h yield(:title)
+    = display_flash_messages
+    =yield
+   #dashboard-right=h yield(:right)
+  #footer= render 'layouts/footer'

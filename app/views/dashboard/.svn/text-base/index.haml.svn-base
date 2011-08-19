@@ -1,0 +1,34 @@
+- title "Dashboard"
+#dashboard-summary
+ -if @invoices.nil?
+  %h3 No Invoices
+ -else
+  -@invoices_states.each do |state, invoices|
+   %h3{:class=> "state expIco"}= state + " (" + invoices.count.to_s + ")"
+   .panel
+    %div{:id=> state.to_s.tr(" ", "-")}
+     %table{:id => "invoices"}
+      %tr
+       %th Created
+       %th Client Name
+       %th Title
+       %th Invoice Date
+       %th Due Date
+       %th Total Cost
+      -invoices.each do |invoice|
+       %tr
+        %td= invoice.created_at.strftime('%d/%m/%Y')
+        %td=link_to_if can?(:read, invoice), invoice.title, invoice
+        %td= invoice.client.name
+        %td= invoice.invoice_date.strftime('%d/%m/%Y')
+        %td
+         - if !invoice.due_date.nil?
+          = invoice.due_date.strftime('%d/%m/%Y')
+         -else
+          ='NA'
+        %td= number_to_currency invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","
+ 
+ #dashboard-calendar
+  = render :partial => "calendar"
+
+

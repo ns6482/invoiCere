@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ishanehal_vb/!svn/ver/286/VisioInvoice/app/views/dashboard
+END
+index.haml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ishanehal_vb/!svn/ver/286/VisioInvoice/app/views/dashboard/index.haml
+END
+_calendar.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/232/VisioInvoice/app/views/dashboard/_calendar.haml
+END
+index.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ishanehal_vb/!svn/ver/231/VisioInvoice/app/views/dashboard/index.js.erb
+END

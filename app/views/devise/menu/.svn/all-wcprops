@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/ishanehal_vb/!svn/ver/288/VisioInvoice/app/views/devise/menu
+END
+_login_items.haml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/ishanehal_vb/!svn/ver/288/VisioInvoice/app/views/devise/menu/_login_items.haml
+END
+_registration_items.haml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ishanehal_vb/!svn/ver/288/VisioInvoice/app/views/devise/menu/_registration_items.haml
+END

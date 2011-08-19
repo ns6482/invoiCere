@@ -1,0 +1,17 @@
+%title
+ = h(yield(:title) || "Untitled")
+= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js', 'nested_form', 'application', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js', 'jquery.form', 'jquery.collapser'
+= javascript_include_tag 'jquery.effects.blind.js', 'jquery.effects.bounce.js','jquery.effects.clip.js', 'jquery.effects.core.js', 'jquery.effects.drop.js', 'jquery.effects.explode.js', 'jquery.effects.fade.js', 'jquery.effects.fold.js', 'jquery.effects.highlight.js', 'jquery.effects.pulsate.js', 'jquery.effects.scale.js', 'jquery.effects.shake.js', 'jquery.effects.slide.js', 'jquery.effects.transfer.js', 'jquery.qtip-1.0.0-rc3.min', 'jquery.jscrollpane.min','jquery.rating.pack', :cache => true
+=# stylesheet_link_tag 'formtastic', 'formtastic_changes', :cache => 'base'
+= stylesheet_link_tag 'flash'
+= stylesheet_link_tag 'compiled/screen', :media => 'screen, projection'
+= stylesheet_link_tag 'compiled/print', :media => 'print'
+/[if IE]
+= stylesheet_link_tag 'compiled/ie', :media => 'screen, projection'
+/[if lt IE 7]
+= stylesheet_link_tag 'compiled/ie6.css', :media => 'screen, projection'
+= stylesheet_link_tag 'compiled/link_icons.css', :media => 'screen, projection'
+= stylesheet_link_tag 'jquery-ui.css', :media => 'screen, projection'
+= stylesheet_link_tag 'jquery.jscrollpane.css', :media => 'screen, projection'
+= stylesheet_link_tag 'jquery.rating.css', :media => 'screen, projection'
+= yield :head

@@ -5,27 +5,28 @@ class User < ActiveRecord::Base
   #has_many :payments  
 
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  # :token_authenticatable, :encryptable, :confirmable, :validatable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, #:registerable,
-         :recoverable, :rememberable, :trackable, :validatable,  :authentication_keys =>[:email, :company_id]#,:encryptable,#,:invitable
+         :recoverable, :rememberable, :trackable,  :authentication_keys =>[:email, :company_id]#,:encryptable,#,:invitable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  #attr_accessible :email, :password, :password_confirmation, :remember_me
 
   accepts_nested_attributes_for :company#, :roles
-
-
   attr_protected :company_id,  :email#, :client_id
 
-  validates_uniqueness_of :email, :scope => [:company_id, :email]
+
   validates_associated :company
   validates_confirmation_of :password
   validates_length_of :password, :within => 6..20, :allow_blank => true
 
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates_presence_of   :email
   validates_format_of     :email, :with  => EmailRegex, :allow_blank => false
+  
 
+  validates :email, :presence => true, :uniqueness => {:scope => [:company_id, :email]}
+
+  
   validate :has_roles?
 
 

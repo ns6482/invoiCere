@@ -1,0 +1,75 @@
+#form-title  
+  color: black
+  text-align: center
+  padding-top: 5px
+  font-size: 1.2em
+  //padding-bottom: 2px
+
+.inline-errors
+  color: red
+.errorExplanation
+  color: red
+
+form.formtastic
+  +float-form-left
+  li
+    padding-top: 4px
+  label
+    font-weight: bold
+
+#form-main, #form-bottom
+  +column(18)
+  :border 3px solid #999
+  +border-radius(8px, 8px)
+  padding: 5px
+  background-color: whitesmoke
+  //input, select,textarea
+    //:font-size 12px
+
+  //label
+    //:line-height 1.4em
+    //:font-size 12px
+
+#form-bottom
+  //:height 100px
+  //:overflow-y scroll
+
+#form-right, #form-left
+  label
+    clear: both
+    display: block
+    float: none
+    width: auto
+
+  :border 3px solid #999
+  +border-radius(8px, 8px)
+  padding: 5px
+  background-color: whitesmoke
+
+
+  //+prepend(1)
+  input, textarea, select
+    :font-family inherit
+    :font-size 12px
+  textarea, input
+    :border 1px solid #999
+    :padding 1px 1px
+
+#form-right
+  :width 60px  
+
+#filter_link
+  :font-size 12px
+  +hover-link
+
+#interactive
+  :display none
+
+#load
+  :display none
+
+#search_form
+  +column(24)
+
+.cancel_button    
+  :float right

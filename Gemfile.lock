@@ -32,7 +32,9 @@ GEM
     babosa (0.3.5)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    cancan (1.6.5)
     chunky_png (1.2.1)
+    cocaine (0.2.0)
     compass (0.11.5)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -43,6 +45,12 @@ GEM
       warden (~> 1.0.3)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    factory_girl (2.0.4)
+    factory_girl_rails (1.1.0)
+      factory_girl (~> 2.0.0)
+      railties (>= 3.0.0)
+    fancy-buttons (1.1.2)
+      compass (>= 0.11)
     friendly_id (3.2.1.1)
       babosa (~> 0.3.0)
     fssm (0.2.7)
@@ -58,6 +66,11 @@ GEM
     nifty-generators (0.4.6)
     nokogiri (1.5.0)
     orm_adapter (0.0.5)
+    paperclip (2.3.16)
+      activerecord (>= 2.3.0)
+      activesupport (>= 2.3.2)
+      cocaine (>= 0.0.2)
+      mime-types
     polyglot (0.3.2)
     rack (1.2.3)
     rack-mount (0.6.14)
@@ -81,6 +94,8 @@ GEM
     rake (0.9.2)
     rdoc (3.9.2)
     sass (3.1.7)
+    simple-navigation (3.5.0)
+      activesupport (>= 2.3.2)
     simple_form (1.4.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -101,13 +116,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan
   compass
   devise
+  factory_girl_rails
+  fancy-buttons
   friendly_id
   haml
   mocha
   nifty-generators
+  paperclip
   rails (= 3.0.10)
+  simple-navigation
   simple_form
   sqlite3
   webrat

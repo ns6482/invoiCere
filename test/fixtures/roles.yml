@@ -1,0 +1,15 @@
+admin:
+  id: 1
+  name: Admin
+
+standard:
+  id: 2
+  name: Standard
+
+viewer:
+  id: 3
+  name: Viewer
+
+client:
+  id: 7
+  name: Client

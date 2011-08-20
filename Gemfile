@@ -1,5 +1,10 @@
 source 'http://rubygems.org'
 
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+
 gem 'rails', '3.0.10'
 gem 'devise'
 gem 'haml'
@@ -7,11 +12,11 @@ gem "nifty-generators", :group => :development
 gem "friendly_id"
 gem "compass"
 gem "simple_form"
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem "paperclip"
+gem "cancan"
 gem 'sqlite3'
+gem "fancy-buttons"
+gem "simple-navigation"
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -34,5 +39,7 @@ gem 'sqlite3'
 # and rake tasks are available in development mode:
 group :development, :test do
   gem 'webrat'
+  gem "mocha"
+  gem 'factory_girl_rails'
 end
-gem "mocha", :group => :test
+

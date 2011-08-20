@@ -1,0 +1,31 @@
+#welcome_console
+  padding-right: 15px
+  padding-top: 5px
+  
+#settings_console
+  +float-right
+  //+append(1)
+  padding-right: 15px
+  padding-top: 5px
+  @extend .standard_header_font
+  ul
+    li
+    a
+      color: black
+
+#logo
+  padding: $blueprint-grid-margin
+  +prepend(1)
+  +column(2)
+  h1,h3,h4
+    @extend .standard_header_font
+    color: black
+
+
+#top-bar
+  height: 30px
+  padding_top: 2px
+  //+linear-gradient(color-stops(black, gray))
+  //background-color: gray
+  a
+    color: black

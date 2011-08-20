@@ -1,0 +1,27 @@
+$width: 24
+$left: 3
+$centre: 18
+$right: 3
+
+.two-col
+  //background:  darkgrey
+#dashboard-content
+  background: white
+  +container
+  #header, #footer
+    +column($width)
+  #dashboard-left
+    +column($left)
+  #dashboard-centre
+    +column($centre)
+    background: white
+    padding-left: 10px
+  #dashboard-right
+    +column($right, last)
+
+#header
+  background-color: white
+
+#footer
+  padding: 10px  
+  text-align: center

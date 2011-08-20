@@ -1,0 +1,75 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset"
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base"
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint"
+
+// Combine the partials into a single screen stylesheet.
+@import "partials/page"
+@import "partials/form"
+@import "partials/two_col"
+
+//@import "partials/formtastic_base"
+//@import "partials/skintastic"
+
+@import "compass/utilities/lists/horizontal-list"
+@import "blueprint/colors"
+@import "blueprint/grid"
+@import "compass/css3/border-radius"
+@import "compass/css3/gradient"
+@import "compass/css3/text-shadow"
+@import "compass/utilities/links/hover-link"
+@import "blueprint/interaction"
+@import "compass/layout"
+@import "compass/utilities/tables"
+@import "compass/utilities/tables/borders"
+@import "blueprint/interaction"
+@import "compass/css3/box-shadow"
+//@import "blueprint/form"
+@import "blueprint/buttons"
+
+@import "blueprint/link-icons"
+
+@import "system_partials/show_invoice"
+@import "system_partials/layout"
+@import "system_partials/tabs"
+@import "system_partials/pagination"
+@import "system_partials/dashboard"
+@import "system_partials/ajax_form"
+@import "system_partials/buttons"
+@import "system_partials/topbar"
+@import "system_partials/forms"
+@import "system_partials/lists"
+@import "system_partials/comments"
+@import "system_partials/rating"
+@import "system_partials/panel"
+
+
+$width: 24
+$left: 3
+$centre: 14
+$right: 3
+
+$header-background-color: #404040
+$header-background-color2: #303030
+$navigation-color:#404040
+$navigation-selected-color:#303030
+$default-border-radius: 5px
+$default-text-shadow-color: #404040
+
+$blueprint-grid-columns: 24px
+$blueprint-grid-width: 30px
+$blueprint-grid-margin: 10px
+
++blueprint-typography
++sticky-footer(72px, "#layout", "#layout_footer", "#footer")
+
+=custom-fancy-gradient($color1, $color2)
+  +radial-gradient(color_stops($color1, darken($color2, 5) 30px), "50% 10%")
+=invert-custom-fancy-gradient($color1, $color2)
+  +custom-fancy-gradient(lighten($color2, 10), lighten($color2, 25))
+
++link-icons

@@ -1,12 +1,42 @@
-- title "Company"
-
+-title "Company"
 %p
-  %strong Name:
-  = @company.name
-
+  %h2 Company Settings
+  %strong Subdomain:
+  =h @company.name
+  %br
+  %strong Logo:
+  =h image_tag @company.setting.logo.url
+  %br
+  %strong Company Name:
+  =h @company.setting.company_name
+  %br
+  %strong Company Registration Number:
+  =h @company.setting.company_registration
 %p
-  = link_to "Edit", edit_company_path(@company)
-  |
-  = link_to "Destroy", @company, :confirm => 'Are you sure?', :method => :delete
-  |
-  = link_to "View All", companies_path
+  %h2 VAT Details
+  %strong VAT Rate:
+  =h @company.setting.vat
+  %br
+  %strong VAT Registration Number:
+  =h @company.setting.vat_registration
+%p
+  %h2 Correspondance
+  %strong Address:
+  =h @company.setting.address
+  %br
+  %strong Telephone:
+  =h @company.setting.telephone
+  %br
+  %strong Fax:
+  =h @company.setting.fax
+  %br
+  %strong Email:
+  =h @company.setting.email
+%p
+  %h2 Payment Instructions
+  %strong Payment Instructions 1:
+  =h @company.setting.payment_instructions_1
+%p
+  -if can? :edit, current_company
+    =  link_to "Edit", edit_company_path
+  = link_to "Dashboard", root_path

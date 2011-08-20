@@ -1,0 +1,23 @@
+$centre: 18
+
+a.ordering, a.ascending, a.descending
+ +link-colors(white, white, white, white, #cc0)
+ +hover-link
+
+#deliveries, #history
+ +column($centre)
+
+#deliveries-main, #history-main
+ border: 3px
+ border-style: solid
+ padding: 5px
+
+#invoices
+ th
+  background-color: #686868
+  color: white
+
+#clients
+ th
+  background-color: #686868
+  color: white

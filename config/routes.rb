@@ -5,9 +5,43 @@ VisioInvoiceV3::Application.routes.draw do
 
   #resources :companies
   resource :company, :only => [:new, :create]
+  
   constraints(Subdomain) do  
-     match '/' => 'dashboard#index'    
-  end  
+    #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
+      #site.resources :invoice_items
+
+      #site.resources :schedules, :only => [:index]
+
+      #site.resources :invoices do |invoices|
+        #invoices.resources :deliveries, :only => [:new, :create, :show, :index], :shallow =>true
+        #invoices.resources :payments,:only => [:new, :create, :index, :destroy], :shallow =>true
+        #invoices.resource :reminder, :only => [ :edit, :update, :show]
+        #invoices.resources :comments, :only => [:new, :create, :destroy, :index], :shallow =>true
+        #invoices.resources :invoice_items, :only => [:new, :create, :destroy, :index], :shallow =>true
+        #invoices.resources :feedbacks, :only => [:new, :create, :destroy, :index], :shallow =>true
+        #invoices.resource :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
+      #end
+
+    
+    devise_for :users
+    resources :users#,  :collection => {:new_invite =>:get, :invite => :post}
+    
+
+    resource :company, :only => [:edit, :update, :show]
+    #site.resources :clients, :member  => {:invite => :put} do | clients |
+     # clients.resources :contacts, :shallow =>true, :member  => {:invite => :put, :new_invite=> :get}
+    #end
+
+    resources :dashboard, :only => [:index]
+    #site.application_root "/", :controller => "dashboard", :action => "index"   
+    root :to => "dashboard#index"
+  end
+  
+ #constraints(Subdomain) do  
+   #  match '/' => 'dashboard#index'    
+  #end  
+  
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,11 +1,24 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+user:
+  id: 1
+  email: nehal.soni@gmail.com
+  encrypted_password: ef63a38b18c6afa5bd52cb1b29d66b35a7c807a0
+  company_id: 1
 
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+user1:
+  id: 2
+  email: soni.isha1@gmail.com
+  encrypted_password: 9f5f2a6b0e83ba6c99d5588ceb91be3d16cc2af2
+  company_id: 2
+
+user2:
+  id: 3
+  email: soni1.isha1@gmail.com
+  encrypted_password: 9f5f2a6b0e83ba6c99d5588ceb91be3d16cc2af2
+  company_id: 2
+
+super:
+  id: 4
+  email: super@gmail.com
+  encrypted_password: 9f5f2a6b0e83ba6c99d5588ceb91be3d16cc2af2
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818170402) do
+ActiveRecord::Schema.define(:version => 20110820172540) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -18,9 +18,52 @@ ActiveRecord::Schema.define(:version => 20110818170402) do
     t.datetime "updated_at"
   end
 
+  create_table "etemplates", :force => true do |t|
+    t.text     "invoice_subject"
+    t.text     "invoice_message"
+    t.text     "reminder_subject"
+    t.text     "reminder_message"
+    t.text     "paythank_message"
+    t.text     "paythank_subject"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  create_table "settings", :id => false, :force => true do |t|
+    t.integer  "id",                     :null => false
+    t.decimal  "vat"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "company_name"
+    t.string   "company_registration"
+    t.text     "address"
+    t.string   "telephone"
+    t.string   "fax"
+    t.string   "email"
+    t.string   "vat_registration"
+    t.text     "payment_instructions_1"
+  end
+
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "email",                                 :default => "",    :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -35,6 +78,9 @@ ActiveRecord::Schema.define(:version => 20110818170402) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.boolean  "owner",                                 :default => false
+    t.string   "name"
+    t.integer  "client_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

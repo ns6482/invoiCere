@@ -1,0 +1,35 @@
+@mixin navigation
+  list-style: none
+  @extend ul.horizontal  
+  font-weight: bold
+  +hover-link
+  @extend .standard_header_font
+
+  li
+    a
+      margin: 5px
+      color: black
+      float: left
+      background-color: white
+
+#tabs
+  border-bottom: 2px solid #B1AD9B  
+
+ul.quick-navigation  
+  float: right
+  +horizontal-list
+  
+ul.horizontal
+  +horizontal-list
+
+ul.navigation
+  +column(10)
+  @include navigation
+  font-size: 1.2em
+
+  li.selected
+    a
+      +box-shadow(blue, 2px, 2px, 10px)
+
+#invoice-history-tabs
+  +horizontal-list

@@ -1,0 +1,7 @@
+one:
+  vat: 17.5
+  company_id: 1
+
+two:  
+  vat: 9.99
+  company_id: 2

@@ -1,0 +1,35 @@
+#form-main
+  margin-bottom: 5px
+
+#ajax_form
+  +column(10,true)
+  +prepend(1)
+  +box-shadow(blue, 2px, 2px, 10px)
+  margin: 5px
+  padding: 5px
+  +border-radius(4px, 4px)
+  background-color: gainsboro
+
+  a.button, button
+    +float-left
+
+  input, select,textarea
+    :font-size 12px
+  label
+    :font-size 12px
+
+  label
+    font-size: 12px
+    font-weight: bold
+    color: black
+
+  li
+    margin: 1px
+    padding: 3px
+
+  li.optional
+    +horizontal-list
+
+#delivery_format_input
+  li.optional
+    :display inline

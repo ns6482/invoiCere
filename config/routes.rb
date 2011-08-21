@@ -1,13 +1,18 @@
 require 'subdomain' 
 
 VisioInvoiceV3::Application.routes.draw do
+  
+
   devise_for :users
 
   #resources :companies
   resource :company, :only => [:new, :create]
+      resource :dashboard, :only => [:index]
   
-  constraints(Subdomain) do  
+  #constraints(Subdomain) do  
     #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
+      
+
       #site.resources :invoice_items
 
       #site.resources :schedules, :only => [:index]
@@ -22,20 +27,24 @@ VisioInvoiceV3::Application.routes.draw do
         #invoices.resource :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
       #end
 
-    
+     
+     
     devise_for :users
     resources :users#,  :collection => {:new_invite =>:get, :invite => :post}
     
 
-    resource :company, :only => [:edit, :update, :show]
+    resource :company, :only => [:edit, :update, :show] 
+    
     #site.resources :clients, :member  => {:invite => :put} do | clients |
      # clients.resources :contacts, :shallow =>true, :member  => {:invite => :put, :new_invite=> :get}
     #end
-
-    resources :dashboard, :only => [:index]
+    get "dashboard/index"
+    resource :dashboard, :only => [:index]
+    #resources :dashboards
     #site.application_root "/", :controller => "dashboard", :action => "index"   
-    root :to => "dashboard#index"
-  end
+    #root :to => "dashboard#index"
+    match '/' => 'dashboard#index'#, :constraints => { :subdomain =>  /^[A-Za-z0-9-]+$/ }  
+  #end
   
  #constraints(Subdomain) do  
    #  match '/' => 'dashboard#index'    

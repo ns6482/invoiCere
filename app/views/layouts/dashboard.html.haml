@@ -9,16 +9,16 @@
           -if !current_user.nil?
             -if !current_user.name.nil?
               %strong="Welcome " + current_user.name
-        #settings_console
-          %ul{:class => "horizontal"}
-          - if can? :update, current_company
-            %li= link_to "Settings", edit_company_path
-            %li= render 'devise/menu/registration_items'
-            %li= render 'devise/menu/login_items'
+              #settings_console
+                %ul{:class => "horizontal"}
+                  - if can? :update, current_company
+                    %li= link_to "Settings", edit_company_path
+                    %li= render 'devise/menu/registration_items'
+                    %li= render 'devise/menu/login_items'
       =h yield(:header)
     #tabs
-      =render_navigation(:context => :main)
-      =render_navigation(:context=> :quick)
+      =#render_navigation(:context => :main)
+      =#render_navigation(:context=> :quick)
     #dashboard-content
       #dashboard-left= yield(:left)
       #dashboard-centre

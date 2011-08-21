@@ -3,8 +3,15 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 #require File.dirname(__FILE__) + "/factories"
 require "webrat"
+require "webrat/core/matchers"
+
+Webrat.configure do |config|
+  config.mode = :rack
+  #config.mode = :rails
+end
 
 class ActiveSupport::TestCase
+  
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #
   # Note: You'll currently still have to declare fixtures explicitly in integration tests

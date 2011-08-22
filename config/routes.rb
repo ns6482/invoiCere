@@ -7,10 +7,10 @@ VisioInvoiceV3::Application.routes.draw do
 
   #resources :companies
   resource :company, :only => [:new, :create]
-      resource :dashboard, :only => [:index]
+
   
-  #constraints(Subdomain) do  
-    #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
+  #constraints(:subdomain => /^[A-Za-z0-9-]+$/) do  
+    with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do# |site|
       
 
       #site.resources :invoice_items
@@ -44,7 +44,7 @@ VisioInvoiceV3::Application.routes.draw do
     #site.application_root "/", :controller => "dashboard", :action => "index"   
     #root :to => "dashboard#index"
     match '/' => 'dashboard#index'#, :constraints => { :subdomain =>  /^[A-Za-z0-9-]+$/ }  
-  #end
+  end
   
  #constraints(Subdomain) do  
    #  match '/' => 'dashboard#index'    

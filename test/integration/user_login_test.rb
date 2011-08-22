@@ -8,9 +8,11 @@ class UserLoginTest < ActionController::IntegrationTest
     host! 'test'
     @company = companies(:one)
 
-    @user = Factory.create(:user, :company_id=> @company.id)
-    @user1 = Factory.create(:user, :company_id=> @company.id)
-
+    @user = Factory.create(:user, :company_id=> @company.id, :email => "test@test.com")
+    @user1 = Factory.create(:user, :company_id=> @company.id, :email => "test1@test.com")
+    @user.roles << Role.find_by_name(:admin)
+    @user1.roles << Role.find_by_name(:admin)
+    
     @setting = settings(:one)#Setting.new(:id=>9991, :company_id => @user.company.id, :vat => 17.5, :logo => File.new("test/fixtures/sample_file.png"))
     @setting1 = settings(:two)#Setting.new(:id=>9992, :company_id => @user.company.id, :vat => 17.5, :logo => File.new("test/fixtures/sample_file.png"))
     @setting.save
@@ -36,7 +38,7 @@ class UserLoginTest < ActionController::IntegrationTest
 
     host! @user1.company.name + ".test"
     logout_user
-    get "/dashboard"
+    get "/dashboard/index"
     follow_redirect!  
     assert_response :success
     assert_equal '/users/sign_in?unauthenticated=true', path

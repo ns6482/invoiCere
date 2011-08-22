@@ -9,7 +9,7 @@
 
 // Combine the partials into a single screen stylesheet.
 @import "partials/page"
-@import "partials/form"
+//@import "partials/form"
 @import "partials/two_col"
 
 //@import "partials/formtastic_base"
@@ -28,7 +28,7 @@
 @import "compass/utilities/tables/borders"
 @import "blueprint/interaction"
 @import "compass/css3/box-shadow"
-//@import "blueprint/form"
+@import "blueprint/form"
 @import "blueprint/buttons"
 
 @import "blueprint/link-icons"
@@ -41,7 +41,7 @@
 @import "system_partials/ajax_form"
 @import "system_partials/buttons"
 @import "system_partials/topbar"
-@import "system_partials/forms"
+//@import "system_partials/forms"
 @import "system_partials/lists"
 @import "system_partials/comments"
 @import "system_partials/rating"
@@ -64,6 +64,10 @@ $blueprint-grid-columns: 24px
 $blueprint-grid-width: 30px
 $blueprint-grid-margin: 10px
 
++blueprint-form
++blueprint-utilities
++blueprint-form-layout
+  
 +blueprint-typography
 +sticky-footer(72px, "#layout", "#layout_footer", "#footer")
 

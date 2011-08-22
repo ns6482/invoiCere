@@ -13,7 +13,7 @@ class UserSignupTest < ActionController::IntegrationTest
 
   def test_after_signup_redirects
    
-    get "accounts/sign_up"
+    get "users/sign_up"
     assert_response :success
     assert_template "registrations/accounts/new"
 

@@ -18,6 +18,9 @@ gem 'sqlite3'
 gem "fancy-buttons"
 gem "simple-navigation"
 
+gem 'activemerchant', '~> 1.10.0'
+gem 'jquery-rails', '~> 0.2.2'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

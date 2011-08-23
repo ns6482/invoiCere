@@ -1,0 +1,10 @@
+%tr
+  %td= link_to_if can?(:read, user), user.email, user
+  %td= h user.sign_in_count      
+  %td= h user.last_sign_in_at 
+  -if can? :update, user
+    %td= link_to 'Edit', edit_user_path(user)
+  -if can? :destroy, user
+    %td= link_to 'Remove User', user, :confirm => 'Are you sure?', :method => :delete
+  - if user.invited?
+    %td Invitation sent...awaiting acceptance

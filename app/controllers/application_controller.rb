@@ -42,29 +42,24 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #def after_sign_in_path_for(resource)
-    #if resource.is_a?(User)
-      #name = Company.find(resource.company_id).name
-      #root_url(:subdomain => name )
-    #elsif resource.is_a?(Account)
-      #name = Company.find(resource.company_id).name
-      #root_url(:subdomain => name )
-    #else
-     #super
-    #end
-  #end
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(User)
+      name = Company.find(resource.company_id).name
+      root_url(:subdomain => name )    
+    else
+     super
+    end
+  end
 
-  #def after_sign_out_path_for(resource_or_scope)
-    #super
-    #if current_user
-      #new_user_session_path
-    #else
-      #new_account_session_path
-    #end
-  #end
+  def after_sign_out_path_for(resource_or_scope)
+    super
+    if current_user
+      new_user_session_path    
+    end
+  end
 
   def current_subdomain
-    request.subdomain(0)
+    request.subdomain
   end
 
   def current_ability

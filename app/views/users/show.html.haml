@@ -1,0 +1,59 @@
+- title "User"
+%table{:id => :users}
+ %tr
+  %td
+   %strong Name:
+  %td
+   %strong= h @user.name
+ %tr
+  %td
+   %strong Email:
+  %td
+   %strong= h @user.email
+ %tr
+  %td Roles
+  %td= @user.roles.collect{|r| r.name}
+ %tr 
+  %td
+   %strong Sign In Count:
+  %td= h @user.sign_in_count
+ %tr
+  %td
+   %strong Current Sign In At:
+  %td
+   -if @user.current_sign_in_at.nil?
+    Not signed in
+   -else
+    =h @user.current_sign_in_at.utc.strftime("%m/%d/%Y")
+    =h @user.current_sign_in_at.utc.strftime("at %I:%M%p")
+ %tr
+  %td
+   %strong Last Sign In At:
+  %td
+   -if @user.last_sign_in_at.nil?
+    Not signed in
+   -else
+    =h @user.last_sign_in_at.utc.strftime("%m/%d/%Y")
+    =h @user.last_sign_in_at.utc.strftime("at %I:%M%p")
+ %tr
+  %td
+   %strong Current Sign In Ip:
+  %td= h @user.current_sign_in_ip
+ %tr
+  %td
+   %strong Last Sign In Ip:
+  %td= h @user.last_sign_in_ip
+ %tr
+  %td
+   %strong Confirmed At:
+  %td= h @user.confirmed_at.to_s
+ %tr
+  %td
+   %strong Confirmation Sent At:
+  %td= h @user.confirmation_sent_at.to_s
+%p
+ = link_to "Edit", edit_user_path(@user)
+ |
+ = link_to "Delete", @user, :confirm => 'Are you sure?', :method => :delete
+ |
+ = link_to "View All", users_path

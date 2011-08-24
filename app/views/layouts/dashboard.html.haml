@@ -16,18 +16,17 @@
                 %li= render 'devise/menu/registration_items'
                 %li= render 'devise/menu/login_items'
       =h yield(:header)
-    #tabs
-      =#render_navigation(:context => :main)
-      =#render_navigation(:context=> :quick)
+      #tabs
+        =#render_navigation(:context => :main)
+        =#render_navigation(:context=> :quick)
     #dashboard-content
       #dashboard-left= yield(:left)
       #dashboard-centre
         -if show_title?
           #form-title
-            %h3=h yield(:title)
-      =# display_flash_messages
-      -flash.each do |name, msg|
-        = content_tag :div, msg, :id => "flash_#{name}"
-      =yield
-    #dashboard-right=h yield(:right)
+            %h3=h yield(:title)      
+        -flash.each do |name, msg|
+          = content_tag :div, msg, :id => "flash_#{name}"
+        =yield
+      #dashboard-right=h yield(:right)
     #footer= render 'layouts/footer'

@@ -35,8 +35,13 @@ class Company < ActiveRecord::Base
 
 
   def set_setting
-     Setting.new(:company_id => self.id).save
-     Etemplate.new(:company_id => self.id).save
+     s = Setting.new() 
+     s.company_id = self.id
+     s.save!
+     
+     e = Etemplate.new()
+     e.company_id = self.id
+     e.save!
      ##TODO put defaults here
      ##setting.save!          
   end

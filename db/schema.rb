@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(:version => 20110820172540) do
   end
 
   create_table "settings", :id => false, :force => true do |t|
-    t.integer  "id",                     :null => false
     t.decimal  "vat"
     t.datetime "created_at"
     t.datetime "updated_at"

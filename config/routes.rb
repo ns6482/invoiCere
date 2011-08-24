@@ -1,11 +1,13 @@
-require 'subdomain' 
+require 'subdomain'
+require 'no_subdomain'  
 
 VisioInvoiceV3::Application.routes.draw do   
-  
- devise_for :users
- resource :company, :only => [:new, :create]
- resource :home, :only => [:index]
-
+    
+ constraints(NoSubdomain) do    
+  devise_for :users
+  resource :company, :only => [:new, :create], :constraints => {:subdomain => ""}
+  resource :home, :only => [:index]#, :constraints => {:subdomain => 'www'}
+ end
  constraints(Subdomain) do
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     

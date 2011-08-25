@@ -1,7 +1,6 @@
 class CreateSetting < ActiveRecord::Migration
   def self.up
-      create_table "settings", :id => false, :force => true do |t|
-        #t.integer  "id",                     :null => false
+      create_table "settings", :force => true do |t|       
         t.decimal  "vat"
         t.datetime "created_at"
         t.datetime "updated_at"

@@ -1,15 +1,14 @@
-- semantic_form_for @user do |f|
- -f.inputs do
-  = f.input :name
-  = f.input :email
-  = f.input :password,:hint => "leave blank if you don't want to change it"
-  = f.input :password_confirmation
+- simple_form_for @user do |f|
+  =field_set_tag '' do
+    = f.input :name
+    = f.input :email
+    = f.input :password,:hint => "leave blank if you don't want to change it"
+    = f.input :password_confirmation
 
-  -if @password_required
-   = f.input :current_password, :label => 'Current Password (we need your current password to confirm your changes)'
+    -if @password_required
+      = f.input :current_password, :label => 'Current Password (we need your current password to confirm your changes)'
 
-  -if can? :read, Role
-   = f.input :roles, :as => :check_boxes, :collection => @accessible_roles
+    -if can? :read, Role
+      = f.input :roles, :as => :check_boxes, :collection => @accessible_roles
 
- -f.buttons do
-  = f.commit_button
+    %button{:type=>"submit",:class=>"red"} Save

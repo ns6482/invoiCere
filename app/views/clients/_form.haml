@@ -1,0 +1,14 @@
+- simple_form_for @client do |f|
+  =field_set_tag 'Client Details' do
+    = f.hidden_field :company_id, :value => current_company.id
+    = f.input :company_name
+    = f.input :address1
+    = f.input :address2
+    = f.input :zip
+    = f.input :city
+    = f.input :country
+    = f.input :phone
+    = f.input :email  
+
+    %button{:type=>"submit",:class=>"red"} Save
+  

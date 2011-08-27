@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/ishanehal_vb/!svn/ver/286/VisioInvoice/app/views/clients
+END
+show.haml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ishanehal_vb/!svn/ver/307/VisioInvoice/app/views/clients/show.haml
+END
+_form.haml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ishanehal_vb/!svn/ver/225/VisioInvoice/app/views/clients/_form.haml
+END
+_address.haml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ishanehal_vb/!svn/ver/221/VisioInvoice/app/views/clients/_address.haml
+END
+_filter.haml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ishanehal_vb/!svn/ver/252/VisioInvoice/app/views/clients/_filter.haml
+END
+edit.haml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ishanehal_vb/!svn/ver/153/VisioInvoice/app/views/clients/edit.haml
+END
+index.haml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ishanehal_vb/!svn/ver/286/VisioInvoice/app/views/clients/index.haml
+END
+new.haml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/ishanehal_vb/!svn/ver/153/VisioInvoice/app/views/clients/new.haml
+END

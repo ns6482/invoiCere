@@ -1,0 +1,14 @@
+#filter_link
+ %a{:href=>"javascript:void(0)"}
+  Show/Hide Filter
+#filter_box
+ - semantic_form_for @search do |f|
+  - f.inputs :id =>  "ajax_form" do
+   = f.input :company_name_like, :label => "Company/Name", :required => false
+   = f.input :email_like, :label => "Email", :required => false
+   = f.input :city_like, :label => "City", :required => false
+   = f.input :country_like, :label => "Country", :required => false
+   = f.input :zip_like, :label => "Post/Zip Code", :required => false
+  
+   %button{:type=>"submit",:class=>"blue"}
+    Filter

@@ -1,0 +1,42 @@
+-title "Contact"
+%p
+ %strong
+  Title:
+ =h @contact.title
+%p
+ %strong
+  First Name:
+ =h @contact.first_name
+ %strong
+  Last Name:
+ =h @contact.last_name
+%p
+ %strong
+  Job Title:
+ =h @contact.job_title
+%p
+ %strong
+  Email:
+ =h @contact.email
+%p
+ %strong
+  Phone:
+ =h @contact.phone
+ %strong
+  Mobile:
+ =h @contact.mobile
+ %strong
+  Fax:
+ =h @contact.fax
+%p
+ -if can? :update, @contact
+  = link_to "Edit", edit_contact_path(@contact)
+
+ -if can? :destroy, @contact
+  |
+  = link_to "Delete",  @contact, :confirm => 'Are you sure?', :method => :delete
+  |
+ - if !@contact.invited?
+  =link_to "Invite", new_invite_contact_path(@contact)
+
+ = link_to "Back", client_path(@contact.client)

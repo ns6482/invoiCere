@@ -1,7 +1,7 @@
 <h2>Sign in</h2>
 
 <%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name) do |f| %>
-  <% field_set_tag 'Inputs' do %>
+  <%= field_set_tag 'Inputs' do %>
 
     <%= f.input :email %>
     <%= f.input :password %>

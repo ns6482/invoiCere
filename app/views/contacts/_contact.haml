@@ -1,0 +1,13 @@
+%table{:id => 'contacts'}
+ -for contact in @client.contacts
+  %tr{:class=> cycle("odd", "even")}
+   %td 
+    =h mail_to contact.email, contact.fullname
+   %td
+    = link_to "Show", contact
+    |
+    = link_to "Edit", edit_contact_path(contact)
+    |
+    = link_to "Delete", contact, :confirm => 'Are you sure?', :method => :delete    
+  
+

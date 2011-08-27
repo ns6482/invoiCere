@@ -2,10 +2,11 @@ require 'test_helper'
 
 class CompaniesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
+    
 
   def setup
     @user = users(:user)#Factory.create(:user)
-    @request.host = @user.company.name + ".test"
+    @request.host = @user.company.name + ".lvh.me"
     sign_in @user
   end
 
@@ -18,9 +19,9 @@ class CompaniesControllerTest < ActionController::TestCase
 #    assert_template 'index'
 #  end
   
-  def test_show
+  test "show company" do 
     get :show#, :id => Company.first
-    assert_template 'show'
+    assert_template 'show',"companies show"
   end
   
 #  def test_new
@@ -43,6 +44,7 @@ class CompaniesControllerTest < ActionController::TestCase
   
   def test_edit
     get :edit#, :id => @user.company#Company.first
+    assert_response :success
     assert_template 'edit'
   end
   

@@ -29,7 +29,6 @@ class UserLoginTest < ActionController::IntegrationTest
   end
 
  
-
   #def test_redirects_when_not_signed_in
    # host! @user1.company.name + ".test"
     #logout_user
@@ -53,50 +52,39 @@ class UserLoginTest < ActionController::IntegrationTest
 #     assert_select "a[href=?]", edit_user_path(@user.id),:count=>1, :text=>"Edit Account"
   end
 
-#  def test_signin_valid
+  def test_signin_valid
 
- #   login_user
- #   follow_redirect!   
- #   assert_template ""
- #   assert_equal @user.company.name + ".test", request.host
+    login_user
+    follow_redirect!   
+    assert_template ""
+    assert_equal @user.company.name + ".test", request.host
     
- # end
+  end
 
 
-  #def test_signin_invalid_company
+  def test_signin_invalid_company
     
-   # get "users/sign_in"
-   # fill_in 'company', :with => @user1.company.name
-   # #fill_in 'username', :with => @user.username
-   # fill_in 'password', :with => @user.password
-   # click_button 'Sign in'
-   # assert !redirect?
+    get "users/sign_in"
+    fill_in 'company', :with => @user1.company.name
+    fill_in 'email', :with => @user.email
+    fill_in 'password', :with => @user.password
+    click_button 'Sign in'
+    follow_redirect!
 
-#    assert_template ""
-  #  assert_equal '/users/sign_in', path
- #   assert_equal "test", request.host
+    assert_template ""
+    assert_equal '/users/sign_in', path
+    assert_equal "test", request.host
 
-#  end
+  end
 
-  #def test_signin_invalid
-
-#    user = User.any_instance.stubs(:valid?).returns(false)
-
- #   get "users/sign_in"
- #   #assert_response :success
- #   #assert_template "sessions/new"
- #   post_via_redirect "users/sign_in",user.to_param#:username => user.username, :password => user.password, :company=> user.company.name
- #   #assert_template "sessions/new"
-       
- # end
-
-  #def test_changing_companies_after_singin_redirects_login_page
-  #  login_user
-  #  host! @user1.company.name + ".test"
-
-   # #assert_template ""
-   # #assert_equal '/users/sign_in', path    
-  #end
+  def test_changing_companies_after_singin_redirects_login_page
+    login_user
+    host! @user1.company.name + ".lvh.me"
+    follow_redirect!
+    #logout_user      
+    #assert_template ""
+    assert_equal '/users/sign_in', path    
+  end
 
   #def test_loggin_out_redirects_to_login_page
   #  login_user
@@ -119,6 +107,7 @@ class UserLoginTest < ActionController::IntegrationTest
     fill_in 'email', :with => @user.email
     fill_in 'password', :with => @user.password
     click_button 'Sign in'
+    follow_redirect!
   end
 
   def logout_user

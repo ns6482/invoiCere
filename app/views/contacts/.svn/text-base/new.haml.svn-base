@@ -1,0 +1,15 @@
+-title "New Contact"
+-semantic_form_for [@client,@contact] do |f|
+ -f.inputs do
+  = f.input :title , :as => :select, :collection => ["Mr", "Mrs", "Miss", "Dr", "Prof","Lady", "Sir"]
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :job_title
+  = f.input :email
+  = f.input :phone
+  = f.input :mobile
+  = f.input :fax 
+ -f.buttons do
+  = f.commit_button
+%p
+ = link_to "Back", client_path(@client)

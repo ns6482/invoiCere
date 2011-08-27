@@ -1,0 +1,35 @@
+-title @client.company_name
+
+%p
+ %b
+  Address:
+ =@client.display_address
+%p
+ %b
+  Email:
+ =h mail_to @client.email
+%p
+ %b
+  Contact Details:
+ =@client.display_phone
+ =@client.display_fax
+
+#contacts
+ %p
+  %b
+   Contacts:
+ %p
+  -if @client.contacts.size > 0
+   = render :partial => "contacts/contact", :object => @client
+  -else
+   No contacts
+ %p
+  -if can? :create, Contact
+   = link_to "New Contact", new_client_contact_path(@client)
+-if can? :update, @client
+ = link_to 'Edit', edit_client_path(@client) |
+= link_to 'Back', clients_path
+
+-if can? :invite, @client
+ - if !@client.invited?
+  = link_to 'Invite', @client, :confirm => 'Are you sure?', :method => :invite

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ishanehal_vb/!svn/ver/239/VisioInvoice/app/views/contacts
+END
+show.haml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ishanehal_vb/!svn/ver/305/VisioInvoice/app/views/contacts/show.haml
+END
+edit.haml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/ishanehal_vb/!svn/ver/203/VisioInvoice/app/views/contacts/edit.haml
+END
+index.haml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/ishanehal_vb/!svn/ver/203/VisioInvoice/app/views/contacts/index.haml
+END
+new_invite.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/302/VisioInvoice/app/views/contacts/new_invite.haml
+END
+new.haml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/ishanehal_vb/!svn/ver/239/VisioInvoice/app/views/contacts/new.haml
+END
+_contact.haml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ishanehal_vb/!svn/ver/203/VisioInvoice/app/views/contacts/_contact.haml
+END

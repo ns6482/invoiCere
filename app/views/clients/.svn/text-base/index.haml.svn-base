@@ -1,0 +1,53 @@
+-title "Clients"
+= render :partial => "filter"
+
+%table{:id => "clients"}
+ %tr
+  %th
+   Company
+  %th
+   Address1
+  %th
+   Address2
+  %th
+   Zip
+  %th
+   City
+  %th
+   Country
+  %th
+   Phone
+  %th
+   Fax
+  %th
+   Email
+  %th
+  %th
+ -@clients.each do |client|
+  %tr{:class=> cycle("odd", "even")}
+   %td
+    =link_to_if can?(:read, client), client.company_name, client
+   %td
+    =h client.address1
+   %td
+    =h client.address2
+   %td
+    =h client.zip
+   %td
+    =h client.city
+   %td
+    =h client.country
+   %td
+    =h client.phone
+   %td
+    =h client.fax
+   %td
+    =h client.email   
+   %td
+    -if can? :update, client
+     = link_to 'Edit', edit_client_path(client)
+   %td
+    -if can? :destroy,client
+     = link_to 'Delete', client, :confirm => 'Are you sure?', :method => :delete
+%p
+ = will_paginate @clients

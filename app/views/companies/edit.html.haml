@@ -1,7 +1,7 @@
 -title "Edit Company"
 =simple_form_for  @company, :url => company_path, :html => { :method => :put, :multipart => true  } do |f|
   = f.input :name, :label => "Subdomain"  
-  -field_set_tag 'Settings' do
+  =field_set_tag 'Settings' do
     =f.simple_fields_for :setting do |s|
       = s.error_messages
       = s.input :logo, :as => :file
@@ -14,7 +14,7 @@
       = s.input :fax
       = s.input :email
       = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }
-  -field_set_tag 'Templates' do
+  =field_set_tag 'Templates' do
     =f.simple_fields_for :etemplate do |s|
       %h3 Invoice Email Template
       company-name company-email company-fax company-phone company-website client-name invoice-id invoice-link invoice-date invoice-summary due-date total (due)

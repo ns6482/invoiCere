@@ -1,0 +1,4 @@
+-title "Edit Client"
+= render :partial => 'form'
+= link_to 'Show', @client |
+= link_to 'Back', clients_path

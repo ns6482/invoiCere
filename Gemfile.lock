@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/railsdog/searchlogic.git
+  revision: 92487f9773b01d27a350c71d0e12fc0124b866b2
+  specs:
+    rd_searchlogic (3.0.1)
+      activerecord (>= 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -49,6 +56,9 @@ GEM
       bcrypt-ruby (~> 2.1.2)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
+    devise_invitable (0.5.4)
+      devise (~> 1.4.1)
+      rails (< 3.2, >= 3.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     factory_girl (2.0.4)
@@ -120,6 +130,7 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    will_paginate (3.0.0)
 
 PLATFORMS
   ruby
@@ -129,6 +140,7 @@ DEPENDENCIES
   cancan
   compass
   devise
+  devise_invitable
   factory_girl_rails
   fancy-buttons
   friendly_id
@@ -138,7 +150,9 @@ DEPENDENCIES
   nifty-generators
   paperclip
   rails (= 3.0.10)
+  rd_searchlogic!
   simple-navigation
   simple_form
   sqlite3
   webrat
+  will_paginate

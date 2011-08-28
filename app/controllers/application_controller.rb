@@ -68,9 +68,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  ##invitation override
-  #def authenticate_resource!
-    #redirect_to root_path
-  #end
+  #invitation override
+  def authenticate_resource!
+    redirect_to root_path
+  end
 
 end

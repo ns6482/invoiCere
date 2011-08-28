@@ -13,7 +13,7 @@ class Ability
       can [:destroy], User, :owner => false,  :company_id => user.company_id
       #can :manage,  [Contact, Invoice, InvoiceItem, Delivery, Send, Reminder, Payment, Comment]
       can [:update, :read], Company, :id => user.company_id
-      #can :manage, Client, :company_id => user.company_id      
+      can :manage, Client, :company_id => user.company_id      
       can :read, Role
       #can [:read, :destroy], Feedback
       #can [:create, :update], Feedback #TODO only apply to client once setup

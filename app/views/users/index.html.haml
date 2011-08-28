@@ -23,4 +23,4 @@
 -if can? :create, User
   =link_to 'Setup User', new_user_path, html_options = {:class => 'red button'}
 -if can? :invite, User
-  =link_to 'Invite User', new_invite_users_path, html_options = {:class => 'button'}
+  =link_to 'Invite User', new_user_invitation_path, html_options = {:class => 'button'}

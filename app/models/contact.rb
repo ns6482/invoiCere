@@ -3,12 +3,10 @@ class Contact < ActiveRecord::Base
   attr_accessor :company_id
   belongs_to :client
 
+  #has_many :sends
+  #has_many :deliveries, :through => :sends
 
-  #has_and_belongs_to_many :deliveries
-  has_many :sends
-  has_many :deliveries, :through => :sends
-
-  accepts_nested_attributes_for :deliveries
+  #accepts_nested_attributes_for :deliveries
 
 
   validates_presence_of :title, :first_name, :last_name,:email

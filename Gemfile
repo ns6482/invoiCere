@@ -21,6 +21,10 @@ gem "simple-navigation"
 gem 'activemerchant', '~> 1.10.0'
 gem 'jquery-rails', '~> 0.2.2'
 
+gem 'devise_invitable'
+gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
+gem 'will_paginate'#, '~> 3.0.0'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

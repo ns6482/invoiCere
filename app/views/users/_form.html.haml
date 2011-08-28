@@ -9,6 +9,8 @@
       = f.input :current_password, :label => 'Current Password (we need your current password to confirm your changes)'
 
     -if can? :read, Role
-      = f.input :roles, :as => :check_boxes, :collection => @accessible_roles
+      =# f.input :roles, :as => :check_boxes, :collection => @accessible_roles
+
+      =f.collection_check_boxes :role_ids, Role.all, :id, :name
 
     %button{:type=>"submit",:class=>"red"} Save

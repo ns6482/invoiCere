@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
 
   has_many :users, :dependent => :destroy
   #has_many :accounts, :dependent => :destroy
-  #has_many :clients, :dependent => :destroy
+  has_many :clients, :dependent => :destroy
   #has_many :invoices, :through => :clients#, :dependent => :destroy
   #has_many :deliveries, :through => :clients, :source => :invoices
   #has_many :schedules, :through => :clients, :source => :invoices

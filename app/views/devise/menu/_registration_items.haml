@@ -1,6 +1,7 @@
 -if user_signed_in?
   %li
-    =  link_to('Edit Account', { :controller => "users", :action => "edit", :id => @current_user })
+    = link_to 'Edit Account', edit_user_path(@current_user.id)
+    =  #link_to('Edit Account', { :controller => "users", :action => "edit", :id => @current_user.id })
 -else
   %li
     = link_to('Signup', new_company_url(:subdomain => false))

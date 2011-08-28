@@ -24,13 +24,15 @@ VisioInvoiceV3::Application.routes.draw do
     #end
 
     devise_for :users
-    resources :users#,  :collection => {:new_invite =>:get, :invite => :post}
+    resources :users,  :collection => {:new_invite =>:get, :invite => :post}
     
 
     resource :company, :only => [:edit, :update, :show]
-    #site.resources :clients, :member  => {:invite => :put} do | clients |
-      #clients.resources :contacts, :shallow =>true, :member  => {:invite => :put, :new_invite=> :get}
-    #end
+    
+    resources :clients, :member  => {:invite => :put} do 
+      resources :contacts, :shallow =>true, :member  => {:invite => :put, :new_invite=> :get}
+    end
+    
     resources :dashboard, :only => [:index]
     root :to => "dashboard#index"
 

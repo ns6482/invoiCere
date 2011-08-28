@@ -1,4 +1,4 @@
-class ContactsController < AccountController
+class ContactsController < BaseController
   #load_and_authorize_resource
   before_filter :find_client, :only => [:index, :new, :create]
   #  before_filter :find_contact, :only => [:show, :edit, :destroy]

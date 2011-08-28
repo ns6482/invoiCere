@@ -1,12 +1,11 @@
 -title "Invite Contact"
-- semantic_form_for @contact,:url =>  invite_contact_path(@contact), :html=>{:method=>:put} do |f|
- -f.inputs do
-  = f.input :first_name
-  = f.input :last_name  
-  = f.input :email  
-  -f.buttons do
-   = f.commit_button "Invite"
+- simple_form_for @contact,:url =>  invite_contact_path(@contact), :html=>{:method=>:put} do |f|
+  =field_set_tag 'Contact Details' do
+    = f.input :first_name
+    = f.input :last_name  
+    = f.input :email  
+    %button{:type=>"submit",:class=>"red"} Invite Contact
 %p
- = link_to "Show", @contact
- |
- = link_to "Back", client_path(@contact.client_id)
+  = link_to "Show", @contact
+  |
+  = link_to "Back", client_path(@contact.client_id)

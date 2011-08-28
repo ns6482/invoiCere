@@ -1,4 +1,4 @@
-class ClientsController < AccountController
+class ClientsController < BaseController
 
   before_filter :get_clients, :only => [:index]
   before_filter :find_client, :only => [:show, :edit, :destroy]
@@ -6,10 +6,10 @@ class ClientsController < AccountController
   # GET /clients
   # GET /clients.xml
   def index
-    #@clients = Client.all
+    ##@clients = Client.all
 
-    @search = @clients.search(params[:search])
-    @clients = @search.all
+    #@search = @clients.search(params[:search])
+    #@clients = @search.all
     @clients = @clients.paginate :page => params[:page], :per_page => 10
 
     respond_to do |format|

@@ -5,14 +5,14 @@ class Client < ActiveRecord::Base
 
   belongs_to :company
   has_many :contacts, :dependent => :destroy
-  has_many :invoices
+  #has_many :invoices
   has_many :users
 
   validates_presence_of :company_name, :address1, :email
   validates_uniqueness_of :company_name
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
-  attr_accessible :company_name, :address1, :address2, :zip, :city, :country, :phone, :fax, :email
+  attr_accessible :company_name, :address1, :address2, :zip, :city, :country, :phone, :fax, :email, :company_id
   attr_accessor :display_address, :display_fax, :display_phone
 
 

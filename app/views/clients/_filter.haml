@@ -5,9 +5,9 @@
   - simple_form_for @search do |f|
     -# f.inputs :id =>  "ajax_form" do
     =field_set_tag 'Client Details' do
-      = f.input :company_name_like, :label => "Company/Name", :required => false
-      = f.input :email_like, :label => "Email", :required => false
-      = f.input :city_like, :label => "City", :required => false
-      = f.input :country_like, :label => "Country", :required => false
-      = f.input :zip_like, :label => "Post/Zip Code", :required => false  
+      = f.input :company_name_contains, :label => "Company/Name", :required => false
+      = f.input :email_contains, :label => "Email", :required => false
+      = f.input :city_contains, :label => "City", :required => false
+      = f.input :country_contains, :label => "Country", :required => false
+      = f.input :zip_contains, :label => "Post/Zip Code", :required => false  
     %button{:type=>"submit",:class=>"blue"} Search Clients

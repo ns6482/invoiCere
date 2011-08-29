@@ -15,6 +15,7 @@ class Client < ActiveRecord::Base
   attr_accessible :company_name, :address1, :address2, :zip, :city, :country, :phone, :fax, :email, :company_id
   attr_accessor :display_address, :display_fax, :display_phone
 
+  attr_searchable :company_name, :address1, :address2, :zip, :city, :country, :phone, :email
 
   def name
     company_name

@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.is_a?(User)
+    if resource.is_a?(User) 
       name = Company.find(resource.company_id).name
       root_url(:subdomain => name )    
     else
@@ -67,6 +67,10 @@ class ApplicationController < ActionController::Base
       @current_ability ||= Ability.new(current_user)
     end
   end
+
+  #def authenticate_inviter!
+  #  redirect_to root_path
+  #end
 
   #invitation override
   def authenticate_resource!

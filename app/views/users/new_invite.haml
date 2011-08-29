@@ -1,8 +1,7 @@
--semantic_form_for :user, @user ,:url => invite_users_path, :html => { :method => :post, :multipart => true  } do |f|
- -f.inputs do
-  = f.input :name
-  = f.input :email
-  -if can? :read, Role
-   = f.input :roles, :as => :check_boxes, :collection => @accessible_roles
- -f.buttons do
-  = f.commit_button 
+-simple_form_for  @user ,:url => invite_users_path, :html => { :method => :post, :multipart => true  } do |f|
+  =field_set_tag 'Client Details' do
+    = f.input :name
+    = f.input :email
+    -if can? :read, Role
+      =f.collection_check_boxes :role_ids, Role.all, :id, :name
+    %button{:type=>"submit",:class=>"red"} Save

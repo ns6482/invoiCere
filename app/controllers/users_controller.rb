@@ -62,8 +62,8 @@ class UsersController < BaseController
 
   def invite        
     #@user.resend_invitation!
-    
-    @user = User.send_invitation(:email => params[:user][:email])
+            
+    @user = User.invite!(:email => params[:user][:email])
     @user.company_id = current_company.id
     @user.role_ids = params[:user][:role_ids]
     @user.name = params[:user][:name]

@@ -1,7 +1,7 @@
 %html{html_attrs(lang = 'en')}
 !!!
 %head= render 'layouts/head'
-%body{:class => "two-col"}
+%body{:class => "two-col bp"}
   #container
     #header
       #top-bar
@@ -17,8 +17,8 @@
                 %li= render 'devise/menu/login_items'
       =h yield(:header)
       #tabs
-        =#render_navigation(:context => :main)
-        =#render_navigation(:context=> :quick)
+        =render_navigation(:context => :main)
+        =render_navigation(:context=> :quick)
     #dashboard-content
       #dashboard-left= yield(:left)
       #dashboard-centre
@@ -26,7 +26,7 @@
           #form-title
             %h3=h yield(:title)      
         -flash.each do |name, msg|
-          = content_tag :div, msg, :id => "flash_#{name}"
+          = content_tag :div, msg, :id => "flash_#{name}", :class => "#{name}"
         =yield
       #dashboard-right=h yield(:right)
     #footer= render 'layouts/footer'

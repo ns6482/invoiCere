@@ -78,7 +78,7 @@ class ContactsController < BaseController
 
 
   def invite_contact
-    @user = User.send_invitation(:email => @contact.email)
+    @user = User.invite!(:email => @contact.email)
     @user.name = @contact.name
     @user.email = @contact.email
     @user.company_id = current_company.id

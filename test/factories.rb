@@ -20,29 +20,29 @@ Factory.define :role do |f |
 end
 
 
-#Factory.define :client do |f|
-#  f.sequence(:company_name) { |n| "company#{n}" }
-#  f.address1 "40 Alderbrook Drive"
-#  f.address2 "test"
-#  f.zip "CV11 6PL"
-#  f.city "Nuneaton"
-#  f.country "United Kingdom"
-#  f.phone "02476 76735989"
-#  f.fax "33233 2323"
-#  f.email "nehal.soni@gmail.com"  
-#end
+Factory.define :client do |f|
+  f.sequence(:company_name) { |n| "company#{n}" }
+  f.address1 "40 Alderbrook Drive"
+  f.address2 "test"
+  f.zip "CV11 6PL"
+  f.city "Nuneaton"
+  f.country "United Kingdom"
+  f.phone "02476 76735989"
+  f.fax "33233 2323"
+  f.email "nehal.soni@gmail.com"  
+end
 
-#Factory.define :contact do |f|
-#  f.title "Mr"
-#  f.first_name "Nehal"
-#  f.last_name "Soni"
-#  f.job_title "Job Title"
-#  f.email "test@gmail.com"
-#  f.phone "2323232323"
-#  f.mobile "232323232323"
-#  f.fax "232323232"
- # f.client {|client| client.association(:client) }
-#end
+Factory.define :contact do |f|
+  f.title "Mr"
+  f.first_name "Nehal"
+  f.last_name "Soni"
+  f.job_title "Job Title"
+  f.email "test@gmail.com"
+  f.phone "2323232323"
+  f.mobile "232323232323"
+  f.fax "232323232"
+  f.client {|client| client.association(:client) }
+end
 
 #Factory.define :delivery do |f|
 #  f.message "message"

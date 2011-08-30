@@ -7,10 +7,10 @@ class ClientTest < ActiveSupport::TestCase
     client = Client.new
     assert !client.save
     assert_equal 4, client.errors.size
-
-    assert client.errors.on(:company_name)
-    assert client.errors.on(:address1)
-    assert client.errors.on(:email)
+    
+    assert_equal client.errors[:company_name].count, 1
+    assert_equal client.errors[:address1].count, 1
+    assert_equal client.errors[:email].count, 2
 
   end
 

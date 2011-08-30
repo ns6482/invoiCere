@@ -7,10 +7,11 @@ class ContactTest < ActiveSupport::TestCase
     assert !contact.save
     assert_equal 5, contact.errors.size
 
-    assert contact.errors.on(:title)
-    assert contact.errors.on(:first_name)
-    assert contact.errors.on(:last_name)
-    assert contact.errors.on(:email)
+    assert_equal contact.errors[:title].count, 1
+    assert_equal contact.errors[:first_name].count, 1
+    assert_equal contact.errors[:last_name].count, 1
+    assert_equal contact.errors[:email].count, 2
+
   end
 
   def test_should_not_save_with_bad_email

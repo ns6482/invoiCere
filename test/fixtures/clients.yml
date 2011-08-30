@@ -1,0 +1,43 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+client1:
+  id: 1
+  company_name: Setutech
+  address1: 40 Alderbrook Drive
+  address2: 
+  zip: CV11 6PL
+  city: Nuneaton
+  country: United Kingdom
+  phone: 02476 76735989
+  fax: 
+  email: nehal.soni@gmail.com
+  contact_id: 1
+  company_id: 1
+
+client2:
+  id: 2
+  company_name: Amor Group
+  address1: Design Hub
+  address2: Puma Way
+  zip: CV1 1TY
+  city: Coventry
+  country: United Kingdom
+  phone: 0752 7979351
+  fax: 
+  email: soni.isha1@gmail.com
+  contact_id: 2
+  company_id: 2
+
+client3:
+  id: 3
+  company_name: Cherwell Packaging
+  address1: Design Hub
+  address2: Puma Way
+  zip: CV1 1TY
+  city: Coventry
+  country: United Kingdom
+  phone: 0752 7979351
+  fax:
+  email: soni.isha1@gmail.com
+  contact_id: 1
+  company_id: 1
+

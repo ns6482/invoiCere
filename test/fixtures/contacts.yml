@@ -1,0 +1,23 @@
+contact1:
+  id: 1
+  title: MyString
+  first_name: MyString
+  last_name: MyString
+  job_title: MyString
+  email: nehal.soni@gmail.com
+  phone: MyString
+  mobile: MyString
+  fax: MyString
+  client_id: 1
+
+contact2:
+  id: 2
+  title: MyString
+  first_name: MyString
+  last_name: MyString
+  job_title: MyString
+  email: nehal.soni@gmail.com
+  phone: MyString
+  mobile: MyString
+  fax: MyString
+  client_id: 2

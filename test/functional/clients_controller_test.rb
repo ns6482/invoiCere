@@ -8,7 +8,7 @@ class ClientsControllerTest < ActionController::TestCase
  fixtures :users, :clients, :companies # fixture_file_name ...
   def setup
     @user = users(:user)#Factory.create(:user)
-    @request.host = @user.company.name + ".test"
+    @request.host = @user.company.name + ".lvh.me"
     sign_in @user
   end
  
@@ -29,7 +29,8 @@ class ClientsControllerTest < ActionController::TestCase
   end
 
   test "should create client" do
- 
+
+    assert_equal Client.count, 3 
     assert_difference('Client.count') do
       post :create,  :client =>Factory.attributes_for(:client)
     end
@@ -97,7 +98,7 @@ class ClientsControllerTest < ActionController::TestCase
 
     assert_equal @client.company_id, @user.company_id
     assert_equal @client.id, @user.client_id
-    assert_true @user.role? "Client"
+    assert_equal !!@user.roles.find_by_name("Client"), true
   end
 
 

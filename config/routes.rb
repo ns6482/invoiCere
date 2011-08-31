@@ -23,14 +23,15 @@ VisioInvoiceV3::Application.routes.draw do
       #invoices.resource :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
     #end
 
-    devise_for :users, :controllers => { :invitations => 'users/new_invite' }
+    devise_for :users, :controllers => { :invitations => 'users/invitations' }
+    #devise_for :users, :controllers => { :invitations => 'users/new_invite' }
     
-    resources :users do 
-      collection do 
-        get 'new_invite'
-        post 'invite'
-      end  
-    end
+    resources :users #do 
+    #  collection do 
+    #    get 'new_invite'
+    #    post 'invite'
+    #  end  
+    #end
     
     resource :company, :only => [:edit, :update, :show]
     

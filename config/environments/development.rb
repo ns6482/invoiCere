@@ -34,7 +34,7 @@ VisioInvoiceV3::Application.configure do
   :enable_starttls_auto => true  }
 
 
-  config.action_controller.session ||= {:domain => '.lvh.me'}
+  #config.action_controller.session ||= {:domain => '.lvh.me'}
   
 end
 

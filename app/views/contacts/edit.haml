@@ -1,5 +1,5 @@
 -title "Edit Contact"
-- simple_form_for @contact, :html=>{:method=>:put} do |f|
+= simple_form_for @contact, :html=>{:method=>:put} do |f|
   =field_set_tag 'Contact Details' do
     = f.input :title , :as => :select, :collection => ["Mr", "Mrs", "Miss", "Dr", "Prof","Lady", "Sir"]
     = f.input :first_name

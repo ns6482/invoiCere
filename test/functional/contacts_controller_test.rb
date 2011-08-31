@@ -5,7 +5,7 @@ class ContactsControllerTest < ActionController::TestCase
    
   def setup
     @user = users(:user)#Factory.create(:user)
-    @request.host = @user.company.name + ".test"
+    @request.host = @user.company.name + ".lvh.me"
     sign_in @user
 
     @contact = contacts(:contact1)
@@ -91,6 +91,6 @@ class ContactsControllerTest < ActionController::TestCase
     
     assert_equal @contact.client.company_id, @user.company_id
     assert_equal @contact.client.id, @user.client_id
-    assert_true @user.role? "Client"
+    assert_equal @user.roles.find_by_name("Client"), true
   end
 end

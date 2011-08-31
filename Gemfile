@@ -19,7 +19,8 @@ gem "fancy-buttons"
 gem "simple-navigation"
 
 gem 'activemerchant', '~> 1.10.0'
-gem 'jquery-rails', '~> 0.2.2'
+gem 'jquery-rails', '>= 1.0.12'
+
 
 gem 'devise_invitable'
 gem "meta_search" 

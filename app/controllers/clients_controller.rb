@@ -113,7 +113,7 @@ class ClientsController < BaseController
   end
 
     def invite_client
-    @user = User.send_invitation(:email => @client.email)
+    @user = User.invite!(:email => @client.email)
     @user.name = @client.name
     @user.email = @client.email
     @user.company_id = current_company.id

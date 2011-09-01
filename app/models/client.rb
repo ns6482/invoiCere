@@ -8,7 +8,7 @@ class Client < ActiveRecord::Base
   #has_many :invoices
   has_many :users
 
-  validates_presence_of :company_name, :address1, :email
+  validates_presence_of :company_name, :address1, :email#,:company_id
   validates_uniqueness_of :company_name
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 

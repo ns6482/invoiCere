@@ -6,11 +6,8 @@ class ClientsControllerTest < ActionController::TestCase
   # called before every single test
 
  fixtures :users, :clients, :companies # fixture_file_name ...
-  def setup
-    @user = users(:user)#Factory.create(:user)
-    @request.host = @user.company.name + ".lvh.me"
-    sign_in @user
-  end
+ 
+ setup :initialize_client
  
   def teardown
     sign_out @user
@@ -28,9 +25,8 @@ class ClientsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create client" do
-
-    assert_equal Client.count, 3 
+  test "should create client" do            
+    Client.any_instance.stubs(:valid?).returns(true)
     assert_difference('Client.count') do
       post :create,  :client =>Factory.attributes_for(:client)
     end
@@ -56,8 +52,13 @@ class ClientsControllerTest < ActionController::TestCase
   end
 
   test "should update client" do
-    put :update, :id => clients(:client1).to_param, :client => { }
-    assert_redirected_to client_path(assigns(:client))
+    #setup
+    
+    Client.any_instance.stubs(:valid?).returns(true)
+    #client =  clients(:client1)
+    put :update, :id => @client.id, :client => { }
+    #assert_response :success
+    assert_redirected_to client_path(@client.id)
     assert_equal 'Client was successfully updated.', flash[:notice]
   end
 
@@ -101,6 +102,15 @@ class ClientsControllerTest < ActionController::TestCase
     assert_equal !!@user.roles.find_by_name("Client"), true
   end
 
+private
 
+  def initialize_client
+    @user = users(:user)#Factory.create(:user)
+    @request.host = @user.company.name + ".lvh.me"
+    sign_in @user
+    @client = clients(:client1)
+    #@client.company_id = @user.company.id
+    #@client.save!
+  end
 
 end

@@ -62,7 +62,7 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   def test_update_valid
-    #Contact.any_instance.stubs(:valid?).returns(true)
+    Contact.any_instance.stubs(:valid?).returns(true)
     #contact = contacts(:contact1)#Factory.create(:contact)
     put :update, :id => @contact
     assert_equal 'Contact was successfully updated.', flash[:notice]    
@@ -91,6 +91,6 @@ class ContactsControllerTest < ActionController::TestCase
     
     assert_equal @contact.client.company_id, @user.company_id
     assert_equal @contact.client.id, @user.client_id
-    assert_equal @user.roles.find_by_name("Client"), true
+    assert_equal !!@user.roles.find_by_name("Client"), true
   end
 end

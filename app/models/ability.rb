@@ -28,7 +28,7 @@ class Ability
       #can :destroy, Comment, :user_id => user.id
       #can [:read, :destroy], Feedback
       #can [:create, :update], Feedback #TODO only apply to client once setup
-      can [:read, :update], Schedule
+      #can [:read, :update], Schedule
       can :read, Role
     elsif user.role? :viewer
       #can [:read], [Invoice, InvoiceItem, Delivery, Send, Reminder, Payment, Feedback]
@@ -38,7 +38,7 @@ class Ability
       can :read, Setting, :id => user.company_id
       #can [:create, :read], Comment
       #can :delete, Comment, :id => user.id
-      can [:read], Schedule
+      #can [:read], Schedule
     elsif user.role? :client
       can [:read, :update], Client, :id => user.client_id
       can [:manage], Contact, :client_id => user.client_id

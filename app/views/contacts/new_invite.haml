@@ -1,5 +1,5 @@
 -title "Invite Contact"
-- simple_form_for @contact,:url =>  invite_contact_path(@contact), :html=>{:method=>:put} do |f|
+= simple_form_for @contact,:url =>  invite_contact_path(@contact), :html=>{:method=>:put} do |f|
   =field_set_tag 'Contact Details' do
     = f.input :first_name
     = f.input :last_name  

@@ -30,6 +30,7 @@ Factory.define :client do |f|
   f.phone "02476 76735989"
   f.fax "33233 2323"
   f.email "nehal.soni@gmail.com"  
+  #f.company {|company| company.association(:company) }
 end
 
 Factory.define :contact do |f|

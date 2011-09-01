@@ -2,7 +2,7 @@
   %a{:href=>"javascript:void(0)"}
     Show/Hide Filter
 #filter_box
-  - simple_form_for @search do |f|
+  = simple_form_for @search do |f|
     -# f.inputs :id =>  "ajax_form" do
     =field_set_tag 'Client Details' do
       = f.input :company_name_contains, :label => "Company/Name", :required => false

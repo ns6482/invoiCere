@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ishanehal_vb/!svn/ver/291/VisioInvoice/app/views/invoices/show_elements
+END
+_toolbar.haml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/ishanehal_vb/!svn/ver/291/VisioInvoice/app/views/invoices/show_elements/_toolbar.haml
+END
+_show_core.haml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/ishanehal_vb/!svn/ver/347/VisioInvoice/app/views/invoices/show_elements/_show_core.haml
+END
+_show_invoice_summary.haml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/ishanehal_vb/!svn/ver/284/VisioInvoice/app/views/invoices/show_elements/_show_invoice_summary.haml
+END
+_show_invoice_item.haml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/ishanehal_vb/!svn/ver/265/VisioInvoice/app/views/invoices/show_elements/_show_invoice_item.haml
+END

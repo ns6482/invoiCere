@@ -1,0 +1,27 @@
+%table
+ %tr
+  %th
+   %strong Tax Rate:
+  %td= h number_to_percentage(@invoice.tax_rate, :precision => 2)
+ %tr
+  %th
+   %strong Item Subtotal:
+  %td= h number_to_currency @invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","
+ %tr
+  %th
+   %strong Item Subtotal inc Tax:
+  %td= h number_to_currency @invoice.total_cost_inc_tax, :unit => '£', :separator => ".", :delimiter => ","
+ %tr
+  %th
+   %strong Delivery Charge:
+  %td= h number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
+ %tr
+  %th
+   %strong Total:
+  %td
+   %strong= h number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
+ %tr
+  %th
+   %strong Payment Due:
+  %td
+   %strong=  number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","

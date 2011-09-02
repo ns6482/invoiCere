@@ -1,0 +1,18 @@
+#filter_link
+ %a{:href=>"javascript:void(0)"}
+  Show/Hide Filter
+ %br
+#filter_box
+ - semantic_form_for @search, :html=>{:id=>"search_form"}, :js_lib => :jquery do |f|
+  - f.inputs :id => "ajax_form" do
+   = f.input :title_like, :label => "Title", :required => false
+   = f.input :invoice_date_gte, :as => :date, :label => "Create From", :required => false
+   = f.input :invoice_date_lte, :as => :date, :label => "Create To", :required => false
+   = f.input :total_cost_inc_tax_delivery_gte,:as => :numeric, :label =>  "Min Cost",:input_html => { :size => 10 } , :required => false
+   = f.input :total_cost_inc_tax_delivery_lte,:as => :numeric, :label => "Max Cost", :required => false
+   = f.input :client_id_equals, :as => :select, :collection => @clients, :name => :company_name , :include_blank => true, :label=>"Client", :required => false
+   = f.input :state_equals_any, :as => :check_boxes , :collection => ["draft", "open", "paid"], :include_blank => true, :label=>"State", :required => false
+   = f.input :due_date_gte, :as => :date, :label => "Due Date From", :required => false
+
+   %button{:type=>"submit",:class=>"blue"}
+    Filter

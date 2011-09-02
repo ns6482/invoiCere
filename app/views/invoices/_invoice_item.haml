@@ -1,0 +1,7 @@
+%tr{:class=>"fields"}
+ %td=f.text_field :item_type, :size => 100
+ %td=f.text_field :item_description, :size => 200
+ %td=f.text_field :cost, :size => 20
+ %td=f.text_field :qty, :size => 20
+ %td=f.check_box :taxable
+ %td=remove_child_link "remove", f

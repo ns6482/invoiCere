@@ -1,0 +1,27 @@
+- title "Invoice Item"
+
+%p
+  %strong Invoice:
+  =h @invoice_item.invoice_id
+%p
+  %strong Item Type:
+  =h @invoice_item.item_type
+%p
+  %strong Item Description:
+  =h @invoice_item.item_description
+%p
+  %strong Qty:
+  =h @invoice_item.qty
+%p
+  %strong Cost:
+  =h @invoice_item.cost
+%p
+  %strong Taxable:
+  =h @invoice_item.taxable
+
+%p
+  = link_to "Edit", edit_invoice_item_path(@invoice_item)
+  |
+  = link_to "Destroy", @invoice_item, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", invoice_items_path

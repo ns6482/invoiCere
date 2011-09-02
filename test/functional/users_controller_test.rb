@@ -79,8 +79,8 @@ class UsersControllerTest < ActionController::TestCase
   #def test_update_invalid_admin_user
    # #User.any_instance.stubs(:valid?).returns(false)
     
-    #put :update, :id => @user, :user => {:email => @user.email, :current_password => "password_wrong"}
-    #assert_template 'edit'
+   # put :update, :id => @user, :user => {:email => @user.email, :current_password => "password_wrong"}
+   # assert_template 'edit'
   #end
 
   #def test_update_invalid_user_bad_password    

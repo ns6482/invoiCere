@@ -1,0 +1,8 @@
+- title "Edit Invoice Item"
+
+= render :partial => 'form'
+
+%p
+  = link_to "Show", invoice_item_path(@invoice_item)
+  |
+  = link_to "View All", invoice_items_path

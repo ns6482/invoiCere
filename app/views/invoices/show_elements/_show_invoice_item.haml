@@ -1,0 +1,5 @@
+%tr{:class=>"fields"}
+ %td= show_invoice_item.item_type
+ %td= show_invoice_item.item_description
+ %td= h number_to_currency show_invoice_item.cost, :unit => '£', :separator => ".", :delimiter => ","
+ %td= show_invoice_item.qty

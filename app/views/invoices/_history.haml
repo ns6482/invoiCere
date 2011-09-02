@@ -1,0 +1,16 @@
+%h2 Invoice Activity
+%table
+ %tr
+  %th Action
+  %th Date
+  %th User
+ %tr
+  %td Created
+  -if !@invoice.created_at.nil?
+   %td=@invoice.created_at.strftime('%d/%m/%Y %H:%M')
+   %td x
+ %tr
+  %td Opened
+  -if !@invoice.opened_date.nil?
+   %td=@invoice.opened_date.strftime('%d/%m/%Y %H:%M')
+   %td=@invoice.opened_by

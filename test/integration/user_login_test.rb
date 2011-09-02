@@ -5,7 +5,7 @@ class UserLoginTest < ActionController::IntegrationTest
   fixtures :all
 
   def setup
-    host! 'test'
+    host! 'lvh.me'
     @company = companies(:one)
         @setting = settings(:one)#Setting.new(:id=>9991, :company_id => @user.company.id, :vat => 17.5, :logo => File.new("test/fixtures/sample_file.png"))
     @setting1 = settings(:two)#Setting.new(:id=>9992, :company_id => @user.company.id, :vat => 17.5, :logo => File.new("test/fixtures/sample_file.png"))
@@ -30,7 +30,7 @@ class UserLoginTest < ActionController::IntegrationTest
 
  
   #def test_redirects_when_not_signed_in
-   # host! @user1.company.name + ".test"
+   # host! @user1.company.name + ".lvh.me"
     #logout_user
     #get "/dashboard/index"
     #follow_redirect!  
@@ -46,7 +46,7 @@ class UserLoginTest < ActionController::IntegrationTest
    # assert_template ""
     get "/"    
     #assert_response :success
-    #assert_equal @user.company.name + ".test", request.host
+    #assert_equal @user.company.name + ".lvh.me", request.host
     assert_contain("Edit Account")
 
 #     assert_select "a[href=?]", edit_user_path(@user.id),:count=>1, :text=>"Edit Account"
@@ -57,7 +57,7 @@ class UserLoginTest < ActionController::IntegrationTest
     login_user
     follow_redirect!   
     assert_template ""
-    assert_equal @user.company.name + ".test", request.host
+    assert_equal @user.company.name + ".lvh.me", request.host
     
   end
 

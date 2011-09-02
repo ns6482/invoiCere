@@ -27,6 +27,7 @@ gem "meta_search"
 
 #gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
 gem 'will_paginate'#, '~> 3.0.0'
+gem 'prawn'
 
 # Use unicorn as the web server
 # gem 'unicorn'

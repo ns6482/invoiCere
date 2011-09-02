@@ -1,0 +1,52 @@
+#invoice-preview
+ #invoice-client-name
+  %h3= "Invoice for " +  @invoice.client.name
+ #invoice-client-address
+  =render :partial => "clients/address", :locals => {:client => @invoice.client}
+ #invoice-logo
+  -#todo delete company from client, or rename to name
+  = image_tag @invoice.client.company.setting.logo.url
+  %p
+   %h3= current_company.setting.company_name#@invoice.client.company_name#@invoice.company_id #current_company.name
+ #invoice-header-details
+  %table
+   %tr
+    %th Invoice ID
+    %th Your ID
+    %th Purchase Order ID
+    %th Invoice Date
+    %th Due Date
+   %tr
+    %td
+     %strong= h @invoice.id
+    %td= h @invoice.business_id
+    %td= h @invoice.purchase_order_id
+    %td= h @invoice.invoice_date
+    %td= h @invoice.due_date
+ #invoice-title
+  %h2= h @invoice.title
+ #invoice-item-list
+  %table{:id => 'invoice-items'}
+   %thead
+    %tr
+     %th Type
+     %th Description
+     %th Cost
+     %th Qty
+   %tbody
+    =render :partial => "invoices/show_elements/show_invoice_item", :collection => @invoice.invoice_items, :as => :show_invoice_item
+ #invoice-summary
+  =render :partial => "invoices/show_elements/show_invoice_summary", :locals => {:invoice => @invoice}
+ #invoice-footer
+  %p
+   %strong Notes
+   =h @invoice.notes
+  -if @invoice.late_fee
+   #invoice-footer-late-fee
+    %p
+     This invoice is due in
+     %strong= pluralize(@invoice.due_days, 'day')
+     , the late fee is set to
+     %strong= h number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+#invoice-activity
+ = render :partial => "invoices/history"

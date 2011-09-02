@@ -1,0 +1,23 @@
+- title "Invoice Items"
+
+%table
+  %tr
+    %th Invoice
+    %th Item type
+    %th Item description
+    %th Qty
+    %th Cost
+    %th Taxable
+  - for invoice_item in @invoice_items
+    %tr
+      %td= h invoice_item.invoice_id
+      %td= h invoice_item.item_type
+      %td= h invoice_item.item_description
+      %td= h invoice_item.qty
+      %td= h invoice_item.cost
+      %td= h invoice_item.taxable
+      %td= link_to 'Show', invoice_item
+      %td= link_to 'Edit', edit_invoice_item_path(invoice_item)
+      %td= link_to 'Destroy', invoice_item, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Invoice Item", new_invoice_item_path

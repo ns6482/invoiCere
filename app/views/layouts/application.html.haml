@@ -15,8 +15,7 @@
         %h4
           Put some sexy quote here...
     #content
-      =# display_flash_messages
-       -flash.each do |key, msg|
+      -flash.each do |key, msg|
         = content_tag :div, msg, :id => "flash_#{key}", :class => "#flash #{key}"
       =yield
     #footer

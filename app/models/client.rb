@@ -5,7 +5,7 @@ class Client < ActiveRecord::Base
 
   belongs_to :company
   has_many :contacts, :dependent => :destroy
-  #has_many :invoices
+  has_many :invoices
   has_many :users
 
   validates_presence_of :company_name, :address1, :email#,:company_id

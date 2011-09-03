@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110828161024) do
+ActiveRecord::Schema.define(:version => 20110903190124) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -60,6 +60,47 @@ ActiveRecord::Schema.define(:version => 20110828161024) do
     t.integer  "company_id"
   end
 
+  create_table "invoice_items", :force => true do |t|
+    t.integer  "invoice_id"
+    t.string   "item_type",        :limit => 20,  :null => false
+    t.string   "item_description", :limit => 100, :null => false
+    t.decimal  "qty",                             :null => false
+    t.decimal  "cost",                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "taxable"
+  end
+
+  create_table "invoices", :force => true do |t|
+    t.integer  "client_id"
+    t.date     "invoice_date"
+    t.string   "title"
+    t.text     "notes"
+    t.decimal  "tax_rate"
+    t.decimal  "delivery_charge"
+    t.string   "business_id"
+    t.string   "purchase_order_id"
+    t.string   "status"
+    t.decimal  "late_fee"
+    t.integer  "due_days"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "state"
+    t.decimal  "total_cost"
+    t.decimal  "total_cost_inc_tax"
+    t.decimal  "total_cost_inc_tax_delivery"
+    t.date     "due_date"
+    t.date     "opened_date"
+    t.string   "opened_by"
+    t.date     "paid_date"
+    t.string   "paid_by"
+    t.boolean  "cancelled"
+    t.date     "cancelled_date"
+    t.string   "cancelled_by"
+    t.integer  "seed_schedule_id"
+    t.boolean  "latest"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -69,6 +110,24 @@ ActiveRecord::Schema.define(:version => 20110828161024) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.string   "name"
+    t.integer  "invoice_id"
+    t.integer  "frequency"
+    t.string   "frequency_type"
+    t.date     "last_sent"
+    t.date     "next_send"
+    t.string   "due_on"
+    t.date     "end_date"
+    t.integer  "enabled"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "send_to_client"
+    t.text     "message"
+    t.integer  "default_message"
+    t.text     "custom_message"
   end
 
   create_table "settings", :force => true do |t|

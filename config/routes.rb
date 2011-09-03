@@ -13,15 +13,15 @@ VisioInvoiceV3::Application.routes.draw do
     
     #site.resources :schedules, :only => [:index]
 
-    #site.resources :invoices do |invoices|
+    resources :invoices do
       #invoices.resources :deliveries, :only => [:new, :create, :show, :index], :shallow =>true
       #invoices.resources :payments,:only => [:new, :create, :index, :destroy], :shallow =>true
       #invoices.resource :reminder, :only => [ :edit, :update, :show]
       #invoices.resources :comments, :only => [:new, :create, :destroy, :index], :shallow =>true
-      #invoices.resources :invoice_items, :only => [:new, :create, :destroy, :index], :shallow =>true
+      resources :invoice_items, :only => [:new, :create, :destroy, :index], :shallow =>true
       #invoices.resources :feedbacks, :only => [:new, :create, :destroy, :index], :shallow =>true
       #invoices.resource :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
-    #end
+    end
 
     devise_for :users, :controllers => { :invitations => 'users/invitations' }
     #devise_for :users, :controllers => { :invitations => 'users/new_invite' }

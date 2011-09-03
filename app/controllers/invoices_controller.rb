@@ -2,7 +2,7 @@ require "open-uri"
 require "prawn"
 
 
-class InvoicesController < AccountController
+class InvoicesController < BaseController
   before_filter :get_clients, :only => [:index]
   before_filter :find_invoice, :only => [:show, :edit, :destroy]  
   load_and_authorize_resource
@@ -12,8 +12,8 @@ class InvoicesController < AccountController
   
     @search = @invoices.search(params[:search])
    
-    @invoices = @search.all
-    @invoices = @invoices.paginate :page => params[:page], :per_page => 10
+    #@invoices = @search.all
+    @invoices = @search.paginate :page => params[:page], :per_page => 10
     #@invoices = Invoice.all
     respond_to do |format|
       format.html # index.html.erb

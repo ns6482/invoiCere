@@ -29,7 +29,7 @@ gem "meta_search"
 gem 'will_paginate'#, '~> 3.0.0'
 gem 'prawn'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
-
+gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 # Use unicorn as the web server
 # gem 'unicorn'
 

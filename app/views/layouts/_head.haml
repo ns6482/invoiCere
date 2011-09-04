@@ -1,6 +1,6 @@
 %title
   = h(yield(:title) || "Untitled")
-= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js', 'nested_form', 'application', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js', 'jquery.form', 'jquery.collapser', 'jquery_ujs'
+= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js', 'nested_form', 'application', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js', 'jquery.collapser', 'jquery_ujs','nested_form'#, 'jquery.form'
 = javascript_include_tag 'jquery.effects.blind.js', 'jquery.effects.bounce.js','jquery.effects.clip.js', 'jquery.effects.core.js', 'jquery.effects.drop.js', 'jquery.effects.explode.js', 'jquery.effects.fade.js', 'jquery.effects.fold.js', 'jquery.effects.highlight.js', 'jquery.effects.pulsate.js', 'jquery.effects.scale.js', 'jquery.effects.shake.js', 'jquery.effects.slide.js', 'jquery.effects.transfer.js', 'jquery.qtip-1.0.0-rc3.min', 'jquery.jscrollpane.min','jquery.rating.pack', :cache => true
 = csrf_meta_tag
 =# stylesheet_link_tag 'formtastic', 'formtastic_changes', :cache => 'base'

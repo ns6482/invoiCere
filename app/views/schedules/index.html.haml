@@ -1,0 +1,24 @@
+- title "Schedules"
+
+%table
+  %thead
+    %th Name
+    %th Client
+    %th Frequency
+    %th Frequency Type
+    %th Last Sent
+    %th Cost
+    %th Enabled    
+  - for schedule in @schedules    
+    %tr{:class=> cycle("odd", "even")}
+      %td= h schedule.name
+      %td= h schedule.invoice.client.name
+      %td= h schedule.frequency
+      %td= h schedule.frequency_type
+      %td= h schedule.last_sent
+      %td= h number_to_currency schedule.invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","       
+      %td= h schedule.enabled
+      %td= link_to 'Preview', invoice_path(schedule.invoice)      
+      %td= link_to 'Delete', invoice_schedule_path(schedule.invoice), :confirm => 'Are you sure?', :method => :delete
+    
+

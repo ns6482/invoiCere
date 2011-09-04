@@ -1,0 +1,10 @@
+-semantic_form_for :payment, @payment, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
+ =# f.error_messages
+ - f.inputs :id => "form-main" do
+  = f.input :pay_full_amount, :as=>:boolean, :label=>"Pay full amount (" + number_to_currency(@invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ",") + ")"
+  = f.input :amount
+  = f.input :payment_type, :as => :select, :collection => ["Cash", "Cheque", "Other"]
+  = f.input :currency, :as => :select,  :collection => ["British Pounds", "US Dollars", "Euros"]
+ 
+  %button{:type=>"submit",:class=>"red"}
+   Pay

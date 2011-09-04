@@ -1,0 +1,4 @@
+$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.delete(:notice)) %> </p>');
+$('#new_schedule').hide('slow').empty();
+$('#schedule_invoice').html('<%= link_to "Edit Reoccurance", edit_invoice_schedule_path(@schedule.invoice), :class => "interactive"%>')
+  

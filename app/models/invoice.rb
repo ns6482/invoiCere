@@ -98,7 +98,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def _total_cost_inc_tax_delivery
-    self.delivery_charge.to_f + @total_cost_inc_tax
+    self.delivery_charge.to_f + self._total_cost_inc_tax
   end
 
   def update_invoice_totals    
@@ -126,14 +126,14 @@ class Invoice < ActiveRecord::Base
 
   def remaining_amount
 
-    #total_payments = Payment.sum(:amount, :conditions => ['invoice_id = ?', self.id])
+    total_payments = Payment.sum(:amount, :conditions => ['invoice_id = ?', self.id])
     
-    #val = self.total_cost_inc_tax_delivery
+    val = self.total_cost_inc_tax_delivery
 
-    #if !total_payments.nil?
-      #val = val - total_payments    
-    #end
-    #self.remaining_amount = val
+    if !total_payments.nil?
+      val = val - total_payments    
+    end
+    self.remaining_amount = val
   end
 
 

@@ -1,0 +1,14 @@
+$("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>").effect("slide");
+$("#invoice-main").prepend("<%= escape_javascript(render("edit")) %>");
+$('#edit_schedule').addClass('ajax_form');
+$('#cancel').bind('click', function() {
+  $('#edit_schedule').hide('slow').empty();  
+  return false;
+ });
+
+ if ($('#schedule_default_message').is(':checked')){
+   $("#schedule_custom_message_input").hide();
+ }
+ else {
+   $("#schedule_custom_message_input").show();
+ }

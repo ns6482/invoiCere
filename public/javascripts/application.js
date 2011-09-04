@@ -6,19 +6,6 @@ jQuery.ajaxSetup({
 })
 
 
-function remove_fields(link) {
-    $(link).prev("input[type=hidden]").val("1");
-    $(link).closest(".fields").hide();
-}
-
-function insert_fields(link, association, content) {
-    var new_id = new Date().getTime();
-    var regexp = new RegExp("new_" + association, "g");
-    //$(link).parent().before(content.replace(regexp, new_id));
-    $('#invoice_items > tbody:last').after('<tr class= "fields" id = ' + new_id + '>' + content.replace(regexp, new_id) + '</tr>');
-
-}
-
 jQuery(function() {
     
     $("#filter_box").hide();

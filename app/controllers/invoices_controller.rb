@@ -26,13 +26,7 @@ class InvoicesController < BaseController
 
     respond_to do | format|
       format.html
-      
-#      output = @invoice.get_pdf
-#      format.pdf do
-#        send_data output, :filename => @invoice.title,
-#                          :type => "application/pdf"
-#      end
-     format.pdf
+     #format.pdf
      format.js
       format.xml  { render :xml => @invoice}
     end
@@ -49,7 +43,11 @@ class InvoicesController < BaseController
       @invoice.invoice_date=Date.today
     else
       @invoice.invoice_date=Date.today
-      @invoice.invoice_items.build
+      
+      #3.times do
+       @invoice.invoice_items.build
+      #end
+
     end
 
     #@invoice = Invoice.new(:invoice_date => Date.today)
@@ -63,9 +61,10 @@ class InvoicesController < BaseController
 
     if  current_company.clients.exists?(@invoice.client)
       if @invoice.save
-        notice  "Successfully created invoice."
+        flash[:notice] =   "Successfully created invoice."
         redirect_to @invoice
       else
+        flash[:notice] = "Please make sure fields are completed correctly"
         render :action => 'new'
       end
     else
@@ -115,7 +114,7 @@ class InvoicesController < BaseController
   def destroy
     #@invoice = Invoice.find(params[:id])
     @invoice.destroy
-    notice  "Successfully destroyed invoice."
+    flash[:notice] =   "Successfully destroyed invoice."
     redirect_to invoices_url
   end
 

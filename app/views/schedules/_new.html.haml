@@ -1,0 +1,17 @@
+-semantic_form_for :schedule, @schedule, :url => invoice_schedule_path(@invoice), :html => {:id=> 'new_schedule', :method => :post }do |f|
+  - f.inputs  :id => "form-main" do
+    =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
+    = f.error_messages
+    = f.input :name
+    = f.input :frequency_type, :as => :select, :collection => ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], :include_blank => false
+    = f.input :frequency, :label => "Number of days to repeat"
+    = f.input :due_on, :as => :select, :label => "Due",  :collection => ["On receipt", "After 15 days", "After 30 Days", "After 45 days", "After 60 days"] , :include_blank => false
+    = f.input :end_date, :hint => "Leave blank to schedule forever"
+    = f.input :default_message, :as => :boolean
+    = f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}
+    %strong Send to Client
+    = f.input :send_to_client, :as => :boolean, :label=> @invoice.client.company_name
+    = f.input :contacts, :as => :check_boxes, :collection => @invoice.client.contacts, :label => "Send To"
+    = f.input :enabled,   :as => :boolean
+    %p
+      %button{:type=>"submit",:class=>"red"} Create Schedule

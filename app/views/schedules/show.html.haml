@@ -1,0 +1,33 @@
+- title "Schedule"
+
+%p
+  %strong Name:
+  =h @schedule.name
+%p
+  %strong Invoice:
+  =h @schedule.invoice_id
+%p
+  %strong Frequency:
+  =h @schedule.frequency
+%p
+  %strong Frequency Type:
+  =h @schedule.frequency_type
+%p
+  %strong Last Sent:
+  =h @schedule.last_sent
+%p
+  %strong Next Send:
+  =h @schedule.next_send
+%p
+  %strong Due On:
+  =h @schedule.due_on
+%p
+  %strong Enabled:
+  =h @schedule.enabled
+
+%p
+  = link_to "Edit", edit_invoice_schedule_path(@schedule.invoice)
+  |
+  =# link_to "Destroy", @schedule, :confirm => 'Are you sure?', :method => :delete
+  |
+  =# link_to "View All", schedules_path

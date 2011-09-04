@@ -1,0 +1,6 @@
+- title "Payments"
+= render :partial =>  "payments"
+-if @invoice.remaining_amount > 0
+ %p= link_to "New Payment", new_invoice_payment_path(@invoice)
+
+%p= link_to "Back to Invoice", invoice_path(@invoice)

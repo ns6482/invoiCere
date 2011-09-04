@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110903190124) do
+ActiveRecord::Schema.define(:version => 20110904162811) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -101,6 +101,16 @@ ActiveRecord::Schema.define(:version => 20110903190124) do
     t.boolean  "latest"
   end
 
+  create_table "payments", :force => true do |t|
+    t.integer  "invoice_id"
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.string   "payment_type"
+    t.string   "currency"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -110,6 +120,14 @@ ActiveRecord::Schema.define(:version => 20110903190124) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "schedule_sends", :force => true do |t|
+    t.integer  "schedule_id"
+    t.integer  "contact_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "schedules", :force => true do |t|
@@ -128,6 +146,14 @@ ActiveRecord::Schema.define(:version => 20110903190124) do
     t.text     "message"
     t.integer  "default_message"
     t.text     "custom_message"
+  end
+
+  create_table "sends", :force => true do |t|
+    t.integer  "delivery_id"
+    t.integer  "contact_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "settings", :force => true do |t|

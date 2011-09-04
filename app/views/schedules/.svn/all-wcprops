@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ishanehal_vb/!svn/ver/309/VisioInvoice/app/views/schedules
+END
+show.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/312/VisioInvoice/app/views/schedules/show.html.haml
+END
+update.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ishanehal_vb/!svn/ver/321/VisioInvoice/app/views/schedules/update.js.erb
+END
+create.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ishanehal_vb/!svn/ver/326/VisioInvoice/app/views/schedules/create.js.erb
+END
+_edit.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ishanehal_vb/!svn/ver/326/VisioInvoice/app/views/schedules/_edit.html.haml
+END
+edit.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ishanehal_vb/!svn/ver/324/VisioInvoice/app/views/schedules/edit.js.erb
+END
+edit.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/321/VisioInvoice/app/views/schedules/edit.html.haml
+END
+index.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ishanehal_vb/!svn/ver/321/VisioInvoice/app/views/schedules/index.html.haml
+END
+_new.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/326/VisioInvoice/app/views/schedules/_new.html.haml
+END
+new.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ishanehal_vb/!svn/ver/326/VisioInvoice/app/views/schedules/new.js.erb
+END
+new.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ishanehal_vb/!svn/ver/321/VisioInvoice/app/views/schedules/new.html.haml
+END

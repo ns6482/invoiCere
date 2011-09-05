@@ -1656,11 +1656,11 @@ span.stars span {
 
 /* line 1, ../../sass/system_partials/_forms.sass */
 .fields {
-  padding-left: 80px;
+  padding-left: 40px;
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 630px;
+  width: 590px;
 }
 /* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .fields {
@@ -1682,7 +1682,7 @@ span.stars span {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 190px;
+  width: 150px;
 }
 /* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .fields .item_description {
@@ -1738,24 +1738,25 @@ span.stars span {
   float: left;
   margin-right: 0;
   width: 30px;
+  background: url("/images/icons/delete.png") norepeat;
 }
 /* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .fields .item_remove {
   overflow-x: hidden;
 }
 
-/* line 20, ../../sass/system_partials/_forms.sass */
+/* line 21, ../../sass/system_partials/_forms.sass */
 .simple_form div.input {
   margin-bottom: 2px;
 }
-/* line 23, ../../sass/system_partials/_forms.sass */
+/* line 24, ../../sass/system_partials/_forms.sass */
 .simple_form label {
   float: left;
   width: 80px;
   text-align: left;
   margin: 2px 10px;
 }
-/* line 29, ../../sass/system_partials/_forms.sass */
+/* line 30, ../../sass/system_partials/_forms.sass */
 .simple_form .error, .simple_form body.bp .alert, body.bp .simple_form .alert {
   clear: left;
   color: black;
@@ -1763,7 +1764,7 @@ span.stars span {
   margin-left: 120px;
   font-size: 12px;
 }
-/* line 36, ../../sass/system_partials/_forms.sass */
+/* line 37, ../../sass/system_partials/_forms.sass */
 .simple_form .hint {
   clear: left;
   margin-left: 120px;
@@ -1773,42 +1774,42 @@ span.stars span {
   font-style: italic;
 }
 
-/* line 44, ../../sass/system_partials/_forms.sass */
+/* line 45, ../../sass/system_partials/_forms.sass */
 div.boolean, .simple_form input[type='submit'] {
   margin-left: 120px;
 }
 
-/* line 47, ../../sass/system_partials/_forms.sass */
+/* line 48, ../../sass/system_partials/_forms.sass */
 div.boolean label, label.collection_radio {
   float: none;
   margin: 0;
 }
 
-/* line 51, ../../sass/system_partials/_forms.sass */
+/* line 52, ../../sass/system_partials/_forms.sass */
 label.collection_radio {
   margin-right: 10px;
   vertical-align: -2px;
   margin-left: 2px;
 }
 
-/* line 56, ../../sass/system_partials/_forms.sass */
+/* line 57, ../../sass/system_partials/_forms.sass */
 .field_with_errors {
   background-color: #fbc2c4;
 }
 
-/* line 59, ../../sass/system_partials/_forms.sass */
+/* line 60, ../../sass/system_partials/_forms.sass */
 input.radio {
   margin-right: 5px;
   vertical-align: -3px;
 }
 
-/* line 63, ../../sass/system_partials/_forms.sass */
+/* line 64, ../../sass/system_partials/_forms.sass */
 input.check_boxes {
   margin-left: 3px;
   vertical-align: -3px;
 }
 
-/* line 67, ../../sass/system_partials/_forms.sass */
+/* line 68, ../../sass/system_partials/_forms.sass */
 label.collection_check_boxes {
   float: none;
   margin: 0;
@@ -1816,7 +1817,7 @@ label.collection_check_boxes {
   margin-left: 2px;
 }
 
-/* line 74, ../../sass/system_partials/_forms.sass */
+/* line 75, ../../sass/system_partials/_forms.sass */
 #form-title {
   color: black;
   text-align: center;
@@ -1824,22 +1825,22 @@ label.collection_check_boxes {
   font-size: 1.2em;
 }
 
-/* line 80, ../../sass/system_partials/_forms.sass */
+/* line 81, ../../sass/system_partials/_forms.sass */
 .inline-errors {
   color: red;
 }
 
-/* line 82, ../../sass/system_partials/_forms.sass */
+/* line 83, ../../sass/system_partials/_forms.sass */
 .errorExplanation {
   color: red;
 }
 
-/* line 93, ../../sass/system_partials/_forms.sass */
+/* line 94, ../../sass/system_partials/_forms.sass */
 #form-main, #form-bottom {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 710px;
+  width: 630px;
   border: 1px solid #999999;
   -webkit-border-radius: 8px 8px;
   -moz-border-radius: 8px / 8px;
@@ -1854,8 +1855,13 @@ label.collection_check_boxes {
 * html #form-main, * html #form-bottom {
   overflow-x: hidden;
 }
+/* line 101, ../../sass/system_partials/_forms.sass */
+#form-main textarea, #form-bottom textarea {
+  height: 50px;
+  width: 390px;
+}
 
-/* line 102, ../../sass/system_partials/_forms.sass */
+/* line 108, ../../sass/system_partials/_forms.sass */
 #form-right, #form-left {
   border: 1px solid #999999;
   -webkit-border-radius: 8px 8px;
@@ -1867,20 +1873,19 @@ label.collection_check_boxes {
   padding: 5px;
   background-color: whitesmoke;
 }
-/* line 103, ../../sass/system_partials/_forms.sass */
+/* line 109, ../../sass/system_partials/_forms.sass */
 #form-right label, #form-left label {
   clear: both;
   display: block;
   float: none;
-  width: auto;
 }
 
-/* line 123, ../../sass/system_partials/_forms.sass */
-#form-right {
-  width: 10px;
+/* line 130, ../../sass/system_partials/_forms.sass */
+#form-right input {
+  width: 50px;
 }
 
-/* line 126, ../../sass/system_partials/_forms.sass */
+/* line 136, ../../sass/system_partials/_forms.sass */
 #filter_link {
   font-size: 12px;
   text-decoration: none;
@@ -1890,17 +1895,17 @@ label.collection_check_boxes {
   text-decoration: underline;
 }
 
-/* line 130, ../../sass/system_partials/_forms.sass */
+/* line 140, ../../sass/system_partials/_forms.sass */
 #interactive {
   display: none;
 }
 
-/* line 133, ../../sass/system_partials/_forms.sass */
+/* line 143, ../../sass/system_partials/_forms.sass */
 #load {
   display: none;
 }
 
-/* line 136, ../../sass/system_partials/_forms.sass */
+/* line 146, ../../sass/system_partials/_forms.sass */
 #search_form {
   display: inline;
   float: left;
@@ -1912,7 +1917,7 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
-/* line 139, ../../sass/system_partials/_forms.sass */
+/* line 149, ../../sass/system_partials/_forms.sass */
 .cancel_button {
   float: right;
 }

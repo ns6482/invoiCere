@@ -25,15 +25,16 @@
         .item_total
         
       = f.simple_fields_for :invoice_items
-      = f.link_to_add "New Item", :invoice_items
-            
+      %br
+      = f.link_to_add "New Item", :invoice_items            
+      %br
       =f.input :notes, :input_html => {:rows => 2}
 
     =field_set_tag 'Charges', :id => "form-right" do
-      = f.input :tax_rate, :input_html => {:size => 3}
-      = f.input :delivery_charge, :input_html => {:size => 3}
-      = f.input :late_fee, :input_html => {:size => 3}
-      = f.input :due_days, :input_html => {:size => 3}
+      = f.input :tax_rate, :input_html => {:size => 1}
+      = f.input :delivery_charge, :input_html => {:size => 1}
+      = f.input :late_fee, :input_html => {:size => 1}
+      = f.input :due_days, :input_html => {:size => 1}
 
     %button{:type=>"submit",:class=>"red"} Save
     

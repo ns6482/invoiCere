@@ -1,10 +1,10 @@
 .fields
-  +prepend(2)
-  +column(16)
+  +prepend(1)
+  +column(15)
   .item_type
     +column(3)
   .item_description
-    +column(5)
+    +column(4)
   .item_qty
     +column(2)
   .item_cost
@@ -15,6 +15,7 @@
     +column(1)
   .item_remove
     +column(1, true)
+    background: url('/images/icons/delete.png') norepeat
  
 .simple_form
   div.input
@@ -91,11 +92,16 @@ label.collection_check_boxes
 
 
 #form-main, #form-bottom
-  +column(18)
+  +column(16)
   :border 1px solid #999
   +border-radius(8px, 8px)
   padding: 5px
   background-color: whitesmoke
+  
+  textarea
+    height: 50px
+    width: 390px
+  
 
 //#form-bottom
 
@@ -104,7 +110,7 @@ label.collection_check_boxes
     clear: both
     display: block
     float: none
-    width: auto
+    //width: auto
 
   :border 1px solid #999
   +border-radius(8px, 8px)
@@ -121,7 +127,11 @@ label.collection_check_boxes
     //:padding 1px 1px
 
 #form-right
-  :width 10px  
+  input
+    width: 50px
+
+  
+  //:width 10px  
 
 #filter_link
   :font-size 12px

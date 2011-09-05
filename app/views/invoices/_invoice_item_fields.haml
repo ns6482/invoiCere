@@ -1,7 +1,10 @@
-=f.input :item_type, :input_html => {:size => 5} 
-=f.input :item_description,:input_html => { :size => 5}
-=f.input :cost,:input_html => { :size => 3}
-=f.input :qty, :input_html => {:size => 3}
-=f.input :taxable
-=f.link_to_remove "Remove"
+.input_fields
+  =f.input_field :item_type, :class => 'item_type'
+  =f.input_field :item_description, :class => 'item_description'
+  =f.input_field :qty, :class => 'item_qty',  :size => 3, :type => "text"
+  =f.input_field :cost,   :class => 'item_cost', :size => 3 , :type => "text" 
+  =f.input_field :taxable,  :class => 'item_tax'
+  =f.link_to_remove "Remove" , :class => "item_remove "
+  .item_total
+   
 

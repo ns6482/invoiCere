@@ -8,7 +8,22 @@
       = f.input :title
       = f.input :business_id, :label => "Your ID"
       = f.input :purchase_order_id, :label => "Order ID"
-      %br      
+      %br
+                 
+      .fields
+        .item_type 
+          %label Type
+        .item_description
+          %label Description        
+        .item_qty 
+          %label Qty
+        .item_cost
+          %label Cost
+        .item_tax
+          %label Tax
+        .item_remove
+        .item_total
+        
       = f.simple_fields_for :invoice_items
       = f.link_to_add "New Item", :invoice_items
             

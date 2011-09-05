@@ -1,5 +1,6 @@
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
+  
   # Components used by the form builder to generate a complete input. You can remove
   # any of them, change the order, or even add your own components to the stack.
   # config.components = [ :placeholder, :label_input, :hint, :error ]
@@ -69,7 +70,7 @@ SimpleForm.setup do |config|
   # (e.g. required) are used or not. True by default.
   # Having this on in non-HTML5 compliant sites can cause odd behavior in
   # HTML5-aware browsers such as Chrome.
-  # config.html5 = true
+   config.html5 =false
 
   # Custom mappings for input types. This should be a hash containing a regexp
   # to match as key, and the input type that will be used when the field name
@@ -90,4 +91,5 @@ SimpleForm.setup do |config|
 
   # When false, do not use translations for labels, hints or placeholders.
   # config.translate = true
+
 end

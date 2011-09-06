@@ -4,7 +4,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.auto_highlight = false
   navigation.items do |primary|
     
-    primary.item :edit_invoice, "Edit #{@model}", edit_invoice_path( @model), :if => Proc.new { can? :update, @invoice and  @invoice.state == "draft"}
+    primary.item :edit_invoice, "Edit #{@model}", edit_invoice_path( @model), :if => Proc.new { can? :update, @invoice and  @invoice.state == "draft"},  :link => {:remote => true}
 
 
     primary.item :print_invoice, "Print", invoice_path( @model)

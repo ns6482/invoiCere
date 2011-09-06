@@ -22,11 +22,11 @@
     #dashboard-content
       #dashboard-left= yield(:left)
       #dashboard-centre
+        -flash.each do |key, msg|
+          = content_tag :div, msg, :id => "flash_#{key}", :class => "#flash #{key}"
         -if show_title?
           #form-title
             %h3=h yield(:title)      
-        -flash.each do |key, msg|
-          = content_tag :div, msg, :id => "flash_#{key}", :class => "#flash #{key}"
         =yield
       #dashboard-right=h yield(:right)
     #footer= render 'layouts/footer'

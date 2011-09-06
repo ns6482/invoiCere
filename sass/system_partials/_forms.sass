@@ -1,22 +1,3 @@
-.fields
-  +prepend(1)
-  +column(15)
-  .item_type
-    +column(3)
-  .item_description
-    +column(4)
-  .item_qty
-    +column(2)
-  .item_cost
-    +column(2)
-  .item_total
-    +column(2)
-  .item_tax
-    +column(1)
-  .item_remove
-    +column(1, true)
-    background: url('/images/icons/delete.png') norepeat
- 
 .simple_form
   div.input
     margin-bottom: 2px
@@ -90,46 +71,50 @@ label.collection_check_boxes
   //label
     //font-weight: bold
 
-
-#form-main, #form-bottom
+#form-top
+  +column(11)
+  height: 190px
+#form-main
+  +column(16)    
+#form-bottom
   +column(16)
-  :border 1px solid #999
+#form-right
+  +column(4, true)
+  height: 190px
+  input
+    width: 50px
+
+
+.fields
+  //+prepend(1)
+  +column(15)
+  .item_type
+    +column(3)
+  .item_description
+    +column(6)
+  .item_qty
+    +column(2)
+  .item_cost
+    +column(2)
+  .item_total
+    +column(2)
+  .item_tax
+    +column(1)
+  .item_remove
+    +column(1, true)
+    background: url('/images/icons/delete.png') norepeat
+
+
+  
+#form-main, #form-bottom, #form-top, #form-right
+  //:border 1px solid #999
   +border-radius(8px, 8px)
-  padding: 5px
+  //padding: 5px
   background-color: whitesmoke
   
   textarea
     height: 50px
-    width: 390px
-  
-
-//#form-bottom
-
-#form-right, #form-left
-  label
-    clear: both
-    display: block
-    float: none
-    //width: auto
-
-  :border 1px solid #999
-  +border-radius(8px, 8px)
-  padding: 5px
-  background-color: whitesmoke
-
-
-  //+prepend(1)
-  //input, textarea, select
-    // :font-family inherit
-    // :font-size 12px
-  //textarea, input
-    //:border 1px solid #999
-    //:padding 1px 1px
-
-#form-right
-  input
-    width: 50px
-
+    //width: 390px
   
   //:width 10px  
 

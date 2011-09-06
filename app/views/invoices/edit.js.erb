@@ -1,2 +1,2 @@
 $("#invoice-centre-panel").html("<%= escape_javascript(render("form")) %>");
-$('.invoice').addClass('ajax_form');
+$('.invoice').attr('data-remote',true)

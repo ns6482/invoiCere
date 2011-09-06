@@ -1654,9 +1654,152 @@ span.stars span {
   background: url(/images/minus.gif) no-repeat;
 }
 
-/* line 1, ../../sass/system_partials/_forms.sass */
+/* line 2, ../../sass/system_partials/_forms.sass */
+.simple_form div.input {
+  margin-bottom: 2px;
+}
+/* line 5, ../../sass/system_partials/_forms.sass */
+.simple_form label {
+  float: left;
+  width: 80px;
+  text-align: left;
+  margin: 2px 10px;
+}
+/* line 11, ../../sass/system_partials/_forms.sass */
+.simple_form .error, .simple_form body.bp .alert, body.bp .simple_form .alert {
+  clear: left;
+  color: black;
+  display: block;
+  margin-left: 120px;
+  font-size: 12px;
+}
+/* line 18, ../../sass/system_partials/_forms.sass */
+.simple_form .hint {
+  clear: left;
+  margin-left: 120px;
+  font-size: 12px;
+  color: #555555;
+  display: block;
+  font-style: italic;
+}
+
+/* line 26, ../../sass/system_partials/_forms.sass */
+div.boolean, .simple_form input[type='submit'] {
+  margin-left: 120px;
+}
+
+/* line 29, ../../sass/system_partials/_forms.sass */
+div.boolean label, label.collection_radio {
+  float: none;
+  margin: 0;
+}
+
+/* line 33, ../../sass/system_partials/_forms.sass */
+label.collection_radio {
+  margin-right: 10px;
+  vertical-align: -2px;
+  margin-left: 2px;
+}
+
+/* line 38, ../../sass/system_partials/_forms.sass */
+.field_with_errors {
+  background-color: #fbc2c4;
+}
+
+/* line 41, ../../sass/system_partials/_forms.sass */
+input.radio {
+  margin-right: 5px;
+  vertical-align: -3px;
+}
+
+/* line 45, ../../sass/system_partials/_forms.sass */
+input.check_boxes {
+  margin-left: 3px;
+  vertical-align: -3px;
+}
+
+/* line 49, ../../sass/system_partials/_forms.sass */
+label.collection_check_boxes {
+  float: none;
+  margin: 0;
+  vertical-align: -2px;
+  margin-left: 2px;
+}
+
+/* line 56, ../../sass/system_partials/_forms.sass */
+#form-title {
+  color: black;
+  text-align: center;
+  padding-top: 5px;
+  font-size: 1.2em;
+}
+
+/* line 62, ../../sass/system_partials/_forms.sass */
+.inline-errors {
+  color: red;
+}
+
+/* line 64, ../../sass/system_partials/_forms.sass */
+.errorExplanation {
+  color: red;
+}
+
+/* line 74, ../../sass/system_partials/_forms.sass */
+#form-top {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 430px;
+  height: 190px;
+}
+/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #form-top {
+  overflow-x: hidden;
+}
+
+/* line 77, ../../sass/system_partials/_forms.sass */
+#form-main {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 630px;
+}
+/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #form-main {
+  overflow-x: hidden;
+}
+
+/* line 79, ../../sass/system_partials/_forms.sass */
+#form-bottom {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 630px;
+}
+/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #form-bottom {
+  overflow-x: hidden;
+}
+
+/* line 81, ../../sass/system_partials/_forms.sass */
+#form-right {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 150px;
+  height: 190px;
+}
+/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #form-right {
+  overflow-x: hidden;
+}
+/* line 84, ../../sass/system_partials/_forms.sass */
+#form-right input {
+  width: 50px;
+}
+
+/* line 88, ../../sass/system_partials/_forms.sass */
 .fields {
-  padding-left: 40px;
   display: inline;
   float: left;
   margin-right: 10px;
@@ -1666,7 +1809,7 @@ span.stars span {
 * html .fields {
   overflow-x: hidden;
 }
-/* line 4, ../../sass/system_partials/_forms.sass */
+/* line 91, ../../sass/system_partials/_forms.sass */
 .fields .item_type {
   display: inline;
   float: left;
@@ -1677,18 +1820,18 @@ span.stars span {
 * html .fields .item_type {
   overflow-x: hidden;
 }
-/* line 6, ../../sass/system_partials/_forms.sass */
+/* line 93, ../../sass/system_partials/_forms.sass */
 .fields .item_description {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 150px;
+  width: 230px;
 }
 /* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .fields .item_description {
   overflow-x: hidden;
 }
-/* line 8, ../../sass/system_partials/_forms.sass */
+/* line 95, ../../sass/system_partials/_forms.sass */
 .fields .item_qty {
   display: inline;
   float: left;
@@ -1699,7 +1842,7 @@ span.stars span {
 * html .fields .item_qty {
   overflow-x: hidden;
 }
-/* line 10, ../../sass/system_partials/_forms.sass */
+/* line 97, ../../sass/system_partials/_forms.sass */
 .fields .item_cost {
   display: inline;
   float: left;
@@ -1710,7 +1853,7 @@ span.stars span {
 * html .fields .item_cost {
   overflow-x: hidden;
 }
-/* line 12, ../../sass/system_partials/_forms.sass */
+/* line 99, ../../sass/system_partials/_forms.sass */
 .fields .item_total {
   display: inline;
   float: left;
@@ -1721,7 +1864,7 @@ span.stars span {
 * html .fields .item_total {
   overflow-x: hidden;
 }
-/* line 14, ../../sass/system_partials/_forms.sass */
+/* line 101, ../../sass/system_partials/_forms.sass */
 .fields .item_tax {
   display: inline;
   float: left;
@@ -1732,7 +1875,7 @@ span.stars span {
 * html .fields .item_tax {
   overflow-x: hidden;
 }
-/* line 16, ../../sass/system_partials/_forms.sass */
+/* line 103, ../../sass/system_partials/_forms.sass */
 .fields .item_remove {
   display: inline;
   float: left;
@@ -1745,147 +1888,22 @@ span.stars span {
   overflow-x: hidden;
 }
 
-/* line 21, ../../sass/system_partials/_forms.sass */
-.simple_form div.input {
-  margin-bottom: 2px;
-}
-/* line 24, ../../sass/system_partials/_forms.sass */
-.simple_form label {
-  float: left;
-  width: 80px;
-  text-align: left;
-  margin: 2px 10px;
-}
-/* line 30, ../../sass/system_partials/_forms.sass */
-.simple_form .error, .simple_form body.bp .alert, body.bp .simple_form .alert {
-  clear: left;
-  color: black;
-  display: block;
-  margin-left: 120px;
-  font-size: 12px;
-}
-/* line 37, ../../sass/system_partials/_forms.sass */
-.simple_form .hint {
-  clear: left;
-  margin-left: 120px;
-  font-size: 12px;
-  color: #555555;
-  display: block;
-  font-style: italic;
-}
-
-/* line 45, ../../sass/system_partials/_forms.sass */
-div.boolean, .simple_form input[type='submit'] {
-  margin-left: 120px;
-}
-
-/* line 48, ../../sass/system_partials/_forms.sass */
-div.boolean label, label.collection_radio {
-  float: none;
-  margin: 0;
-}
-
-/* line 52, ../../sass/system_partials/_forms.sass */
-label.collection_radio {
-  margin-right: 10px;
-  vertical-align: -2px;
-  margin-left: 2px;
-}
-
-/* line 57, ../../sass/system_partials/_forms.sass */
-.field_with_errors {
-  background-color: #fbc2c4;
-}
-
-/* line 60, ../../sass/system_partials/_forms.sass */
-input.radio {
-  margin-right: 5px;
-  vertical-align: -3px;
-}
-
-/* line 64, ../../sass/system_partials/_forms.sass */
-input.check_boxes {
-  margin-left: 3px;
-  vertical-align: -3px;
-}
-
-/* line 68, ../../sass/system_partials/_forms.sass */
-label.collection_check_boxes {
-  float: none;
-  margin: 0;
-  vertical-align: -2px;
-  margin-left: 2px;
-}
-
-/* line 75, ../../sass/system_partials/_forms.sass */
-#form-title {
-  color: black;
-  text-align: center;
-  padding-top: 5px;
-  font-size: 1.2em;
-}
-
-/* line 81, ../../sass/system_partials/_forms.sass */
-.inline-errors {
-  color: red;
-}
-
-/* line 83, ../../sass/system_partials/_forms.sass */
-.errorExplanation {
-  color: red;
-}
-
-/* line 94, ../../sass/system_partials/_forms.sass */
-#form-main, #form-bottom {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 630px;
-  border: 1px solid #999999;
-  -webkit-border-radius: 8px 8px;
-  -moz-border-radius: 8px / 8px;
-  -o-border-radius: 8px / 8px;
-  -ms-border-radius: 8px / 8px;
-  -khtml-border-radius: 8px / 8px;
-  border-radius: 8px / 8px;
-  padding: 5px;
-  background-color: whitesmoke;
-}
-/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #form-main, * html #form-bottom {
-  overflow-x: hidden;
-}
-/* line 101, ../../sass/system_partials/_forms.sass */
-#form-main textarea, #form-bottom textarea {
-  height: 50px;
-  width: 390px;
-}
-
-/* line 108, ../../sass/system_partials/_forms.sass */
-#form-right, #form-left {
-  border: 1px solid #999999;
-  -webkit-border-radius: 8px 8px;
-  -moz-border-radius: 8px / 8px;
-  -o-border-radius: 8px / 8px;
-  -ms-border-radius: 8px / 8px;
-  -khtml-border-radius: 8px / 8px;
-  border-radius: 8px / 8px;
-  padding: 5px;
-  background-color: whitesmoke;
-}
 /* line 109, ../../sass/system_partials/_forms.sass */
-#form-right label, #form-left label {
-  clear: both;
-  display: block;
-  float: none;
+#form-main, #form-bottom, #form-top, #form-right {
+  -webkit-border-radius: 8px 8px;
+  -moz-border-radius: 8px / 8px;
+  -o-border-radius: 8px / 8px;
+  -ms-border-radius: 8px / 8px;
+  -khtml-border-radius: 8px / 8px;
+  border-radius: 8px / 8px;
+  background-color: whitesmoke;
+}
+/* line 115, ../../sass/system_partials/_forms.sass */
+#form-main textarea, #form-bottom textarea, #form-top textarea, #form-right textarea {
+  height: 50px;
 }
 
-/* line 130, ../../sass/system_partials/_forms.sass */
-#form-right input {
-  width: 50px;
-}
-
-/* line 136, ../../sass/system_partials/_forms.sass */
+/* line 121, ../../sass/system_partials/_forms.sass */
 #filter_link {
   font-size: 12px;
   text-decoration: none;
@@ -1895,17 +1913,17 @@ label.collection_check_boxes {
   text-decoration: underline;
 }
 
-/* line 140, ../../sass/system_partials/_forms.sass */
+/* line 125, ../../sass/system_partials/_forms.sass */
 #interactive {
   display: none;
 }
 
-/* line 143, ../../sass/system_partials/_forms.sass */
+/* line 128, ../../sass/system_partials/_forms.sass */
 #load {
   display: none;
 }
 
-/* line 146, ../../sass/system_partials/_forms.sass */
+/* line 131, ../../sass/system_partials/_forms.sass */
 #search_form {
   display: inline;
   float: left;
@@ -1917,7 +1935,7 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
-/* line 149, ../../sass/system_partials/_forms.sass */
+/* line 134, ../../sass/system_partials/_forms.sass */
 .cancel_button {
   float: right;
 }

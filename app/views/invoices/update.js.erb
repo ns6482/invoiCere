@@ -1,2 +1,2 @@
-$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.delete(:notice)) %> </p>');
+$("#dashboard-centre").prepend('<p class="notice"><%= escape_javascript(flash.delete(:notice)) %> </p>');
 $("#invoice-centre-panel").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>");

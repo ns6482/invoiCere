@@ -88,18 +88,18 @@ class InvoicesController < BaseController
       @invoice.update_user = current_user.email
       #@invoice = Invoice.find(params[:id])
       if params[:commit] == "complete"
-        @invoice.complete!
-        notice  "Invoice is now open and ready for payment"
+        @invoice.open!
+        flash[:notice] =  "Invoice is now open and ready for payment"
         format.html {redirect_to @invoice}
         format.js
       elsif params[:commit] == "pay"
         @invoice.pay!
-        notice  "Invoice marked as paid"
+        flash[:notice] = "Invoice marked as paid"
         format.html{redirect_to @invoice}
         format.js
       else
         if @invoice.update_attributes(params[:invoice])
-          notice "Successfully updated invoice."
+          flash[:notice] =  "Successfully updated invoice."
           format.html{redirect_to @invoice}
           format.js 
         else

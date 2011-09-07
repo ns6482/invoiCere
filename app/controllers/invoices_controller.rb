@@ -3,7 +3,7 @@ require "prawn"
 
 
 class InvoicesController < BaseController
-  before_filter :get_clients, :only => [:index]
+  before_filter :get_clients, :only => [:index, :new, :edit]
   before_filter :find_invoice, :only => [:show, :edit, :destroy]  
   load_and_authorize_resource
 
@@ -38,7 +38,7 @@ class InvoicesController < BaseController
   def new
 
     if params[:id]
-      master_invoice = current_company.invoices.find(params[:id])
+      master_invoice = current_company.invoices.find(params[:id], :readonly => false)
       @invoice = master_invoice.clone_with_associations
       @invoice.invoice_date=Date.today
     else

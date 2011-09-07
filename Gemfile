@@ -30,6 +30,8 @@ gem 'will_paginate'#, '~> 3.0.0'
 gem 'prawn'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
+gem 'delorean'
+gem "table_builder"
 # Use unicorn as the web server
 # gem 'unicorn'
 

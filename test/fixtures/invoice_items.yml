@@ -1,0 +1,31 @@
+one:
+  invoice_id: 1
+  item_type: MyString
+  item_description: MyString
+  qty: 9.99
+  cost: 9.99
+  taxable: true
+
+two:
+  invoice_id: 1
+  item_type: MyString
+  item_description: MyString
+  qty: 9.99
+  cost: 9.99
+  taxable: false
+
+three:
+  invoice_id: 2
+  item_type: MyString
+  item_description: MyString
+  qty: 9.99
+  cost: 9.99
+  taxable: true
+
+four:
+  invoice_id: 2
+  item_type: MyString
+  item_description: MyString
+  qty: 9.99
+  cost: 9.99
+  taxable: true

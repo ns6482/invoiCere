@@ -55,28 +55,28 @@ end
 #  s.contact {|c| c.association(:contact)}
 #end
 
-#Factory.define :invoice do |f|  
-#  f.invoice_date "2010-01-01 00:00:00"
-#  f.title "title"
-#  f.notes ""
-#  f.tax_rate 17.5
-#  f.delivery_charge 0
-#  f.business_id "ID001"
-#  f.purchase_order_id "PO2232"
-#  f.state "draft"
-#  f.late_fee "10.55"
-#  f.due_days  7
-#  f.total_cost_inc_tax_delivery 10
-#  f.client {|client| client.association(:client) }  
-#end
+Factory.define :invoice do |f|  
+  f.invoice_date "2010-01-01 00:00:00"
+  f.title "title"
+  f.notes ""
+  f.tax_rate 17.5
+  f.delivery_charge 0
+  f.business_id "ID001"
+  f.purchase_order_id "PO2232"
+  f.state "draft"
+  f.late_fee "10.55"
+  f.due_days  7
+  f.total_cost_inc_tax_delivery 10
+  f.client {|client| client.association(:client) }  
+end
 
-#Factory.define :invoice_item do |f|
-#  f.item_type "type"
-#  f.item_description "description"
-#  f.qty 1
-#  f.cost 10
-#  f.invoice {|invoice| invoice.association(:invoice) }
-#end
+Factory.define :invoice_item do |f|
+  f.item_type "type"
+  f.item_description "description"
+  f.qty 1
+  f.cost 10
+  f.invoice {|invoice| invoice.association(:invoice) }
+end
 
 #Factory.define :reminder do |f|
 #  f.default_message false

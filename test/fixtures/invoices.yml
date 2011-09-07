@@ -1,0 +1,74 @@
+one:
+  id: 1
+  client_id: 1
+  invoice_date: 2010-07-25
+  title: MyString
+  notes: MyText
+  tax_rate: 9.99
+  delivery_charge: 9.99
+  business_id: MyString
+  purchase_order_id: MyString
+  state: draft
+  late_fee: 9.99
+  due_days: 1
+  due_date:  2010-07-26
+  total_cost: 100
+  total_cost_inc_tax: 100
+  total_cost_inc_tax_delivery: 100
+  seed_schedule_id: 
+
+two:
+  id: 2
+  client_id: 2
+  invoice_date: 2010-07-25
+  title: MyString
+  notes: MyText
+  tax_rate: 9.99
+  delivery_charge: 9.99
+  business_id: MyString
+  purchase_order_id: MyString
+  state: draft
+  late_fee: 9.99
+  due_days: 1
+  due_date:  2010-07-26
+  total_cost: 100
+  total_cost_inc_tax: 100
+  total_cost_inc_tax_delivery: 100
+  seed_schedule_id: nil
+
+three:
+  id: 3
+  client_id: 2
+  invoice_date: 2010-07-25
+  title: MyString
+  notes: MyText
+  tax_rate: 9.99
+  delivery_charge: 9.99
+  business_id: MyString
+  purchase_order_id: MyString
+  state: draft
+  late_fee: 9.99
+  due_days: 1
+  total_cost: 100
+  total_cost_inc_tax: 100
+  total_cost_inc_tax_delivery: 100
+  seed_schedule_id: nil
+
+four:
+  id: 4
+  client_id: 1
+  invoice_date: 2010-07-25
+  title: MyString
+  notes: MyText
+  tax_rate: 9.99
+  delivery_charge: 9.99
+  business_id: MyString
+  purchase_order_id: MyString
+  state: draft
+  late_fee: 9.99
+  due_days: 1
+  due_date:  2010-07-26
+  total_cost: 100
+  total_cost_inc_tax: 100
+  total_cost_inc_tax_delivery: 100
+  seed_schedule_id: nil

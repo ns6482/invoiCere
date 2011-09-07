@@ -1,1 +1,6 @@
-$("#invoice-list").html("<%= escape_javascript(render("invoices")) %>").effect("slide");
+$("#dashboard-centre").empty();
+$("#dashboard-centre").append('<div id="form-title"><h3>Invoices</h3></div>');
+$("#dashboard-centre").append("<%= escape_javascript(render("filter")) %>");
+$("#filter_link").effect("slide");
+$("#filter_box").hide();
+$("#dashboard-centre").append("<%= escape_javascript(render("invoices")) %>").effect("slide");

@@ -2,23 +2,14 @@ require 'transitions'
 
 class Invoice < ActiveRecord::Base
   include ActiveRecord::Transitions
-  #include AASM
-  #include ActionView::Helpers::NumberHelper
   
   cattr_reader :per_page
   @@per_page = 10
 
-  named_scope :none_scheduled,
+  scope :none_scheduled,
     :conditions => "schedules.id IS NULL",
     :joins => ["LEFT JOIN 'schedules' ON invoices.id = schedules.invoice_id"]
-  
-                  
-  #aasm_initial_state :draft
-  #aasm_column :state    
-  #aasm_state :draft
-  #aasm_state :open
-  #aasm_state :paid
-  
+
   state_machine do
     state :draft # first one is initial state
     state :open, :enter=> :update_opened_date
@@ -30,18 +21,12 @@ class Invoice < ActiveRecord::Base
 
     event :pay do
       transitions :to => :paid, :from => [:open]
-    end        
+    end 
+      
   end
-
-
 
   belongs_to :client
   has_many :invoice_items, :dependent => :destroy
-  #has_many :deliveries, :dependent => :destroy
-  #has_many :comments, :dependent => :destroy
-  #has_many :payments, :dependent => :destroy
-  #has_many :feedbacks, :dependent => :destroy
-  #has_one :reminder, :dependent => :destroy
   has_one :schedule, :dependent => :destroy
 
   attr_protected :total_cost, :total_cost_inc_tax, :total_cost_inc_tax_delivery, :opened_date, :opened_by, :paid_date, :paid_by
@@ -49,21 +34,12 @@ class Invoice < ActiveRecord::Base
   attr_accessor :company_id, :formatted_state, :update_user, :logo_url, :remaining_amount
   validates_presence_of :title,:invoice_date, :client_id
   validates_numericality_of :due_days
-
-  #accepts_nested_attributes_for :invoice_items, :reject_if => lambda { |a| a[:content].blank? }
+ 
   accepts_nested_attributes_for :invoice_items, :reject_if => :all_blank, :allow_destroy => true
     
   before_save :set_due_date#, :update_invoice_totals
   after_save :update_invoice_totals
   after_create :setup_reminder
-
-  #aasm_event :complete,  :before => :update_opened_date do
-    #transitions :to => :open, :from => [:draft]
-  #end
-
-  #aasm_event :pay,  :before => :update_paid_date do
-    #transitions :to => :paid, :from => [:open]
-  #end
 
   def total_items
     self.invoice_items.sum(:qty).to_s
@@ -74,7 +50,6 @@ class Invoice < ActiveRecord::Base
     @total = total.first.total_cost
   end
 
-  
 
   def _total_cost_inc_tax
 
@@ -138,8 +113,8 @@ class Invoice < ActiveRecord::Base
 
 
   def clone_with_associations
-    #new_invoice = self.clone
-    #new_invoice.invoice_items = self.invoice_items
+    new_invoice = self.clone
+    new_invoice.invoice_items = self.invoice_items
 
     #if !self.reminder.nil?
       #new_reminder = self.reminder.clone
@@ -147,8 +122,8 @@ class Invoice < ActiveRecord::Base
       #new_invoice.reminder = new_reminder
     #end
 
-    #new_invoice.save!
-    #new_invoice
+    new_invoice.save!
+    new_invoice
   end
 
   private
@@ -176,10 +151,7 @@ class Invoice < ActiveRecord::Base
     
     val
   end
-
   
-
-
   def setup_reminder
 
     #Reminder.new do | reminder|

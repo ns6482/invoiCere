@@ -1,15 +1,15 @@
 %h2{:id => "month"}
- = link_to "<", {:month => (@date.beginning_of_month-1).strftime("%Y-%m-01")}, :class=> "calendar_month"
- = h @date.strftime("%B %Y")
- = link_to ">", {:month => (@date.end_of_month+1).strftime("%Y-%m-01")}, :class => "calendar_month"
+  = link_to "<", {:month => (@date.beginning_of_month-1).strftime("%Y-%m-01")}, :class=> "calendar_month"
+  = h @date.strftime("%B %Y")
+  = link_to ">", {:month => (@date.end_of_month+1).strftime("%Y-%m-01")}, :class => "calendar_month"
 - calendar_for @invoices, :year => @date.year, :month => @date.month do |calendar|
- = calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat')
- -calendar.day(:day_method => :due_date) do |date, invoices|    
-  -if invoices.count > 0
-   =link_to date.day.to_s + " (" + h(invoices.count) + ") ", invoices_path("search[due_date_gte(1i)]" => date.year, "search[due_date_gte(2i)]"=>date.month,"search[due_date_gte(3i)]"=>date.day-1), :class=> "due"
-  -else
-   = date.day
+  = calendar.head('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat')
+  -calendar.day(:day_method => :due_date) do |date, invoices|    
+    -if invoices.count > 0
+      =link_to date.day.to_s + " (" + h(invoices.count) + ") ", invoices_path("search[due_date_gte(1i)]" => date.year, "search[due_date_gte(2i)]"=>date.month,"search[due_date_gte(3i)]"=>date.day-1), :class=> "due"
+    -else
+      = date.day
  
-   //%ul
-   -#for invoice in invoices
-    //%li= link_to h(invoice.title) + " (" + number_to_currency(invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ",") + ")", invoice
+    %ul
+      -for invoice in invoices
+        %li= link_to h(invoice.title) + " (" + number_to_currency(invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ",") + ")", invoice

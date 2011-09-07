@@ -6,7 +6,7 @@
       =field_set_tag 'Invoice Details', :id => "form-top" do  
         = f.input :title
         = f.input :invoice_date, :label => "Date"
-        = f.association :client
+        = f.association :client, :collection => @clients
         = f.input :business_id, :label => "Your ID"
         = f.input :purchase_order_id, :label => "Order ID"    
       

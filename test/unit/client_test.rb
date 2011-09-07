@@ -6,7 +6,7 @@ class ClientTest < ActiveSupport::TestCase
   def test_failing_create
     client = Client.new
     assert !client.save
-    assert_equal 5, client.errors.size
+    assert_equal 4, client.errors.size
     
     assert_equal client.errors[:company_name].count, 1
     assert_equal client.errors[:address1].count, 1

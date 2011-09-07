@@ -1,4 +1,4 @@
-class InvoiceItemsController < AccountController
+class InvoiceItemsController < BaseController
   def index
     @invoice_items = InvoiceItem.all
   end

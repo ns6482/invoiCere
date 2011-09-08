@@ -1,4 +1,7 @@
 class InvoiceItemsController < BaseController
+  before_filter :find_invoice, :only => [:new, :create]  
+  load_and_authorize_resource
+  
   def index
     @invoice_items = InvoiceItem.all
   end
@@ -7,7 +10,7 @@ class InvoiceItemsController < BaseController
     @invoice_item = InvoiceItem.find(params[:id])
   end
   
-  def new
+  def new    
     @invoice_item = InvoiceItem.new
   end
   
@@ -39,6 +42,12 @@ class InvoiceItemsController < BaseController
     @invoice_item = InvoiceItem.find(params[:id])
     @invoice_item.destroy
     flash[:notice] = "Successfully destroyed invoice item."
-    redirect_to invoice_items_url
+    redirect_to invoice_invoice_items_url(@invoice_item.invoice.id)
+  end
+  
+  private
+  
+  def find_invoice
+    @invoice = current_company.invoices.find(params[:invoice_id])
   end
 end

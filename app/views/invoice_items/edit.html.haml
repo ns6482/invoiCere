@@ -5,4 +5,4 @@
 %p
   = link_to "Show", invoice_item_path(@invoice_item)
   |
-  = link_to "View All", invoice_items_path
+  = link_to "View All", invoice_invoice_items_path(@invoice_item.invoice.id)

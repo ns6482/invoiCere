@@ -28,6 +28,11 @@ class Invoice < ActiveRecord::Base
   belongs_to :client
   has_many :invoice_items, :dependent => :destroy
   has_one :schedule, :dependent => :destroy
+  has_many :payments, :dependent => :destroy
+  #has_many :deliveries, :dependent => :destroy
+  #has_many :comments, :dependent => :destroy  
+  #has_many :feedbacks, :dependent => :destroy
+  #has_one :reminder, :dependent => :destroy
 
   attr_protected :total_cost, :total_cost_inc_tax, :total_cost_inc_tax_delivery, :opened_date, :opened_by, :paid_date, :paid_by
 

@@ -15,12 +15,12 @@ class Payment < ActiveRecord::Base
   def overpaid? 
     unless amount.nil?
      remaining = self.invoice.remaining_amount
-       errors.add_to_base "Amount must be less than or equal to #{remaining}." if self.amount > remaining
+       errors.add :base,  "Amount must be less than or equal to #{remaining}." if self.amount > remaining
      end
   end
 
   def invoice_is_open?    
-     errors.add_to_base "Cannot make payment, this invoice is not open" if self.invoice.state == "draft"
+     errors.add :base, "Cannot make payment, this invoice is not open" if self.invoice.state == "draft"
   end
 
   private

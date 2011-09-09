@@ -11,7 +11,7 @@ class Ability
       can [:update, :read], Setting, :company_id => user.company_id
       can [:create, :read, :update, :invite, :new_invite], User,  :company_id => user.company_id
       can [:destroy], User, :owner => false,  :company_id => user.company_id
-      can :manage,  [Invoice, InvoiceItem]#, Delivery, Send, Reminder, Payment, Comment]
+      can :manage,  [Invoice, InvoiceItem, Payment]#, Delivery, Send, Reminder, Comment]
       can [:update, :read], Company, :id => user.company_id
       can :manage, [Client, Contact], :company_id => user.company_id      
       can :read, Role

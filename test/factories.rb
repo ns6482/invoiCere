@@ -88,13 +88,13 @@ end
 #  f.invoice_id 1
 #end
 
-#Factory.define :payment do |f|
-#  f.invoice {|invoice| invoice.association(:invoice) }
-#  f.user_id 1
-#  f.amount 5
-#  f.payment_type "cheque"
-#  f.currency "sterling"
-#end
+Factory.define :payment do |f|
+  f.invoice {|invoice| invoice.association(:invoice) }
+  f.user_id 1
+  f.amount 5
+  f.payment_type "cheque"
+  f.currency "sterling"
+end
 
 #Factory.define :schedule do |f|
 #  f.invoice {|invoice| invoice.association(:invoice) }

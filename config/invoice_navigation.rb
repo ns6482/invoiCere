@@ -18,9 +18,9 @@ SimpleNavigation::Configuration.run do |navigation|
     #primary.item :schedule_invoice, 'Setup Reocurrance', Proc.new {new_invoice_schedule_path( @invoice)}, :if => Proc.new { can? :update, Schedule and @invoice.schedule.nil?}, :link => {:class => 'interactive'}
     #primary.item :schedule_invoice, 'Edit Reocurrance', Proc.new {edit_invoice_schedule_path( @invoice)}, :if => Proc.new { can? :update, Schedule and !@invoice.schedule.nil?}, :link => {:class => 'interactive schedule_icon'}
     
-    primary.item :open_invoice, "Open Invoice",invoice_path(:id => @invoice.id, :commit => 'complete'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "draft"},  :link => {:class => 'interactive'}
-    #primary.item :payment_invoice, "Log Payment",new_invoice_payment_path(@invoice), :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:class => 'interactive'}
-    primary.item :draft_invoice, "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'draft'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:class => 'interactive'}
+    primary.item :open_invoice, "Open Invoice",invoice_path(:id => @invoice.id, :commit => 'complete'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "draft"},  :link => {:remote => true}#:class => 'interactive'}
+    primary.item :payment_invoice, "Log Payment",new_invoice_payment_path(@invoice), :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:remote => true}#:class => 'interactive'}
+    primary.item :draft_invoice, "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'draft'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:remote => true}#:class => 'interactive'}
 
     #primary.item :feedback_invoice, "Feedback on Invoice",new_invoice_payment_path(@invoice), :if => Proc.new {can? :create, @feedback and @invoice.state == "closed"},  :link => {:class => 'interactive'}
 

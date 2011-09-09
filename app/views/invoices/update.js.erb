@@ -1,2 +1,4 @@
-$("#dashboard-centre").prepend('<p class="notice"><%= escape_javascript(flash.delete(:notice)) %> </p>');
+$("#dashboard-centre").empty();
+$("#dashboard-centre").append('<div id="form-title"><h3>Invoices</h3></div>');
+$("#dashboard-centre").append("<%= escape_javascript(render("filter")) %>");
 $("#invoice-centre-panel").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>");

@@ -1,20 +1,20 @@
 %h2 Payments
 -if @invoice.remaining_amount == @invoice.total_cost_inc_tax_delivery
- %p
+  %p
   %strong No payments made
 -elsif @invoice.remaining_amount == 0 
- %h3 This invoice have been paid
+  %h3 This invoice have been paid
 -if @invoice.payments.count >0
- %table
-  %tr
-   %th User
-   %th Amount
-   %th Payment type
-   %th Currency
-   - for payment in @invoice.payments
+  %table
     %tr
-     %td= h payment.user.email
-     %td= h number_to_currency(payment.amount, :unit => '£', :separator => ".", :delimiter => ",")
-     %td= h payment.payment_type
-     %td= h payment.currency
-     %td= link_to 'Cancel', payment_path(payment, :invoice_id => @invoice.id), :confirm => 'Are you sure?', :method => :delete
+      %th User
+      %th Amount
+      %th Payment type
+      %th Currency
+    - for payment in @invoice.payments
+      %tr
+        %td= h payment.user.email
+        %td= h number_to_currency(payment.amount, :unit => '£', :separator => ".", :delimiter => ",")
+        %td= h payment.payment_type
+        %td= h payment.currency
+        %td= link_to 'Cancel', payment_path(payment, :invoice_id => @invoice.id), :confirm => 'Are you sure?', :method => :delete

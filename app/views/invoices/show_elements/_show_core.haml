@@ -7,7 +7,7 @@
   -#todo delete company from client, or rename to name
   = image_tag @invoice.client.company.setting.logo.url
   %p
-   %h3= current_company.setting.company_name#@invoice.client.company_name#@invoice.company_id #current_company.name
+   %h3= @invoice.client.company.name
  #invoice-header-details
   %table
    %tr

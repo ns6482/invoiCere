@@ -10,7 +10,7 @@ class Payment < ActiveRecord::Base
   validate :overpaid?
   validate :invoice_is_open?
 
-  before_validation :set_if_full_amount
+  before_save :set_if_full_amount
 
   def overpaid? 
     unless amount.nil?

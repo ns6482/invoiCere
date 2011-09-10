@@ -1,0 +1,8 @@
+%h1
+ Welcome to
+ = @client.company_name
+#message
+ %p
+  = @schedule.message
+#details
+ = render :partial => "invoices/show_elements/show_core", :object => :invoice

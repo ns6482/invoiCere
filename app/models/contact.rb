@@ -4,9 +4,9 @@ class Contact < ActiveRecord::Base
   belongs_to :client
 
   #has_many :sends
-  #has_many :deliveries, :through => :sends
+  has_many :deliveries, :through => :sends
 
-  #accepts_nested_attributes_for :deliveries
+  accepts_nested_attributes_for :deliveries
 
 
   validates_presence_of :title, :first_name, :last_name,:email

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/ishanehal_vb/!svn/ver/225/VisioInvoice/app/views/notifier
+END
+invoice.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/ishanehal_vb/!svn/ver/225/VisioInvoice/app/views/notifier/invoice.html.haml
+END
+invoice.text.haml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/ishanehal_vb/!svn/ver/136/VisioInvoice/app/views/notifier/invoice.text.haml
+END
+schedule.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ishanehal_vb/!svn/ver/319/VisioInvoice/app/views/notifier/schedule.html.haml
+END
+schedule.text.haml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/ishanehal_vb/!svn/ver/319/VisioInvoice/app/views/notifier/schedule.text.haml
+END

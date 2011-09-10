@@ -1,0 +1,16 @@
+%h2 Emails
+-if @invoice.deliveries.count == 0
+  %strong No emails sent
+-else
+  #deliveries-main{:class => 'scroll-pane jspScrollable'}
+  %table
+    %tr
+      %th Date
+      %th Sent to
+      %th Message
+    -for delivery in @invoice.deliveries
+      %tr{:class => cycle("odd", "even")}
+        %td= h delivery.created_at.strftime('%d/%m/%Y')
+        %td todo
+        %td= link_to delivery.message_short, delivery_path(:id => delivery.id)
+        %td= link_to 'Cancel', delivery_path(delivery, :invoice_id => @invoice.id), :confirm => 'Are you sure?', :method => :delete

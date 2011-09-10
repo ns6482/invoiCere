@@ -1,0 +1,11 @@
+one:
+  invoice_id: 1
+  message: MyText
+  client_email: false
+  schedule: false
+
+two:
+  invoice_id: 1
+  message: MyText
+  client_email: false
+  schedule: true

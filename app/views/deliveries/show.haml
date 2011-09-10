@@ -1,0 +1,12 @@
+- title "Email"
+%p
+  %strong Date
+  =h @delivery.created_at.to_s(:long)
+%p
+  %strong To
+  =h @delivery.recipient_names
+%p
+  %strong Message
+  =h @delivery.message
+%p
+  = link_to "Back", invoice_path(@delivery.invoice)

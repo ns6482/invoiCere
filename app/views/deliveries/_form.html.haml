@@ -1,0 +1,11 @@
+=simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :method => :post } do |f|
+  = field_set_tag 'Send Email', :id => "form-main" do
+    =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
+    = f.hidden_field :invoice_id
+    = f.input :message, :input_html => { :rows => 3 }  
+    = f.input :client_email,  :label=> @invoice.client.company_name
+    = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To"
+    = f.input :format, :as => :radio, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional"}  
+    %br
+    %button{:type=>"submit",:class=>"red"} Send
+  %br

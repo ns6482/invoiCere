@@ -45,15 +45,15 @@ Factory.define :contact do |f|
   f.client {|client| client.association(:client) }
 end
 
-#Factory.define :delivery do |f|
-#  f.message "message"
-#  f.invoice {|invoice| invoice.association(:invoice) }
-#end
+Factory.define :delivery do |f|
+  f.message "message"
+  f.invoice {|invoice| invoice.association(:invoice) }
+end
 
-#Factory.define :send do |s|
-#  s.delivery {|d| d.association(:delivery)}
-#  s.contact {|c| c.association(:contact)}
-#end
+Factory.define :send do |s|
+  s.delivery {|d| d.association(:delivery)}
+  s.contact {|c| c.association(:contact)}
+end
 
 Factory.define :invoice do |f|  
   f.invoice_date "2010-01-01 00:00:00"

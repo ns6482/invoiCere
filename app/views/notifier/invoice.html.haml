@@ -2,6 +2,7 @@
   Welcome to
   = @client.company_name
 #message
-  %p =@delivery.message
+  %p 
+    = @delivery.message
 #details
   = render :partial => "invoices/show_elements/show_core", :object => :invoice

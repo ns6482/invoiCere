@@ -18,7 +18,7 @@ class Delivery < ActiveRecord::Base
 
   def has_contacts?
     if self.contacts.blank? and !self.client_email
-      errors.add_to_base "Please select at least one email address"
+      errors.add :base,  "Please select at least one email address"
     end
   end
 

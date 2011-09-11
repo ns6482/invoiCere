@@ -1,6 +1,8 @@
 require "open-uri"
 
 class Notifier < ActionMailer::Base
+  layout 'email'
+
   
   default :from => 'no-reply@example.com',
     :return_path => 'system@example.com'
@@ -26,8 +28,8 @@ class Notifier < ActionMailer::Base
     @client = @invoice.client
   
     mail(:subject => @delivery.invoice.title, :from => @company, :to =>@delivery.recipients ) do |format|
-      format.html { render :invoice }
-      format.text
+      format.html { render :layout => 'email' }
+      #format.text      
     end
   end
 

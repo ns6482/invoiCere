@@ -1,6 +1,6 @@
 $("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>").effect("slide");
 $("#invoice-main").prepend("<%= escape_javascript(render("form")) %>")
-$('#new_delivery').addClass('ajax_form');
+
 $('#cancel').bind('click', function() {
   $('#new_delivery').hide('slow').empty();
   return false;

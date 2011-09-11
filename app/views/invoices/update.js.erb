@@ -1,4 +1,8 @@
+$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.delete(:notice)) %> </p>');
+$(".notice").fadeOut(3000);
 $("#dashboard-centre").empty();
 $("#dashboard-centre").append('<div id="form-title"><h3>Invoices</h3></div>');
-$("#dashboard-centre").append("<%= escape_javascript(render("filter")) %>");
-$("#invoice-centre-panel").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>");
+$("#dashboard-centre").append('<div id="invoice-centre-panel"></div>');
+$("#invoice-centre-panel").append('<div id="invoice-main"></div>');
+$("#invoice-centre-panel").html("<%= escape_javascript(render("invoices/show_elements/show")) %>");
+$("#invoice-side-panel").html("<%= escape_javascript(render("invoices/show_elements/toolbar")) %>");

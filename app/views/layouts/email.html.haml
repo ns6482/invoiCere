@@ -1,14 +1,9 @@
 %html{html_attrs(lang = 'en')}
 !!!
-%head
-  = stylesheet_link_tag 'http://foo.lvh.me:3000/stylesheets/screen.css'
-  = stylesheet_link_tag 'http://foo.lvh.me:3000/stylesheets/ie.css'
-  = stylesheet_link_tag 'http://foo.lvh.me:3000/stylesheets/ie6.css'  
 %body{:class => "two-col bp"}
   #container
     #dashboard-content
       #dashboard-centre
-        should be email template
         =yield
     #footer= render 'layouts/footer'
     

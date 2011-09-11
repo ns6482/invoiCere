@@ -32,6 +32,7 @@ gem "transitions", :require => ["transitions", "active_record/transitions"]
 gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 gem 'delorean'
 gem "haml-rails" 
+gem "deep_cloneable", "~> 1.3.0"
 # Use unicorn as the web server
 # gem 'unicorn'
 

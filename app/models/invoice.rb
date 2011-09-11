@@ -7,14 +7,17 @@ class Invoice < ActiveRecord::Base
   @@per_page = 10
 
   scope :none_scheduled,
+    :select => 'invoice.*',
     :conditions => "schedules.id IS NULL",
-    :joins => ["LEFT JOIN 'schedules' ON invoices.id = schedules.invoice_id"]
+    :joins => ["LEFT JOIN 'schedules' ON invoices.id = schedules.invoice_id"],
+    :readonly => false
+    
 
   state_machine do
     state :draft # first one is initial state
     state :open, :enter=> :update_opened_date
     state :paid, :enter => :update_paid_date 
-
+    
     event :open do
       transitions :to => :open, :from => [:draft]
     end
@@ -22,6 +25,11 @@ class Invoice < ActiveRecord::Base
     event :pay do
       transitions :to => :paid, :from => [:open]
     end 
+    
+    event :revert_draft do 
+      transitions :to => :draft, :from => [:open]
+    end
+    
       
   end
 
@@ -117,19 +125,6 @@ class Invoice < ActiveRecord::Base
   end
 
 
-  def clone_with_associations
-    new_invoice = self.clone
-    new_invoice.invoice_items = self.invoice_items
-
-    #if !self.reminder.nil?
-      #new_reminder = self.reminder.clone
-      #new_reminder.invoice_id = self.id
-      #new_invoice.reminder = new_reminder
-    #end
-
-    new_invoice.save!
-    new_invoice
-  end
 
   private
 
@@ -156,6 +151,11 @@ class Invoice < ActiveRecord::Base
     
     val
   end
+  
+  def readonly?
+    false
+  end
+
   
   def setup_reminder
 

@@ -1,4 +1,4 @@
-=simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :method => :post } do |f|
+=simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :method => :post, :remote => true } do |f|
   = field_set_tag 'Send Email', :id => "form-main" do
     =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.hidden_field :invoice_id

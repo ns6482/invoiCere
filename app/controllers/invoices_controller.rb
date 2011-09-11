@@ -4,7 +4,7 @@ require "prawn"
 
 class InvoicesController < BaseController
   before_filter :get_clients, :only => [:index, :new, :edit]
-  before_filter :find_invoice, :only => [:show, :edit, :destroy]  
+  before_filter :find_invoice, :only => [:show, :edit, :destroy, :update]  
   load_and_authorize_resource
 
   def index
@@ -37,10 +37,13 @@ class InvoicesController < BaseController
 
   def new
 
-    if params[:id]
-      master_invoice = current_company.invoices.find(params[:id], :readonly => false)
-      @invoice = master_invoice.clone_with_associations
+    if params[:id]      
+
+      master_invoice = current_company.invoices.find(params[:id])
+      @invoice  = master_invoice.clone :include => :invoice_items
+      @invoice.state = "draft"
       @invoice.invoice_date=Date.today
+#      @invoice.invoice_items << InvoiceItem.new(:type=> "test", :description => "gg")
     else
       @invoice.invoice_date=Date.today
       
@@ -85,9 +88,15 @@ class InvoicesController < BaseController
     #redirect if draft status
     
     respond_to do |format|
+      #@invoice.read_only => false
       @invoice.update_user = current_user.email
       #@invoice = Invoice.find(params[:id])
-      if params[:commit] == "complete"
+      if params[:commit] == "draft"
+        @invoice.revert_draft!
+        flash[:notice] =  "Invoice is in draft status"
+        format.html {redirect_to @invoice}
+        format.js
+      elsif params[:commit] == "open"
         @invoice.open!
         flash[:notice] =  "Invoice is now open and ready for payment"
         format.html {redirect_to @invoice}

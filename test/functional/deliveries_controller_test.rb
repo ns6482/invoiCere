@@ -5,7 +5,7 @@ class DeliveriesControllerTest < ActionController::TestCase
   
    def setup
     @user = users(:user)#Factory.create(:user)
-    @request.host = @user.company.name + ".test"
+    @request.host = @user.company.name + ".lvh.me"
     sign_in @user
     
   end

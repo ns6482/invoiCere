@@ -12,6 +12,7 @@ class Payment < ActiveRecord::Base
 
   before_validation :set_if_full_amount
   before_save :set_if_full_amount
+  after_save :check_if_paid
   
   def overpaid? 
     unless amount.nil?
@@ -31,5 +32,13 @@ class Payment < ActiveRecord::Base
       self.amount = self.invoice.remaining_amount
     end
   end
+  
+  def check_if_paid
+    if self.invoice.remaining_amount ==0 
+      self.invoice.pay!
+    end
+  end
+  
+  #TODO - on delete need to reset to open invoice
   
 end

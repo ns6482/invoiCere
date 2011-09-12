@@ -1,4 +1,4 @@
-=simple_form_for [@invoice, @payment] do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
+=simple_form_for [@invoice, @payment], :html => { :remote => true} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
   =# f.error_messages
   =field_set_tag "Log Payment", :id=>'form-main' do
     = f.input :pay_full_amount, :as=>:boolean, :label=>"Pay full amount (" + number_to_currency(@invoice.remaining_amount, :unit => '£', :separator => "   .", :delimiter => ",") + ")"

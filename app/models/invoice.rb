@@ -30,6 +30,11 @@ class Invoice < ActiveRecord::Base
       transitions :to => :draft, :from => [:open]
     end
     
+    #TODO - put in testing first
+    event :open_again do 
+      transitions :to => :open, :from => [:paid]
+    end
+    
       
   end
 
@@ -95,6 +100,8 @@ class Invoice < ActiveRecord::Base
     self.total_cost_inc_tax_delivery = self._total_cost_inc_tax_delivery
 
     Invoice.update_all("total_cost = #{self.total_cost}, total_cost_inc_tax = #{self.total_cost_inc_tax}, total_cost_inc_tax_delivery = #{self.total_cost_inc_tax_delivery}","id=#{self.id}")
+    
+
 
   end
   

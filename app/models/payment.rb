@@ -13,6 +13,8 @@ class Payment < ActiveRecord::Base
   before_validation :set_if_full_amount
   before_save :set_if_full_amount
   after_save :check_if_paid
+  after_destroy :reopen
+
   
   def overpaid? 
     unless amount.nil?
@@ -38,6 +40,14 @@ class Payment < ActiveRecord::Base
       self.invoice.pay!
     end
   end
+  
+  
+  private 
+  
+  def reopen    
+    self.invoice.open_again!
+  end
+    
   
   #TODO - on delete need to reset to open invoice
   

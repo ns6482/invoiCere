@@ -53,6 +53,8 @@ class InvoiceTest < ActiveSupport::TestCase
 
   end
 
+
+
   def test_total
 
    @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
@@ -111,19 +113,20 @@ class InvoiceTest < ActiveSupport::TestCase
     #assert_not_nil invoice.reminder
   end
 
-  def test_clone_with_associations
-    invoice = invoices(:one)    
-    invoice.save
+  #def test_clone_with_associations
+    #invoice = invoices(:one)    
+    #invoice.save
 
-    new_invoice = invoice.clone_with_associations
-    assert_equal invoice.client_id, new_invoice.client_id
-    assert_equal invoice.invoice_date, new_invoice.invoice_date
-    assert_not_equal invoice.id, new_invoice.id
-    assert_equal 2, new_invoice.invoice_items.count
-    #assert_not_equal invoice.reminder.id,  new_invoice.reminder.id
-    #assert_not_nil new_invoice.reminder
+    #new_invoice = invoice.clone_with_associations
+    #assert_equal invoice.client_id, new_invoice.client_id
+    #assert_equal invoice.invoice_date, new_invoice.invoice_date
+    #assert_not_equal invoice.id, new_invoice.id
+    #assert_equal 2, new_invoice.invoice_items.count
+    ##assert_not_equal invoice.reminder.id,  new_invoice.reminder.id
+    ##assert_not_nil new_invoice.reminder  
+  #end
   
-  end
+  
 
 
   

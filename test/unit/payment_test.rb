@@ -112,5 +112,12 @@ class PaymentTest < ActiveSupport::TestCase
      assert_equal 1,  @invoice.payments.count
    end
 
+  #create invoice,open, pay, cancel payment, check status reverted to open again
+
+ # def test_status_open_from_paid
+    #@payment = Factory.build(:payment, :invoice_id => @invoice.id, :pay_full_amount => "1")
+    #assert @payment.save
+    #@payment.run_callbacks(:save)    
+  #end
 
 end

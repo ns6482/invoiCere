@@ -7,7 +7,7 @@ class Invoice < ActiveRecord::Base
   @@per_page = 10
 
   scope :none_scheduled,
-    :select => 'invoice.*',
+    :select => 'invoices.*',
     :conditions => "schedules.id IS NULL",
     :joins => ["LEFT JOIN 'schedules' ON invoices.id = schedules.invoice_id"],
     :readonly => false
@@ -28,11 +28,12 @@ class Invoice < ActiveRecord::Base
     
     event :revert_draft do 
       transitions :to => :draft, :from => [:open]
+      Payment.destroy_all "invoice_id = #{self.id}"
     end
     
     #TODO - put in testing first
     event :open_again do 
-      transitions :to => :open, :from => [:paid]
+      transitions :to => :open, :from => [:paid]  
     end
     
       

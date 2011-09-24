@@ -17,6 +17,7 @@ class Invoice < ActiveRecord::Base
     state :draft # first one is initial state
     state :open, :enter=> :update_opened_date
     state :paid, :enter => :update_paid_date 
+
     
     event :open do
       transitions :to => :open, :from => [:draft]
@@ -27,13 +28,11 @@ class Invoice < ActiveRecord::Base
     end 
     
     event :revert_draft do 
-      transitions :to => :draft, :from => [:open]
-      Payment.destroy_all "invoice_id = #{self.id}"
+      transitions :to => :draft, :from => [:open], :on_transition => :clear_all_payments
     end
     
-    #TODO - put in testing first
     event :open_again do 
-      transitions :to => :open, :from => [:paid]  
+      transitions :to => :open, :from => [:paid] , :on_transition => :clear_all_payments
     end
     
       
@@ -164,6 +163,10 @@ class Invoice < ActiveRecord::Base
     false
   end
 
+
+  def clear_all_payments
+    Payment.delete_all(:invoice_id => self.id)
+  end
   
   def setup_reminder
 

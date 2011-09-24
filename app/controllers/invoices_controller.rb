@@ -91,13 +91,18 @@ class InvoicesController < BaseController
       #@invoice.read_only => false
       @invoice.update_user = current_user.email
       #@invoice = Invoice.find(params[:id])
-      if params[:commit] == "draft"
+      if params[:commit] == "revert_draft"
         @invoice.revert_draft!
         flash[:notice] =  "Invoice is in draft status"
         format.html {redirect_to @invoice}
         format.js
-      elsif params[:commit] == "open"
+      elsif params[:commit] == "open" 
         @invoice.open!
+        flash[:notice] =  "Invoice is now open and ready for payment"
+        format.html {redirect_to @invoice}
+        format.js
+    elsif params[:commit] == "open_again" 
+        @invoice.open_again!
         flash[:notice] =  "Invoice is now open and ready for payment"
         format.html {redirect_to @invoice}
         format.js
@@ -105,7 +110,7 @@ class InvoicesController < BaseController
         @invoice.pay!
         flash[:notice] = "Invoice marked as paid"
         format.html{redirect_to @invoice}
-        format.js
+        format.js   
       else
         if @invoice.update_attributes(params[:invoice])
           flash[:notice] =  "Successfully updated invoice."

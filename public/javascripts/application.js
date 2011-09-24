@@ -206,7 +206,7 @@ $(document).ready(function() {
     );
 
     // Change our search form to ajax
-    $('#search_form').ajaxForm();
+    //$('#search_form').ajaxForm();
 
     //hide dashboard panels
     $('.panel').hide();

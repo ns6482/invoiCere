@@ -4,7 +4,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.auto_highlight = false
   navigation.items do |primary|
     
-    primary.item :edit_invoice, "Edit #{@model}", edit_invoice_path( @model), :if => Proc.new { can? :update, @invoice and  @invoice.state == "draft"},  :link => {:remote => true}
+    primary.item :edit_invoice, "Edit #{@model}", edit_invoice_path( @model), :if => Proc.new { can? :update, @invoice and  @invoice.state != "paid"},  :link => {:remote => true}
 
 
     primary.item :print_invoice, "Print", invoice_path( @model)
@@ -20,7 +20,8 @@ SimpleNavigation::Configuration.run do |navigation|
     
     primary.item :open_invoice, "Open Invoice",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "draft"},  :link => {:remote => true}#:class => 'interactive'}
     primary.item :payment_invoice, "Log Payment",new_invoice_payment_path(@invoice), :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:remote => true}#:class => 'interactive'}
-    primary.item :draft_invoice, "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'draft'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:remote => true}#:class => 'interactive'}
+    primary.item :draft_invoice, "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'revert_draft'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:remote => true}#:class => 'interactive'}
+    primary.item :open_invoice, "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "paid"},  :link => {:remote => true}#:class => 'interactive'}
 
     #primary.item :feedback_invoice, "Feedback on Invoice",new_invoice_payment_path(@invoice), :if => Proc.new {can? :create, @feedback and @invoice.state == "closed"},  :link => {:class => 'interactive'}
 

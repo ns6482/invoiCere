@@ -1,14 +1,14 @@
 # Configures your navigation
 SimpleNavigation::Configuration.run do |navigation|
 
-  navigation.auto_highlight = false
+  navigation.auto_highlight = true
   navigation.items do |primary|
     
-    primary.item :edit_invoice, "Edit #{@model}", edit_invoice_path( @model), :if => Proc.new { can? :update, @invoice and  @invoice.state != "paid"},  :link => {:remote => true}
+    primary.item :edit_invoice, "Edit #{@model}", edit_invoice_path( @invoice), :if => Proc.new { can? :update, @invoice and  @invoice.state != "paid"},  :link => {:remote => true}
 
 
-    primary.item :print_invoice, "Print", invoice_path( @model)
-    primary.item :pdf_invoice, "PDF", invoice_path( @model, :format => :pdf)
+    primary.item :print_invoice, "Print", invoice_path( @invoice)
+    primary.item :pdf_invoice, "PDF", invoice_path( @invoice, :format => :pdf)
     #primary.item :reminder_invoice, "Setup Reminder",edit_invoice_reminder_path(@invoice), :if => Proc.new { can? :update, @invoice.reminder},  :link => {:class => 'interactive'}
     primary.item :email_invoice, "Send Email",new_invoice_delivery_path(@invoice), :if => Proc.new { can? :create, Delivery},  :link => {:remote => true}#:class => 'interactive'}
     #primary.item :comment_invoice, "Add a Comment",new_invoice_comment_path(@invoice), :if => Proc.new { can? :create, Comment},  :link => {:class => 'interactive'}

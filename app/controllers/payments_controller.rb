@@ -35,7 +35,7 @@ class PaymentsController < BaseController
       if @payment.save
         flash[:notice] = "Successfully created payment."
         format.html{redirect_to @invoice}
-        format.js
+        format.js {render :action => 'create'}
       else
         format.html{render :action => 'new'}
         format.js {render :action => 'new'}

@@ -12,6 +12,8 @@ class SchedulesController < BaseController
   
   def new
 
+    @contacts = @invoice.client.contacts
+    
     if Schedule.find_by_invoice_id(@invoice.id)
 
       respond_to do |format|
@@ -19,7 +21,6 @@ class SchedulesController < BaseController
         format.js{"edit.js"}
       end
     else
-
 
       respond_to do |format|
         format.html
@@ -29,6 +30,8 @@ class SchedulesController < BaseController
   end
 
   def edit
+    
+   @contacts = @invoice.client.contacts
 
     if !Schedule.find_by_invoice_id(@invoice.id)
 

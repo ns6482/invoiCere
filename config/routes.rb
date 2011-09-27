@@ -11,7 +11,7 @@ VisioInvoiceV3::Application.routes.draw do
  constraints(Subdomain) do
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     
-    #site.resources :schedules, :only => [:index]
+    resources :schedules, :only => [:index]
 
     resources :invoices do
       resources :deliveries, :only => [:new, :create, :show, :index], :shallow =>true
@@ -20,7 +20,7 @@ VisioInvoiceV3::Application.routes.draw do
       #invoices.resources :comments, :only => [:new, :create, :destroy, :index], :shallow =>true
       resources :invoice_items,  :shallow =>true
       #invoices.resources :feedbacks, :only => [:new, :create, :destroy, :index], :shallow =>true
-      #invoices.resource :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
+      resource :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
     end
 
     devise_for :users, :controllers => { :invitations => 'users/invitations' }

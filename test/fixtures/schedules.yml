@@ -1,0 +1,10 @@
+one:
+  name: MyString
+  invoice_id: 1
+  frequency: 1
+  frequency_type: Daily
+  last_sent: 
+  next_send: 
+  due_on: NET15
+  enabled: false
+

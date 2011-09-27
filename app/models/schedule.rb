@@ -3,7 +3,7 @@ class Schedule < ActiveRecord::Base
 
   belongs_to :invoice
 
-  #has_many :schedule_sends
+  has_many :schedule_sends
   has_many :contacts, :through => :schedule_sends
 
   accepts_nested_attributes_for :contacts

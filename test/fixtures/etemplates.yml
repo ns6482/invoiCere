@@ -1,0 +1,17 @@
+one:
+  company_id: 1
+  invoice_subject: MyText
+  invoice_message: MyText
+  reminder_subject: MyText
+  reminder_message: MyText
+  paythank_message: MyText
+  paythank_subject: MyText
+
+two:
+  company_id: 1
+  invoice_subject: MyText
+  invoice_message: MyText
+  reminder_subject: MyText
+  reminder_message: MyText
+  paythank_message: MyText
+  paythank_subject: MyText

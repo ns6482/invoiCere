@@ -5,14 +5,14 @@ class Company < ActiveRecord::Base
   #has_many :accounts, :dependent => :destroy
   has_many :clients, :dependent => :destroy
   has_many :invoices, :through => :clients#, :dependent => :destroy
-  #has_many :deliveries, :through => :clients, :source => :invoices
-  #has_many :schedules, :through => :clients, :source => :invoices
+  has_many :deliveries, :through => :clients, :source => :invoices
+  has_many :schedules, :through => :clients, :source => :invoices
 
-  #has_many :schedules,  :finder_sql =>
-  #  'SELECT s.* ' +
-  #  'FROM schedules  s JOIN invoices i ON s.invoice_id = i.id ' +
-  #  'JOIN clients c ON i.client_id = c.id ' +
-  #  'WHERE c.company_id = #{id}'
+  has_many :schedules,  :finder_sql =>
+    'SELECT s.* ' +
+    'FROM schedules  s JOIN invoices i ON s.invoice_id = i.id ' +
+    'JOIN clients c ON i.client_id = c.id ' +
+    'WHERE c.company_id = #{id}'
 
   has_one :etemplate, :dependent => :destroy
   has_one :setting, :dependent => :destroy

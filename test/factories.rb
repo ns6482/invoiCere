@@ -96,16 +96,16 @@ Factory.define :payment do |f|
   f.currency "sterling"
 end
 
-#Factory.define :schedule do |f|
-#  f.invoice {|invoice| invoice.association(:invoice) }
-#  f.name 1
-#  f.frequency 1
-#  f.frequency_type "daily"
-#  f.last_sent
-#  f.next_send
-#  f.due_on "2010-01-01 00:00:00"
-#  f.end_date
-#  f.enabled 1
-#  f.send_to_client 1
-#end
+Factory.define :schedule do |f|
+  f.invoice {|invoice| invoice.association(:invoice) }
+  f.name 1
+  f.frequency 1
+  f.frequency_type "daily"
+  f.last_sent
+  f.next_send
+  f.due_on "2010-01-01 00:00:00"
+  f.end_date
+  f.enabled 1
+  f.send_to_client 1
+end
 

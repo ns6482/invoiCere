@@ -17,7 +17,7 @@ class Ability
       can :read, Role
       #can [:read, :destroy], Feedback
       #can [:create, :update], Feedback #TODO only apply to client once setup
-      #can [:manage], Schedule
+      can [:manage], Schedule
     elsif user.role? :standard
       #can [:create, :update, :read], [Invoice, InvoiceItem, Delivery, Send, Reminder, Payment]
       can [:create, :update, :read], [Client, Contact], :company_id => user.company_id

@@ -9,7 +9,12 @@ class Schedule < ActiveRecord::Base
   accepts_nested_attributes_for :contacts
 
   def send_invoice!
-    invoice = self.invoice.clone_with_associations
+
+    master_invoice = self.invoice        
+    invoice  = master_invoice.clone :include => :invoice_items
+    invoice.state = "open"
+    invoice.invoice_date=Date.today
+      
     invoice.seed_schedule_id = self.id
     self.last_sent = Date.today
     #Notifier.deliver_schedule(invoice, self)

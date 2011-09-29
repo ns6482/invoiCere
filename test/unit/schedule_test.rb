@@ -11,13 +11,12 @@ class ScheduleTest < ActiveSupport::TestCase
 
     schedule = Schedule.find_by_invoice_id(1)
     
-    assert_false schedule.nil?
+    assert_equal false,  schedule.nil?
     assert_nil invoice.seed_schedule_id
-
-    assert_emails 0
+    
     new_invoice = schedule.send_invoice!
     assert_equal schedule.id, new_invoice.seed_schedule_id.to_i
-    assert_emails 1
+    assert !ActionMailer::Base.deliveries.empty?
   end
 
   def test_set_last_sent

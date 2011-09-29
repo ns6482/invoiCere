@@ -34,12 +34,13 @@ class Notifier < ActionMailer::Base
   end
 
   def schedule(invoice, schedule)
-    #@schedule = schedule
-    #@invoice  = invoice
-    #@client = @invoice.client
-    #subject    @invoice.title
-    #recipients  @schedule.recipients
-    #from       @company
-    #content_type  "text/html"
+    @schedule = schedule
+    @invoice  = invoice
+    @client = @invoice.client
+    
+    mail(:subject => @invoice.title, :from => @company, :to =>@schedule.recipients, :content_type => "text/html") do |format|
+     format.html { render :layout => 'email' }
+   end
+    
   end
 end

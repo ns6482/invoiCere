@@ -1,4 +1,4 @@
-=simple_form_for  @schedule, :url => invoice_schedule_path(@invoice), :html => {:id=> 'new_schedule', :method => :post , :remote => true }do |f|
+=simple_form_for  @schedule, :url => invoice_schedule_path(@invoice), :html => {:id=> 'new_schedule', :method => :post , :remote => true duc}do |f|
   = field_set_tag "Setup reocurrance",   :id => "form-main" do
     =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.error_messages

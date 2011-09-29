@@ -5,7 +5,7 @@ class SchedulesControllerTest < ActionController::TestCase
 
  def setup
     @user = users(:user)#Factory.create(:user)
-    @request.host = @user.company.name + ".test"
+    @request.host = @user.company.name + ".lvh.me"
     @invoice = invoices(:one)
     @invoice2 = invoices(:four)
     sign_in @user

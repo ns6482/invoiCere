@@ -1,6 +1,5 @@
 $("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>").effect("slide");
-$("#invoice-main").prepend("<%= escape_javascript(render("edit")) %>");
-$('#edit_schedule').addClass('ajax_form');
+$("#invoice-main").prepend("<%= escape_javascript(render("edit")) %>");;
 $('#cancel').bind('click', function() {
   $('#edit_schedule').hide('slow').empty();  
   return false;

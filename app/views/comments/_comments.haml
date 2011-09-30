@@ -1,0 +1,12 @@
+%h2 Comments
+-if @invoice.comments.count == 0
+ %strong No Comments made
+-else
+ - for comment in @invoice.comments
+  .comment-item
+   .comment-item-header
+    = comment.title
+   =comment.message
+  .comment-item-footer
+   = "Posted  by " + comment.user_id + " on " + comment.created_at.strftime('%d/%m/%Y %H:%M')
+   = link_to 'Delete', comment_path(comment, :invoice_id => @invoice.id), :confirm => 'Are you sure?', :method => :delete

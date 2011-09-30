@@ -1,0 +1,7 @@
+$("#invoice-main").html("<%= escape_javascript(render("form")) %>");
+if ($('#reminder_default_message').is(':checked')){
+  $("#reminder_custom_message_input").hide();
+}
+else {
+  $("#reminder_custom_message_input").show();
+}

@@ -1,0 +1,16 @@
+%h2 Invoice Feedback
+-if @invoice.comments.count == 0
+  %strong No feedback has been submitted
+-else
+  - for feedback in @invoice.feedbacks
+    .comment-item
+      .comment-item-header
+        %span{:class => "stars"}
+          =h feedback.rating
+        %br
+      =h feedback.message
+    .comment-item-footer
+      = "Posted  by " + feedback.user_name.to_s + " on " + feedback.created_at.strftime('%d/%m/%Y %H:%M')
+      = link_to 'Cancel Feedback', feedback_path(feedback), :confirm => 'Are you sure?', :method => :delete
+      |
+      = link_to 'Edit', edit_feedback_path(feedback)

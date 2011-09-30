@@ -1,0 +1,21 @@
+one:
+  custom_message: MyText
+  default_message: 0
+  enabled: 1
+  last_send: 2011-02-10 20:40:57
+  next_send: 2011-02-10 20:40:57
+  days_before: 1
+  last_send_status: MyString
+  frequency: MyString
+  invoice_id: 1
+
+two:  
+  custom_message: MyText
+  default_message: 1
+  enabled: 1
+  last_send: 2011-02-10 20:40:57
+  next_send: 2011-02-10 20:40:57
+  days_before: 1
+  last_send_status: MyString
+  frequency: MyString
+  invoice_id: 2

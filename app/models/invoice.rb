@@ -45,7 +45,7 @@ class Invoice < ActiveRecord::Base
   has_many :deliveries, :dependent => :destroy
   #has_many :comments, :dependent => :destroy  
   #has_many :feedbacks, :dependent => :destroy
-  #has_one :reminder, :dependent => :destroy
+  has_one :reminder, :dependent => :destroy
 
   attr_protected :total_cost, :total_cost_inc_tax, :total_cost_inc_tax_delivery, :opened_date, :opened_by, :paid_date, :paid_by
 
@@ -170,21 +170,21 @@ class Invoice < ActiveRecord::Base
   
   def setup_reminder
 
-    #Reminder.new do | reminder|
-      #reminder.invoice_id = self.id
-      #reminder.enabled = 0
-      #reminder.default_message = 1
-      #reminder.days_before= 3
-      #reminder.frequency = "Weekly"
+    Reminder.new do | reminder|
+      reminder.invoice_id = self.id
+      reminder.enabled = 0
+      reminder.default_message = 1
+      reminder.days_before= 3
+      reminder.frequency = "Weekly"
 
-      #if self.due_days ==0
-        #reminder.next_send  = self.due_date
-      #else
-        #reminder.next_send = (self.due_date-3) + 7
-      #end
+      if self.due_days ==0
+        reminder.next_send  = self.due_date
+      else
+        reminder.next_send = (self.due_date-3) + 7
+      end
       
-      #reminder.save!
-    #end  
+      reminder.save!
+    end  
       
   end
 

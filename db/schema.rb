@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110910153932) do
+ActiveRecord::Schema.define(:version => 20110930175104) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(:version => 20110910153932) do
     t.string   "email"
     t.string   "contact_id"
     t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "invoice_id"
+    t.string   "title"
+    t.text     "message"
+    t.string   "user_id"
+    t.string   "user_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,6 +78,16 @@ ActiveRecord::Schema.define(:version => 20110910153932) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "feedbacks", :force => true do |t|
+    t.integer  "invoice_id"
+    t.string   "user_name"
+    t.string   "user_email"
+    t.integer  "rating"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "invoice_items", :force => true do |t|
@@ -117,6 +137,21 @@ ActiveRecord::Schema.define(:version => 20110910153932) do
     t.decimal  "amount"
     t.string   "payment_type"
     t.string   "currency"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "reminders", :force => true do |t|
+    t.integer  "default_message",  :default => 0
+    t.text     "custom_message"
+    t.datetime "last_send"
+    t.datetime "next_send"
+    t.integer  "enabled",          :default => 0
+    t.integer  "days_before"
+    t.string   "last_send_status"
+    t.string   "frequency"
+    t.string   "name"
+    t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

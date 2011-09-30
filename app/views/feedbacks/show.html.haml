@@ -1,0 +1,12 @@
+- title "Feedback"
+%p
+  %span{:class => "stars"}
+    =h @feedback.rating
+%p
+  %strong Message:
+  =h @feedback.message
+
+%p
+  = link_to "Edit", edit_feedback_path(@feedback)
+  |
+  = link_to 'Cancel Feedback', feedback_path(@feedback), :confirm => 'Are you sure?', :method => :delete

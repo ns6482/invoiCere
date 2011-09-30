@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ishanehal_vb/!svn/ver/291/VisioInvoice/app/views/reminders
+END
+show.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/258/VisioInvoice/app/views/reminders/show.html.haml
+END
+update.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ishanehal_vb/!svn/ver/253/VisioInvoice/app/views/reminders/update.js.erb
+END
+_form.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ishanehal_vb/!svn/ver/291/VisioInvoice/app/views/reminders/_form.html.haml
+END
+edit.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ishanehal_vb/!svn/ver/324/VisioInvoice/app/views/reminders/edit.js.erb
+END
+edit.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/241/VisioInvoice/app/views/reminders/edit.html.haml
+END

@@ -1,0 +1,5 @@
+- title "Reminder"
+%p= @reminder.message
+%p= link_to "Edit", edit_invoice_reminder_path(@invoice)
+|
+%p= link_to "Back to Invoice", invoice_path(@invoice)

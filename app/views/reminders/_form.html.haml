@@ -1,0 +1,12 @@
+=simple_form_for @invoice.reminder, :url => invoice_reminder_path(@invoice), :html => {:id=> 'edit_reminder', :method => :put, :remote => true }do |f|
+  = field_set_tag, :id => "form-main" do
+    = f.error_messages      
+    = f.input :days_before,  :as => :select, :collection => 1..31
+    = f.input :frequency, :as => :select, :collection => ["Daily", "Weekly", "Monthly" ,"Quarterly", "Yearly"]
+    = f.input :default_message, :as => :boolean
+    = f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}
+    = f.input :enabled, :as => :boolean
+  %br
+  %button{:type=>"submit",:class=>"red"} Save Reminder
+  %br
+  %br

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/ishanehal_vb/!svn/ver/293/VisioInvoice/app/views/feedbacks
+END
+show.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/301/VisioInvoice/app/views/feedbacks/show.html.haml
+END
+_form.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ishanehal_vb/!svn/ver/302/VisioInvoice/app/views/feedbacks/_form.html.haml
+END
+create.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ishanehal_vb/!svn/ver/302/VisioInvoice/app/views/feedbacks/create.js.erb
+END
+_feedbacks.haml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ishanehal_vb/!svn/ver/301/VisioInvoice/app/views/feedbacks/_feedbacks.haml
+END
+edit.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ishanehal_vb/!svn/ver/291/VisioInvoice/app/views/feedbacks/edit.html.haml
+END
+index.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/ishanehal_vb/!svn/ver/302/VisioInvoice/app/views/feedbacks/index.js.erb
+END
+index.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/ishanehal_vb/!svn/ver/301/VisioInvoice/app/views/feedbacks/index.html.haml
+END
+new.js.erb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/ishanehal_vb/!svn/ver/302/VisioInvoice/app/views/feedbacks/new.js.erb
+END
+new.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/ishanehal_vb/!svn/ver/301/VisioInvoice/app/views/feedbacks/new.html.haml
+END

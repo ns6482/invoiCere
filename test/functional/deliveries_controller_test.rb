@@ -36,7 +36,7 @@ class DeliveriesControllerTest < ActionController::TestCase
     @invoice = invoices(:one)
     #@invoice.save!
     @delivery = Factory.build(:delivery, :invoice_id => @invoice.id)
-    @delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1")
+    @delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1", :client_id => @invoice.client.id)
     @delivery.save!
     get :show, :id => @delivery.id
     assert_template 'show'
@@ -47,7 +47,7 @@ class DeliveriesControllerTest < ActionController::TestCase
     @invoice = invoices(:one)
     #@invoice.save!
     @delivery = Factory.build(:delivery, :invoice_id => @invoice.id)
-    @delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1")
+    @delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1", :client_id => @invoice.client.id)
     @delivery.save!
     get :index, :invoice_id => @invoice.id
     assert_template 'index'

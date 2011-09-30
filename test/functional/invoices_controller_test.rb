@@ -40,7 +40,7 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_not_nil  :invoices
 
     assert_select "table#invoices" do
-      assert_select "tr", :count => 3
+      assert_select "tr", :count => 2
     end
   end
 
@@ -159,9 +159,10 @@ class InvoicesControllerTest < ActionController::TestCase
   end
 
   def test_invoice_complete
-    invoice = Factory.create(:invoice, :state => "draft")
-    assert_equal "draft", invoice.state
-    put :update, :id => invoice.id, :commit => "complete"
+    #@invoice = Factory.create(:invoice, :state => "draft")
+    @invoice = invoices(:one)
+    assert_equal "draft", @invoice.state
+    put :update, :id => @invoice.id, :commit => "open"
     assert_response :found
     #assert_equal "open", invoice.state
     assert_equal 'Invoice is now open and ready for payment', flash[:notice]
@@ -169,9 +170,11 @@ class InvoicesControllerTest < ActionController::TestCase
   end
 
    def test_invoice_pay
-    invoice2 = Factory.create(:invoice, :state => "open")
-    assert_equal "open",invoice2.state
-    put :update, :id => invoice2.id, :commit => "pay"
+    @invoice2 = invoices(:one)
+    @invoice2.open!
+    #invoice2 = Factory.create(:invoice, :state => "open")
+    assert_equal "open",@invoice2.state
+    put :update, :id => @invoice2.id, :commit => "pay"
     #assert_equal  "paid", invoice2.state
     assert_response :found
     assert_equal 'Invoice marked as paid', flash[:notice]

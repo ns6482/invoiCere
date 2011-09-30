@@ -60,6 +60,8 @@ class PaymentsControllerTest < ActionController::TestCase
   end
 
   def test_destroy
+    @invoice.state = "paid"
+    @invoice.save!
     payment = Payment.first
     delete :destroy, :id => payment, :invoice_id => @invoice.id
     assert_redirected_to invoice_payments_url(@invoice)

@@ -42,7 +42,7 @@ Factory.define :contact do |f|
   f.phone "2323232323"
   f.mobile "232323232323"
   f.fax "232323232"
-  f.client {|client| client.association(:client) }
+  #f.client {|client| client.association(:client) }
 end
 
 Factory.define :delivery do |f|

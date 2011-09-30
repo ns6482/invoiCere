@@ -13,7 +13,7 @@ class Payment < ActiveRecord::Base
   before_validation :set_if_full_amount
   before_save :set_if_full_amount
   after_save :check_if_paid
-  after_destroy :reopen
+  #after_destroy :reopen
 
   
   def overpaid? 
@@ -26,6 +26,8 @@ class Payment < ActiveRecord::Base
   def invoice_is_open?    
      errors.add :base, "Cannot make payment, this invoice is not open" if self.invoice.state == "draft"
   end
+
+
 
   private
 
@@ -41,13 +43,9 @@ class Payment < ActiveRecord::Base
     end
   end
   
-  
-  private 
-  
-  def reopen    
-    self.invoice.open_again!
-  end
-    
+
+
+
   
   #TODO - on delete need to reset to open invoice
   

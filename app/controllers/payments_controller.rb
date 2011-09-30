@@ -45,6 +45,7 @@ class PaymentsController < BaseController
   
   def destroy
     #@payment = Payment.find(params[:id])
+    @payment.invoice.open_again!
     @payment.destroy
     flash[:notice] = "Successfully destroyed payment."
     redirect_to invoice_payments_url(@invoice)

@@ -19,7 +19,7 @@ class NotifierTest < ActionMailer::TestCase
     
     assert_emails 0
     # Send the email, then test that it got queued
-    email = Notifier.deliver_invoice(@delivery) # sends the email
+    email = Notifier.invoice(@delivery).deliver # sends the email
     assert_emails 1
     
     #recipients = @delivery.contacts.collect("") { |acc, contact| acc << "#{contact.email}"}
@@ -45,7 +45,7 @@ class NotifierTest < ActionMailer::TestCase
 
     assert_emails 0
     # Send the email, then test that it got queued
-    email = Notifier.deliver_invoice(@delivery) # sends the email
+    email = Notifier.invoice(@delivery).deliver # sends the email
     assert_emails 1
 
     #recipients = @delivery.contacts.collect("") { |acc, contact| acc << "#{contact.email}"}
@@ -73,7 +73,7 @@ class NotifierTest < ActionMailer::TestCase
 
     assert_emails 0
     # Send the email, then test that it got queued
-    email = Notifier.deliver_schedule(@invoice, @schedule) # sends the email
+    email = Notifier.schedule(@invoice, @schedule).deliver # sends the email
     assert_emails 1
 
     #recipients = @delivery.contacts.collect("") { |acc, contact| acc << "#{contact.email}"}

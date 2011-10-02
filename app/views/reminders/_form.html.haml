@@ -1,5 +1,6 @@
 =simple_form_for @invoice.reminder, :url => invoice_reminder_path(@invoice), :html => {:id=> 'edit_reminder', :method => :put, :remote => true }do |f|
-  = field_set_tag, :id => "form-main" do
+  = field_set_tag "Setup reminder", :id => "form-main" do
+    =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.error_messages      
     = f.input :days_before,  :as => :select, :collection => 1..31
     = f.input :frequency, :as => :select, :collection => ["Daily", "Weekly", "Monthly" ,"Quarterly", "Yearly"]

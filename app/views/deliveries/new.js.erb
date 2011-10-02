@@ -1,5 +1,5 @@
-$("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>").effect("slide");
-$("#invoice-main").prepend("<%= escape_javascript(render("form")) %>")
+$("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>");
+$("#invoice-main").prepend("<%= escape_javascript(render("form")) %>").effect("slide");
 
 $('#cancel').bind('click', function() {
   $('#new_delivery').hide('slow').empty();

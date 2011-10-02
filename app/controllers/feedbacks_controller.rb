@@ -1,4 +1,4 @@
-class FeedbacksController < AccountController
+class FeedbacksController < BaseController
 
   before_filter :find_invoice, :only => [:new, :index]
   before_filter :find_feedback, :only => [:edit, :show, :destroy]

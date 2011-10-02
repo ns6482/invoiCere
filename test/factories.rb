@@ -78,15 +78,15 @@ Factory.define :invoice_item do |f|
   f.invoice {|invoice| invoice.association(:invoice) }
 end
 
-#Factory.define :reminder do |f|
-#  f.default_message false
-#  f.custom_message "MyText"
-#  f.enabled false
-#  f.days_before 1
-#  f.last_send_status "MyString"
-#  f.frequency "Weekly"
-#  f.invoice_id 1
-#end
+Factory.define :reminder do |f|
+  f.default_message false
+  f.custom_message "MyText"
+  f.enabled false
+  f.days_before 1
+  f.last_send_status "MyString"
+  f.frequency "Weekly"
+  f.invoice_id 1
+end
 
 Factory.define :payment do |f|
   f.invoice {|invoice| invoice.association(:invoice) }

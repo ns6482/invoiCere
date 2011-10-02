@@ -1,4 +1,4 @@
-class RemindersController < AccountController
+class RemindersController < BaseController
   before_filter :find_invoice  
   load_and_authorize_resource :reminder,:through=> :invoice, :singleton => true
   #load_and_authorize_resource :reminder, :through => :find_invoice, :singleton => true

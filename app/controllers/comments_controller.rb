@@ -1,4 +1,4 @@
-class CommentsController < AccountController
+class CommentsController < BaseController
 
   before_filter :find_invoice, :only => [:new, :index, :destroy]
   before_filter :find_comment, :only => :edit

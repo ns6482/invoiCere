@@ -1,7 +1,14 @@
-$("#invoice-main").html("<%= escape_javascript(render("form")) %>");
+$("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>");
+$("#invoice-main").prepend("<%= escape_javascript(render("form")) %>").effect("slide");
+
 if ($('#reminder_default_message').is(':checked')){
   $("#reminder_custom_message_input").hide();
 }
 else {
   $("#reminder_custom_message_input").show();
 }
+
+$('#cancel').bind('click', function() {
+  $('#edit_reminder').hide('slow').empty();
+  return false;
+ });

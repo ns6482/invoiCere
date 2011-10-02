@@ -9,7 +9,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     primary.item :print_invoice, "Print", invoice_path( @invoice)
     primary.item :pdf_invoice, "PDF", invoice_path( @invoice, :format => :pdf)
-    #primary.item :reminder_invoice, "Setup Reminder",edit_invoice_reminder_path(@invoice), :if => Proc.new { can? :update, @invoice.reminder},  :link => {:class => 'interactive'}
+    primary.item :reminder_invoice, "Setup Reminder",edit_invoice_reminder_path(@invoice), :if => Proc.new { can? :update, @invoice.reminder},  :link => {:remote => true}
     primary.item :email_invoice, "Send Email",new_invoice_delivery_path(@invoice), :if => Proc.new { can? :create, Delivery},  :link => {:remote => true}#:class => 'interactive'}
     #primary.item :comment_invoice, "Add a Comment",new_invoice_comment_path(@invoice), :if => Proc.new { can? :create, Comment},  :link => {:class => 'interactive'}
     primary.item :copy_invoice, "Copy", new_invoice_path(:id => @invoice.id), :if => Proc.new { can? :create, @invoice}#,  :link => {:class => 'interactive'}

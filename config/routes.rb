@@ -16,7 +16,7 @@ VisioInvoiceV3::Application.routes.draw do
     resources :invoices do
       resources :deliveries, :only => [:new, :create, :show, :index], :shallow =>true
       resources :payments,:only => [:new, :create, :index, :destroy], :shallow =>true
-      #invoices.resource :reminder, :only => [ :edit, :update, :show]
+      resource :reminder, :only => [ :edit, :update, :show]
       #invoices.resources :comments, :only => [:new, :create, :destroy, :index], :shallow =>true
       resources :invoice_items,  :shallow =>true
       #invoices.resources :feedbacks, :only => [:new, :create, :destroy, :index], :shallow =>true

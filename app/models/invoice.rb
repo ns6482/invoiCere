@@ -43,7 +43,7 @@ class Invoice < ActiveRecord::Base
   has_one :schedule, :dependent => :destroy
   has_many :payments, :dependent => :destroy
   has_many :deliveries, :dependent => :destroy
-  #has_many :comments, :dependent => :destroy  
+  has_many :comments, :dependent => :destroy  
   #has_many :feedbacks, :dependent => :destroy
   has_one :reminder, :dependent => :destroy
 

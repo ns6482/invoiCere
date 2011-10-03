@@ -1,11 +1,9 @@
-- semantic_form_for [@invoice,@comment] do |f|
- - f.inputs :id => "form-main" do
-  =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
-  =# f.error_messages
-  = f.input :title
-  = f.input :message, :input_html => { :rows => 3 }  
-  %br
-  %button{:type=>"submit",:class=>"red"}
-   Send
+= simple_form_for [@invoice,@comment] do |f|
+  = field_set_tag "Add Comment", :id => "form-main" do
+    =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
+    =# f.error_messages
+    = f.input :title
+    = f.input :message, :input_html => { :rows => 3 }  
+  %button{:type=>"submit",:class=>"red"} Send
   %br
   %br

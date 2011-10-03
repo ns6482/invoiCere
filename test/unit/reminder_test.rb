@@ -35,11 +35,16 @@ class ReminderTest < ActiveSupport::TestCase
   end
 
   def test_after_remind_sets_next_date
+    
+    n = Time.now
+    ns = Time.gm(n.year, n.month, n.day, 0, 0)
+    
     @reminder.remind
-    #compare_date(Date.today, @reminder.last_send)
-    compare_date((@reminder.last_send +7), @reminder.next_send)
-  end
+    assert_equal @reminder.frequency, "Weekly"
+    assert_equal ns, @reminder.last_send
+    assert_equal (ns +7.days), @reminder.next_send    
 
+  end
 
   def compare_date (dt, dt2)
     assert_equal dt.year, dt2.year

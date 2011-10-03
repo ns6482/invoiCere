@@ -5,18 +5,22 @@ class Reminder < ActiveRecord::Base
   attr_accessor :message
   
   def remind
-    self.last_send = Date.today
 
-    ns =self.last_send 
+
+      
+   n = Time.now
+   ns = Time.gm(n.year, n.month, n.day)
+
 
     val = case self.frequency
-    when "Weekly" then ns+7
-    when "Daily" then ns+1
+  when "Weekly" then ns + 7.days
+  when "Daily" then ns +1.days
     when "Monthly" then ns >> 1
     else ns+1
     end
 
-    self.update_attribute("last_send", Date.today)
+    
+    self.update_attribute("last_send", ns)
     self.update_attribute("next_send", val)
   end
 

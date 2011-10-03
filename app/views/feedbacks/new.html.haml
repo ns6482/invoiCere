@@ -1,4 +1,19 @@
 - title "Provide Invoice Feedback"
 
-= render :partial => 'form'
+%p
+  We would be grateful if you could provide feedback about this invoice, if it is about
+  the products or services provided or the experience of dealing with this invoice.
+= simple_form_for [@invoice, @feedback] do |f|
+  = f.error_messages
+  = field_set_tag "Provide Feedback",  :id => "form-main" do
+    =# f.input :rating, :as => :radio, :wrapper_html=>{:class => 'ratings'}, :input_html => {:class => 'star'}, :collection => 1..5
+    = f.label :Rating
+    - (1..4).each do |val|
+      =f.radio_button :rating, val, { :class => 'star' }     
+    %br
+    = f.input :message, :input_html => { :class => 'autogrow', :rows => 3, :cols => 5, :maxlength => 10  }
+    %br
+      %button{:type=>"submit",:class=>"red"} Send
+    %br
+    %br
 

@@ -1,9 +1,9 @@
 %p
   We would be grateful if you could provide feedback about this invoice, if it is about
   the products or services provided or the experience of dealing with this invoice.
-- semantic_form_for @feedback do |f|
+= simple_form_for @feedback do |f|
   = f.error_messages
-  - f.inputs  :id => "form-main" do
+  = field_set_tag "Provide Feedback",  :id => "form-main" do
     =# f.input :rating, :as => :radio, :wrapper_html=>{:class => 'ratings'}, :input_html => {:class => 'star'}, :collection => 1..5
     = f.label :Rating
     - (1..4).each do |val|

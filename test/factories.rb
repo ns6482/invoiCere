@@ -30,7 +30,7 @@ Factory.define :client do |f|
   f.phone "02476 76735989"
   f.fax "33233 2323"
   f.email "nehal.soni@gmail.com"  
-  #f.company {|company| company.association(:company) }
+  f.company {|company| company.association(:company) }
 end
 
 Factory.define :contact do |f|
@@ -42,7 +42,7 @@ Factory.define :contact do |f|
   f.phone "2323232323"
   f.mobile "232323232323"
   f.fax "232323232"
-  #f.client {|client| client.association(:client) }
+  f.client {|client| client.association(:client) }
 end
 
 Factory.define :delivery do |f|

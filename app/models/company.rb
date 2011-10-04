@@ -9,10 +9,10 @@ class Company < ActiveRecord::Base
   has_many :schedules, :through => :clients, :source => :invoices
 
   has_many :schedules,  :finder_sql =>
-    'SELECT s.* ' +
-    'FROM schedules  s JOIN invoices i ON s.invoice_id = i.id ' +
-    'JOIN clients c ON i.client_id = c.id ' +
-    'WHERE c.company_id = #{id}'
+    proc {"SELECT s.* " +
+    "FROM schedules  s JOIN invoices i ON s.invoice_id = i.id " +
+    "JOIN clients c ON i.client_id = c.id " +
+    "WHERE c.company_id = #{id}"}
 
   has_one :etemplate, :dependent => :destroy
   has_one :setting, :dependent => :destroy

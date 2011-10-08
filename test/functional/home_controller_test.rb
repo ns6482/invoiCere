@@ -6,9 +6,9 @@ class HomeControllerTest < ActionController::TestCase
 
    def setup
     @company = companies(:two)
-    @account = Factory.create(:account, :company_id => @company.id)
+    #@account = Factory.create(:account, :company_id => @company.id)
     @user = Factory.create(:user, :company_id => @company.id)   
-    @request.host = @company.name + ".test"
+    @request.host = @company.name + ".lvh.me"
   end
 
    def test_user_cannot_see_users_crud_link
@@ -18,11 +18,5 @@ class HomeControllerTest < ActionController::TestCase
     sign_out @user
    end
 
-   def test_account_can_see_users_crud_link
-     sign_in @account
-     get :index
-     assert_response :success     
-     sign_out @account
-   end
-  
+
 end

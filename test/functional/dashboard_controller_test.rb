@@ -4,14 +4,13 @@ class DashboardControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
-    @company = companies(:two)
-    @account = Factory.create(:account, :company_id => @company.id)
+    @company = companies(:two)    
     @adminUser = users(:user1)
     @standardUser = users(:user2)
-    #@user = Factory.create(:user, :company_id => @company.id)
-    @request.host = @company.name + ".test"
+    @user = Factory.create(:user, :company_id => @company.id)
+    @request.host = @company.name + ".lvh.me"
 
-    sign_in @account
+    sign_in @user
   end
 #
 #  def test_account_can_see_users_crud_link

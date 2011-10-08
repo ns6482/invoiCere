@@ -1,13 +1,13 @@
 require 'test_helper'
-
+=begin
 class RoutingTest < ActionController::TestCase
 
   def test_should_route_to_clients
-    assert_routing '/clients', { :controller => "clients", :action => "index"}
+    assert_routing '/clients', { :controller => "clients", :action => "index", :subdomain => "www"}
   end
 
   def test_should_route_to_client
-    assert_routing '/clients/1', {:controller => "clients", :action => "show", :id => "1" }
+    assert_routing '/clients/1', {:controller => "clients", :action => "show", :id => "1", :subdomain => "www" }
   end
 
   def test_should_route_to_client_edit
@@ -28,7 +28,8 @@ class RoutingTest < ActionController::TestCase
   def test_should_route_contacts_of_client
     options = { :controller => 'contacts',
       :action => 'index',
-      :client_id => '1' }
+      :client_id => '1', 
+      :subdomain => "lvh"}
     assert_routing('clients/1/contacts', options)
   end
 
@@ -38,6 +39,5 @@ class RoutingTest < ActionController::TestCase
       :client_id => '1' }
     assert_routing('clients/1/contacts/new', options)
   end
-
-
 end
+=end

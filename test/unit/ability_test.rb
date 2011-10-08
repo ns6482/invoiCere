@@ -19,6 +19,8 @@ class AbilityTest < ActiveSupport::TestCase
     @standardUser = Factory.build(:user)
     @standardUser.roles << standard_role
     @standardUser.save!
+    
+    @contactAdminAbility = Factory.build(:contact, :client_id => @adminUserClient)
 
     @standardUserClient = Factory.build(:client, :company_id =>@standardUser.company_id)
 
@@ -55,7 +57,7 @@ class AbilityTest < ActiveSupport::TestCase
     assert @adminAbility.can?(:manage, InvoiceItem.new)
     assert @adminAbility.cannot?(:manage, Client.new)
     assert @adminAbility.can?(:manage, @adminUserClient)
-    assert @adminAbility.can?(:manage, @contact)
+    assert @adminAbility.can?(:manage, @contactAdminAbility)
     assert @adminAbility.can?(:manage, Delivery.new)
     assert @adminAbility.can?(:manage, Send.new)
     assert @adminAbility.cannot?(:destroy, @adminUser)
@@ -76,7 +78,7 @@ class AbilityTest < ActiveSupport::TestCase
   def test_standard_can_only_update_read_client
     assert @standardAbility.cannot?([:create, :destroy], Client.new)
     assert @standardAbility.cannot?(:update, @client)
-    assert @standardAbility.cannot?(:update, Client.new(:company_id=>@standardUser.company_id))
+    assert @standardAbility.cannot?(:update, Client.new)
     assert @standardAbility.cannot?(:read, Client.new)
 
     assert @standardAbility.cannot?([:create, :destroy], @standardUserClient)

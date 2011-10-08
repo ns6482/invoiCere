@@ -12,9 +12,9 @@ class Ability
       can [:update, :read], Setting, :company_id => user.company_id
       can [:create, :read, :update, :invite, :new_invite], User,  :company_id => user.company_id
       can [:destroy], User, :owner => false,  :company_id => user.company_id
-      can :manage,  [Invoice, InvoiceItem, Payment, Delivery, Send, Reminder, Comment]
+      can :manage,  [Invoice, InvoiceItem, Payment, Delivery, Send, Reminder, Comment, Contact]
       can [:update, :read], Company, :id => user.company_id
-      can :manage, [Client, Contact], :company_id => user.company_id      
+      can :manage, Client, :company_id => user.company_id      
       can :read, Role
       can [:read, :destroy], Feedback
       can [:create, :update], Feedback #TODO only apply to client once setup
@@ -33,7 +33,8 @@ class Ability
       can :read, Role
     elsif user.role? :viewer
       can [:read], [Invoice, InvoiceItem, Delivery, Send, Reminder, Payment, Feedback]
-      can [:read], [Client,Contact], :company_id => user.company_id
+      can [:read], [Client], :company_id => user.company_id
+      can [:read], [Contact]
       can [:update, :read], User,:id => user.id
       can :read, Company, :id => user.company_id
       can :read, Setting, :id => user.company_id

@@ -23,7 +23,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :draft_invoice, "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'revert_draft'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:remote => true}
     primary.item :open_invoice, "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "paid"},  :link => {:remote => true}
 
-    #primary.item :feedback_invoice, "Feedback on Invoice",new_invoice_payment_path(@invoice), :if => Proc.new {can? :create, @feedback and @invoice.state == "closed"},  :link => {:class => 'interactive'}
+    primary.item :feedback_invoice, "Feedback on Invoice",new_invoice_payment_path(@invoice), :if => Proc.new {can? :create, @feedback and @invoice.state == "closed"},  :link => {:class => 'interactive'}
 
   end
    

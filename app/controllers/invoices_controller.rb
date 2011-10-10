@@ -1,5 +1,7 @@
 require "open-uri"
-require "prawn"
+require 'prawn'
+require 'prawn/core'
+require 'prawn/layout' 
 
 
 class InvoicesController < BaseController
@@ -25,10 +27,10 @@ class InvoicesController < BaseController
   def show
 
     respond_to do | format|
-      format.html
-     #format.pdf
+     format.html
+     format.pdf
      format.js
-      format.xml  { render :xml => @invoice}
+     format.xml  { render :xml => @invoice}
     end
     
   end

@@ -5,3 +5,4 @@ require File.expand_path('../application', __FILE__)
 VisioInvoiceV3::Application.initialize!
 require 'will_paginate'
 
+

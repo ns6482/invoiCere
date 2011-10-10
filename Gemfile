@@ -27,12 +27,14 @@ gem "meta_search"
 
 #gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
 gem 'will_paginate'#, '~> 3.0.0'
-gem 'prawn'
+gem 'prawn', '~> 0.12.0'
+gem 'prawnto'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 gem 'delorean'
 gem "haml-rails" 
 gem "deep_cloneable", "~> 1.3.0"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

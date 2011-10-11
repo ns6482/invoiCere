@@ -1100,4 +1100,29 @@ Started GET "/invoices/23.pdf" for 127.0.0.1 at Mon Oct 10 21:21:26 +0100 2011
   [1m[35mSQL (0.2ms)[0m  SELECT COUNT(*) FROM "invoice_items" WHERE ("invoice_items".invoice_id = 23)
   [1m[36mRole Load (0.3ms)[0m  [1mSELECT "roles".* FROM "roles" INNER JOIN "roles_users" ON "roles".id = "roles_users".role_id WHERE "roles"."name" = 'Admin' AND ("roles_users".user_id = 15 ) LIMIT 1[0m
   [1m[35mSetting Load (0.4ms)[0m  SELECT "settings".* FROM "settings" WHERE ("settings".company_id = 13) LIMIT 1
-  [1m
+  [1m[36mClient Load (0.3ms)[0m  [1mSELECT "clients".* FROM "clients" WHERE "clients"."id" = 1 LIMIT 1[0m
+  [1m[35mInvoiceItem Load (0.3ms)[0m  SELECT "invoice_items".* FROM "invoice_items" WHERE ("invoice_items".invoice_id = 23)
+  [1m[36mSQL (0.3ms)[0m  [1mSELECT SUM("payments"."amount") AS sum_id FROM "payments" WHERE (invoice_id = 23)[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT SUM("payments"."amount") AS sum_id FROM "payments" WHERE (invoice_id = 23)
+Rendered invoices/show.pdf.prawn (920.5ms)
+Completed 200 OK in 1447ms (Views: 938.6ms | ActiveRecord: 5.4ms)
+^C[2011-10-10 21:22:36] INFO  going to shutdown ...
+[2011-10-10 21:22:36] INFO  WEBrick::HTTPServer#start done.
+Exiting
+]0;nehal@nehal-laptop: ~/Projects/VisioInvoiceV3nehal@nehal-laptop:~/Projects/VisioInvoiceV3$ rails  serverbundle update prawn[5Pinstall[1Prails  serverbundle install[2Prails serverbundle install[2Prails serverbundle install[2Prails serverconsolescript/consolels[Kexitgit pushcommit -a -m "comment form ajaxify"[1@m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cadd -A[K
+]0;nehal@nehal-laptop: ~/Projects/VisioInvoiceV3nehal@nehal-laptop:~/Projects/VisioInvoiceV3$ git add -Arails  serverbundle update prawn[6Prails  server[3Pgit add -A[Kgit add -Arails  serverbundle update prawn[5Pinstall[1Prails  serverbundle install[2Prails serverbundle install[2Prails serverbundle install[2Prails serverconsolescript/consolels[Kexitgit pushcommit -a -m "comment form ajaxify"[1@m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"p"r"a"w" "[1P"n"p"d"f"[1P"[1P"[1P" "p"d"f"
+[master 5ca3d0e] prawn pdf
+ 6 files changed, 1120 insertions(+), 6 deletions(-)
+ create mode 100644 console
+]0;nehal@nehal-laptop: ~/Projects/VisioInvoiceV3nehal@nehal-laptop:~/Projects/VisioInvoiceV3$ git commit -a -m "prawn pdf"add -A[Krails  server[3Pgit add -Arails  serverbundle update prawngit [K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgit push
+Counting objects: 22, done.
+Delta compression using up to 2 threads.
+Compressing objects:   8% (1/12)   Compressing objects:  16% (2/12)   Compressing objects:  25% (3/12)   Compressing objects:  33% (4/12)   Compressing objects:  41% (5/12)   Compressing objects:  50% (6/12)   Compressing objects:  58% (7/12)   Compressing objects:  66% (8/12)   Compressing objects:  75% (9/12)   Compressing objects:  83% (10/12)   Compressing objects:  91% (11/12)   Compressing objects: 100% (12/12)   Compressing objects: 100% (12/12), done.
+Writing objects:   8% (1/12)   Writing objects:  16% (2/12)   Writing objects:  25% (3/12)   Writing objects:  33% (4/12)   Writing objects:  41% (5/12)   Writing objects:  50% (6/12)   Writing objects:  58% (7/12)   Writing objects:  66% (8/12)   Writing objects:  75% (9/12)   Writing objects:  83% (10/12)   Writing objects:  91% (11/12)   Writing objects: 100% (12/12)   Writing objects: 100% (12/12), 5.89 KiB, done.
+Total 12 (delta 9), reused 0 (delta 0)
+To git@github.com:nehalsoni/VisioInvoice.git
+   ed74986..5ca3d0e  master -> master
+]0;nehal@nehal-laptop: ~/Projects/VisioInvoiceV3nehal@nehal-laptop:~/Projects/VisioInvoiceV3$ exi[K[K[Ke[Kexit
+exit
+
+Script done on Mon 10 Oct 2011 21:24:53 BST

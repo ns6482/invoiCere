@@ -1,9 +1,7 @@
 
-pdf = Prawn::Document.new(:page_layout => :portrait, :page_size => "A4", :margin => [50,50,50,50])
+pdf = Prawn::Document.new(:page_layout => :portrait, :page_size => "A4", :margin => [25,25,25,25])
 
-content = <<-EOS
-
-EOS
+content = ""
 
 
 company_contact = ""
@@ -117,9 +115,6 @@ pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.m
        ]
     end
 
-    invoice_items += invoice_items  
-    invoice_items += invoice_items
-
     main_table = pdf.make_table(invoice_items, :header => true,:width => 400) do
         cells.size = 9
         cells.padding = 2
@@ -173,14 +168,22 @@ pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.m
         end
     end
 
+      pdf.move_down 25
 
-  pdf.move_down 30
 
-         pdf.dash(5, :space=> 5, :phase => 0)
-     
-
-       pdf.text content, :align => :left, :size => 14, :style => :bold, :color => :white
-       pdf.text "Payment Stub", :align => :left, :size => 14, :style => :bold
+      pdf.dash(1, :space=> 2, :phase => 0)
+      pdf.bounding_box [pdf.bounds.left, pdf.cursor], :width => pdf.margin_box.width do
+        pdf.stroke do          
+          pdf.line pdf.bounds.top_left, pdf.bounds.top_right       
+        end
+        pdf.move_down 10
+      end
+      pdf.undash
+        
+      
+          
+      pdf.text "Payment Stub", :align => :left, :size => 11, :style => :bold
+      pdf.text content, :align => :left, :size => 11, :style => :bold, :color => :white
       pdf.move_down 10
 
        summary_items =
@@ -193,7 +196,7 @@ pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.m
 
 
         summary_table = pdf.make_table(summary_items, :header => true, :width => 150) do
-            cells.size = 9
+            cells.size = 8
             cells.padding = 2
             column(0).style(:font_style => :bold)
         end
@@ -207,36 +210,34 @@ pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.m
             pdf.line pdf.bounds.top_left, pdf.bounds.top_right
         end
 
-        pdf.move_down 15
-        pdf.undash
+        pdf.move_down 10
+
 
         
         pdf.stroke_rectangle([90, pdf.cursor], 100, 15)
         
         pdf.indent(3) do
-            pdf.text "Amount Closed: ", :size =>10,  :style => :bold, :align => :left
+            pdf.text "Amount Closed: ", :size => 8, :style => :bold, :align => :left
         end
 
-        pdf.move_down 15
+        pdf.move_down 10
         
         pdf.stroke_rectangle([90, pdf.cursor], 100, 15)
 
         pdf.indent(3) do
-            pdf.text "Date: ", :size => 10, :style => :bold
+            pdf.text "Date: ", :size => 8, :style => :bold
         end
-       pdf.move_down 15
+       pdf.move_down 10
 
        if !current_company.setting.payment_instructions_1.nil?
            pdf.text current_company.setting.payment_instructions_1, :size => 8, :align => :left
        end
-
         
-       pdf.text "#{@invoice.client.name}", :size => 8, :align => :center,  :style => :bold
+       pdf.text "#{current_company.name}", :size => 8, :align => :center,  :style => :bold
        pdf.text "#{current_company.setting.address}", :size => 8, :align => :center
        pdf.text company_contact, :size => 8, :align => :center
+  
 
-
- 
 end
 
 # PAGE NUMBERS

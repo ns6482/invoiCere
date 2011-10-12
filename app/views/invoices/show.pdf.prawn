@@ -1,3 +1,18 @@
+def add_page_break_if_overflow(pdf, &block)
+  current_page = pdf.page_count
+  roll = pdf.transaction do
+    yield(pdf)
+  
+    pdf.rollback if pdf.page_count > current_page
+  end
+  
+  if roll == false
+    pdf.start_new_page
+    yield(pdf)
+  end
+end
+
+
 
 pdf = Prawn::Document.new(:page_layout => :portrait, :page_size => "A4", :margin => [25,25,25,25])
 
@@ -181,7 +196,8 @@ pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.m
       pdf.undash
         
       
-          
+ add_page_break_if_overflow(pdf) do |pdf|
+             
       pdf.text "Payment Stub", :align => :left, :size => 11, :style => :bold
       pdf.text content, :align => :left, :size => 11, :style => :bold, :color => :white
       pdf.move_down 10
@@ -211,9 +227,7 @@ pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.m
         end
 
         pdf.move_down 10
-
-
-        
+      
         pdf.stroke_rectangle([90, pdf.cursor], 100, 15)
         
         pdf.indent(3) do
@@ -237,9 +251,11 @@ pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.m
        pdf.text "#{current_company.setting.address}", :size => 8, :align => :center
        pdf.text company_contact, :size => 8, :align => :center
   
-
+end
 end
 
 # PAGE NUMBERS
 pdf.number_pages "Page <page> of <total>", :at => [pdf.margin_box.right-65, 0], :page_filter => :all, :size => 8
+
+
 

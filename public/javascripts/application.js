@@ -1,16 +1,18 @@
+/*
 jQuery.ajaxSetup({
     'beforeSend': function(xhr) {
         xhr.setRequestHeader("Accept",
             "text/javascript")
     }
 })
-
+*/
 
 jQuery(function() {
     
     $("#filter_box").hide();
     
-    $('#filter_link').click(function() {
+    $('#filter_link').click(
+    function() {
         $("#filter_box").toggle(function () {
            
             });
@@ -18,6 +20,7 @@ jQuery(function() {
 
 });
 
+/*
 jQuery.fn.submitWithAjax = function() {
     this.submit(function() {
         $.post(this.action, $(this).serialize(), null, "script");
@@ -25,6 +28,7 @@ jQuery.fn.submitWithAjax = function() {
     })
     return this;
 };
+*/
 
 //$(function() {
 //    $( "#print-invoice" ).button({
@@ -143,6 +147,7 @@ $(document).ready(function() {
     // Change our reminder form to ajax
     
     //$('#interactive').hide();
+    /*
     $('.ajax_form').live('submit', function()
     {
         var options = {
@@ -164,7 +169,7 @@ $(document).ready(function() {
     }
         
     );
-
+*/
        // Notice the use of the each() method to acquire access to each elements attributes
 //   $('a[tooltip]').each(function()
 //   {

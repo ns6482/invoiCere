@@ -12,7 +12,7 @@ class CompaniesController < BaseController
   def new
     @company = Company.new
     @company.users.build
-    render :layout => 'application'
+    
   end
   
   def create

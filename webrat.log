@@ -163,3 +163,7 @@ REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"ema
 REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"email"=>"test@test.com", "password"=>"password123", "company_id"=>"one"}, "commit"=>"Sign in"} and HTTP headers {}
 REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"email"=>"test@test.com", "password"=>"password123", "company_id"=>"one"}, "commit"=>"Sign in"} and HTTP headers {}
 REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"email"=>"test@test.com", "password"=>"password123", "company_id"=>"one"}, "commit"=>"Sign in"} and HTTP headers {}
+REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"email"=>"test@test.com", "password"=>"password123", "company_id"=>"one"}, "commit"=>"Sign in"} and HTTP headers {}
+REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"email"=>"test@test.com", "password"=>"password123", "company_id"=>"one"}, "commit"=>"Sign in"} and HTTP headers {}
+REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"email"=>"test@test.com", "password"=>"password123", "company_id"=>"one"}, "commit"=>"Sign in"} and HTTP headers {}
+REQUESTING PAGE: POST /users/sign_in with {"utf8"=>"\xE2\x9C\x93", "user"=>{"email"=>"test@test.com", "password"=>"password123", "company_id"=>"one"}, "commit"=>"Sign in"} and HTTP headers {}

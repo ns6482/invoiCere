@@ -4,7 +4,7 @@ source 'http://rubygems.org'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
+gem 'rake', '~> 0.9.3.beta.1'
 gem 'rails', '3.0.10'
 gem 'devise'
 gem 'haml'

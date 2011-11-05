@@ -28,6 +28,9 @@
                     ='NA'
                 %td= number_to_currency invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","
  
-  #dashboard-calendar
-    =# render :partial => "calendar"
+    #dashboard-calendar
+      =@date.year.to_s + " " + Date::MONTHNAMES[@date.month]
+      -@invoices_for_month.each do |invoice|
+        test
+        =# render :partial => "calendar"
 

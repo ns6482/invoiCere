@@ -1,0 +1,11 @@
+%tr
+  %td= invoice.created_at.strftime('%d/%m/%Y')
+  %td= link_to_if can?(:read, invoice), invoice.title, invoice
+  %td= invoice.client.name
+  %td= invoice.invoice_date.strftime('%d/%m/%Y')
+  %td
+    - if !invoice.due_date.nil?
+      = invoice.due_date.strftime('%d/%m/%Y')
+    -else
+      ='NA'
+  %td= number_to_currency invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","

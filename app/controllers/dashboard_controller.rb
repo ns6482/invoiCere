@@ -10,6 +10,10 @@ class DashboardController < BaseController
       #@date = params[:month] ? Date.parse(params[:month]) : Date.today
       @date = (params[:month] and params[:year]) ? Date.strptime("#{params[:month]} #{params[:year]}", '%m %Y') : Date.today
       @invoices_for_month = @invoices.find_all{|item| item.invoice_date.month == @date.month and item.invoice_date.year == @date.year }
+      
+      @total_invoice = @invoices.find_all{|item| item.invoice_date.year == @date.year}.collect {|item_total| item_total.total_cost_inc_tax_delivery}.reduce(:+)  
+      
+      
     respond_to do | format |
       format.html
     end

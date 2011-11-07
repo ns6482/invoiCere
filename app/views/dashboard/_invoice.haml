@@ -8,4 +8,4 @@
       = invoice.due_date.strftime('%d/%m/%Y')
     -else
       ='NA'
-  %td= number_to_currency invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","
+  %td= number_to_currency invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","

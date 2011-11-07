@@ -34,4 +34,18 @@
               -@invoices_for_month.each do |invoice|
                 = render :partial => "invoice", :object => invoice
             =# render :partial => "calendar"
+        
+#dashboard-totals
+  %h3 Breakdown
+  %ul{:id => "dashboard-list"}
+    %li 
+      %strong Total Invoiced:  
+      =number_to_currency @total_invoice, :unit => '£', :separator => ".", :delimiter => ","
+    %li
+      %strong Total Payments Received
+    %li
+      %strong Total Outstanding
+
+#dashboard-recent
+  %h3 Recent Activity
 

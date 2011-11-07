@@ -46,7 +46,7 @@ end
 # PDF FOOTER (without page number which must be the last line of code)
 ################################################################################
 pdf.repeat :all do
-    pdf.bounding_box ([pdf.margin_box.left, pdf.margin_box.bottom + 20], :width => pdf.margin_box.width, :height => pdf.margin_box.height - 60) do
+  pdf.bounding_box [pdf.margin_box.left, pdf.margin_box.bottom + 20], :width => pdf.margin_box.width, :height => pdf.margin_box.height - 60 do 
         pdf.stroke_horizontal_rule
         pdf.move_down 10
         str = ''
@@ -62,7 +62,6 @@ pdf.repeat :all do
         pdf.text str, :align => :center, :size => 9
   end
 end
-
 # SET THE BOUNDING BOX SO CONTENT DOESN'T OVERLAP THE HEADER AND FOOTER
 pdf.bounding_box([pdf.margin_box.left, pdf.margin_box.top - 10], :width => pdf.margin_box.width, :height => pdf.margin_box.height - 120) do
    

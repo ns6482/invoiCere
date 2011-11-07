@@ -995,6 +995,31 @@ prev_page {
   background: #e5ecf9;
 }
 
+/* line 36, ../../sass/system_partials/_dashboard.sass */
+#dashboard-totals {
+  border-style: solid;
+  border-color: black;
+}
+/* line 39, ../../sass/system_partials/_dashboard.sass */
+#dashboard-totals ul {
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e5ecf9;
+  -webkit-border-radius: 4px 4px;
+  -moz-border-radius: 4px / 4px;
+  -o-border-radius: 4px / 4px;
+  -ms-border-radius: 4px / 4px;
+  -khtml-border-radius: 4px / 4px;
+  border-radius: 4px / 4px;
+  list-style: none;
+}
+/* line 11, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/lists/_bullets.scss */
+#dashboard-totals ul li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0px;
+}
+
 /* line 1, ../../sass/system_partials/_ajax_form.sass */
 #form-main {
   margin-bottom: 5px;

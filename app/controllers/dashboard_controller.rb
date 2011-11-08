@@ -12,8 +12,9 @@ class DashboardController < BaseController
       @invoices_for_month = @invoices.find_all{|item| item.invoice_date.month == @date.month and item.invoice_date.year == @date.year }
       
       @total_invoice = @invoices.find_all{|item| item.invoice_date.year == @date.year}.collect {|item_total| item_total.total_cost_inc_tax_delivery}.reduce(:+)  
-      
-      
+    
+      @invoices_month = current_company.invoices.accessible_by(current_ability).group_by{|invoice| invoice.invoice_date.month} 
+
     respond_to do | format |
       format.html
     end

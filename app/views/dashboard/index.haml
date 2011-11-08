@@ -48,4 +48,10 @@
 
 #dashboard-recent
   %h3 Recent Activity
-
+  
+-@invoices_month.each do |month, invoices|
+  .month
+    %h2 Month starting
+    = month.to_s
+    Total: 
+    =invoices.collect {|item| item.total_cost_inc_tax_delivery}.reduce(:+)  

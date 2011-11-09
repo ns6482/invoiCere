@@ -48,10 +48,23 @@
 
 #dashboard-recent
   %h3 Recent Activity
-  
--@invoices_month.each do |month, invoices|
-  .month
-    %h2 Month starting
-    = month.to_s
-    Total: 
-    =invoices.collect {|item| item.total_cost_inc_tax_delivery}.reduce(:+)  
+
+
+%h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_month_breakdown.count.to_s + ")"
+%table
+  %tr  
+  -@invoices_month_breakdown.each do |day, invoices|
+    %td
+      %strong=day.to_s
+      %br 
+      =invoices.collect {|item| item.total_cost_inc_tax_delivery}.reduce(:+)  
+
+%h3="Invoices by month for " + @date.year.to_s + " (" + @invoices_for_year.size.to_s + ")"
+%table
+  %tr  
+  -@invoices_year_breakdown.each do |month, invoices|
+    %td
+      %strong=Date::MONTHNAMES[month] + " (" + invoices.size.to_s + ")"
+      %br 
+      =invoices.collect {|item| item.total_cost_inc_tax_delivery}.reduce(:+)  
+

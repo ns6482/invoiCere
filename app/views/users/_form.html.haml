@@ -1,12 +1,12 @@
 = simple_form_for @user do |f|
-  =field_set_tag '' do
+  =field_set_tag 'Account details' do
     = f.input :name
     = f.input :email
     = f.input :password,:hint => "leave blank if you don't want to change it"
     = f.input :password_confirmation
 
     -if @password_required
-      = f.input :current_password, :label => 'Current Password (we need your current password to confirm your changes)'
+      = f.input :current_password, :label => 'Current Password', :hint => 'we need your current password to confirm your changes'
 
     -if can? :read, Role
       =# f.input :roles, :as => :check_boxes, :collection => @accessible_roles

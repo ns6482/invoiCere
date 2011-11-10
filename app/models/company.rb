@@ -31,6 +31,10 @@ class Company < ActiveRecord::Base
 
   accepts_nested_attributes_for :users, :setting, :etemplate
 
+  def get_invoices_by_state
+    self.invoices.group_by {|i| i.formatted_state }
+  end
+  
   private
 
 

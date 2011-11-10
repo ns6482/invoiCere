@@ -51,7 +51,7 @@
 
 
 %h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_month_breakdown.count.to_s + ")"
-%table
+%table{:class => "dashboard-table"}
   %tr  
   -@invoices_month_breakdown.each do |day, invoices|
     %td
@@ -60,11 +60,11 @@
       =invoices.collect {|item| item.total_cost_inc_tax_delivery}.reduce(:+)  
 
 %h3="Invoices by month for " + @date.year.to_s + " (" + @invoices_for_year.size.to_s + ")"
-%table
+%table{:class => "dashboard-table"}
   %tr  
-  -@invoices_year_breakdown.each do |month, invoices|
+  -@invoices_year_breakdown_f.each do |month|
     %td
-      %strong=Date::MONTHNAMES[month] + " (" + invoices.size.to_s + ")"
-      %br 
-      =invoices.collect {|item| item.total_cost_inc_tax_delivery}.reduce(:+)  
+      =month
+      
+      
 

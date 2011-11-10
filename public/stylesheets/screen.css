@@ -996,11 +996,20 @@ prev_page {
 }
 
 /* line 36, ../../sass/system_partials/_dashboard.sass */
+.dashboard-table table {
+  width: 120px;
+}
+/* line 38, ../../sass/system_partials/_dashboard.sass */
+.dashboard-table table td {
+  width: 10px;
+}
+
+/* line 41, ../../sass/system_partials/_dashboard.sass */
 #dashboard-totals {
   border-style: solid;
   border-color: black;
 }
-/* line 39, ../../sass/system_partials/_dashboard.sass */
+/* line 44, ../../sass/system_partials/_dashboard.sass */
 #dashboard-totals ul {
   padding: 1.5em;
   margin-bottom: 1.5em;

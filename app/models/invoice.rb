@@ -12,7 +12,11 @@ class Invoice < ActiveRecord::Base
     :joins => ["LEFT JOIN 'schedules' ON invoices.id = schedules.invoice_id"],
     :readonly => false
     
-
+  scope :for_year,
+    :select => 'invoices.*',
+    :conditions => "invoice_date between '#{Date.new(Date.today.year,1,1)}' and '#{Date.new(Date.today.year+1,1,1)}'",
+    :readonly => false
+  
   state_machine do
     state :draft # first one is initial state
     state :open, :enter=> :update_opened_date

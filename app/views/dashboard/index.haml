@@ -50,23 +50,17 @@
   %h3 Recent Activity
 
 
-%h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_month_breakdown.count.to_s + ")"
+%h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_for_month.size.to_s + ")"
 %table{:class => "dashboard-table"}
-  %tr  
-  -@invoices_month_breakdown.each do |day, invoices|
-    %td
-      %strong=day.to_s
-      %br 
-      =invoices.collect {|item| item.total_cost_inc_tax_delivery}.reduce(:+)  
-
-%h3="Invoices by month for " + @date.year.to_s + " (" + @invoices_for_year.size.to_s + ")"
-%table{:class => "dashboard-table"}
-  %tr  
-  -@invoices_year_breakdown_f.each do |month|
-    %td
-      =month
-      
--@test.each do |i|
+  %tr 
+  -@invoices_month_breakdown.each do |i|
+    %th
+      %strong=i.month
+    %td 
+      =i.val
+    
+%h3="Invoices by month for " + @date.year.to_s + " (" + @invoices_for_year.size.to_s + ")"      
+-@invoices_year_breakdown.each do |i|
   %th
     %strong=i.month
   %td 

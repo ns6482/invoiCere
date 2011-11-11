@@ -27,6 +27,27 @@ class Invoice < ActiveRecord::Base
   scope :group_by_month, 
     :select => "invoices.mm as month, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
     :group => "mm"
+   
+   
+    #scope :last_12_months, by_date(Date.today << 6, Date.now), lambda {
+    # select("invoices.month, SUM(invoices.invoice_item_total)")
+    # group("month")
+    #}
+
+    #scope :last_6_months, by_date(Date.now << 6, Date.now), lambda {
+     #select("invoices.month, SUM(invoices.invoice_item_total)")
+     #group("month")
+    #}
+
+    #scope :last_3_months, by_date(Date.now << 3, Date.now), lambda {
+     #select("invoices.month, SUM(invoices.invoice_item_total)")
+     #group("month")
+    #}
+
+    #scope :last_month, by_date(Date.now << 1, Date.now), lambda {
+     #select("invoices.month, SUM(invoices.invoice_item_total)")
+     #group("month")
+    #}
     
 
   state_machine do

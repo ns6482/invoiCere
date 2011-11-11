@@ -12,11 +12,12 @@ class DashboardController < BaseController
       @date = (params[:month] and params[:year]) ? Date.strptime("#{params[:month]} #{params[:year]}", '%m %Y') : Date.today
 
 
-      @invoices_for_year = current_company.invoices.for_year.accessible_by(current_ability)
+      @invoices_for_year = @invoices.ytd.accessible_by(current_ability)
       @invoices_for_month = @invoices_for_year.find_all{|item| item.invoice_date.month == @date.month }
 
-      @total_invoice = @invoices_for_year.collect {|item_total| item_total.total_cost_inc_tax_delivery}.reduce(:+)  
-
+      @total_invoice = @invoices.ytd.sum(:total_cost_inc_tax_delivery)#@invoices_for_year.collect {|item_total| item_total.total_cost_inc_tax_delivery}.reduce(:+)  
+      
+      @test = @invoices.ytd.group_by_month
       @invoices_year_breakdown = @invoices_for_year.group_by{|invoice| invoice.invoice_date.month} 
       @invoices_month_breakdown = @invoices_for_month.group_by{|invoice| invoice.invoice_date.day} 
 

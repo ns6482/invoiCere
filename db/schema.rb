@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110930175104) do
+ActiveRecord::Schema.define(:version => 20111111193954) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -130,6 +130,9 @@ ActiveRecord::Schema.define(:version => 20110930175104) do
     t.string   "cancelled_by"
     t.integer  "seed_schedule_id"
     t.boolean  "latest"
+    t.integer  "yyyy"
+    t.integer  "mm"
+    t.integer  "dd"
   end
 
   create_table "payments", :force => true do |t|

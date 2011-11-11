@@ -17,6 +17,18 @@ class Invoice < ActiveRecord::Base
     :conditions => "invoice_date between '#{Date.new(Date.today.year,1,1)}' and '#{Date.new(Date.today.year+1,1,1)}'",
     :readonly => false
   
+  scope :by_date, lambda { |time1, time2 | 
+    where("invoice_date >= ? and invoice_date < ? ", time1, time2) 
+  }
+  
+  scope :ytd, by_date( Date.new(Date.today.year,1,1) , Date.today)
+  scope :mtd, by_date( Date.new(Date.today.year,Date.today.month,1) , Date.today)
+  
+  scope :group_by_month, 
+    :select => "invoices.mm as month, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
+    :group => "mm"
+    
+
   state_machine do
     state :draft # first one is initial state
     state :open, :enter=> :update_opened_date
@@ -60,7 +72,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :invoice_items, :reject_if => :all_blank, :allow_destroy => true
     
   before_save :set_due_date#, :update_invoice_totals
-  after_save :update_invoice_totals
+  after_save :update_invoice_totals, :set_year_month_day_numbers
   after_create :setup_reminder
 
   def total_items
@@ -104,9 +116,6 @@ class Invoice < ActiveRecord::Base
     self.total_cost_inc_tax_delivery = self._total_cost_inc_tax_delivery
 
     Invoice.update_all("total_cost = #{self.total_cost}, total_cost_inc_tax = #{self.total_cost_inc_tax}, total_cost_inc_tax_delivery = #{self.total_cost_inc_tax_delivery}","id=#{self.id}")
-    
-
-
   end
   
   def formatted_state
@@ -191,6 +200,13 @@ class Invoice < ActiveRecord::Base
     end  
       
   end
+  
+  def set_year_month_day_numbers
+    self.mm = self.invoice_date.month
+    self.yyyy = self.invoice_date.year
+    self.dd  = self.invoice_date.day
+  end
+    
 
   
 end

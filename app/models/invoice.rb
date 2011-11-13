@@ -27,35 +27,21 @@ class Invoice < ActiveRecord::Base
   scope :group_by_month, 
     :select => "invoices.mm as month, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
     :group => "mm"
+  
+  scope :group_by_day, 
+    :select => "invoices.dd as day, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
+    :group => "dd" 
    
-   
-    #scope :last_12_months, by_date(Date.today << 6, Date.now), lambda {
-    # select("invoices.month, SUM(invoices.invoice_item_total)")
-    # group("month")
-    #}
-
-    #scope :last_6_months, by_date(Date.now << 6, Date.now), lambda {
-     #select("invoices.month, SUM(invoices.invoice_item_total)")
-     #group("month")
-    #}
-
-    #scope :last_3_months, by_date(Date.now << 3, Date.now), lambda {
-     #select("invoices.month, SUM(invoices.invoice_item_total)")
-     #group("month")
-    #}
-
-    #scope :last_month, by_date(Date.now << 1, Date.now), lambda {
-     #select("invoices.month, SUM(invoices.invoice_item_total)")
-     #group("month")
-    #}
-    
+  scope :last_12_months, by_date(Date.today << 12, Date.today).group_by_month
+  scope :last_6_months, by_date(Date.today << 12, Date.today).group_by_month
+  scope :last_3_months, by_date(Date.today << 12, Date.today).group_by_month
+  scope :last_month, by_date(Date.today << 12, Date.today).group_by_month
 
   state_machine do
     state :draft # first one is initial state
     state :open, :enter=> :update_opened_date
     state :paid, :enter => :update_paid_date 
 
-    
     event :open do
       transitions :to => :open, :from => [:draft]
     end

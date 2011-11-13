@@ -36,35 +36,32 @@
             =# render :partial => "calendar"
         
 #dashboard-totals
-  %h3 Breakdown
+  %h3 YTD Breakdown
   %ul{:id => "dashboard-list"}
     %li 
       %strong Total Invoiced:  
       =number_to_currency @total_invoice, :unit => '£', :separator => ".", :delimiter => ","
     %li
       %strong Total Payments Received
+      =number_to_currency @total_paid, :unit => '£', :separator => ".", :delimiter => ","
     %li
       %strong Total Outstanding
-
-#dashboard-recent
-  %h3 Recent Activity
-
+      =number_to_currency @total_outstanding, :unit => '£', :separator => ".", :delimiter => ","
 
 %h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_for_month.size.to_s + ")"
 %table{:class => "dashboard-table"}
   %tr 
   -@invoices_month_breakdown.each do |i|
     %th
-      %strong=i.month
-    %td 
-      =i.val
+      %strong=i.day
+    %td=i.val
     
 %h3="Invoices by month for " + @date.year.to_s + " (" + @invoices_for_year.size.to_s + ")"      
 -@invoices_year_breakdown.each do |i|
   %th
     %strong=i.month
-  %td 
-    =i.val
+  %td=i.val
 
-      
+#dashboard-recent
+  %h3 Recent Activity   
 

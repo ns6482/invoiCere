@@ -47,6 +47,14 @@
     %li
       %strong Total Outstanding
       =number_to_currency @total_outstanding, :unit => '£', :separator => ".", :delimiter => ","
+      (of which overdue)
+      =number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","
+
+=label(:gdate, " Date Range ")
+= select_tag :gdate, options_for_select([ "This Month", "Last 3 Months", "Last 6 Months", "Last 12 Months"], "Last 12 Months")
+
+=label(:measure, " Report on ")
+= select_tag :gdate, options_for_select([ "Invoice Amount", "Invoice Count", "Paid Amount"], "Total Invoiced")
 
 %h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_for_month.size.to_s + ")"
 %table{:class => "dashboard-table"}
@@ -62,6 +70,12 @@
     %strong=i.month
   %td=i.val
 
+%br
+#dashboard-recent
+  %h3 Accounts with Outstanding payments
+  * Overdue
+
+%br
 #dashboard-recent
   %h3 Recent Activity   
 

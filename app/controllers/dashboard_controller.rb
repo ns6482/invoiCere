@@ -15,6 +15,7 @@ class DashboardController < BaseController
       @invoices_for_year = @invoices.ytd.accessible_by(current_ability)
       @invoices_for_month = @invoices_for_year.find_all{|item| item.invoice_date.month == @date.month }
 
+      #TODO - total_invoiced where status is open only - total paid  maybe...check
       @total_invoice = @invoices.ytd.sum(:total_cost_inc_tax_delivery)#@invoices_for_year.collect {|item_total| item_total.total_cost_inc_tax_delivery}.reduce(:+)  
       @total_paid = @invoices.sum("payments.amount")
       @total_outstanding = @total_invoice.to_i - @total_paid.to_i

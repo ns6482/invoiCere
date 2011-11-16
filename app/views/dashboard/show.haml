@@ -51,10 +51,9 @@
       =number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","
 
 =label(:gdate, " Date Range ")
-= select_tag :gdate, options_for_select([ "This Month", "Last 3 Months", "Last 6 Months", "Last 12 Months"], "Last 12 Months")
+= select_tag :gdate, options_for_select([ "This Month", "3 Months ago", "Last Year", "5 Years"], "5 years")
 
-=label(:measure, " Report on ")
-= select_tag :gdate, options_for_select([ "Invoice Amount", "Invoice Count", "Paid Amount"], "Total Invoiced")
+#invoices_chart
 
 %h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_for_month.size.to_s + ")"
 %table{:class => "dashboard-table"}

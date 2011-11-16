@@ -2,7 +2,7 @@ class DashboardController < BaseController
 
   load_and_authorize_resource :class => "Invoice", :only => "index"
   
-  def index
+  def show
   
       @invoices = current_company.invoices.accessible_by(current_ability).includes(:payments)
       
@@ -23,12 +23,12 @@ class DashboardController < BaseController
       
       @invoices_year_breakdown = @invoices.ytd.group_by_month
       @invoices_month_breakdown = @invoices.mtd.group_by_day
-      
-      @graph = @invoices.last_12_months
-      
+    
+      @gdate = params[:gdate]
 
     respond_to do | format |
       format.html
+      format.js
     end
   end
 

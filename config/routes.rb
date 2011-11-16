@@ -47,8 +47,15 @@ VisioInvoiceV3::Application.routes.draw do
       end
     end
     
-    resources :dashboard, :only => [:index]
-    root :to => "dashboard#index"
+    resources :dashboard do 
+      member do 
+        get 'show'
+    #    post 'invite'
+      end  
+    end
+    
+    resources :dashboard, :only => [:show]
+    root :to => "dashboard#show"
 
   end
   

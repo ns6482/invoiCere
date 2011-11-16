@@ -33,9 +33,8 @@ class Invoice < ActiveRecord::Base
     :group => "dd" 
    
   scope :last_12_months, by_date(Date.today << 12, Date.today).group_by_month
-  scope :last_6_months, by_date(Date.today << 12, Date.today).group_by_month
-  scope :last_3_months, by_date(Date.today << 12, Date.today).group_by_month
-  scope :last_month, by_date(Date.today << 12, Date.today).group_by_month
+  scope :last_3_months, by_date(Date.today << 12, Date.today).group_by_day
+  scope :last_month, by_date(Date.today << 12, Date.today).group_by_day
 
   state_machine do
     state :draft # first one is initial state

@@ -5,12 +5,9 @@ class DashboardController < BaseController
   def show
   
       @invoices = current_company.invoices.accessible_by(current_ability).includes(:payments)
-      
       @invoices_states = @invoices.group_by {|i| i.formatted_state }
       
-
       @date = (params[:month] and params[:year]) ? Date.strptime("#{params[:month]} #{params[:year]}", '%m %Y') : Date.today
-
 
       @invoices_for_year = @invoices.ytd.accessible_by(current_ability)
       @invoices_for_month = @invoices_for_year.find_all{|item| item.invoice_date.month == @date.month }
@@ -24,8 +21,12 @@ class DashboardController < BaseController
       @invoices_year_breakdown = @invoices.ytd.group_by_month
       @invoices_month_breakdown = @invoices.mtd.group_by_day
     
-      @gdate = params[:gdate]
-
+      if params[:gdate]
+        @gdate = params[:gdate]
+      else
+        @gdate =1
+      end
+  
     respond_to do | format |
       format.html
       format.js

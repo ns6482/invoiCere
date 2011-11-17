@@ -1,6 +1,8 @@
 $(function () {
 	
-  alert(<% @gdate %>)
+
+  //alert('<%= Integer(@gdate).months.ago %>');
+
 
   new Highcharts.Chart({
     chart: { 
@@ -12,6 +14,7 @@ $(function () {
     yAxis: {
       title: { text: 'Pounds' }
     },
+
     tooltip: {
       formatter: function () {
         return Highcharts.dateFormat("%B %e %Y", this.x) + ': ' +
@@ -23,8 +26,8 @@ $(function () {
     {
       name: "<%= name %>",
       pointInterval: <%= 1.day * 1000 %>,
-      pointStart: <%= 1.months.ago.at_midnight.to_i * 1000 %>,
-      data: <%= invoices_chart_series(@invoices, 1.months.ago) %>
+      pointStart: <%= Integer(@gdate).months.ago.at_midnight.to_i * 1000 %>,
+      data: <%= invoices_chart_series(@invoices, Integer(@gdate).months.ago) %>
     },
     <% end %>]
   });

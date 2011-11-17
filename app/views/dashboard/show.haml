@@ -51,7 +51,7 @@
       =number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","
 
 =label(:gdate, " Date Range ")
-= select_tag :gdate, options_for_select([ "This Month", "3 Months ago", "Last Year", "5 Years"], "5 years")
+= select_tag :gdate, options_for_select([['This Month',1],['3 Months ago',3], ['6 Months ago', 6], ['12 Months ago', 12]])
 
 #invoices_chart
 

@@ -24,17 +24,17 @@ class Invoice < ActiveRecord::Base
   scope :ytd, by_date( Date.new(Date.today.year,1,1) , Date.today)
   scope :mtd, by_date( Date.new(Date.today.year,Date.today.month,1) , Date.today)
   
-  scope :group_by_month, 
-    :select => "invoices.mm as month, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
-    :group => "mm"
+  #scope :group_by_month, 
+    #:select => "invoices.mm as month, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
+    #:group => "mm"
   
-  scope :group_by_day, 
-    :select => "invoices.dd as day, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
-    :group => "dd" 
+  #scope :group_by_day, 
+    #:select => "invoices.dd as day, SUM(invoices.total_cost_inc_tax_delivery) AS val, COUNT(*) AS count_invoices", 
+    #:group => "dd" 
    
-  scope :last_12_months, by_date(Date.today << 12, Date.today).group_by_month
-  scope :last_3_months, by_date(Date.today << 12, Date.today).group_by_day
-  scope :last_month, by_date(Date.today << 12, Date.today).group_by_day
+  #scope :last_12_months, by_date(Date.today << 12, Date.today).group_by_month
+  #scope :last_3_months, by_date(Date.today << 12, Date.today).group_by_day
+  #scope :last_month, by_date(Date.today << 12, Date.today).group_by_day
 
   state_machine do
     state :draft # first one is initial state
@@ -78,7 +78,7 @@ class Invoice < ActiveRecord::Base
   accepts_nested_attributes_for :invoice_items, :reject_if => :all_blank, :allow_destroy => true
     
   before_save :set_due_date#, :update_invoice_totals
-  after_save :update_invoice_totals, :set_year_month_day_numbers
+  after_save :update_invoice_totals
   after_create :setup_reminder
 
   def total_items
@@ -206,13 +206,5 @@ class Invoice < ActiveRecord::Base
     end  
       
   end
-  
-  def set_year_month_day_numbers
-    self.mm = self.invoice_date.month
-    self.yyyy = self.invoice_date.year
-    self.dd  = self.invoice_date.day
-  end
     
-
-  
 end

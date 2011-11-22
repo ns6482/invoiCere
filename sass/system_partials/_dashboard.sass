@@ -38,7 +38,7 @@
   td
    :width 10px
  
-#dashboard-totals
+#dashboard-box
  :border-style solid
  :border-color black
  ul
@@ -46,3 +46,12 @@
   +border-radius(4px, 4px)
   +no-bullets    
   li
+
+#dashboard-box-start
+ @extend #dashboard-box
+ +column(9)
+
+#dashboard-box-end
+ @extend #dashboard-box
+ +column(9,last)
+ 

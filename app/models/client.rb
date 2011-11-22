@@ -17,6 +17,12 @@ class Client < ActiveRecord::Base
 
   attr_searchable :company_name, :address1, :address2, :zip, :city, :country, :phone, :email
 
+  scope :outstanding, 
+    :select => "clients.*, SUM(invoices.total_cost_inc_tax_delivery) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(payments.amount) as total_paid ", 
+    :joins => ["JOIN 'invoices' ON invoices.client_id = clients.id LEFT JOIN payments ON invoices.id = payments.invoice_id"],
+    :conditions => "invoices.due_date <= '#{Date.today}' and invoices.state = 'open'",
+    :group => "clients.id"
+    
   def name
     company_name
   end

@@ -1005,12 +1005,12 @@ prev_page {
 }
 
 /* line 41, ../../sass/system_partials/_dashboard.sass */
-#dashboard-totals {
+#dashboard-box, #dashboard-box-start, #dashboard-box-end {
   border-style: solid;
   border-color: black;
 }
 /* line 44, ../../sass/system_partials/_dashboard.sass */
-#dashboard-totals ul {
+#dashboard-box ul, #dashboard-box-start ul, #dashboard-box-end ul {
   padding: 1.5em;
   margin-bottom: 1.5em;
   background: #e5ecf9;
@@ -1023,10 +1023,34 @@ prev_page {
   list-style: none;
 }
 /* line 11, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/lists/_bullets.scss */
-#dashboard-totals ul li {
+#dashboard-box ul li, #dashboard-box-start ul li, #dashboard-box-end ul li {
   list-style-image: none;
   list-style-type: none;
   margin-left: 0px;
+}
+
+/* line 50, ../../sass/system_partials/_dashboard.sass */
+#dashboard-box-start {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 350px;
+}
+/* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #dashboard-box-start {
+  overflow-x: hidden;
+}
+
+/* line 54, ../../sass/system_partials/_dashboard.sass */
+#dashboard-box-end {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 350px;
+}
+/* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #dashboard-box-end {
+  overflow-x: hidden;
 }
 
 /* line 1, ../../sass/system_partials/_ajax_form.sass */
@@ -1629,6 +1653,60 @@ a.ordering:hover, a.ascending:hover, a.descending:hover {
   font-size: 90%;
   color: #4a4a4a;
   font-size: 1.1em;
+}
+
+/* line 4, ../../sass/system_partials/_clients.sass */
+.client-item {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 390px;
+  padding: 5px;
+  font-size: 1.1em;
+  margin-bottom: 0.1em;
+}
+/* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .client-item {
+  overflow-x: hidden;
+}
+
+/* line 10, ../../sass/system_partials/_clients.sass */
+.client-maintain {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 230px;
+  padding: 5px;
+}
+/* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .client-maintain {
+  overflow-x: hidden;
+}
+
+/* line 15, ../../sass/system_partials/_clients.sass */
+.clent-item-header {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 550px;
+  font-weight: bold;
+}
+/* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .clent-item-header {
+  overflow-x: hidden;
+}
+/* line 18, ../../sass/system_partials/_clients.sass */
+.clent-item-header a {
+  font-size: 3em;
+  font-color: #4572a7;
+}
+
+/* line 22, ../../sass/system_partials/_clients.sass */
+.client-item-footer {
+  padding-left: 58px;
+  padding-top: 1px;
+  color: #4a4a4a;
+  font-size: 0.8em;
 }
 
 /* line 2, ../../sass/system_partials/_rating.sass */

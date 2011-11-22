@@ -1,10 +1,12 @@
 class DashboardController < BaseController
 
-  load_and_authorize_resource :class => "Invoice", :only => "index"
+  #load_and_authorize_resource :class => "Invoice"
+  #load_and_authorize_resource :class => "Client"
   
   def show
   
       @invoices = current_company.invoices.accessible_by(current_ability).includes(:payments)
+
       @invoices_states = @invoices.group_by {|i| i.formatted_state }
       
       @date = (params[:month] and params[:year]) ? Date.strptime("#{params[:month]} #{params[:year]}", '%m %Y') : Date.today
@@ -17,10 +19,8 @@ class DashboardController < BaseController
       @total_paid = @invoices.sum("payments.amount")
       @total_outstanding = @total_invoice.to_i - @total_paid.to_i
       
-      
-      @invoices_year_breakdown = @invoices.ytd.group_by_month
-      @invoices_month_breakdown = @invoices.mtd.group_by_day
-    
+      @clients_outstanding = current_company.clients.outstanding
+ 
       if params[:gdate]
         @gdate = params[:gdate]
       else

@@ -1,41 +1,6 @@
 - title "Dashboard"
-#dashboard-summary
-  -if @invoices.nil?
-    %h3 No Invoices
-  -else
-    -@invoices_states.each do |state, invoices|
-      %h3{:class=> "state expIco"}= state + " (" + invoices.count.to_s + ")"
-      .panel
-        %div{:id=> state.to_s.tr(" ", "-")}
-          %table{:id => "invoices"}
-            %tr
-              %th Created
-              %th Client Name
-              %th Title
-              %th Invoice Date
-              %th Due Date
-              %th Total Cost
-            -invoices.each do |invoice|
-              = render :partial => "invoice", :object => invoice
-    
-    -if not @invoices_for_month.nil?
-      #dashboard-calendar
-        %h3{:class=> "state expIco"}= @date.year.to_s + " " + Date::MONTHNAMES[@date.month] + " (" + @invoices_for_month.size.to_s + ")"
-        .panel
-          %div{:id=> "invoice_for_month"}
-            %table{:id => "invoices"}
-              %tr
-                %th Created
-                %th Client Name
-                %th Title
-                %th Invoice Date
-                %th Due Date
-                %th Total Cost
-              -@invoices_for_month.each do |invoice|
-                = render :partial => "invoice", :object => invoice
-            =# render :partial => "calendar"
-        
-#dashboard-totals
+
+#dashboard-box-start
   %h3 YTD Breakdown
   %ul{:id => "dashboard-list"}
     %li 
@@ -49,30 +14,28 @@
       =number_to_currency @total_outstanding, :unit => '£', :separator => ".", :delimiter => ","
       (of which overdue)
       =number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","
-
-=label(:gdate, " Date Range ")
-= select_tag :gdate, options_for_select([['This Month',1],['3 Months ago',3], ['6 Months ago', 6], ['12 Months ago', 12]])
-
-#invoices_chart
-
-%h3="Invoices by day for " + Date::MONTHNAMES[@date.month] + " (" + @invoices_for_month.size.to_s + ")"
-%table{:class => "dashboard-table"}
-  %tr 
-  -@invoices_month_breakdown.each do |i|
-    %th
-      %strong=i.day
-    %td=i.val
-    
-%h3="Invoices by month for " + @date.year.to_s + " (" + @invoices_for_year.size.to_s + ")"      
--@invoices_year_breakdown.each do |i|
-  %th
-    %strong=i.month
-  %td=i.val
-
-%br
-#dashboard-recent
+      
+#dashboard-box-end
   %h3 Accounts with Outstanding payments
-  * Overdue
+  %ul{:id => "dashboard-list"}
+    -@clients_outstanding.each do |client|
+      %li
+        %strong=client.company_name
+        (
+        =client.count_invoices
+        invoices):     
+        %strong=number_to_currency (client.total_due - client.total_paid).to_f, :unit => '£', :separator => ".", :delimiter => ","
+        (paid: 
+        =number_to_currency client.total_paid.to_f, :unit => '£', :separator => ".", :delimiter => ","
+        )
+
+#dashboard-summary
+  Select graph: 
+  = select_tag :gdate, options_for_select([['This Month',1],['3 Months ago',3], ['6 Months ago', 6], ['12 Months      ago', 12]])
+
+  #invoices_chart
+
+  = render :partial => "summary"
 
 %br
 #dashboard-recent

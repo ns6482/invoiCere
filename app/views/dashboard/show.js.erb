@@ -1,13 +1,9 @@
 $(function () {
 	
-
-  //alert('<%= Integer(@gdate).months.ago %>');
-
-
   new Highcharts.Chart({
     chart: { 
 		renderTo: 'invoices_chart' 
-		, defaultSeriesType: 'column'	
+		, defaultSeriesType: 'line'	
 	},
     title: { text: 'Invoices by Day' },
     xAxis: { type: 'datetime' },
@@ -21,14 +17,17 @@ $(function () {
           '£' + Highcharts.numberFormat(this.y, 2);
       }
     },    
-    series: [
-      <% { "Invoices" => @invoices }.each do |name, invoice| %>
-    {
-      name: "<%= name %>",
+    series: [{
+      name: "Invoices",
       pointInterval: <%= 1.day * 1000 %>,
       pointStart: <%= Integer(@gdate).months.ago.at_midnight.to_i * 1000 %>,
       data: <%= invoices_chart_series(@invoices, Integer(@gdate).months.ago) %>
-    },
-    <% end %>]
+	},
+	{
+	  name: "Payments",
+	  pointInterval: <%= 1.day * 1000 %>,
+	  pointStart: <%= Integer(@gdate).months.ago.at_midnight.to_i * 1000 %>,
+	  data: <%= payments_chart_series(@invoices, Integer(@gdate).months.ago) %>
+    }]
   });
 });

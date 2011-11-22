@@ -14,9 +14,6 @@ $(function() {
 	});
 	
 	$('#gdate').change(function() {
-	  //alert($(this).val());
-	  //$.getScript('/dashboard/show.js', function(data, textStatus){
-		//});
 		$.ajax({
 		  type: "GET",
 		  url: "dashboard/show.js",

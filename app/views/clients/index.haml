@@ -1,6 +1,11 @@
 -title "Clients"
 = render :partial => "filter"
-#clients
-  = render :partial => "client", :collection => @clients
+
+%table{:id => "clients", :class => "table-main"}
+  %tr
+    %th Client Name
+    %th Outstanding Invoices
+    %th
+  =render :partial => "client", :collection => @clients
 %p
   = will_paginate @clients

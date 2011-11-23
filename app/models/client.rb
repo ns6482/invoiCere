@@ -17,11 +17,19 @@ class Client < ActiveRecord::Base
 
   attr_searchable :company_name, :address1, :address2, :zip, :city, :country, :phone, :email
 
-  scope :outstanding, 
-    :select => "clients.*, SUM(invoices.total_cost_inc_tax_delivery) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(payments.amount) as total_paid ", 
-    :joins => ["JOIN 'invoices' ON invoices.client_id = clients.id LEFT JOIN payments ON invoices.id = payments.invoice_id"],
-    :conditions => "invoices.due_date <= '#{Date.today}' and invoices.state = 'open'",
-    :group => "clients.id"
+  scope :due, where("invoices.due_date <= '#{Date.today}' and invoices.state = 'open'")
+
+  scope :with_aggregates, 
+  :select => "clients.*,MIN(invoices.due_date) AS min_due_date, SUM(invoices.total_cost_inc_tax_delivery) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(payments.amount) as total_paid ", 
+  :joins => ["LEFT JOIN 'invoices' ON invoices.client_id = clients.id LEFT JOIN payments ON invoices.id = payments.invoice_id"],
+  :group => "clients.id"
+
+  scope :outstanding, due.with_aggregates#.having("total_due >= 0") 
+  
+    #:select => "clients.*, SUM(invoices.total_cost_inc_tax_delivery) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(payments.amount) as total_paid ", 
+    #:joins => ["JOIN 'invoices' ON invoices.client_id = clients.id LEFT JOIN payments ON invoices.id = payments.invoice_id"],
+    #:conditions => "invoices.due_date <= '#{Date.today}' and invoices.state = 'open'",
+    #:group => "clients.id"
     
   def name
     company_name
@@ -30,18 +38,18 @@ class Client < ActiveRecord::Base
   def display_address
     str = ""
     str += address1.strip
-    str += ", " + address2.strip unless address2.nil?
-    str += ", " + city.strip unless city.nil?
-    str += ", " + country.strip unless country.nil?
-    str += ", " + zip.strip unless zip.nil?
+    str += ", " + address2.strip unless address2.blank?
+    str += ", " + city.strip unless city.blank?
+    str += ", " + country.strip unless country.blank?
+    str += ", " + zip.strip unless zip.blank?
   end
 
   def display_phone
-    "Phone: (" + phone.strip + ")" unless phone.nil?
+    "Phone: (" + phone.strip + ")" unless phone.blank?
   end
 
   def display_fax
-    "Fax: (" + fax.strip + ")" unless fax.nil?
+    "Fax: (" + fax.strip + ")" unless fax.blank?
   end
 
   def invited?

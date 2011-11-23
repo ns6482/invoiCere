@@ -18,7 +18,6 @@
       =h yield(:header)
       #tabs
         =render_navigation(:context => :main)
-        =render_navigation(:context=> :quick)
     #dashboard-content
       #dashboard-left= yield(:left)
       #dashboard-centre
@@ -28,7 +27,10 @@
           #form-title
             %h3=h yield(:title)      
         =yield
-      #dashboard-right=h yield(:right)
+      #dashboard-right
+        =render_navigation(:context=> :quick)
+        =h yield(:right)        
+      
     #footer= render 'layouts/footer'
     
 

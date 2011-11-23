@@ -105,7 +105,8 @@ class ClientsController < BaseController
 
   def get_clients
     #authorize! :read, current_company
-    @clients = current_company.clients#.accessible_by(current_ability, :read)
+    @clients_outstanding = current_company.clients.with_aggregates.due.map {|client| client.id}
+    @clients = current_company.clients.with_aggregates#.accessible_by(current_ability, :read)
   end
 
   def find_client

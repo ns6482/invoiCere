@@ -1,0 +1,33 @@
+%tr{:class=>"table-row " + cycle("odd", "even")}
+  %td
+    %dd{:class => "table-item"}
+      %h3=link_to_if can?(:read, client), client.company_name, client
+      =h client.display_address
+      %br
+      -if client.display_phone or client.display_fax
+        =h client.display_phone
+        =h client.display_fax
+        %br
+      %strong Email: 
+      =mail_to client.email
+  %td{:class => "table-side"}
+    %dd
+      - if @clients_outstanding.include? client.id
+        .alert
+          %strong Due: 
+          =h number_to_currency client.total_due.to_d - client.total_paid.to_d, :unit => '£', :separator => ".", :delimiter => ","
+      - else
+        .success
+          %strong Due:
+          =h number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","        
+      %br
+      %strong Total Invoices: 
+      =client.count_invoices
+      %br
+      %strong Invoice Amount:
+      =h number_to_currency client.total_due.to_d, :unit => '£', :separator => ".", :delimiter => ","
+  
+      -#if can? :update, client
+        =# link_to 'Edit', edit_client_path(client)
+      -#if can? :destroy,client
+        =# link_to 'Delete', client, :confirm => 'Are you sure?', :method => :delete

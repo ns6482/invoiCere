@@ -1,29 +1,17 @@
 %table{:id => "invoices"}
-  %tr
-    %th= sort_link @search, :invoice_date, "Date"
-    %th= sort_link @search, :due_date, "Due Date"
-    %th= sort_link @search, :title, "Title"
-    %th= sort_link @search, :client_company_name, "Client"
-    %th= sort_link @search, :status, "Status"
-    %th= sort_link @search, :due_days, "Due Days" 
-    %th= sort_link @search, :total_cost_inc_tax_delivery, "Total Cost" 
-    %th
-    %th
-  -for invoice in @invoices
-    %tr{:class=> cycle("odd", "even")}
-      %td= h invoice.invoice_date
-      %td= h invoice.due_date
-      %td= link_to_if can?(:read, invoice), invoice.title, invoice
-      %td= h invoice.client.name
-      %td= h invoice.state
-      %td= h invoice.due_days
-      %td= h number_to_currency invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
-      %td
-        -if can? :update, invoice
-          = link_to "Edit", edit_invoice_path(invoice)
-      %td
-        -if can? :delete, invoice
-          = link_to "Delete", invoice, :confirm => 'Are you sure?', :method => :delete
+  %thead
+    %tr
+      %th=sort_link @search, :invoice_date, "Date"
+      %th=sort_link @search, :due_date, "Due Date"
+      %th=sort_link @search, :title, "Title"
+      %th=sort_link @search, :client_company_name, "Client"
+      %th=sort_link @search, :status, "Status"
+      %th=sort_link @search, :due_days, "Due Days" 
+      %th=sort_link @search, :total_cost_inc_tax_delivery, "Total Cost" 
+      %th
+      %th
+  %tbody
+    =render :partial => "invoices/invoice", :collection => @invoices
 %p
   = will_paginate @invoices
   

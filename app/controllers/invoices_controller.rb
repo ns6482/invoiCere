@@ -10,12 +10,11 @@ class InvoicesController < BaseController
   load_and_authorize_resource
 
   def index
-
-  
     @search = @invoices.search(params[:search])
    
     #@invoices = @search.all
     @invoices = @search.paginate :page => params[:page], :per_page => 10
+   
     #@invoices = Invoice.all
     respond_to do |format|
       format.html # index.html.erb

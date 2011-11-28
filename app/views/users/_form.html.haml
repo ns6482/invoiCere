@@ -6,7 +6,7 @@
     = f.input :password_confirmation
 
     -if @password_required
-      = f.input :current_password, :label => 'Current Password', :hint => 'we need your current password to confirm your changes'
+      = f.input :current_password, :hint => 'we need your current password to confirm your changes'
 
     -if can? :read, Role
       =# f.input :roles, :as => :check_boxes, :collection => @accessible_roles

@@ -1,3 +1,9 @@
 - title "Invoices"
+
+#dashboard-centre-left
+ -if can? :create, Invoice
+  = link_to "New Invoice", new_invoice_path
+
 = render :partial => "filter"
-#invoice-list= render :partial=> "invoices" 
+
+=render :partial=> "invoices" 

@@ -1,5 +1,5 @@
 - title "Users"
-%h2 System Logins
+%h3 System Logins
 %table
   %tr
     %th Email
@@ -7,7 +7,7 @@
     %th Last sign in at
   = render :partial => "user", :collection => @users
 %br
-%h2 Client Logins
+%h3 Client Logins
 - for client in @clients
   -if client.users.count >0
     %h3=client.name

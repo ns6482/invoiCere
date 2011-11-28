@@ -1,8 +1,10 @@
-%tr{:class=> cycle("odd", "even")}
-  %td= h invoice.invoice_date
-  %td= h invoice.due_date
-  %td= link_to_if can?(:read, invoice), invoice.title, invoice
-  %td= h invoice.client.name
+%tr{:class=> cycle("odd", "even") + " table-row"}
+  %td= h invoice.invoice_date.strftime("%Y %b %d")
+  
+  %td= link_to_if can?(:read, invoice), invoice.id, invoice
+  %td 
+    %strong=h invoice.client.name
+  %td= h invoice.title
   %td= h invoice.state
   %td= h invoice.due_days
   %td= h number_to_currency invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","

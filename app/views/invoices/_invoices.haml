@@ -1,10 +1,10 @@
-%table{:id => "invoices"}
+%table{:class => "table-main"}
   %thead
     %tr
       %th=sort_link @search, :invoice_date, "Date"
-      %th=sort_link @search, :due_date, "Due Date"
-      %th=sort_link @search, :title, "Title"
+      %th=sort_link @search, :id, "Id"
       %th=sort_link @search, :client_company_name, "Client"
+      %th=sort_link @search, :title, "Title"      
       %th=sort_link @search, :status, "Status"
       %th=sort_link @search, :due_days, "Due Days" 
       %th=sort_link @search, :total_cost_inc_tax_delivery, "Total Cost" 

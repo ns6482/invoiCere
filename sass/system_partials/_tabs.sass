@@ -3,14 +3,15 @@
   @extend ul.horizontal  
   font-weight: bold
   +hover-link
-  @extend .standard_header_font
+  //@extend .standard_header_font
+  //background-color: #B1AD9B
 
   li
     a
-      margin: 5px
-      color: black
-      float: left
-      background-color: white
+      //margin: 5px
+      //color: black
+      //float: left
+      //background-color: white
 
 #tabs
   border-bottom: 2px solid #B1AD9B  
@@ -23,13 +24,14 @@ ul.horizontal
   +horizontal-list
 
 ul.navigation
+  background-color: #B1AD9B
   +column(10)
   @include navigation
   font-size: 1.2em
 
   li.selected
     a
-      +box-shadow(blue, 2px, 2px, 10px)
+      background-color: white//+box-shadow(#B1AD9B, 4px, 4px, 4px)
 
 #invoice-history-tabs
   +horizontal-list

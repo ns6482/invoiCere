@@ -507,22 +507,22 @@ body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 23, ../../sass/system_partials/_show_invoice.sass */
+/* line 20, ../../sass/system_partials/_show_invoice.sass */
 #invoice-header-details {
   float: right;
 }
 
-/* line 26, ../../sass/system_partials/_show_invoice.sass */
+/* line 23, ../../sass/system_partials/_show_invoice.sass */
 #toolbar {
   padding: 2px 2px;
   padding-bottom: 10px;
 }
 
-/* line 30, ../../sass/system_partials/_show_invoice.sass */
+/* line 27, ../../sass/system_partials/_show_invoice.sass */
 #invoice-side-panel {
   padding-top: 50px;
 }
-/* line 32, ../../sass/system_partials/_show_invoice.sass */
+/* line 29, ../../sass/system_partials/_show_invoice.sass */
 #invoice-side-panel ul {
   list-style: none;
   margin: 0;
@@ -535,7 +535,7 @@ body.two-col #content {
   list-style-type: none;
   margin-left: 0px;
 }
-/* line 36, ../../sass/system_partials/_show_invoice.sass */
+/* line 33, ../../sass/system_partials/_show_invoice.sass */
 #invoice-side-panel ul li {
   border-width: 1px;
   padding: 0px;
@@ -543,7 +543,7 @@ body.two-col #content {
   background: #f8f8f8;
   border-bottom: 1px solid #e1e1e1;
 }
-/* line 42, ../../sass/system_partials/_show_invoice.sass */
+/* line 39, ../../sass/system_partials/_show_invoice.sass */
 #invoice-side-panel ul li a {
   color: black;
   border-color: white transparent #e7e7e7;
@@ -556,7 +556,7 @@ body.two-col #content {
   text-decoration: underline;
 }
 
-/* line 52, ../../sass/system_partials/_show_invoice.sass */
+/* line 49, ../../sass/system_partials/_show_invoice.sass */
 #invoice-preview {
   display: inline;
   float: left;
@@ -571,7 +571,7 @@ body.two-col #content {
 * html #invoice-preview {
   overflow-x: hidden;
 }
-/* line 54, ../../sass/system_partials/_show_invoice.sass */
+/* line 51, ../../sass/system_partials/_show_invoice.sass */
 #invoice-preview table {
   border: 1px solid black;
 }
@@ -607,7 +607,7 @@ body.two-col #content {
   border-bottom-width: 0px;
 }
 
-/* line 63, ../../sass/system_partials/_show_invoice.sass */
+/* line 60, ../../sass/system_partials/_show_invoice.sass */
 #invoice-main {
   display: inline;
   float: left;
@@ -619,7 +619,7 @@ body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 66, ../../sass/system_partials/_show_invoice.sass */
+/* line 63, ../../sass/system_partials/_show_invoice.sass */
 #invoice-item-list {
   display: inline;
   float: left;
@@ -631,7 +631,7 @@ body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 69, ../../sass/system_partials/_show_invoice.sass */
+/* line 66, ../../sass/system_partials/_show_invoice.sass */
 #invoice-title {
   display: inline;
   float: left;
@@ -643,7 +643,7 @@ body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 72, ../../sass/system_partials/_show_invoice.sass */
+/* line 69, ../../sass/system_partials/_show_invoice.sass */
 #invoice-footer {
   display: inline;
   float: left;
@@ -655,12 +655,12 @@ body.two-col #content {
   overflow-x: hidden;
 }
 
-/* line 75, ../../sass/system_partials/_show_invoice.sass */
+/* line 72, ../../sass/system_partials/_show_invoice.sass */
 #invoice-summary {
   float: right;
 }
 
-/* line 79, ../../sass/system_partials/_show_invoice.sass */
+/* line 76, ../../sass/system_partials/_show_invoice.sass */
 #invoice-footer-late-fee {
   border: 2px;
   border-style: solid;
@@ -723,24 +723,36 @@ body.two-col #content {
 * html #dashboard-content #dashboard-right {
   overflow-x: hidden;
 }
+/* line 21, ../../sass/system_partials/_layout.sass */
+#dashboard-content #dashboard-centre-left {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 70px;
+  padding: 10px;
+}
+/* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #dashboard-content #dashboard-centre-left {
+  overflow-x: hidden;
+}
 
-/* line 22, ../../sass/system_partials/_layout.sass */
+/* line 24, ../../sass/system_partials/_layout.sass */
 #header {
   background-color: white;
 }
 
-/* line 25, ../../sass/system_partials/_layout.sass */
+/* line 28, ../../sass/system_partials/_layout.sass */
 #footer {
   padding: 10px;
   text-align: center;
 }
 
-/* line 15, ../../sass/system_partials/_tabs.sass */
+/* line 16, ../../sass/system_partials/_tabs.sass */
 #tabs {
   border-bottom: 2px solid #b1ad9b;
 }
 
-/* line 18, ../../sass/system_partials/_tabs.sass */
+/* line 19, ../../sass/system_partials/_tabs.sass */
 ul.quick-navigation {
   float: right;
   margin: 0;
@@ -773,7 +785,7 @@ ul.quick-navigation li.last {
   padding-right: 0;
 }
 
-/* line 22, ../../sass/system_partials/_tabs.sass */
+/* line 23, ../../sass/system_partials/_tabs.sass */
 ul.horizontal, ul.navigation {
   margin: 0;
   padding: 0;
@@ -805,8 +817,9 @@ ul.horizontal li.last, ul.navigation li.last {
   padding-right: 0;
 }
 
-/* line 25, ../../sass/system_partials/_tabs.sass */
+/* line 26, ../../sass/system_partials/_tabs.sass */
 ul.navigation {
+  background-color: #b1ad9b;
   display: inline;
   float: left;
   margin-right: 10px;
@@ -824,22 +837,12 @@ ul.navigation {
 ul.navigation:hover {
   text-decoration: underline;
 }
-/* line 9, ../../sass/system_partials/_tabs.sass */
-ul.navigation li a {
-  margin: 5px;
-  color: black;
-  float: left;
+/* line 33, ../../sass/system_partials/_tabs.sass */
+ul.navigation li.selected a {
   background-color: white;
 }
-/* line 31, ../../sass/system_partials/_tabs.sass */
-ul.navigation li.selected a {
-  -moz-box-shadow: 2px 2px 10px blue;
-  -webkit-box-shadow: 2px 2px 10px blue;
-  -o-box-shadow: 2px 2px 10px blue;
-  box-shadow: 2px 2px 10px blue;
-}
 
-/* line 34, ../../sass/system_partials/_tabs.sass */
+/* line 36, ../../sass/system_partials/_tabs.sass */
 #invoice-history-tabs {
   margin: 0;
   padding: 0;
@@ -1619,18 +1622,6 @@ a.ordering:hover, a.ascending:hover, a.descending:hover {
   padding: 5px;
 }
 
-/* line 16, ../../sass/system_partials/_lists.sass */
-#invoices th {
-  background-color: #686868;
-  color: white;
-}
-
-/* line 21, ../../sass/system_partials/_lists.sass */
-#clients th {
-  background-color: #686868;
-  color: white;
-}
-
 /* line 1, ../../sass/system_partials/_comments.sass */
 .comment-item {
   background-color: #ececec;
@@ -1655,6 +1646,11 @@ a.ordering:hover, a.ascending:hover, a.descending:hover {
   font-size: 1.1em;
 }
 
+/* line 4, ../../sass/system_partials/_table.sass */
+.table-row tr {
+  padding-bottom: 10px;
+}
+
 /* line 2, ../../sass/system_partials/_rating.sass */
 #new_feedback ol li {
   display: inline;
@@ -1676,16 +1672,16 @@ span.stars span {
 }
 
 /* line 1, ../../sass/system_partials/_panel.sass */
-.standard_header_font, ul.navigation, #settings_console, #logo h1, #logo h3, #logo h4 {
+.standard_header_font, #settings_console, #logo h1, #logo h3, #logo h4 {
   color: white;
 }
 /* line 3, ../../sass/system_partials/_panel.sass */
-.standard_header_font a, ul.navigation a, #settings_console a, #logo h1 a, #logo h3 a, #logo h4 a {
+.standard_header_font a, #settings_console a, #logo h1 a, #logo h3 a, #logo h4 a {
   color: black;
   text-decoration: none;
 }
 /* line 4, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/compass/stylesheets/compass/typography/links/_hover-link.scss */
-.standard_header_font a:hover, ul.navigation a:hover, #settings_console a:hover, #logo h1 a:hover, #logo h3 a:hover, #logo h4 a:hover {
+.standard_header_font a:hover, #settings_console a:hover, #logo h1 a:hover, #logo h3 a:hover, #logo h4 a:hover {
   text-decoration: underline;
 }
 

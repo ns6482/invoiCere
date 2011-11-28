@@ -2,10 +2,12 @@
 = render :partial => "filter"
 
 %table{:id => "clients", :class => "table-main"}
-  %tr
-    %th Client Name
-    %th Outstanding Invoices
-    %th
-  =render :partial => "client", :collection => @clients
+  %thead
+    %tr
+      %th Client Name
+      %th Outstanding Invoices
+      %th
+  %tbody
+    =render :partial => "client", :collection => @clients
 %p
   = will_paginate @clients

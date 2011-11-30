@@ -8,7 +8,8 @@ class UsersController < BaseController
   before_filter :check_password_required, :only => [:edit, :update]
 
   def index
-    @clients = current_company.clients.accessible_by(current_ability)
+    @clients = current_company.clients.accessible_by(current_ability).users
+    
   end
   
   def show   

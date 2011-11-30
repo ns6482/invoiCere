@@ -4,13 +4,14 @@
     = f.input :email
     = f.input :password,:hint => "leave blank if you don't want to change it"
     = f.input :password_confirmation
+    =#f.input :email
+    %br
 
-    -if @password_required
-      = f.input :current_password, :hint => 'we need your current password to confirm your changes'
+    -if @password_required    
+      =f.input :current_password, :hint => 'we need your current password to confirm your changes'
 
+    %br
     -if can? :read, Role
-      =# f.input :roles, :as => :check_boxes, :collection => @accessible_roles
-
       =f.collection_check_boxes :role_ids, Role.all, :id, :name
 
-    %button{:type=>"submit",:class=>"red"} Save
+  %button{:type=>"submit",:class=>"red"} Save

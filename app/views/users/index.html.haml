@@ -8,19 +8,23 @@
   = render :partial => "user", :collection => @users
 %br
 %h3 Client Logins
-- for client in @clients
-  -if client.users.count >0
-    %h3=client.name
-    =client.display_address   
-    %table
-      %tr
-        %th Email
-        %th Sign in count
-        %th Last sign in at
-      = render :partial => "user", :collection => client.users
-
-
--if can? :create, User
-  =link_to 'Setup User', new_user_path, html_options = {:class => 'red button'}
--if can? :invite, User
-  =link_to 'Invite User', new_user_invitation_path, html_options = {:class => 'button'}
+-if @clients.count > 0 
+  - for client in @clients
+    -if client.users.count >0
+      %h3=client.name
+      =client.display_address   
+      %table
+        %tr
+          %th Email
+          %th Sign in count
+          %th Last sign in at
+        = render :partial => "user", :collection => client.users
+-else
+  No Client Users
+  
+=content_for :right do
+  -if can? :create, User
+    =link_to 'Setup User', new_user_path#, html_options = {:class => 'red button'}
+  %br
+  -if can? :invite, User
+    =link_to 'Invite User', new_user_invitation_path#, html_options = {:class => 'button'}

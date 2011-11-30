@@ -1,5 +1,12 @@
 -title "Clients"
-= render :partial => "filter"
+
+#dashboard-centre-left
+  = render :partial => "filter"
+
+=content_for :right do
+  -if can? :create, Client
+    = link_to "New Client", new_client_path
+
 
 %table{:id => "clients", :class => "table-main"}
   %thead

@@ -16,11 +16,17 @@ $right: 3
     +column($centre)
     background: white
     padding-left: 10px
+    padding-top: 10px
   #dashboard-right
     +column($right, last)
   #dashboard-centre-left
-    +column(2)
-    padding: 10px
+    +column(15)
+    padding-bottom: 10px
+  #dashboard-centre-right
+    float: right
+    //+prepend(5)
+    //+column(4)
+    padding-bottom: 10px
 #header
   background-color: white
   

@@ -26,6 +26,11 @@ class Client < ActiveRecord::Base
 
   scope :outstanding, due.with_aggregates#.having("total_due >= 0") 
   
+  scope :users, 
+  :select => "clients.*",
+  :joins => ["JOIN 'users' ON clients.id = users.client_id"]
+  
+  
     #:select => "clients.*, SUM(invoices.total_cost_inc_tax_delivery) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(payments.amount) as total_paid ", 
     #:joins => ["JOIN 'invoices' ON invoices.client_id = clients.id LEFT JOIN payments ON invoices.id = payments.invoice_id"],
     #:conditions => "invoices.due_date <= '#{Date.today}' and invoices.state = 'open'",

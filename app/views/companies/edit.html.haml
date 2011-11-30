@@ -5,10 +5,19 @@
     =f.simple_fields_for :setting do |s|
       = s.error_messages
       = s.input :logo, :as => :file
+      %br
       = s.input :company_name
+      
+      %br
       = s.input :company_registration
+      
+      %br
+      
       = s.input :vat
       = s.input :vat_registration
+      
+      %br
+      
       = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }
       = s.input :telephone
       = s.input :fax
@@ -19,13 +28,13 @@
       %h3 Invoice Email Template
       company-name company-email company-fax company-phone company-website client-name invoice-id invoice-link invoice-date invoice-summary due-date total (due)
       = s.input :invoice_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-      = s.input :invoice_message, :input_html => { :rows => 10, :class => 'autogrow' }, :label => "Message"
+      = s.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
       %h3 Reminder Email Template
       = s.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-      = s.input :reminder_message, :input_html => { :rows => 10, :class => 'autogrow' }, :label => "Message"
+      = s.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
       %h3 Payment Thank you Email Template
       = s.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-      = s.input :paythank_message, :input_html => { :rows => 10, :class => 'autogrow' }, :label => "Message"
+      = s.input :paythank_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
   %button{:type=>"submit",:class=>"red"}
     Save
 %p= link_to "Preview Settings", company_path

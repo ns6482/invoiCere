@@ -37,9 +37,13 @@ class InvoicesController < BaseController
   #TODO create partial buttons and put into show part, create content for
 
   def new
+    
+    
+    if params[:client_id] 
+      @invoice.client_id = params[:client_id] 
+    end
 
-    if params[:id]      
-
+    if params[:id]    
       master_invoice = current_company.invoices.find(params[:id])
       @invoice  = master_invoice.clone :include => :invoice_items
       @invoice.state = "draft"

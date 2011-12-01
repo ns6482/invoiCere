@@ -15,6 +15,7 @@ class ClientsController < BaseController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @clients }
+      format.js
     end
   end
 

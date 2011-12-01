@@ -72,8 +72,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :dashboard, 'Dashboard', root_path
     primary.item :invoices, 'Invoices', invoices_path, :if => Proc.new { can? :read, Invoice}#,   :link => {:remote => true}
     primary.item :clients, 'Clients', clients_path, :if => Proc.new { can? :read, Client}
-    primary.item :users, 'Users', users_path, :if => Proc.new { can? :destroy, User}
-
+    primary.item :inventory, "Inventory", users_path
     primary.dom_class = 'navigation'
   end
   

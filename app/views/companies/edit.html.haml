@@ -1,42 +1,56 @@
 -title "Edit Company"
-=simple_form_for  @company, :url => company_path, :html => { :method => :put, :multipart => true  } do |f|
-  = f.input :name, :label => "Subdomain"  
-  =field_set_tag 'Settings' do
-    =f.simple_fields_for :setting do |s|
-      = s.error_messages
-      = s.input :logo, :as => :file
-      %br
-      = s.input :company_name
+
+=content_for :right do 
+  -if can? :read, User 
+    =link_to "Manage Users", users_path 
+    =link_to "Preview Settings", company_path
+    
+#tabs
+  %ul
+    %li
+      %a{:href=> '#tabs-1'} Nunc tincidunt
+    %li
+      %a{:href=> '#tabs-2'} Proin dolor
+	
+
+  =simple_form_for  @company, :url => company_path, :html => { :method => :put, :multipart => true  } do |f|
+    = f.input :name, :label => "Subdomain"  
+    =field_set_tag 'Settings', :id =>"tabs-1" do
+      =f.simple_fields_for :setting do |s|
+        = s.error_messages
+        = s.input :logo, :as => :file
+        %br
+        = s.input :company_name
       
-      %br
-      = s.input :company_registration
+        %br
+        = s.input :company_registration
       
-      %br
+        %br
       
-      = s.input :vat
-      = s.input :vat_registration
+        = s.input :vat
+        = s.input :vat_registration
       
-      %br
+        %br
       
-      = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }
-      = s.input :telephone
-      = s.input :fax
-      = s.input :email
-      = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }
-  =field_set_tag 'Templates' do
-    =f.simple_fields_for :etemplate do |s|
-      %h3 Invoice Email Template
-      company-name company-email company-fax company-phone company-website client-name invoice-id invoice-link invoice-date invoice-summary due-date total (due)
-      = s.input :invoice_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-      = s.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
-      %h3 Reminder Email Template
-      = s.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-      = s.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
-      %h3 Payment Thank you Email Template
-      = s.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-      = s.input :paythank_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
-  %button{:type=>"submit",:class=>"red"}
-    Save
-%p= link_to "Preview Settings", company_path
-|
-= link_to "Dashboard", root_path
+        = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }
+        = s.input :telephone
+        = s.input :fax
+        = s.input :email
+        = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }
+    =field_set_tag 'Templates', :id =>"tabs-2" do
+      =f.simple_fields_for :etemplate do |s|
+        %h3 Invoice Email Template
+        company-name company-email company-fax company-phone company-website client-name invoice-id invoice-link invoice-date    invoice-summary due-date total (due)
+        = s.input :invoice_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+        = s.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
+        %h3 Reminder Email Template
+        = s.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+        = s.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
+        %h3 Payment Thank you Email Template
+        = s.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+        = s.input :paythank_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
+        
+    =content_for :right do   
+      %button{:type=>"submit",:class=>"red"} Save
+      
+  

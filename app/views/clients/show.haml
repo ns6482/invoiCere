@@ -30,12 +30,8 @@
     = render :partial => "contacts/contact", :object => @client
   -else
     No contacts
-  %p
-    -if can? :create, Contact
-      = link_to "New Contact", new_client_contact_path(@client)
-    -if can? :update, @client
-      = link_to 'Edit', edit_client_path(@client) |
-
+%br
+#invoices
   %h3 Invoices 
   -if @client.invoices.size > 0 
     %table{:id => "invoices"}
@@ -53,4 +49,15 @@
       %tbody
         =render :partial => "invoices/invoice", :collection => @client.invoices
 
-= link_to 'Back', clients_path
+=content_for :right do
+
+  -if can? :update, @client
+    = link_to 'Edit', edit_client_path(@client)
+    %br
+  -if can? :create, Contact
+    = link_to "New Contact", new_client_contact_path(@client)
+    %br
+  -if can? :create, Client
+    = link_to "New Invoice", new_invoice_path(:client_id => @client)
+    %br
+  = link_to 'View All Clients', clients_path

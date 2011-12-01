@@ -7,14 +7,4 @@
   -if can? :create, Client
     = link_to "New Client", new_client_path
 
-
-%table{:id => "clients", :class => "table-main"}
-  %thead
-    %tr
-      %th Client Name
-      %th Outstanding Invoices
-      %th
-  %tbody
-    =render :partial => "client", :collection => @clients
-%p
-  = will_paginate @clients
+= render :partial => "clients"

@@ -3,7 +3,7 @@
     Show/Hide Filter
   %br
 #filter_box
-  = simple_form_for @search do |f|
+  = simple_form_for @search, :html => {:remote => true}  do |f|
     -# f.inputs :id =>  "ajax_form" do
     =field_set_tag 'Client Details' do
       = f.input :company_name_contains, :label => "Company/Name", :required => false

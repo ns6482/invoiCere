@@ -3,7 +3,7 @@
     Show/Hide Filter
   %br
 #filter_box
-  = simple_form_for @search, :js_lib => :jquery do |f|
+  = simple_form_for @search, :js_lib => :jquery, :html => {:remote => true} do |f|
     =field_set_tag 'Search Invoice' do#, :id => "ajax_form" do
       = f.input :title_contains, :label => "Title", :required => false
       = f.input :invoice_date_gte, :as => :date, :label => "Create From", :required => false

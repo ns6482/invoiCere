@@ -1,5 +1,16 @@
 - title "Dashboard"
 
+=content_for :right do 
+  %strong Quick Start
+  %ul{:id => "dashboard-list"}
+    %li
+      -if can? :create, Invoice
+        = link_to "New Invoice", new_invoice_path
+    %li
+      -if can? :create, Invoice
+        = link_to "New Client", new_invoice_path
+      
+
 #dashboard-box-start
   %h3 YTD Breakdown
   %ul{:id => "dashboard-list"}

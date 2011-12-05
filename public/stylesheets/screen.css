@@ -314,19 +314,19 @@ body.bp .showgrid {
   background-position: left top;
 }
 /* line 4, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .feedback, body.bp .error, body.bp .alert, body.bp .notice, body.bp .success, body.bp .info {
+body.bp .feedback, body.bp .error, body.bp .alert, body.bp #dashboard-content #dashboard-centre .alert, #dashboard-content #dashboard-centre body.bp .alert, body.bp .notice, body.bp .success, body.bp .info, body.bp #dashboard-content #dashboard-centre .error, #dashboard-content #dashboard-centre body.bp .error, body.bp #dashboard-content #dashboard-centre .alert, #dashboard-content #dashboard-centre body.bp .alert, body.bp #dashboard-content #dashboard-centre .notice, #dashboard-content #dashboard-centre body.bp .notice, body.bp #dashboard-content #dashboard-centre .success, #dashboard-content #dashboard-centre body.bp .success, body.bp #dashboard-content #dashboard-centre .info, #dashboard-content #dashboard-centre body.bp .info {
   padding: 0.8em;
   margin-bottom: 1em;
   border: 2px solid #dddddd;
 }
 /* line 5, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .error, body.bp .alert {
+body.bp .error, body.bp .alert, body.bp #dashboard-content #dashboard-centre .alert, #dashboard-content #dashboard-centre body.bp .alert {
   background: #fbe3e4;
   color: #8a1f11;
   border-color: #fbc2c4;
 }
 /* line 27, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .error a, body.bp .alert a {
+body.bp .error a, body.bp .alert a, body.bp #dashboard-content #dashboard-centre .alert a, #dashboard-content #dashboard-centre body.bp .alert a {
   color: #8a1f11;
 }
 /* line 7, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
@@ -786,7 +786,71 @@ body.two-col #content {
 * html #dashboard-content #dashboard-centre {
   overflow-x: hidden;
 }
-/* line 20, ../../sass/system_partials/_layout.sass */
+/* line 4, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .feedback, #dashboard-content #dashboard-centre body.bp .error, body.bp #dashboard-content #dashboard-centre .error, #dashboard-content #dashboard-centre body.bp .alert, body.bp #dashboard-content #dashboard-centre .alert, body.bp #dashboard-content #dashboard-centre .alert, #dashboard-content #dashboard-centre body.bp .alert, #dashboard-content #dashboard-centre body.bp .notice, body.bp #dashboard-content #dashboard-centre .notice, #dashboard-content #dashboard-centre body.bp .success, body.bp #dashboard-content #dashboard-centre .success, #dashboard-content #dashboard-centre body.bp .info, body.bp #dashboard-content #dashboard-centre .info, #dashboard-content #dashboard-centre .error, #dashboard-content #dashboard-centre .alert, #dashboard-content #dashboard-centre .notice, #dashboard-content #dashboard-centre .success, #dashboard-content #dashboard-centre .info {
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 2px solid #dddddd;
+}
+/* line 5, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .error, #dashboard-content #dashboard-centre body.bp .alert, body.bp #dashboard-content #dashboard-centre .alert, #dashboard-content #dashboard-centre .alert {
+  background: #fbe3e4;
+  color: #8a1f11;
+  border-color: #fbc2c4;
+}
+/* line 27, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .error a, #dashboard-content #dashboard-centre body.bp .alert a, body.bp #dashboard-content #dashboard-centre .alert a, #dashboard-content #dashboard-centre .alert a {
+  color: #8a1f11;
+}
+/* line 7, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .notice {
+  background: #fff6bf;
+  color: #514721;
+  border-color: #ffd324;
+}
+/* line 36, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .notice a {
+  color: #514721;
+}
+/* line 8, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .success {
+  background: #e6efc2;
+  color: #264409;
+  border-color: #c6d880;
+}
+/* line 45, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .success a {
+  color: #264409;
+}
+/* line 9, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .info {
+  background: #d5edf8;
+  color: #205791;
+  border-color: #92cae4;
+}
+/* line 54, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .info a {
+  color: #205791;
+}
+/* line 10, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .hide {
+  display: none;
+}
+/* line 11, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .highlight {
+  background: yellow;
+}
+/* line 12, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .added {
+  background: #006600;
+  color: white;
+}
+/* line 13, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
+#dashboard-content #dashboard-centre .removed {
+  background: #990000;
+  color: white;
+}
+/* line 22, ../../sass/system_partials/_layout.sass */
 #dashboard-content #dashboard-right {
   display: inline;
   float: left;
@@ -797,7 +861,7 @@ body.two-col #content {
 * html #dashboard-content #dashboard-right {
   overflow-x: hidden;
 }
-/* line 22, ../../sass/system_partials/_layout.sass */
+/* line 24, ../../sass/system_partials/_layout.sass */
 #dashboard-content #dashboard-centre-left {
   display: inline;
   float: left;
@@ -809,18 +873,18 @@ body.two-col #content {
 * html #dashboard-content #dashboard-centre-left {
   overflow-x: hidden;
 }
-/* line 25, ../../sass/system_partials/_layout.sass */
+/* line 27, ../../sass/system_partials/_layout.sass */
 #dashboard-content #dashboard-centre-right {
   float: right;
   padding-bottom: 10px;
 }
 
-/* line 30, ../../sass/system_partials/_layout.sass */
+/* line 32, ../../sass/system_partials/_layout.sass */
 #header {
   background-color: white;
 }
 
-/* line 34, ../../sass/system_partials/_layout.sass */
+/* line 36, ../../sass/system_partials/_layout.sass */
 #footer {
   padding: 10px;
   text-align: center;
@@ -1799,7 +1863,7 @@ span.stars span {
   margin: 2px 10px;
 }
 /* line 11, ../../sass/system_partials/_forms.sass */
-.simple_form .error, .simple_form body.bp .alert, body.bp .simple_form .alert {
+.simple_form .error, .simple_form body.bp .alert, body.bp .simple_form .alert, .simple_form #dashboard-content #dashboard-centre .alert, #dashboard-content #dashboard-centre .simple_form .alert {
   clear: left;
   color: black;
   display: block;

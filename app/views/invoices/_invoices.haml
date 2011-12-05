@@ -1,6 +1,7 @@
 %table{:id => "table-invoices", :class => "table-main"}
   %thead
     %tr
+      %th
       %th=sort_link @search, :invoice_date, "Date", {}, :remote => "true"
       %th=sort_link @search, :id, "Id", {}, :remote => "true"
       %th=sort_link @search, :client_company_name, "Client", {}, :remote => "true"
@@ -10,7 +11,7 @@
       %th=sort_link @search, :total_cost_inc_tax_delivery, "Total Cost", {}, :remote => "true" 
       %th
       %th
-  %tbody
+  %tbody{:id => "invoices-body"}
     =render :partial => "invoices/invoice", :collection => @invoices
 %p
   = will_paginate @invoices

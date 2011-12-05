@@ -14,6 +14,10 @@ VisioInvoiceV3::Application.routes.draw do
     resources :schedules, :only => [:index]
 
     resources :invoices do
+      collection do
+        delete :delete_multiple
+      end
+      
       resources :deliveries, :only => [:new, :create, :show, :index], :shallow =>true
       resources :payments,:only => [:new, :create, :index, :destroy], :shallow =>true
       resource  :reminder, :only => [ :edit, :update, :show]

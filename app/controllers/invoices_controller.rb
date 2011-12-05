@@ -137,6 +137,23 @@ class InvoicesController < BaseController
     redirect_to invoices_url
   end
 
+ def delete_multiple
+   
+  respond_to do |format|
+         
+    i = 0
+    #arr_item = Array.new
+    @invoices_to_delete = @invoices.find(params[:invoice_ids])
+    @invoices_to_delete.each do |invoice|
+      #invoice.destroy 
+    end
+
+    flash[:notice] ='Invoices successfully deleted.'
+    format.html {redirect_to invoices_url}  
+    format.js { render :action => 'delete_multiple.js.erb'}
+  end
+  
+ end
 
   private
 

@@ -46,7 +46,7 @@
           %th Total Cost 
           %th
           %th
-      %tbody
+      %tbody{:id => "invoices_body"}
         =render :partial => "invoices/invoice", :collection => @client.invoices
 
 =content_for :right do

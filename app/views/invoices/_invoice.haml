@@ -1,4 +1,5 @@
 %tr{:class=> cycle("odd", "even") + " table-row"}
+  %td= check_box_tag "invoice_ids[]", invoice.id
   %td= h invoice.invoice_date.strftime("%Y %b %d")
   
   %td= link_to_if can?(:read, invoice), invoice.id, invoice

@@ -1,9 +1,12 @@
 - title "Invoices"
 
+= render :partial => "filter"
+%br
 =form_tag delete_multiple_invoices_path, :method => :delete, :remote => true do
+ -if can? :delete, Invoice
+  = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
+  
  =render :partial=> "invoices" 
- = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
-
 
 =content_for :right do
  -if can? :create, Invoice

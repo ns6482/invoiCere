@@ -101,6 +101,23 @@ class ClientsController < BaseController
     flash[:notice] = 'Invitation has been sent to client'
     redirect_to client_path(@client)
   end
+  
+  def delete_multiple
+
+   respond_to do |format|
+
+     i = 0
+     #arr_item = Array.new
+     @clients_to_delete = @clients.find(params[:client_ids])
+     @clients_to_delete.each do |client|
+       #invoice.destroy 
+     end
+
+     flash[:notice] ='Clients successfully deleted.'
+     format.html {redirect_to invoices_url}  
+     format.js { render :action => 'delete_multiple.js.erb'}
+   end
+  end
 
   private
 

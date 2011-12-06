@@ -40,6 +40,9 @@ VisioInvoiceV3::Application.routes.draw do
     resource :company, :only => [:edit, :update, :show]
     
     resources :clients do 
+      collection do
+        delete :delete_multiple
+      end
       member do
           put 'invite'
       end

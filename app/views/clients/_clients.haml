@@ -1,6 +1,7 @@
 %table{:id => "table-clients", :class => "table-main"}
   %thead
     %tr
+      %th
       %th=sort_link @search, :company_name, "Client Name", {}, :remote => "true"
       %th Outstanding Invoices
       %th

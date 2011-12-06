@@ -1,4 +1,4 @@
-%tr{:class=> cycle("odd", "even") + " table-row"}
+%tr{:id => "invoice-row-" + invoice.id.to_s, :class=> cycle("odd", "even") + " table-row"}
   %td= check_box_tag "invoice_ids[]", invoice.id
   %td= h invoice.invoice_date.strftime("%Y %b %d")
   
@@ -12,6 +12,4 @@
   %td
     -if can? :update, invoice
       = link_to "Edit", edit_invoice_path(invoice)
-  %td
-    -if can? :delete, invoice
-      = link_to "Delete", invoice, :confirm => 'Are you sure?', :method => :delete
+  

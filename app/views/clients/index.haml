@@ -1,10 +1,13 @@
 -title "Clients"
 
-#dashboard-centre-left
-  = render :partial => "filter"
+= render :partial => "filter"
+%br
+=form_tag delete_multiple_clients_path, :method => :delete, :remote => true do
+  -if can? :delete, Client
+    = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
 
+  = render :partial => "clients"
+  
 =content_for :right do
   -if can? :create, Client
     = link_to "New Client", new_client_path
-
-= render :partial => "clients"

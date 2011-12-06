@@ -10,7 +10,6 @@
       %th=sort_link @search, :due_days, "Due Days" , {}, :remote => "true"
       %th=sort_link @search, :total_cost_inc_tax_delivery, "Total Cost", {}, :remote => "true" 
       %th
-      %th
   %tbody{:id => "invoices-body"}
     =render :partial => "invoices/invoice", :collection => @invoices
 %p

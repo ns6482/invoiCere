@@ -3,6 +3,8 @@ require 'transitions'
 class Invoice < ActiveRecord::Base
   include ActiveRecord::Transitions
   
+  liquid_methods :title
+
   cattr_reader :per_page
   @@per_page = 10
 
@@ -35,6 +37,7 @@ class Invoice < ActiveRecord::Base
   #scope :last_12_months, by_date(Date.today << 12, Date.today).group_by_month
   #scope :last_3_months, by_date(Date.today << 12, Date.today).group_by_day
   #scope :last_month, by_date(Date.today << 12, Date.today).group_by_day
+
 
   state_machine do
     state :draft # first one is initial state

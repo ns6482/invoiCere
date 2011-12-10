@@ -1,10 +1,10 @@
 = simple_form_for @client do |f|
   =field_set_tag 'Client Details' do
     = f.hidden_field :company_id, :value => current_company.id
-    = f.input :company_name
+    = f.input :company_name, :label => "Name"
     %br
-    = f.input :address1
-    = f.input :address2
+    = f.input :address1, :label => "Address"
+    = f.input :address2, :label => ".."
     = f.input :zip
     = f.input :city
     = f.input :country

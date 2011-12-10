@@ -2,13 +2,13 @@
   =field_set_tag 'Account details' do
     = f.input :name
     = f.input :email
-    = f.input :password,:hint => "leave blank if you don't want to change it"
-    = f.input :password_confirmation
+    = f.input :password,:hint => "leave blank if you don't want to change it", :label => "New Password"
+    = f.input :password_confirmation, :label => "Confirm Password"
     =#f.input :email
     %br
 
     -if @password_required    
-      =f.input :current_password, :hint => 'we need your current password to confirm your changes'
+      =f.input :current_password, :hint => 'we need your current password to confirm your changes', :required => true, :label => "Password"
 
     %br
     -if can? :read, Role

@@ -2,13 +2,17 @@
 
 = render :partial => "filter"
 %br
-=form_tag delete_multiple_invoices_path, :method => :delete, :remote => true do
- -if can? :delete, Invoice
-  = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
+-if @invoices.count > 0
+ =form_tag delete_multiple_invoices_path, :method => :delete, :remote => true do
+  -if can? :delete, Invoice
+   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
   
- =render :partial=> "invoices" 
+  =render :partial=> "invoices" 
+-else
+ -if can? :create, Invoice
+  No Invoices, create a new invoice
+  = link_to " now", new_invoice_path  
 
 =content_for :right do
  -if can? :create, Invoice
   = link_to "New Invoice", new_invoice_path
-

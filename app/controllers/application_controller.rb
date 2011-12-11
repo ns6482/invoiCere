@@ -16,8 +16,6 @@ class ApplicationController < ActionController::Base
   # Will either fetch the current account or return nil if none is found
   def current_company
     @company ||= Company.find_by_name(current_subdomain)
-    
-    
   end
 
   def set_email_host

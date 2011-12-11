@@ -34,7 +34,7 @@ gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 gem 'delorean'
 gem "haml-rails" 
 gem "deep_cloneable", "~> 1.3.0"
-
+gem 'mysql2', '< 0.3'
 gem "liquid"
 # Use unicorn as the web server
 # gem 'unicorn'

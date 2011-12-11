@@ -7,8 +7,8 @@
       -if can? :create, Invoice
         = link_to "New Invoice", new_invoice_path
     %li
-      -if can? :create, Invoice
-        = link_to "New Client", new_invoice_path
+      -if can? :create, Client
+        = link_to "New Client", new_client_path
       
 
 #dashboard-box-start

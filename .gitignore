@@ -6,3 +6,4 @@ test/fixtures_to_add/
 webrat.log
 *.svn-base
 *.sass-cache
+config/environments/development.rb

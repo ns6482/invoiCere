@@ -2,12 +2,19 @@
 
 = render :partial => "filter"
 %br
-=form_tag delete_multiple_clients_path, :method => :delete, :remote => true do
-  -if can? :delete, Client
-    = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
+-if @clients.length > 0
 
+ =form_tag delete_multiple_clients_path, :method => :delete, :remote => true do
+  -if can? :delete, Client
+   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
   = render :partial => "clients"
   
+-else
+ 
+ -if can? :create, Client
+  No Clients setup, create a new client
+  = link_to " now", new_client_path  
+
 =content_for :right do
-  -if can? :create, Client
-    = link_to "New Client", new_client_path
+ -if can? :create, Client
+  = link_to "New Client", new_client_path

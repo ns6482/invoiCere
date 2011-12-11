@@ -26,7 +26,10 @@
       =client.count_invoices
       %br
       %strong Invoice Amount:
-      =h number_to_currency client.total_due.to_d, :unit => '£', :separator => ".", :delimiter => ","
+      -if client.invoices.count > 0
+        =h number_to_currency client.total_due.to_d, :unit => '£', :separator => ".", :delimiter => ","
+      -else
+        0
   
       -#if can? :update, client
         =# link_to 'Edit', edit_client_path(client)

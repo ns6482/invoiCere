@@ -11,11 +11,11 @@ class Invoice < ActiveRecord::Base
   scope :none_scheduled,
     :select => 'invoices.*',
     :conditions => "schedules.id IS NULL",
-    :joins => ["LEFT JOIN 'schedules' ON invoices.id = schedules.invoice_id"],
+    :joins => ["LEFT JOIN schedules ON invoices.id = schedules.invoice_id"],
     :readonly => false
     
   scope :for_year,
-    :select => 'invoices.*',
+    :select => "invoices.*",
     :conditions => "invoice_date between '#{Date.new(Date.today.year,1,1)}' and '#{Date.new(Date.today.year+1,1,1)}'",
     :readonly => false
   

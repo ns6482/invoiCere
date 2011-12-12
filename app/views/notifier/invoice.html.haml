@@ -3,8 +3,8 @@
   = @client.company_name
 #message
   %p 
-    = @delivery.message
-    =#Liquid::Template.parse(@delivery.message.render('invoice' => @delivery.invoice))
+    =# @delivery.message
+    =Liquid::Template.parse(@delivery.message).render('invoice' => @delivery.invoice)
     
 #details
   = render :partial => "invoices/show_elements/show_core", :object => :invoice

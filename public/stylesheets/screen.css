@@ -2156,6 +2156,25 @@ label.collection_check_boxes {
   float: right;
 }
 
+/* line 156, ../../sass/system_partials/_forms.sass */
+#rt-form textarea {
+  width: 390px;
+  height: 219px;
+  padding: 5px;
+}
+
+/* line 161, ../../sass/system_partials/_forms.sass */
+#lt-form {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 110px;
+}
+/* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #lt-form {
+  overflow-x: hidden;
+}
+
 /* line 9, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 .clear {
   clear: both;

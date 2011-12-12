@@ -40,9 +40,31 @@
     =field_set_tag 'Templates', :id =>"tabs-2" do
       =f.simple_fields_for :etemplate do |s|
         %h3 Invoice Email Template
-        company-name company-email company-fax company-phone company-website client-name invoice-id invoice-link invoice-date    invoice-summary due-date total (due)
+
         = s.input :invoice_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-        = s.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"
+             
+             
+        %label 
+          Message     
+        %br
+            
+        %ul{:id => "lt-form"} 
+          %li company-name   
+          %li company-email
+          %li company-fax 
+          %li company-phone 
+          %li company-website 
+          %li client-name 
+          %li invoice-id 
+          %li invoice-link 
+          %li invoice-date    
+          %li invoice-title 
+          %li due-date 
+          %li total (due)
+        
+        #rt-form
+          = s.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+        %br
         %h3 Reminder Email Template
         = s.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
         = s.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => "Message"

@@ -7,3 +7,4 @@ webrat.log
 *.svn-base
 *.sass-cache
 config/environments/development.rb
+config/initializers/setup_mail.rb

@@ -4,7 +4,7 @@
   
   %td= link_to_if can?(:read, invoice), invoice.id, invoice
   %td 
-    %strong=h invoice.client.name
+    %strong=link_to_if can?(:read, invoice.client), invoice.client.name, invoice.client
   %td= h invoice.title
   %td= h invoice.state
   %td= h invoice.due_days

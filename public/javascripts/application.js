@@ -79,7 +79,6 @@ jQuery.fn.submitWithAjax = function() {
 
 $(document).ready(function() {
 
-
       // Notice the use of the each() method to acquire access to each elements attributes
     $('#toolbar a[tooltip]').each(function()
     {

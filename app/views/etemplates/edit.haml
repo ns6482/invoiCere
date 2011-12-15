@@ -1,0 +1,42 @@
+-title "Edit Etemplate"
+
+= javascript_include_tag  "template_setup.js"
+
+=content_for :right do 
+  -if can? :read, User 
+    =link_to "Manage Users", users_path 
+    =link_to "Preview Settings", company_path
+    
+=simple_form_for  @etemplate , :url => company_etemplate_path, :html => { :method => :put, :multipart => true  } do |f|
+  %h3 Invoice Email Template
+  = f.input :invoice_subject, :input_html => { :rows => 1 }, :label => "Subject"     
+  %label Message     
+  %br
+  #template_setup
+    =render :partial => "placeholders_email"    
+    #rt-form
+      = f.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+  %br
+  %h3 Reminder Email Template
+  = f.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+  %br
+  %label Message     
+  %br
+  #template_setup  
+    =render :partial => "placeholders_payment"    
+    #rt-form
+      = f.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+  %br
+  %h3 Payment Thank you Email Template
+  = f.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+        
+  %br
+  %label Message     
+  %br
+  #template_setup    
+    =render :partial => "placeholders_reminder"    
+    #rt-form
+      = f.input :paythank_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+ 
+  %button{:type=>"submit",:class=>"red"} Save
+

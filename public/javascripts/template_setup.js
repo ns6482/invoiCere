@@ -36,4 +36,8 @@ $(document).ready(function() {
  		$(this).closest("#template_setup").find(".text").insertAtCaret("{{" + $(this).text() + "}}");
  		return false;
      });
+     
+	$( "#tabs_etemplate").tabs();
+
+ 
 });

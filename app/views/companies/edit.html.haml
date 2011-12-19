@@ -4,17 +4,14 @@
 
 =content_for :right do 
   -if can? :read, User 
-    =link_to "Manage Users", users_path 
+    =link_to "Manage Users", users_path
+    %br
+    =link_to "Edit Template", edit_company_etemplate_path
+    %br
     =link_to "Preview Settings", company_path
+   
     
-#tabs
-  %ul
-    %li
-      %a{:href=> '#tabs-1'} Nunc tincidunt
-    %li
-      %a{:href=> '#tabs-2'} Proin dolor
-	
-
+#form-x
   =simple_form_for  @company, :url => company_path, :html => { :method => :put, :multipart => true  } do |f|
     = f.input :name, :label => "Subdomain"  
     =field_set_tag 'Settings', :id =>"tabs-1" do
@@ -39,7 +36,120 @@
         = s.input :fax
         = s.input :email
         = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }
-    
-    %button{:type=>"submit",:class=>"red"} Save
+    =field_set_tag 'Templates', :id =>"tabs-2" do
+      =f.simple_fields_for :etemplate do |s|
+        %h3 Invoice Email Template
+
+        = s.input :invoice_subject, :input_html => { :rows => 1 }, :label => "Subject"
+             
+             
+        %label 
+          Message     
+        %br
+        #template_setup    
+          %ul{:id => "lt-form"} 
+            %li 
+              %a{:href => "#"} company.name   
+            %li 
+              %a{:href => "#"} company.email
+            %li
+              %a{:href => "#"} company.fax 
+            %li
+              %a{:href => "#"} company.phone 
+            %li
+              %a{:href => "#"} company.website 
+            %li
+              %a{:href => "#"} client.name 
+            %li
+              %a{:href => "#"} invoice.id 
+            %li
+              %a{:href => "#"} invoice.link 
+            %li
+              %a{:href => "#"} invoice.date    
+            %li
+              %a{:href => "#"} invoice.title 
+            %li
+              %a{:href => "#"} invoice.due_date 
+            %li
+              %a{:href => "#"} invoice.total_due
+        
+          #rt-form
+            = s.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+        %br
+        %h3 Reminder Email Template
+        = s.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+        %br
+        %label 
+          Message     
+        %br
+        #template_setup    
+          %ul{:id => "lt-form"} 
+            %li 
+              %a{:href => "#"} company.name   
+            %li 
+              %a{:href => "#"} company.email
+            %li
+              %a{:href => "#"} company.fax 
+            %li
+              %a{:href => "#"} company.phone 
+            %li
+              %a{:href => "#"} company.website 
+            %li
+              %a{:href => "#"} client.name 
+            %li
+              %a{:href => "#"} invoice.id 
+            %li
+              %a{:href => "#"} invoice.link 
+            %li
+              %a{:href => "#"} invoice.date    
+            %li
+              %a{:href => "#"} invoice.title 
+            %li
+              %a{:href => "#"} invoice.due_date 
+            %li
+              %a{:href => "#"} invoice.total_due
+        
+          #rt-form
+            = s.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+        %br
+        %h3 Payment Thank you Email Template
+        = s.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+        
+        %br
+        %label 
+          Message     
+        %br
+        #template_setup    
+          %ul{:id => "lt-form"} 
+            %li 
+              %a{:href => "#"} company.name   
+            %li 
+              %a{:href => "#"} company.email
+            %li
+              %a{:href => "#"} company.fax 
+            %li
+              %a{:href => "#"} company.phone 
+            %li
+              %a{:href => "#"} company.website 
+            %li
+              %a{:href => "#"} client.name 
+            %li
+              %a{:href => "#"} invoice.id 
+            %li
+              %a{:href => "#"} invoice.link 
+            %li
+              %a{:href => "#"} invoice.date    
+            %li
+              %a{:href => "#"} invoice.title 
+            %li
+              %a{:href => "#"} invoice.due_date 
+            %li
+              %a{:href => "#"} invoice.total_due
+        
+          #rt-form
+            = s.input :paythank_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+        
+
+        %button{:type=>"submit",:class=>"red"} Save
       
   

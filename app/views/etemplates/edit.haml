@@ -13,42 +13,44 @@
   #tabs_etemplate
     %ul
       %li
-        %a{:href=> '#tabs-1'} Nunc tincidunt
+        %a{:href=> '#tabs-1'} Invoice Template
       %li
-        %a{:href=> '#tabs-2'} Proin dolor
+        %a{:href=> '#tabs-2'} Reminder Template
       %li
-        %a{:href=> '#tabs-3'} Proin dolor
-    
+        %a{:href=> '#tabs-3'} Payment Template
+            
     #tabs-1
       %h3 Invoice Email Template
       = f.input :invoice_subject, :input_html => { :rows => 1 }, :label => "Subject"     
       %label Message     
       %br
       #template_setup
-        =render :partial => "placeholders_email"    
+        %ul{:id => "lt-form"} 
+          =render :partial => "placeholders_email"    
         #rt-form
           = f.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
       %br
     #tabs-2
       %h3 Reminder Email Template
       = f.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-      %br
+     
       %label Message     
       %br
-      #template_setup  
-        =render :partial => "placeholders_payment"    
+      #template_setup
+        %ul{:id => "lt-form"}   
+          =render :partial => "placeholders_payment"    
         #rt-form
           = f.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
       %br
     #tabs-3
       %h3 Payment Thank you Email Template
       = f.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
-        
-      %br
+       
       %label Message     
       %br
-      #template_setup    
-        =render :partial => "placeholders_reminder"    
+      #template_setup 
+        %ul{:id => "lt-form"}    
+          =render :partial => "placeholders_reminder"    
         #rt-form
           = f.input :paythank_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
  

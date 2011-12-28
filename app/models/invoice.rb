@@ -23,7 +23,7 @@ class Invoice < ActiveRecord::Base
     where("invoice_date >= ? and invoice_date < ? ", time1, time2) 
   }
   
-  scope :ytd, by_date( Date.new(Date.today.year,1,1) , Date.today)
+  scope :ytd, by_date( Date.new(Date.today.year,1,1) , Date.today+1)
   scope :mtd, by_date( Date.new(Date.today.year,Date.today.month,1) , Date.today)
   
   #scope :group_by_month, 

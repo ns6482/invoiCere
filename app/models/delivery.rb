@@ -5,6 +5,8 @@ class Delivery < ActiveRecord::Base
   attr_accessor :company_id
   
 
+  liquid_methods :invoice_title, :company_name, :company_email, :company_fax, :company_phone, :company_website, :client_name, :invoice_id, :invoice_link, :invoice_date, :invoice_title, :invoice_due_date, :invoice_total_due
+
   belongs_to :invoice
   
   has_many :sends
@@ -46,9 +48,54 @@ class Delivery < ActiveRecord::Base
     self.message.first(47) << "..."
   end
 
-   def company_id
+  def company_id
     self.invoice.company_id
   end
 
-
+  def invoice_title
+    self.invoice.title
+  end
+  
+  def company_name
+    Company.find(self.invoice.client.company_id).name  
+  end
+  
+  def company_email
+    Company.find(self.invoice.client.company_id).setting.email
+  end
+  
+  def company_fax
+    Company.find(self.invoice.client.company_id).setting.fax
+  end
+  
+  def company_phone
+    Company.find(self.invoice.client.company_id).setting.telephone
+  end
+  
+  def company_website
+  end
+  
+  def client_name
+    self.invoice.client.name
+  end
+  
+  def invoice_id
+    self.invoice.id
+  end
+  
+  def invoice_link
+  end
+  
+  def invoice_date
+    self.invoice.invoice_date
+  end
+  
+  def invoice_due_date
+    self.invoice.due_date
+  end
+  
+  def invoice_total_due
+    self.invoice.remaining_amount
+  end
+       
 end

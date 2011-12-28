@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   extend FriendlyId
 
+ 
   has_many :users, :dependent => :destroy
   #has_many :accounts, :dependent => :destroy
   has_many :clients, :dependent => :destroy
@@ -34,6 +35,7 @@ class Company < ActiveRecord::Base
   def get_invoices_by_state
     self.invoices.group_by {|i| i.formatted_state }
   end
+  
   
   private
 

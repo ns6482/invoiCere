@@ -8,6 +8,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.1)
+    RedCloth (4.2.9)
     abstract (1.0.0)
     actionmailer (3.0.10)
       actionpack (= 3.0.10)
@@ -162,6 +163,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  RedCloth
   activemerchant (~> 1.10.0)
   cancan
   compass

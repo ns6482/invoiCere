@@ -73,6 +73,7 @@ class Delivery < ActiveRecord::Base
   end
   
   def company_website
+    #TODO company_website placeholder
   end
   
   def client_name
@@ -84,6 +85,7 @@ class Delivery < ActiveRecord::Base
   end
   
   def invoice_link
+    #TODO invoice link placeholder
   end
   
   def invoice_date
@@ -97,5 +99,11 @@ class Delivery < ActiveRecord::Base
   def invoice_total_due
     self.invoice.remaining_amount
   end
+  
+  def invoice_paid_total 
+    self.invoice.total_cost_inc_tax_delivery - self.invoice.remaining_amount 
+  end
+  
+ 
        
 end

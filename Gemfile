@@ -36,6 +36,7 @@ gem "haml-rails"
 gem "deep_cloneable", "~> 1.3.0"
 gem 'mysql2', '< 0.3'
 gem "liquid"
+gem "RedCloth"
 # Use unicorn as the web server
 # gem 'unicorn'
 

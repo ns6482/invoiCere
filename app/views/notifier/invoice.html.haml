@@ -2,8 +2,8 @@
   Welcome to
   = @client.company_name
 #message
- 
-  =raw RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html
+  -if !@delivery.message.nil?
+    =raw RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html
     
 #details
   = render :partial => "invoices/show_elements/show_core", :object => :invoice

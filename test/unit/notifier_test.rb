@@ -32,8 +32,8 @@ class NotifierTest < ActionMailer::TestCase
     assert_equal recipients, email.to
 
     assert_equal  @delivery.invoice.title, email.subject       
-    assert_match /#{@delivery.message}/, email.body
-    assert_match /#{@delivery.invoice.client.company_name}/, email.body
+    assert_match /#{@delivery.message}/, email.body.to_s
+    assert_match /#{@delivery.invoice.client.company_name}/, email.body.to_s
 
   end
 
@@ -58,8 +58,8 @@ class NotifierTest < ActionMailer::TestCase
     assert_equal recipients, email.to
 
     assert_equal  @delivery.invoice.title, email.subject
-    assert_match /#{@delivery.message}/, email.body
-    assert_match /#{@delivery.invoice.client.company_name}/, email.body
+    assert_match /#{@delivery.message}/, email.body.to_s
+    assert_match /#{@delivery.invoice.client.company_name}/, email.body.to_s
 
   end
 
@@ -86,8 +86,8 @@ class NotifierTest < ActionMailer::TestCase
     assert_equal recipients, email.to
 
     assert_equal  @invoice.title, email.subject
-    assert_match /#{@schedule.message}/, email.body
-    assert_match /#{@invoice.client.company_name}/, email.body
+    assert_match /#{@schedule.message}/, email.body.to_s
+    assert_match /#{@invoice.client.company_name}/, email.body.to_s
 
   end
 

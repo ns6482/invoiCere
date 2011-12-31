@@ -3,6 +3,7 @@
  = @client.company_name
 #message
  %p
-  = @schedule.message
+  -if !@schedule.message.nil?
+   =raw RedCloth.new(Liquid::Template.parse(@schedule.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html
 #details
  = render :partial => "invoices/show_elements/show_core", :object => :invoice

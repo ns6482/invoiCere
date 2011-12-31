@@ -55,7 +55,7 @@ class UserLoginTest < ActionController::IntegrationTest
   def test_signin_valid
 
     login_user
-    follow_redirect!   
+    #follow_redirect!   
     #assert_template ""
     #assert_equal @user.company.name + ".lvh.me", request.host
     
@@ -82,7 +82,7 @@ class UserLoginTest < ActionController::IntegrationTest
   def test_changing_companies_after_singin_redirects_login_page
     login_user
     host! @user1.company.name + ".lvh.me"
-    follow_redirect!
+    #follow_redirect!
     #logout_user      
     #assert_template ""
     #assert_equal '/users/sign_in', path    

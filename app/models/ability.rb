@@ -12,7 +12,9 @@ class Ability
       can [:update, :read], Etemplate, :company_id => user.company_id
       can [:update, :read], Setting, :company_id => user.company_id
       can [:create, :read, :update, :invite, :new_invite], User,  :company_id => user.company_id
-      can [:destroy], User, :owner => false,  :company_id => user.company_id
+      #can [:destroy], User, :owner => false,  :company_id => user.company_id
+      can [:destroy], User,  :company_id => user.company_id
+
       can :manage,  [Invoice, InvoiceItem, Payment, Delivery, Send, Reminder, Comment, Contact]
       can [:update, :read], Company, :id => user.company_id
       can :manage, Client, :company_id => user.company_id      
@@ -21,12 +23,16 @@ class Ability
       can [:create, :update], Feedback #TODO only apply to client once setup
       can [:manage], Schedule
     elsif user.role? :standard
-      can [:create, :update, :read], [Invoice, InvoiceItem, Delivery, Send, Reminder, Payment]
+      cannot [:invite], Client
+      cannot [:invite], Contact
+
+      can [:create, :update, :read, :destroy], [Invoice, InvoiceItem, Delivery, Send, Reminder, Payment]
+      #can :destroy, [Invoice, InvoiceItem]
       can [:create, :update, :read], [Client, Contact], :company_id => user.company_id
       can [:update, :read], User,:id => user.id
       can :read, Company, :id => user.company_id
       can :read, Setting, :id => user.company_id
-      can [:create, :read], Comment
+      can [:create, :read], Comment      
       can :destroy, Comment, :user_id => user.id
       can [:read, :destroy], Feedback
       can [:create, :update], Feedback #TODO only apply to client once setup
@@ -43,7 +49,8 @@ class Ability
       can :delete, Comment, :id => user.id
       can [:read], Schedule
     elsif user.role? :client
-      can [:read, :update], Client, :id => user.client_id
+      can [:read, :update], Client, :client_id => user.client_id
+
       can [:manage], Contact, :client_id => user.client_id
       can [:update], User, :id => user.id
       can [:read], Invoice, :client_id => user.client_id

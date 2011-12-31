@@ -45,7 +45,7 @@ class PaymentsControllerTest < ActionController::TestCase
 
   def test_new_already_paid
     post :create, :invoice_id =>@invoice.id,  :payment => {:invoice_id => @invoice.id, :pay_full_amount => "1"}    
-    assert_equal "0.0", @invoice.remaining_amount.to_s
+    assert_equal 0, @invoice.remaining_amount.to_f
     get :new, :invoice_id => @invoice.id
     assert_redirected_to invoice_payments_url(@invoice)
   end

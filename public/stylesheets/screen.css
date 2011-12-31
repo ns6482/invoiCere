@@ -2191,7 +2191,8 @@ label.collection_check_boxes {
 
 /* line 161, ../../sass/system_partials/_forms.sass */
 #lt-form {
-  padding-top: 10px;
+  padding-top: 5px;
+  padding-right: 15px;
   float: left;
   width: 60px;
   text-align: left;

@@ -85,7 +85,7 @@ class Invoice < ActiveRecord::Base
   after_create :setup_reminder
 
   def total_items
-    self.invoice_items.sum(:qty).to_s
+    self.invoice_items.sum(:qty)
   end
   
   def _total_cost
@@ -101,7 +101,7 @@ class Invoice < ActiveRecord::Base
     elsif self.tax_rate <=0
       tax = 1
     else
-      tax =  ((self.tax_rate.to_f + 100)/100)
+      tax =  ((self.tax_rate + 100)/100)
     end
     
     total_tax = self.invoice_items.find_all_by_taxable(true,:select => "SUM(qty*(cost*#{tax})) as total_cost")
@@ -150,7 +150,8 @@ class Invoice < ActiveRecord::Base
     if !total_payments.nil?
       val = val - total_payments    
     end
-    self.remaining_amount = val
+    self.remaining_amount = val.round(2)
+    
   end
 
 

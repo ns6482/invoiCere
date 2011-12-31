@@ -21,6 +21,7 @@ class UsersController < BaseController
   def create
 
     @user.company_id = current_company.id  
+   
     #@user.role_ids = params[:user][:role_ids]
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]

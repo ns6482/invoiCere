@@ -39,7 +39,7 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil  :invoices
 
-    assert_select "table#invoices" do
+    assert_select "table#table-invoices" do
       assert_select "tr", :count => 2
     end
   end
@@ -59,7 +59,7 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil  :invoices
 
-    assert_select "table#invoices" do
+    assert_select "table#table-invoices" do
       assert_select "tr", :count => 3
     end
 

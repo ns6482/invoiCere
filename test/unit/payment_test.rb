@@ -42,11 +42,11 @@ class PaymentTest < ActiveSupport::TestCase
 
 
    def test_overpayment_payment_not_allowed
-     assert_equal("100",@invoice._total_cost.to_s)
-     assert_equal("100.0", @invoice.remaining_amount.to_s)
+     assert_equal(100,@invoice._total_cost)
+     assert_equal(100, @invoice.remaining_amount)
      @payment = Factory.build(:payment, :amount=> 101, :invoice_id => @invoice.id)
      assert !@payment.save#, "Saved the post without a title"
-     assert_equal("100.0", @invoice.remaining_amount.to_s)
+     assert_equal(100, @invoice.remaining_amount)
      assert_equal 0,  @invoice.payments.count
   end
 
@@ -76,19 +76,19 @@ class PaymentTest < ActiveSupport::TestCase
 #8. assert invoice.payments is 3
 
    def test_partial_payment
-     assert_equal("100",@invoice._total_cost.to_s)
-     assert_equal("100.0", @invoice.remaining_amount.to_s)
+     assert_equal(100,@invoice._total_cost)
+     assert_equal(100, @invoice.remaining_amount)
 
      @payment = Factory.build(:payment, :amount=> 50, :invoice_id => @invoice.id)
      assert @payment.save
 
-     assert_equal("50.0", @invoice.remaining_amount.to_s)
+     assert_equal(50, @invoice.remaining_amount)
      assert_equal 1,  @invoice.payments.count
 
      @payment = Factory.build(:payment, :amount=> 30, :invoice_id => @invoice.id)
      assert @payment.save!
 
-     assert_equal("20.0", @invoice.remaining_amount.to_s)
+     assert_equal(20, @invoice.remaining_amount)
      assert_equal 2,  @invoice.payments.count
 
      @payment = Factory.build(:payment, :amount=> 30, :invoice_id => @invoice.id)
@@ -97,18 +97,18 @@ class PaymentTest < ActiveSupport::TestCase
      @payment = Factory.build(:payment, :amount=> 20, :invoice_id => @invoice.id)
      assert @payment.save
 
-     assert_equal("0.0", @invoice.remaining_amount.to_s)
+     assert_equal(0.0, @invoice.remaining_amount)
      assert_equal 3,  @invoice.payments.count
    end
 
   def test_full_payment
-     assert_equal("100",@invoice._total_cost.to_s)
-     assert_equal("100.0", @invoice.remaining_amount.to_s)
+     assert_equal(100.0,@invoice._total_cost)
+     assert_equal(100, @invoice.remaining_amount)
 
      @payment = Factory.build(:payment, :pay_full_amount=>"1", :invoice_id => @invoice.id)
      assert @payment.save
 
-     assert_equal("0.0", @invoice.remaining_amount.to_s)
+     assert_equal(0.0, @invoice.remaining_amount)
      assert_equal 1,  @invoice.payments.count
    end
 

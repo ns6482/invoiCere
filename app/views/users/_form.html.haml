@@ -11,7 +11,7 @@
       =f.input :current_password, :hint => 'we need your current password to confirm your changes', :required => true, :label => "Password"
 
     %br
-    -if can? :read, Role
-      =f.collection_check_boxes :role_ids, Role.all, :id, :name
+    -#if can? :read, Role
+      =#f.collection_check_boxes :role_ids, Role.all, :id, :name
 
   %button{:type=>"submit",:class=>"red"} Save

@@ -11,7 +11,7 @@ Factory.define :user do |f|
   f.sequence(:email) { |n| "foo#{n}@foo.com" }
   f.password "password123"
   f.company {|company| company.association(:company) }
-  f.roles { [Factory.create(:role, :name => 'admin')] }
+  f.roles { [Factory.create(:role, :name => 'viewer')] }
   f.client_id ""
 end
 

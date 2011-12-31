@@ -71,7 +71,7 @@ class InvoiceTest < ActiveSupport::TestCase
    @invoice.run_callbacks(:save)
   
    assert_equal(2,@invoice.invoice_items.length)
-   assert_equal("19.98",@invoice.total_items)  
+   assert_equal(19.98,@invoice.total_items)  
    assert_equal("199.6002",@invoice._total_cost.to_s)    
    assert_equal("209.57022999",@invoice._total_cost_inc_tax.to_s)
 

@@ -1,1 +1,1 @@
-= @schedule.message
+=raw Liquid::Template.parse(@schedule.message.gsub("{{","{{d.")).render('d' => @delivery)

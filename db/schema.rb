@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111111193954) do
+ActiveRecord::Schema.define(:version => 20111231224550) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(:version => 20111111193954) do
     t.integer  "invoice_id"
     t.string   "item_type",        :limit => 20,                                 :null => false
     t.string   "item_description", :limit => 100,                                :null => false
-    t.decimal  "qty",                             :precision => 10, :scale => 0, :null => false
-    t.decimal  "cost",                            :precision => 10, :scale => 0, :null => false
+    t.decimal  "qty",                             :precision => 12, :scale => 2, :null => false
+    t.decimal  "cost",                            :precision => 12, :scale => 2, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "taxable"
@@ -107,19 +107,19 @@ ActiveRecord::Schema.define(:version => 20111111193954) do
     t.date     "invoice_date"
     t.string   "title"
     t.text     "notes"
-    t.decimal  "tax_rate",                    :precision => 10, :scale => 0
-    t.decimal  "delivery_charge",             :precision => 10, :scale => 0
+    t.decimal  "tax_rate",                    :precision => 12, :scale => 2
+    t.decimal  "delivery_charge",             :precision => 12, :scale => 2
     t.string   "business_id"
     t.string   "purchase_order_id"
     t.string   "status"
-    t.decimal  "late_fee",                    :precision => 10, :scale => 0
+    t.decimal  "late_fee",                    :precision => 12, :scale => 2
     t.integer  "due_days"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
-    t.decimal  "total_cost",                  :precision => 10, :scale => 0
-    t.decimal  "total_cost_inc_tax",          :precision => 10, :scale => 0
-    t.decimal  "total_cost_inc_tax_delivery", :precision => 10, :scale => 0
+    t.decimal  "total_cost",                  :precision => 12, :scale => 2
+    t.decimal  "total_cost_inc_tax",          :precision => 12, :scale => 2
+    t.decimal  "total_cost_inc_tax_delivery", :precision => 12, :scale => 2
     t.date     "due_date"
     t.date     "opened_date"
     t.string   "opened_by"
@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20111111193954) do
   create_table "payments", :force => true do |t|
     t.integer  "invoice_id"
     t.integer  "user_id"
-    t.decimal  "amount",       :precision => 10, :scale => 0
+    t.decimal  "amount",       :precision => 12, :scale => 2
     t.string   "payment_type"
     t.string   "currency"
     t.datetime "created_at"

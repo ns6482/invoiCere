@@ -78,7 +78,7 @@ class InvoiceTest < ActiveSupport::TestCase
    total_cost_inc_tax_delivery = @invoice.delivery_charge.to_f + 209.57022999
    assert_equal(total_cost_inc_tax_delivery.to_s,@invoice._total_cost_inc_tax_delivery.to_s)
 
-   assert_equal("189.56022999", @invoice.remaining_amount.to_s)
+   assert_equal("189.56", @invoice.remaining_amount.to_s)
 
   end
 

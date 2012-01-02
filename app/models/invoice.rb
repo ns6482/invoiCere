@@ -90,7 +90,7 @@ class Invoice < ActiveRecord::Base
   
   def _total_cost
     total = self.invoice_items.find(:all,:select => "SUM(qty*cost) as total_cost")
-    @total = total.first.total_cost
+    @total = discountize(total.first.total_cost)    
   end
 
 
@@ -112,7 +112,7 @@ class Invoice < ActiveRecord::Base
     @total_cost_no_tax = total.first.total_cost.to_f
 
     @total_cost_inc_tax = @total_cost_no_tax + @total_cost_inc_tax
-    
+    discountize(@total_cost_inc_tax)
   end
 
   def _total_cost_inc_tax_delivery
@@ -157,6 +157,14 @@ class Invoice < ActiveRecord::Base
 
 
   private
+  
+  def discountize(val)
+    if !self.discount.nil?
+      val = val -self.discount.to_f 
+    end
+    
+    val
+  end
 
   def update_opened_date
     self.opened_date = Date.today

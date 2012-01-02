@@ -82,9 +82,26 @@ class InvoiceTest < ActiveSupport::TestCase
 
   end
   
-  def test_total_with_discount_percent
+  def test_discount_validation
 
-   @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
+    @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
+    @invoice.discount = "10.12"
+    assert @invoice.save
+    
+    @invoice.discount = "10%"
+    assert @invoice.save
+    
+    @invoice.discount = "20d"
+    assert !@invoice.save
+
+    assert_equal 1, @invoice.errors.size
+    assert_equal @invoice.errors[:discount].count, 1
+    
+  end
+  
+  def test_total_with_discount
+
+      @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
 
    item1 = invoice_items(:one)#InvoiceItem.create( :cost =>10.11, :qty => 1.5, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test1")
    item2 = invoice_items(:two)#InvoiceItem.create( :cost => 11.22, :qty => 2, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test2")
@@ -92,44 +109,44 @@ class InvoiceTest < ActiveSupport::TestCase
     
    @invoice.invoice_items << item1
    @invoice.invoice_items << item2
-   @invoice.discount = "10%"
+   @invoice.discount = "9.00"
+    
    @invoice.save
    #@invoice.run_callbacks(:after_save)
    @invoice.run_callbacks(:save)
-    
-   assert_equal("209.57022999",@invoice._total_cost_inc_tax.to_s)
-
-   total_cost_inc_tax_delivery = @invoice.delivery_charge.to_f + 209.57022999
-   assert_equal(total_cost_inc_tax_delivery.to_s,@invoice._total_cost_inc_tax_delivery.to_s)
-
-   assert_equal("189.56", @invoice.remaining_amount.to_s)
+  
+   assert_equal(2,@invoice.invoice_items.length)
+   assert_equal(19.98,@invoice.total_items)  
+   assert_equal("190.6002",@invoice._total_cost.to_s)    
+   assert_equal("200.57022999",@invoice._total_cost_inc_tax.to_s)
 
   end
   
-    def test_total_with_discount_percent
+   #def test_total_with_discount_perc
 
-   @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
+    #  @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
 
-   item1 = invoice_items(:one)#InvoiceItem.create( :cost =>10.11, :qty => 1.5, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test1")
-   item2 = invoice_items(:two)#InvoiceItem.create( :cost => 11.22, :qty => 2, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test2")
-   #item3 = InvoiceItem.create( :cost => 12.31, :qty => 3, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test3")
+   #item1 = invoice_items(:one)#InvoiceItem.create( :cost =>10.11, :qty => 1.5, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test1")
+   #item2 = invoice_items(:two)#InvoiceItem.create( :cost => 11.22, :qty => 2, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test2")
+   ##item3 = InvoiceItem.create( :cost => 12.31, :qty => 3, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test3")
     
-   @invoice.invoice_items << item1
-   @invoice.invoice_items << item2
-   @invoice.discount = "9.57"
-   @invoice.save
-   #@invoice.run_callbacks(:after_save)
-   @invoice.run_callbacks(:save)
+   #@invoice.invoice_items << item1
+   #@invoice.invoice_items << item2
+   #@invoice.discount = "10%"
     
-   assert_equal("209.57022999",@invoice._total_cost_inc_tax.to_s)
+   #@invoice.save
+   ##@invoice.run_callbacks(:after_save)
+   #@invoice.run_callbacks(:save)
+  
+   #assert_equal(2,@invoice.invoice_items.length)
+   #assert_equal(19.98,@invoice.total_items)  
+   #assert_equal("190.6002",@invoice._total_cost.to_s)    
+   #assert_equal("200.57022999",@invoice._total_cost_inc_tax.to_s)
 
-   total_cost_inc_tax_delivery = @invoice.delivery_charge.to_f + 209.57022999
-   assert_equal(total_cost_inc_tax_delivery.to_s,@invoice._total_cost_inc_tax_delivery.to_s)
+  #end
 
-   assert_equal("189.56", @invoice.remaining_amount.to_s)
 
-  end
-
+  
   def test_due_date
     @invoice = Factory.create(:invoice, :invoice_date => "01/01/2010", :due_days => 30)
     @invoice.save!

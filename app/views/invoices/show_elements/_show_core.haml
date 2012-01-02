@@ -29,10 +29,12 @@
   %table{:id => 'invoice-items'}
    %thead
     %tr
-     %th Type
-     %th Description
-     %th Cost
+     %th Item Name and Description
      %th Qty
+     %th Unit Price
+     %th Unit
+     %th Total
+     %th Tax
    %tbody
     =render :partial => "invoices/show_elements/show_invoice_item", :collection => @invoice.invoice_items, :as => :show_invoice_item
  #invoice-summary

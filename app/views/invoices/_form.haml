@@ -18,20 +18,22 @@
 
       =field_set_tag 'Items', :id => "form-main" do
         .fields
-          .item_type 
-            %label Type
+
           .item_description
-            %label Description        
+            %strong Item Name and Description        
           .item_qty 
-            %label Qty
+            %strong Qty
           .item_cost
-            %label Cost
+            %strong Price
+          .item_type 
+            %strong / Unit
           .item_tax
-            %label Tax
+            %strong Tax
           .item_remove
           .item_total        
         = f.simple_fields_for :invoice_items
         =f.link_to_add "New Item", :invoice_items                  
+
       =field_set_tag 'Further Notes', :id => "form-bottom" do
         =f.input_field :notes, :html => {:rows => 2}
       #button

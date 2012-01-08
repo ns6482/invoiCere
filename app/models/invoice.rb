@@ -8,6 +8,9 @@ class Invoice < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
 
+
+  validates_format_of :discount, :with => /^((0*?\.\d+(\.\d{1,2})?)|((\d+(\.\d{1,2})?)|(((100(?:\.0{1,2})?|0*?\.\d{1,2}|\d{1,2}(?:\.\d{1,2})?)\%))))$/, :message=> "discount must be a positive numerical or percentage value, maximum two decimal places allowed", :allow_nil => true  
+
   scope :none_scheduled,
     :select => 'invoices.*',
     :conditions => "schedules.id IS NULL",
@@ -159,8 +162,17 @@ class Invoice < ActiveRecord::Base
   private
   
   def discountize(val)
+    
     if !self.discount.nil?
-      val = val -self.discount.to_f 
+
+      discount_calc= self.discount.gsub(/\%/, "").to_f
+ 
+      if self.discount.include? "%"
+        val = val - (val * (discount_calc/100))
+      else
+        val = val - discount_calc
+      end
+    
     end
     
     val

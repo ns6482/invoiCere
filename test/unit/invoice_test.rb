@@ -122,28 +122,26 @@ class InvoiceTest < ActiveSupport::TestCase
 
   end
   
-   #def test_total_with_discount_perc
+   def test_total_with_discount_perc
 
-    #  @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
+   @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
 
-   #item1 = invoice_items(:one)#InvoiceItem.create( :cost =>10.11, :qty => 1.5, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test1")
-   #item2 = invoice_items(:two)#InvoiceItem.create( :cost => 11.22, :qty => 2, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test2")
-   ##item3 = InvoiceItem.create( :cost => 12.31, :qty => 3, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test3")
+   item1 = invoice_items(:one)#InvoiceItem.create( :cost =>10.11, :qty => 1.5, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test1")
+   item2 = invoice_items(:two)#InvoiceItem.create( :cost => 11.22, :qty => 2, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test2")
+   #item3 = InvoiceItem.create( :cost => 12.31, :qty => 3, :invoice_id => invoice.id, :item_type=> "service", :item_description => "test3")
     
-   #@invoice.invoice_items << item1
-   #@invoice.invoice_items << item2
-   #@invoice.discount = "10%"
+   @invoice.invoice_items << item1
+   @invoice.invoice_items << item2
+   @invoice.discount = "10%"
     
-   #@invoice.save
-   ##@invoice.run_callbacks(:after_save)
-   #@invoice.run_callbacks(:save)
+   @invoice.save
+   #@invoice.run_callbacks(:after_save)
+   @invoice.run_callbacks(:save)
   
-   #assert_equal(2,@invoice.invoice_items.length)
-   #assert_equal(19.98,@invoice.total_items)  
-   #assert_equal("190.6002",@invoice._total_cost.to_s)    
-   #assert_equal("200.57022999",@invoice._total_cost_inc_tax.to_s)
+   assert_equal("179.64018",@invoice._total_cost.to_s)    
+   assert_equal("188.613206991",@invoice._total_cost_inc_tax.to_s)
 
-  #end
+  end
 
 
   

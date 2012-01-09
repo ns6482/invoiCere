@@ -1997,7 +1997,7 @@ label.collection_check_boxes {
   float: left;
   margin-right: 10px;
   width: 430px;
-  height: 210px;
+  height: 242px;
 }
 /* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #form-top {
@@ -2033,8 +2033,8 @@ label.collection_check_boxes {
   display: inline;
   float: left;
   margin-right: 0;
-  width: 150px;
-  height: 210px;
+  width: 110px;
+  height: 242px;
 }
 /* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #form-right {

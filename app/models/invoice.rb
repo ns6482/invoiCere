@@ -9,7 +9,7 @@ class Invoice < ActiveRecord::Base
   @@per_page = 10
 
 
-  validates_format_of :discount, :with => /^((0*?\.\d+(\.\d{1,2})?)|((\d+(\.\d{1,2})?)|(((100(?:\.0{1,2})?|0*?\.\d{1,2}|\d{1,2}(?:\.\d{1,2})?)\%))))$/, :message=> "discount must be a positive numerical or percentage value, maximum two decimal places allowed", :allow_nil => true  
+  validates_format_of :discount, :with => /^((0*?\.\d+(\.\d{1,2})?)|((\d+(\.\d{1,2})?)|(((100(?:\.0{1,2})?|0*?\.\d{1,2}|\d{1,2}(?:\.\d{1,2})?)\%))))$/, :message=> "must be a positive numerical or percentage value, maximum two decimal places allowed", :allow_nil => true  
 
   scope :none_scheduled,
     :select => 'invoices.*',

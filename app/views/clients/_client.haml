@@ -16,7 +16,7 @@
       - if @clients_outstanding.include? client.id
         .alert
           %strong Due: 
-          =h number_to_currency client.total_due.to_d - client.total_paid.to_d, :unit => '£', :separator => ".", :delimiter => ","
+          =h number_to_currency client.total_due.to_d ||= 0 - client.total_paid.to_d ||= 0, :unit => '£', :separator => ".", :delimiter => ","
       - else
         .success
           %strong Due:

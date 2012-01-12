@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120102115631) do
+ActiveRecord::Schema.define(:version => 20120110200534) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -196,6 +196,13 @@ ActiveRecord::Schema.define(:version => 20120102115631) do
     t.text     "message"
     t.integer  "default_message"
     t.text     "custom_message"
+    t.integer  "client_id"
+    t.string   "title"
+    t.text     "notes"
+    t.decimal  "tax_rate",          :precision => 10, :scale => 0
+    t.decimal  "delivery_charge",   :precision => 10, :scale => 0
+    t.string   "purchase_order_id"
+    t.decimal  "late_fee",          :precision => 10, :scale => 0
   end
 
   create_table "sends", :force => true do |t|

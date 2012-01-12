@@ -1,7 +1,7 @@
 class SchedulesController < BaseController
-  before_filter :find_invoice, :except => :index
+  #before_filter :find_invoice, :except => :index
   #before_filter :check_schedule_exists, :only => [:new, :edit]
-  load_and_authorize_resource :schedule,:through=> :invoice, :singleton => true, :except => :index
+  load_and_authorize_resource #:schedule,:through=> :invoice, :singleton => true, :except => :index
 
   def index    
     @schedules = current_company.schedules    
@@ -12,21 +12,28 @@ class SchedulesController < BaseController
   
   def new
 
-    @contacts = @invoice.client.contacts
+    @schedule  = Schedule.new
+    #@schedule.client_id = params[:client_id]
+    @client = current_company.clients.find(params[:client_id])
+    @contacts = @client.contacts
     
-    if Schedule.find_by_invoice_id(@invoice.id)
+    @schedule.client = @client
+    
+    #@contacts = @invoice.client.contacts
+    
+    #if Schedule.find_by_invoice_id(@invoice.id)
 
-      respond_to do |format|
-        format.html{redirect_to edit_invoice_schedule_url(@invoice)}
-        format.js{"edit.js"}
-      end
-    else
+     # respond_to do |format|
+     #   format.html{redirect_to edit_invoice_schedule_url(@invoice)}
+     #   format.js{"edit.js"}
+     # end
+    #else
 
       respond_to do |format|
         format.html
         format.js
       end
-    end
+    #end
   end
 
   def edit
@@ -53,10 +60,14 @@ class SchedulesController < BaseController
   def create
 
     respond_to do |format|
-    if @schedule.valid?
-      @schedule.save
+    
+    client = current_company.clients.find( params[:schedule][:client_id])      
+    @schedule.client_id =  client.id 
+    if @schedule.save
+      
+      #@schedule.save
       flash[:notice] = "Successfully created schedule."
-      format.html {redirect_to invoice_schedule_url(@invoice)}
+      format.html {redirect_to :action => :index} #{redirect_to invoice_schedule_url(@invoice)}
       format.js
     else
       format.html{render :action => 'new'}
@@ -89,9 +100,9 @@ class SchedulesController < BaseController
 
   private
   
-  def find_invoice
-    @invoice = current_company.invoices.find(params[:invoice_id])
-  end
+  #def find_invoice
+   # @invoice = current_company.invoices.find(params[:invoice_id])
+  #end
 
    def check_schedule_exists
       if Schedule.find_by_invoice_id(@invoice.id)
@@ -107,4 +118,7 @@ class SchedulesController < BaseController
       end
       end
    end
+   
+   
+    
 end

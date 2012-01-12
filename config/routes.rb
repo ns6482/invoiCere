@@ -11,7 +11,7 @@ VisioInvoiceV3::Application.routes.draw do
  constraints(Subdomain) do
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     
-    resources :schedules, :only => [:index]
+    resources :schedules#, :only => [:index, :new]
 
     resources :invoices do
       collection do

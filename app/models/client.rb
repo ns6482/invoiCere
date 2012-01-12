@@ -7,6 +7,7 @@ class Client < ActiveRecord::Base
   has_many :contacts, :dependent => :destroy
   has_many :invoices
   has_many :users
+  has_many :schedules
 
   validates_presence_of :company_name, :address1, :email#,:company_id
   validates_uniqueness_of :company_name

@@ -2,6 +2,7 @@ class Schedule < ActiveRecord::Base
   attr_accessible :name,  :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message
 
   belongs_to :invoice
+  belongs_to :client
 
   has_many :schedule_sends
   has_many :contacts, :through => :schedule_sends

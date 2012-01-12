@@ -9,8 +9,15 @@
   %td= h number_to_currency @invoice.total_cost_inc_tax, :unit => '£', :separator => ".", :delimiter => ","
  %tr
   %th
+   %strong Discount:
+  -if @invoice.discount.include? "%"
+   %td= h @invoice.discount
+  -else 
+   %td= h number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => "," 
+ %tr
+  %th
    %strong Delivery Charge:
-  %td= h number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
+  %td= h number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => "," 
  %tr
   %th
    %strong Total:

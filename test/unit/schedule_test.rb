@@ -9,7 +9,7 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule = schedules(:one)
     invoice = invoices(:one)
 
-    schedule = Schedule.find_by_invoice_id(1)
+    #schedule = Schedule.find_by_invoice_id(1)
     
     assert_equal false,  schedule.nil?
     assert_nil invoice.seed_schedule_id
@@ -21,7 +21,7 @@ class ScheduleTest < ActiveSupport::TestCase
 
   def test_set_last_sent
     schedule = schedules(:one)
-    schedule = Schedule.find_by_invoice_id(1)
+    #schedule = Schedule.find_by_invoice_id(1)
     assert_nil schedule.last_sent
     schedule.send_invoice!
     assert_equal Date.today.to_s, schedule.last_sent.to_s
@@ -30,7 +30,7 @@ class ScheduleTest < ActiveSupport::TestCase
   
   def test_set_next_send
     schedule = schedules(:one)
-    schedule = Schedule.find_by_invoice_id(1)
+    #schedule = Schedule.find_by_invoice_id(1)
     assert_nil schedule.next_send
     schedule.send_invoice!
     assert_equal (Date.today + 1).to_s, schedule.next_send.to_s
@@ -42,7 +42,7 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule.frequency_type = "Daily"
     schedule.save!
 
-    schedule = Schedule.find_by_invoice_id(1)
+    #schedule = Schedule.find_by_invoice_id(1)
     assert_nil schedule.next_send
     schedule.send_invoice!
     assert_equal (Date.today + 2).to_s, schedule.next_send.to_s
@@ -54,7 +54,7 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule.frequency_type = "Weekly"
     schedule.save!
 
-    schedule = Schedule.find_by_invoice_id(1)
+    #schedule = Schedule.find_by_invoice_id(1)
     assert_nil schedule.next_send
     schedule.send_invoice!
     assert_equal (Date.today + 14).to_s, schedule.next_send.to_s
@@ -66,7 +66,7 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule.frequency_type = "Monthly"
     schedule.save!
 
-    schedule = Schedule.find_by_invoice_id(1)
+    #schedule = Schedule.find_by_invoice_id(1)
     assert_nil schedule.next_send
     schedule.send_invoice!
     assert_equal (Date.today >> 2).to_s, schedule.next_send.to_s
@@ -78,7 +78,7 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule.frequency_type = "Yearly"
     schedule.save!
 
-    schedule = Schedule.find_by_invoice_id(1)
+    #schedule = Schedule.find_by_invoice_id(1)
     assert_nil schedule.next_send
     schedule.send_invoice!
     assert_equal (Date.today >> 12).to_s, schedule.next_send.to_s

@@ -157,9 +157,6 @@ class InvoicesController < BaseController
 
   private
 
-
-
-
   def find_invoice
     @invoice = current_company.invoices.find(params[:id])
     @invoice.invoice_items.count

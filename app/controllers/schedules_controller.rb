@@ -19,6 +19,9 @@ class SchedulesController < BaseController
     
     @schedule.client = @client
     
+    @schedule.schedule_items.build
+
+    
     #@contacts = @invoice.client.contacts
     
     #if Schedule.find_by_invoice_id(@invoice.id)
@@ -37,24 +40,15 @@ class SchedulesController < BaseController
   end
 
   def edit
+   @schedule = current_company.schedules.find(params[:id])
+   @client = @schedule.client
+   @contacts = @schedule.client.contacts
+   
+   respond_to do |format|
+    format.html
+    format.js
+   end
     
-   @contacts = @invoice.client.contacts
-
-    if !Schedule.find_by_invoice_id(@invoice.id)
-
-      respond_to do |format|
-        format.html{redirect_to new_invoice_schedule_url(@invoice)}
-        format.js{"edit.js"}
-      end
-    else
-      
-      user ||= User.new
-
-      respond_to do |format|
-        format.html
-        format.js
-      end
-    end
   end
   
   def create
@@ -82,8 +76,9 @@ class SchedulesController < BaseController
     respond_to do |format|
       if @schedule.valid?
         @schedule.update_attributes(params[:schedule])
+
         flash[:notice] = "Successfully updated schedule."
-        format.html {redirect_to invoice_schedule_url(@schedule.invoice)}
+        format.html {redirect_to :action => :index} #{redirect_to invoice_schedule_url(@invoice)}
         format.js
       else
         format.html{render :action => 'edit'}

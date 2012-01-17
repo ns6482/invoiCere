@@ -1,0 +1,10 @@
+.input_fields
+  =f.input_field :item_description, :class => 'item_description'
+  =f.input_field :qty, :class => 'item_qty',  :size => 3, :type => "text"
+  =f.input_field :cost,   :class => 'item_cost', :size => 3 , :type => "text" 
+  =f.input_field :item_type, :class => 'item_type'
+  =f.input_field :taxable,  :class => 'item_tax'
+  =f.link_to_remove "Remove" , :class => "item_remove "
+  .item_total
+   
+

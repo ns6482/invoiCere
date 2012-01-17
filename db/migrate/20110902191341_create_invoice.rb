@@ -28,6 +28,8 @@ class CreateInvoice < ActiveRecord::Migration
       t.string   :cancelled_by
       t.integer  :seed_schedule_id
       t.boolean  :latest
+      t.string,  :discount
+
     end
   end
 

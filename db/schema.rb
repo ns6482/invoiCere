@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120110200534) do
+ActiveRecord::Schema.define(:version => 20120115140244) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -172,6 +172,17 @@ ActiveRecord::Schema.define(:version => 20120110200534) do
     t.integer "user_id"
   end
 
+  create_table "schedule_items", :force => true do |t|
+    t.integer  "schedule_id",                                                    :null => false
+    t.string   "item_type",        :limit => 20,                                 :null => false
+    t.string   "item_description", :limit => 100,                                :null => false
+    t.decimal  "qty",                             :precision => 10, :scale => 0, :null => false
+    t.decimal  "cost",                            :precision => 10, :scale => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "taxable"
+  end
+
   create_table "schedule_sends", :force => true do |t|
     t.integer  "schedule_id"
     t.integer  "contact_id"
@@ -182,7 +193,7 @@ ActiveRecord::Schema.define(:version => 20120110200534) do
 
   create_table "schedules", :force => true do |t|
     t.string   "name"
-    t.integer  "invoice_id"
+    t.integer  "client_id"
     t.integer  "frequency"
     t.string   "frequency_type"
     t.date     "last_sent"
@@ -196,13 +207,14 @@ ActiveRecord::Schema.define(:version => 20120110200534) do
     t.text     "message"
     t.integer  "default_message"
     t.text     "custom_message"
-    t.integer  "client_id"
     t.string   "title"
     t.text     "notes"
     t.decimal  "tax_rate",          :precision => 10, :scale => 0
     t.decimal  "delivery_charge",   :precision => 10, :scale => 0
     t.string   "purchase_order_id"
+    t.string   "business_id"
     t.decimal  "late_fee",          :precision => 10, :scale => 0
+    t.decimal  "discount",          :precision => 10, :scale => 0
   end
 
   create_table "sends", :force => true do |t|

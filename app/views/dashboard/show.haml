@@ -35,7 +35,7 @@
         (
         =client.count_invoices
         invoices):     
-        %strong=number_to_currency (client.total_due - client.total_paid).to_f, :unit => '£', :separator => ".", :delimiter => ","
+        %strong=number_to_currency (client.total_due.to_d ||= 0 - client.total_paid.to_d ||= 0).to_f, :unit => '£', :separator => ".", :delimiter => ","
         (paid: 
         =number_to_currency client.total_paid.to_f, :unit => '£', :separator => ".", :delimiter => ","
         )

@@ -10,10 +10,11 @@
  %tr
   %th
    %strong Discount:
-  -if @invoice.discount.include? "%"
-   %td= h @invoice.discount
-  -else 
-   %td= h number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => "," 
+  -if !@invoice.discount.nil?
+    -if @invoice.discount.include? "%"
+      %td= h @invoice.discount
+    -else 
+       %td= h number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => "," 
  %tr
   %th
    %strong Delivery Charge:

@@ -10,7 +10,6 @@ class Schedule < ActiveRecord::Base
 
   attr_accessible :name,  :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :schedule_items_attributes, :notes
 
-  belongs_to :invoice
   belongs_to :client
 
   has_many :schedule_sends
@@ -50,7 +49,7 @@ class Schedule < ActiveRecord::Base
     invoice.purchase_order_id = self.purchase_order_id
     invoice.late_fee = self.late_fee
     invoice.discount = self.discount 
-    invoice.due_date = Date.today >> self.due_on
+    invoice.due_date = Date.today + (self.due_on ||= 0)
     
     self.last_sent = Date.today
     self.next_send = get_next_send

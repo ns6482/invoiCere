@@ -10,12 +10,6 @@ class Invoice < ActiveRecord::Base
 
 
   validates_format_of :discount, :with => /^((0*?\.\d+(\.\d{1,2})?)|((\d+(\.\d{1,2})?)|(((100(?:\.0{1,2})?|0*?\.\d{1,2}|\d{1,2}(?:\.\d{1,2})?)\%))))$/, :message=> "must be a positive numerical or percentage value, maximum two decimal places allowed", :allow_nil => true  
-
-  scope :none_scheduled,
-    :select => 'invoices.*',
-    :conditions => "schedules.id IS NULL",
-    :joins => ["LEFT JOIN schedules ON invoices.id = schedules.invoice_id"],
-    :readonly => false
     
   scope :for_year,
     :select => "invoices.*",
@@ -68,7 +62,6 @@ class Invoice < ActiveRecord::Base
 
   belongs_to :client
   has_many :invoice_items, :dependent => :destroy
-  has_one :schedule, :dependent => :destroy
   has_many :payments, :dependent => :destroy
   has_many :deliveries, :dependent => :destroy
   has_many :comments, :dependent => :destroy  

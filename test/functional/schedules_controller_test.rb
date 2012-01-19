@@ -6,8 +6,8 @@ class SchedulesControllerTest < ActionController::TestCase
  def setup
     @user = users(:user)#Factory.create(:user)
     @request.host = @user.company.name + ".lvh.me"
-    @invoice = invoices(:one)
-    @invoice2 = invoices(:four)
+    @schedule = schedules(:one)
+    @client= clients(:client1)
     sign_in @user
 
   end
@@ -22,52 +22,51 @@ class SchedulesControllerTest < ActionController::TestCase
   end
   
   def test_show
-    get :show, :invoice_id => @invoice
-    assert_template 'show'
+    #get :show, :invoice_id => @invoice
+    #assert_template 'show'
   end
   
   def test_new
     #@invoice = Factory.create(:invoice)
-    get :new, :invoice_id => @invoice2.id
+    get :new, :client_id => @client.id
     assert_template 'new'
   end
   
   def test_create_invalid
     Schedule.any_instance.stubs(:valid?).returns(false)
-    post :create, :invoice_id => @invoice, :schedule => {}
+    post :create, :client_id => @client.id, :schedule => {}
     assert_template 'new'
   end
   
   def test_create_valid
     Schedule.any_instance.stubs(:valid?).returns(true)
     Delivery.any_instance.stubs(:valid?).returns(true)
-    post :create, :invoice_id => @invoice, :schedule => {}
-    assert_redirected_to invoice_schedule_url(@invoice)
+    post :create, :client_id => @client.id, :schedule => {}
+    assert_redirected_to schedules_url
   end
   
   def test_edit  
-    get :edit, :invoice_id => Schedule.first.invoice
+    get :edit, :schedule_id => @schedule.id
     assert_template 'edit'
     #assert assigns(:delivery)
   end
   
   def test_update_invalid
     Schedule.any_instance.stubs(:valid?).returns(false)
-    put :update, :invoice_id => Schedule.first.invoice
+    put :update, :schedule_id =>@schedule.id
     assert_template 'edit'
   end
   
   def test_update_valid
     Schedule.any_instance.stubs(:valid?).returns(true)
-    put :update, :invoice_id => Schedule.first.invoice
-    assert_redirected_to invoice_schedule_url(Schedule.first.invoice)
+    put :update, :id => @schedule
+    assert_redirected_to schedules_url
   end
   
   def test_destroy
-    schedule = Schedule.first
-    delete :destroy,  :invoice_id => schedule.invoice
+    delete :destroy,  :id => @schedule.id
     assert_redirected_to schedules_url
-    assert !Schedule.exists?(schedule.id)
+    assert !Schedule.exists?(@schedule.id)
   end
 
 #  def test_new_if_exists_redirects

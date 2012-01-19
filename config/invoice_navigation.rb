@@ -15,8 +15,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :copy_invoice, "Copy", new_invoice_path(:id => @invoice.id), :if => Proc.new { can? :create, @invoice}
 
 
-    primary.item :schedule_invoice, 'Setup Reocurrance', Proc.new {new_invoice_schedule_path( @invoice)}, :if => Proc.new { can? :update, Schedule and @invoice.schedule.nil?}, :link => {:remote => true}
-    primary.item :schedule_invoice, 'Edit Reocurrance', Proc.new {edit_invoice_schedule_path( @invoice)}, :if => Proc.new { can? :update, Schedule and !@invoice.schedule.nil?}, :link => {:remote => true, :class => 'schedule_icon'}
+    #primary.item :schedule_invoice, 'Setup Reocurrance', Proc.new {new_invoice_schedule_path( @invoice)}, :if => Proc.new { can? :update, Schedule and @invoice.schedule.nil?}, :link => {:remote => true}
+    #primary.item :schedule_invoice, 'Edit Reocurrance', Proc.new {edit_invoice_schedule_path( @invoice)}, :if => Proc.new { can? :update, Schedule and !@invoice.schedule.nil?}, :link => {:remote => true, :class => 'schedule_icon'}
     
     primary.item :open_invoice, "Open Invoice",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "draft"},  :link => {:remote => true}
     primary.item :payment_invoice, "Log Payment",new_invoice_payment_path(@invoice), :if => Proc.new {can? :update, @invoice and @invoice.state == "open"},  :link => {:remote => true}#:class => 'interactive'}

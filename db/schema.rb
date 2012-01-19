@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(:version => 20120115140244) do
     t.string   "frequency_type"
     t.date     "last_sent"
     t.date     "next_send"
-    t.string   "due_on"
+    t.integer  "due_on"
     t.date     "end_date"
     t.integer  "enabled"
     t.datetime "created_at"

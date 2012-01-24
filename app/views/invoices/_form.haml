@@ -2,11 +2,12 @@
   %h2 Invoice has been paid, you can copy this invoice or reset to open
 -else
   #invoice-main
-    =simple_nested_form_for @invoice, :html => {:novalidate => true} do |f|           
+    =simple_nested_form_for @invoice, :html => {:novalidate => true} do |f|      
+      =f.error_messages     
       =field_set_tag 'Invoice Details', :id => "form-top", :class => "invoice" do  
         = f.input :title
         = f.input :invoice_date, :label => "Date"
-        = f.association :client, :collection => @clients
+        = f.association :client, :collection => current_company.clients.accessible_by(current_ability)
         %br
         = f.input :business_id, :label => "Your ID"
         = f.input :purchase_order_id, :label => "Order ID"    

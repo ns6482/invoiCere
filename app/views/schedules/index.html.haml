@@ -20,3 +20,7 @@
       %td= link_to 'Delete', schedule_path(schedule), :confirm => 'Are you sure?', :method => :delete
     
 
+=content_for :right do
+  -if can? :create, Schedule
+    = link_to "New Schedule", new_schedule_path
+

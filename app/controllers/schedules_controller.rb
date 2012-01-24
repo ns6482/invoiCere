@@ -55,8 +55,9 @@ class SchedulesController < BaseController
 
     respond_to do |format|
     
-    client = current_company.clients.find( params[:schedule][:client_id])      
-    @schedule.client_id =  client.id 
+    @client = current_company.clients.find( params[:schedule][:client_id])      
+    @schedule.client_id =  @client.id 
+    @contacts = @client.contacts
     if @schedule.save
       
       #@schedule.save
@@ -74,9 +75,13 @@ class SchedulesController < BaseController
   def update
 
     respond_to do |format|
-      if @schedule.valid?
-        @schedule.update_attributes(params[:schedule])
-
+     
+      @client = current_company.clients.find(@schedule.client_id)#(params[:schedule][:client_id])
+      @schedule.client_id = @client.id
+      @contacts = @client.contacts
+      
+      #if @schedule.valid?
+      if @schedule.update_attributes(params[:schedule])
         flash[:notice] = "Successfully updated schedule."
         format.html {redirect_to :action => :index} #{redirect_to invoice_schedule_url(@invoice)}
         format.js

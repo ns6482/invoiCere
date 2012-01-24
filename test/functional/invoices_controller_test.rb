@@ -40,7 +40,7 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_not_nil  :invoices
 
     assert_select "table#table-invoices" do
-      assert_select "tr", :count => 2
+      assert_select "tr", :count => 3
     end
   end
 

@@ -8,6 +8,12 @@ class SchedulesControllerTest < ActionController::TestCase
     @request.host = @user.company.name + ".lvh.me"
     @schedule = schedules(:one)
     @client= clients(:client1)
+    @client.company_id = @user.company_id
+    @client.save
+    
+    @schedule.client_id = @client.id
+    @schedule.save
+    
     sign_in @user
 
   end
@@ -34,26 +40,27 @@ class SchedulesControllerTest < ActionController::TestCase
   
   def test_create_invalid
     Schedule.any_instance.stubs(:valid?).returns(false)
-    post :create, :client_id => @client.id, :schedule => {}
+    post :create, :schedule => {:client_id => @client.id}
     assert_template 'new'
   end
   
   def test_create_valid
     Schedule.any_instance.stubs(:valid?).returns(true)
     Delivery.any_instance.stubs(:valid?).returns(true)
-    post :create, :client_id => @client.id, :schedule => {}
+    post :create,  :schedule => {:client_id => @client.id}
+
     assert_redirected_to schedules_url
   end
   
   def test_edit  
-    get :edit, :schedule_id => @schedule.id
+    get :edit, :id => @schedule.id
     assert_template 'edit'
     #assert assigns(:delivery)
   end
   
   def test_update_invalid
     Schedule.any_instance.stubs(:valid?).returns(false)
-    put :update, :schedule_id =>@schedule.id
+    put :update, :id =>@schedule
     assert_template 'edit'
   end
   

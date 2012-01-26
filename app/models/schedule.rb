@@ -34,12 +34,15 @@ class Schedule < ActiveRecord::Base
     invoice = Invoice.new
     invoice.client_id = self.client_id 
     invoice.state = "open"
+    
+    
     #TODO add schedule draft only option
     #if self.draft_only 
      #invoice.state = "draft"
     #else
      #invoice.state = "open"
     #end
+    
     invoice.invoice_date=Date.today  
     invoice.title = self.title
     invoice.notes = self.notes
@@ -50,13 +53,25 @@ class Schedule < ActiveRecord::Base
     invoice.late_fee = self.late_fee
     invoice.discount = self.discount 
     invoice.due_date = Date.today + (self.due_on ||= 0)
+    invoice.due_days = self.due_on ||= 0
+    
+    invoice.save!
+    
+   self.schedule_items.each do |s|
+      i = InvoiceItem.new(:invoice_id => invoice.id, :item_description => s.item_description,  :qty => s.qty, :cost => s.cost, :item_type => s.item_type)
+      i.save!
+    end
+    
     
     self.last_sent = Date.today
     self.next_send = get_next_send
     
+    self.save!
+    
     #Notifier.deliver_schedule(invoice, self)
 
-   
+    
+    
     return invoice    
   end
 

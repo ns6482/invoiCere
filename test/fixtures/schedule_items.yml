@@ -1,0 +1,15 @@
+one:
+  schedule_id: 1
+  item_type: MyString
+  item_description: MyString
+  qty: 9.99
+  cost: 9.99
+  taxable: true
+
+two:
+  schedule_id: 1
+  item_type: MyString
+  item_description: MyString
+  qty: 9.99
+  cost: 9.99
+  taxable: false

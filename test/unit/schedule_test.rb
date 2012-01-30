@@ -101,6 +101,30 @@ class ScheduleTest < ActiveSupport::TestCase
     
   end
   
+   def test_schedule_pdf_format
+    
+    val = Invoice.count
+    schedule = schedules(:one)
+    schedule.frequency = 1
+    schedule.format = 2
+    schedule.frequency_type = "Yearly"
+    
+    schedule.schedule_items << schedule_items(:one)
+    schedule.schedule_items << schedule_items(:two)
+   
+    schedule.save!
+
+    #schedule = Schedule.find_by_invoice_id(1)
+    #assert_nil schedule.next_send
+    invoice = schedule.send_invoice!
+    
+    assert_equal Invoice.count, val+1
+    assert_equal (Date.today >> 12).to_s, schedule.next_send.to_s
+
+
+    assert_equal schedule.schedule_items.count, invoice.invoice_items.count
+    
+  end
   
 
 

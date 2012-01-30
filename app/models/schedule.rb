@@ -8,7 +8,7 @@ class Schedule < ActiveRecord::Base
     60 => "After 60 Days" 
    } 
 
-  attr_accessible :name,  :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :schedule_items_attributes, :notes
+  attr_accessible :name, :format, :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :schedule_items_attributes, :notes
 
   belongs_to :client
 
@@ -68,10 +68,24 @@ class Schedule < ActiveRecord::Base
     
     self.save!
     
+      
+    delivery = Delivery.new(:invoice_id => invoice.id, :message => self.message, :client_email => send_to_client, :format => self.format, :schedule => 1)
+    
+    self.schedule_sends.each do |send|
+      delivery.contacts << send.contact
+    end
+
+    if delivery.format ==2
+          pdf_file = render_to_string(:action=>'show', :id => invoice.id, :template=>'invoices/show.pdf.prawn')
+          Notifier.deliver_invoice_pdf(@delivery, pdf_file) # sends the email
+    else 
+          Notifier.invoice(delivery) # sends the email   end
+    end
+    
+    #Notifier.invoice(delivery) # sends the email
+    
     #Notifier.deliver_schedule(invoice, self)
 
-    
-    
     return invoice    
   end
 

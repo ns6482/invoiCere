@@ -14,7 +14,8 @@
     = field_set_tag "Message Details" do #,   :id => "form-main" do
       = f.input :default_message, :as => :boolean
       = f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}, :label_html => { :class => 'label_wide' }
-      
+      = f.input :format, :as => :radio, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional"}  
+
     = field_set_tag "Email Client and Contacts" do #,   :id => "form-main" do
       = f.input :send_to_client, :as => :boolean, :label=> @client.company_name, :label_html => { :class => 'label_wide' }
       -if @contacts.size > 0 

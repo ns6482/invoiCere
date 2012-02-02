@@ -163,6 +163,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  Ascii85
   RedCloth
   activemerchant (~> 1.10.0)
   cancan
@@ -184,6 +185,7 @@ DEPENDENCIES
   nested_form!
   nifty-generators
   paperclip
+  pdf-reader
   prawn (~> 0.12.0)
   prawnto
   rails (= 3.0.10)

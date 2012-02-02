@@ -25,9 +25,17 @@ class InvoicesController < BaseController
   
   def show
 
+
+    output = HelloReport.new(@invoice).to_pdf
+
     respond_to do | format|
      format.html
-     format.pdf
+     #format.pdf
+     format.pdf do
+        send_data output, :filename => "hello.pdf", 
+                          :type => "application/pdf"
+     end
+
      format.js
      format.xml  { render :xml => @invoice}
     end

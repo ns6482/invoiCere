@@ -8,6 +8,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module VisioInvoiceV3
   class Application < Rails::Application
+    
+    config.autoload_paths << "#{Rails.root}/app/reports"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -47,6 +50,8 @@ module VisioInvoiceV3
        # g.orm             :mongoid
       end  
     end
+    
+
     
     
 end

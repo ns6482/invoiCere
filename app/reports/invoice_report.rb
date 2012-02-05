@@ -1,11 +1,7 @@
-class HelloReport < Prawn::Document
+class InvoiceReport < Prawn::Document
   
   attr_accessor :invoice, :current_company, :content
-  #def to_pdf
-    #text "Hello world"
-  #end
-    #render
-    
+
     
 def add_page_break_if_overflow (&block)
   current_page = page_count
@@ -38,16 +34,22 @@ def to_pdf
    
   company_contact = ""
   
-  if @current_company.setting.telephone.length >0
-    company_contact += "Tel: #{@current_company.setting.telephone}   "
+  if !@current_company.setting.telephone.nil?
+    if @current_company.setting.telephone.length > 0
+      company_contact += "Tel: #{@current_company.setting.telephone}   "
+    end
   end
 
-  if @current_company.setting.fax.length >0
-    company_contact += "Fax: #{@current_company.setting.fax}   "
+  if !@current_company.setting.fax.nil?
+    if @current_company.setting.fax.length >0 
+      company_contact += "Fax: #{@current_company.setting.fax}   "
+     end
   end
 
-  if @current_company.setting.email.length >0
-    company_contact += "Email: #{@current_company.setting.email}"
+  if !@current_company.setting.email.nil?
+    if @current_company.setting.email.length >0
+      company_contact += "Email: #{@current_company.setting.email}"
+    end
   end
   
   
@@ -182,7 +184,7 @@ def to_pdf
          move_down 5
         indent(5) do
             text "#{@invoice.notes}"
-            text "Payment Due #{@invoice.remaining_amount}"
+            text "Payment Due #{@invoice.remaining_amount}", :align => :center, :style => :bold
             move_down 1
             if @invoice.late_fee
                text "This invoice is due in #{@invoice.due_days} day(s), the late fee is set to #{@invoice.late_fee}", :align => :center

@@ -1,3 +1,4 @@
+
 class Schedule < ActiveRecord::Base
   
   DUE_DAYS_LIST = {
@@ -76,8 +77,9 @@ class Schedule < ActiveRecord::Base
     end
 
     if delivery.format ==2
-          pdf_file = render_to_string(:action=>'show', :id => invoice.id, :template=>'invoices/show.pdf.prawn')
-          Notifier.deliver_invoice_pdf(@delivery, pdf_file) # sends the email
+          pdf_file = InvoiceReport.new(invoice).to_pdf
+          
+          Notifier.invoice_pdf(delivery, pdf_file) # sends the email
     else 
           Notifier.invoice(delivery) # sends the email   end
     end

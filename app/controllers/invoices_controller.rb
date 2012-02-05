@@ -26,7 +26,7 @@ class InvoicesController < BaseController
   def show
 
 
-    output = HelloReport.new(@invoice).to_pdf
+    output = InvoiceReport.new(@invoice).to_pdf
 
     respond_to do | format|
      format.html

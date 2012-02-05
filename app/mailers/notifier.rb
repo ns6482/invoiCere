@@ -8,19 +8,19 @@ class Notifier < ActionMailer::Base
     :return_path => 'system@example.com'
 
 
-  #def invoice_pdf(delivery, pdf_file)
-  #  @delivery = delivery
-   # @invoice  = @delivery.invoice
-   # @client = @invoice.client
-   # subject    @delivery.invoice.title
-   # recipients  @delivery.recipients
-   # from       @company
-   # content_type  "text/html"
-   # body       @delivery.message
+  def invoice_pdf(delivery, pdf_file)
+    @delivery = delivery
+    @invoice  = @delivery.invoice
+    @client = @invoice.client
+    subject    @delivery.invoice.title
+    recipients  @delivery.recipients
+    from       @company
+    content_type  "text/html"
+    body       @delivery.message
 
-#    attachment :content_type => "application/octet-stream", :filename => "Invoice details - " + @invoice.title + ".pdf", :body => pdf_file
+    attachment :content_type => "application/octet-stream", :filename => "Invoice details - " + @invoice.title + ".pdf", :body => pdf_file
 
-#  end
+  end
 
   def invoice(delivery)
     @delivery = delivery

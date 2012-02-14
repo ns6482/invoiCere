@@ -1,42 +1,42 @@
 %h3 Setup schedule
 =simple_nested_form_for  @schedule do |f|
+  = f.error_messages
   = field_set_tag "Setup reocurrance" do #,   :id => "form-main" do
-    = f.error_messages
-    = field_set_tag do #,   :id => "form-main" do
-      = f.input :client_id, :as => :hidden, :input_html => { :value =>  @client.id}
-      = f.input :name, :label_html => { :class => 'label_wide' }
-      = f.input :frequency_type, :as => :select, :collection => ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], :include_blank => false, :label_html => { :class => 'label_wide' }
-      = f.input :frequency, :label => "Frequency", :label_html => { :class => 'label_wide' }, :label => "Occurances"
-      = f.input :next_send, :label_html => { :class => 'label_wide' }, :label => "Start date"
-      = f.input :end_date, :hint => "Leave blank to schedule forever", :label_html => { :class => 'label_wide' }, :include_blank => true
-      = f.input :enabled,   :as => :boolean, :label_html => { :class => 'label_wide' }, :label_html => { :class => 'label_wide' }
+    = f.input :client_id, :as => :select, :collection => current_company.clients.accessible_by(current_ability),  :label_html => { :class => 'label_wide' }
+    = f.input :name, :label_html => { :class => 'label_wide' }
+    = f.input :frequency_type, :as => :select, :collection => ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], :include_blank => false, :label_html => { :class => 'label_wide' }
+    = f.input :frequency, :label => "Frequency", :label_html => { :class => 'label_wide' }, :label => "Occurances"
+    = f.input :next_send, :label_html => { :class => 'label_wide' }, :label => "Start date"
+    = f.input :end_date, :hint => "Leave blank to schedule forever", :label_html => { :class => 'label_wide' }, :include_blank => true
+    = f.input :enabled,   :as => :boolean, :label_html => { :class => 'label_wide' }, :label_html => { :class => 'label_wide' }
 
-    = field_set_tag "Message Details" do #,   :id => "form-main" do
-      = f.input :default_message, :as => :boolean
-      = f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}, :label_html => { :class => 'label_wide' }
-      = f.input :format, :as => :radio, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional"}  
-
-    = field_set_tag "Email Client and Contacts" do #,   :id => "form-main" do
-      = f.input :send_to_client, :as => :boolean, :label=> @client.company_name, :label_html => { :class => 'label_wide' }
-      -if @contacts.size > 0 
-        = f.association :schedule_sends, :collection => @contacts, :as => :check_boxes, :label => "Send To", :label_html => { :class => 'label_wide' }
-      =# f.input :contacts, :as => :check_boxes, :collection => @invoice.client.contacts, :label => "Send To"
-      
-    #invoice-main
-    =field_set_tag 'Invoice Details', :id => "form-top", :class => "invoice" do  
+  
+    = f.input :default_message, :as => :boolean
+    = f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}, :label_html => { :class => 'label_wide' }
+    = f.input :format, :as => :radio, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional"}  
+    = f.input :send_to_client, :as => :boolean, :label_html => { :class => 'label_wide' }
+    =f.submit "Send to clients", :name => "send_contacts"
+    -if @client
+      -if @client.contacts.size > 0 
+        = f.association :schedule_sends, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :label_html => { :class => 'label_wide' }
+                  
+  = field_set_tag "Invoice Details" do #,   :id => "form-main" do
+    %div{:id => "form-top", :class => "invoice"}  
       = f.input :title
       %br
       = f.input :business_id, :label => "Your ID"
       = f.input :purchase_order_id, :label => "Order ID"    
       
-    =field_set_tag 'Charges',:id => "form-right", :class => "invoice" do
+    %div{:id => "form-right", :class => "invoice"}
+      %h3 Charges  
       = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %"
       = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery"
       = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee"
       = f.input :due_on, :as => :select, :label => "Due",  :collection => Schedule::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_wide' }
       = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)"
 
-    =field_set_tag 'Items', :id => "form-main" do
+    %div{:id => "form-main"}
+      %h3 Items
       .fields
         .item_description
           %strong Item Name and Description        
@@ -53,7 +53,8 @@
       =f.simple_fields_for :schedule_items 
       = f.link_to_add "New Item", :schedule_items                  
 
-    =field_set_tag 'Further Notes', :id => "form-bottom" do
+    %div{:id => "form-bottom"}
+      %h3 Further Notes  
       =f.input_field :notes, :html => {:rows => 2}
      
     %p

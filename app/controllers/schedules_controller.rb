@@ -12,14 +12,26 @@ class SchedulesController < BaseController
   
   def new
 
-    @schedule  = Schedule.new
-    #@schedule.client_id = params[:client_id]
-    @client = current_company.clients.find(params[:client_id])
-    @contacts = @client.contacts
+    #@schedule  = Schedule.new
+    ##@schedule.client_id = params[:client_id]
+    #@client = current_company.clients.find(params[:client_id])
+    #@contacts = @client.contacts
     
-    @schedule.client = @client
+    #@schedule.client = @client
     
-    @schedule.schedule_items.build
+ 
+    #if session[:schedule_client_id]  
+      #@schedule.client_id = session[:schedule_client_id]  
+ #session[:schedule_client_id] 
+    #end
+    
+    #if !@schedule.client_id.nil?
+    #  @client = current_company.clients.find(@schedule.client_id)        
+    #  @contacts = @client.contacts
+    #else
+      @schedule.schedule_items.build
+    #end
+    
 
     
     #@contacts = @invoice.client.contacts
@@ -54,22 +66,27 @@ class SchedulesController < BaseController
   def create
 
     respond_to do |format|
-    
-    @client = current_company.clients.find( params[:schedule][:client_id])      
-    @schedule.client_id =  @client.id 
-    @contacts = @client.contacts
-    if @schedule.save
       
-      #@schedule.save
-      flash[:notice] = "Successfully created schedule."
-      format.html {redirect_to :action => :index} #{redirect_to invoice_schedule_url(@invoice)}
-      format.js
-    else
-      format.html{render :action => 'new'}
-      format.js
-    end
-    end
+      if params[:send_contacts]
+        @client = current_company.clients.find(@schedule.client_id)        
+        @contacts = @client.contacts
 
+        format.html{render :action => 'new'}
+      else
+         @client = current_company.clients.find( params[:schedule][:client_id])      
+         @schedule.client_id =  @client.id 
+         @contacts = @client.contacts
+    
+         if @schedule.save
+          flash[:notice] = "Successfully created schedule."
+          format.html {redirect_to :action => :index} #{redirect_to invoice_schedule_url(@invoice)}
+          format.js
+         else
+          format.html{render :action => 'new'}
+          format.js
+         end
+        end
+      end
   end
       
   def update

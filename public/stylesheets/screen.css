@@ -2220,6 +2220,52 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
+/* line 1, ../../sass/system_partials/_form_wizard.sass */
+.prev, .next {
+  background-color: #b0232a;
+  padding: 5px 10px;
+  color: white;
+}
+
+/* line 7, ../../sass/system_partials/_form_wizard.sass */
+.prev:hover, .next:hover {
+  background-color: black;
+  text-decoration: none;
+}
+
+/* line 11, ../../sass/system_partials/_form_wizard.sass */
+.prev {
+  float: left;
+}
+
+/* line 14, ../../sass/system_partials/_form_wizard.sass */
+.next {
+  float: right;
+}
+
+/* line 17, ../../sass/system_partials/_form_wizard.sass */
+#steps {
+  list-style: none;
+  width: 100%;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* line 24, ../../sass/system_partials/_form_wizard.sass */
+#steps li {
+  font-size: 24px;
+  float: left;
+  padding: 10px;
+  color: #b0b1b3;
+}
+
+/* line 30, ../../sass/system_partials/_form_wizard.sass */
+#steps li span {
+  font-size: 11px;
+  display: block;
+}
+
 /* line 9, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_utilities.scss */
 .clear {
   clear: both;

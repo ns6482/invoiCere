@@ -9,6 +9,8 @@ $input_border : #cccccc
 .label_wide
   width: 180px
 
+.label_med
+  width: 150px
    
 .simple_form
 
@@ -109,16 +111,25 @@ label.collection_check_boxes
 
 #form-top
   +column(11)
-  height: 242px
+  height: 150px
+  input
+    width: 170px
+    padding: 2px
+  label
+    padding-left: 5px
 #form-main
-  +column(16)    
+  +column(18)    
 #form-bottom
-  +column(16)
+  +column(18)
 #form-right
-  +column(4, true)
-  height: 242px
+  +column(7, true)
+  height: 160px
   input
     width: 50px
+    margin: 0.1em 0
+    padding: 2px
+  label
+    padding-left: 5px
 
 
 .fields

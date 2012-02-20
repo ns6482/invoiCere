@@ -23,21 +23,20 @@
     %br
     = f.input :enabled,   :as => :select, :label_html => { :class => 'label_narrow ' }, :label => "Enabled", :include_blank => false
 
-  = field_set_tag "Invoice Details" do #,   :id => "form-main" do
+  = field_set_tag "Setup Invoice" do #,   :id => "form-main" do
     %div{:id => "form-top", :class => "invoice"}  
-      = f.input :title
+      = f.input :title, :label_html => { :class => 'label_narrow' }
       %br
-      = f.input :business_id, :label => "Your ID"
-      = f.input :purchase_order_id, :label => "Order ID"    
+      = f.input :business_id, :label => "Your ID", :label_html => { :class => 'label_narrow' }
+      = f.input :purchase_order_id, :label => "Order ID", :label_html => { :class => 'label_narrow' }    
       
     %div{:id => "form-right", :class => "invoice"}
-      %h3 Charges  
-      = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %"
-      = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery"
-      = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee"
-      = f.input :due_on, :as => :select, :label => "Due",  :collection => Schedule::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_narrow' }
-      = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)"
-
+      = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => { :class => 'label_med' }
+      .50a= f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery", :label_html => { :class => 'label_med' }
+      .50z= f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => { :class => 'label_med' }
+      = f.input :due_on, :as => :select, :label => "Due",  :collection => Schedule::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_med' }
+      = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => { :class => 'label_med' }
+    %br
     %div{:id => "form-main"}
       %h3 Items
       .fields

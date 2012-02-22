@@ -1,0 +1,81 @@
+/*
+Syntax error: Invalid CSS after "(": expected variable (e.g. $foo), was "!color_1,!color_2)"
+        on line 1 of /Users/nehalsoni/Projects/visioinvoice/sass/system_partials/active_stylus_form_mixins.sass
+
+1: =v-grad(!color_1,!color_2)
+2:   :background-color = !color_2
+3:   :background-image -webkit-gradient(linear, left top, left bottom, from(#{!color_1}), to(#{!color_2}))
+4:   :background-image -moz-linear-gradient(center top, #{!color_1} 0%, #{!color_2} 100%)
+5: 
+6: =h-grad(!color_1,!color_2)
+
+Backtrace:
+/Users/nehalsoni/Projects/visioinvoice/sass/system_partials/active_stylus_form_mixins.sass:1
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/scss/parser.rb:898:in `expected'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/script/lexer.rb:193:in `expected!'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/script/parser.rb:448:in `assert_tok'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/script/parser.rb:317:in `block in defn_arglist!'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/script/parser.rb:314:in `loop'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/script/parser.rb:314:in `defn_arglist!'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/script/parser.rb:102:in `parse_mixin_definition_arglist'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:777:in `parse_mixin_definition'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:547:in `parse_line'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:448:in `build_tree'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:467:in `block in append_children'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:466:in `each'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:466:in `append_children'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:323:in `_to_tree'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:293:in `_render'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:241:in `block in render'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/util.rb:297:in `silence_sass_warnings'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/engine.rb:241:in `render'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:319:in `update_stylesheet'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:181:in `block (2 levels) in update_stylesheets'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:175:in `each'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:175:in `block in update_stylesheets'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:173:in `each'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin/compiler.rb:173:in `update_stylesheets'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin.rb:81:in `update_stylesheets'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin.rb:54:in `check_for_updates'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/sass-3.1.7/lib/sass/plugin/rack.rb:51:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/warden-1.0.5/lib/warden/manager.rb:35:in `block in call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/warden-1.0.5/lib/warden/manager.rb:34:in `catch'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/warden-1.0.5/lib/warden/manager.rb:34:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/head.rb:14:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/rack-1.2.3/lib/rack/methodoverride.rb:24:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/flash.rb:182:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/session/abstract_store.rb:149:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/cookies.rb:302:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/activerecord-3.0.10/lib/active_record/query_cache.rb:32:in `block in call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/activerecord-3.0.10/lib/active_record/connection_adapters/abstract/query_cache.rb:28:in `cache'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/activerecord-3.0.10/lib/active_record/query_cache.rb:12:in `cache'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/activerecord-3.0.10/lib/active_record/query_cache.rb:31:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/activerecord-3.0.10/lib/active_record/connection_adapters/abstract/connection_pool.rb:354:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/callbacks.rb:46:in `block in call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/activesupport-3.0.10/lib/active_support/callbacks.rb:416:in `_run_call_callbacks'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/callbacks.rb:44:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/rack-1.2.3/lib/rack/sendfile.rb:107:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/railties-3.0.10/lib/rails/rack/logger.rb:13:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/rack-1.2.3/lib/rack/runtime.rb:17:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/activesupport-3.0.10/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/rack-1.2.3/lib/rack/lock.rb:11:in `block in call'
+<internal:prelude>:10:in `synchronize'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/rack-1.2.3/lib/rack/lock.rb:11:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/actionpack-3.0.10/lib/action_dispatch/middleware/static.rb:30:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/railties-3.0.10/lib/rails/application.rb:168:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/railties-3.0.10/lib/rails/application.rb:77:in `method_missing'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/railties-3.0.10/lib/rails/rack/log_tailer.rb:14:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/rack-1.2.3/lib/rack/content_length.rb:13:in `call'
+/Users/nehalsoni/.rvm/gems/ruby-1.9.3-p0/gems/rack-1.2.3/lib/rack/handler/webrick.rb:52:in `service'
+/Users/nehalsoni/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/1.9.1/webrick/httpserver.rb:138:in `service'
+/Users/nehalsoni/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/1.9.1/webrick/httpserver.rb:94:in `run'
+/Users/nehalsoni/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/1.9.1/webrick/server.rb:191:in `block in start_thread'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Invalid CSS after \"(\": expected variable (e.g. $foo), was \"!color_1,!color_2)\"\A         on line 1 of /Users/nehalsoni/Projects/visioinvoice/sass/system_partials/active_stylus_form_mixins.sass\A \A 1: =v-grad(!color_1,!color_2)\A 2:   :background-color = !color_2\A 3:   :background-image -webkit-gradient(linear, left top, left bottom, from(#{!color_1}), to(#{!color_2}))\A 4:   :background-image -moz-linear-gradient(center top, #{!color_1} 0%, #{!color_2} 100%)\A 5: \A 6: =h-grad(!color_1,!color_2)"; }

@@ -110,19 +110,24 @@ label.collection_check_boxes
     //font-weight: bold
 
 #form-top
-  +column(11)
-  height: 150px
+  +column(10)
+  height: 160px
   input
     width: 170px
     padding: 2px
   label
     padding-left: 5px
+    
+  padding-top: 2px
+  padding-bottom: 2px
 #form-main
-  +column(18)    
+  +column(18)   
+  margin-bottom: 10px
+  
 #form-bottom
   +column(18)
 #form-right
-  +column(7, true)
+  +column(8, true)
   height: 160px
   input
     width: 50px
@@ -130,9 +135,32 @@ label.collection_check_boxes
     padding: 2px
   label
     padding-left: 5px
+  padding-top: 5px
+ 
+  margin-bottom: 10px
+
+.field-items
+  +column(15)
+  .item_type
+    +column(3)
+  .item_description
+    +column(6)
+  .item_qty
+    +column(2)
+  .item_cost
+    +column(2)
+  .item_total
+    +column(2)
+  .item_tax
+    +column(1)
+  .item_remove
+    +column(1, true)
+    background: url('/images/icons/delete.png') norepeat
 
 
 .fields
+  padding-top: 10px
+  padding-left: 10px
   //+prepend(1)
   +column(15)
   .item_type

@@ -23,41 +23,46 @@
     %br
     = f.input :enabled,   :as => :select, :label_html => { :class => 'label_narrow ' }, :label => "Enabled", :include_blank => false
 
-  = field_set_tag "Setup Invoice" do #,   :id => "form-main" do
+  = field_set_tag  do #,   :id => "form-main" do
     %div{:id => "form-top", :class => "invoice"}  
-      = f.input :title, :label_html => { :class => 'label_narrow' }
-      %br
-      = f.input :business_id, :label => "Your ID", :label_html => { :class => 'label_narrow' }
-      = f.input :purchase_order_id, :label => "Order ID", :label_html => { :class => 'label_narrow' }    
+      .fields
+        
+        = f.input :title, :label_html => { :class => 'label_narrow' }
+        %br
+        = f.input :business_id, :label => "Your ID", :label_html => { :class => 'label_narrow' }
+        = f.input :purchase_order_id, :label => "Order ID", :label_html => { :class => 'label_narrow' }    
       
     %div{:id => "form-right", :class => "invoice"}
-      = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => { :class => 'label_med' }
-      .50a= f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery", :label_html => { :class => 'label_med' }
-      .50z= f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => { :class => 'label_med' }
-      = f.input :due_on, :as => :select, :label => "Due",  :collection => Schedule::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_med' }
-      = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => { :class => 'label_med' }
-    %br
-    %div{:id => "form-main"}
-      %h3 Items
       .fields
-        .item_description
-          %strong Item Name and Description        
-        .item_qty 
-          %strong Qty
-        .item_cost
-          %strong Price
-        .item_type 
-          %strong / Unit
-        .item_tax
-          %strong Tax
-        .item_remove
-        .item_total        
+        = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => { :class => 'label_med' }
+        .50a= f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery", :label_html => { :class => 'label_med' }
+        .50z= f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => { :class => 'label_med' }
+        = f.input :due_on, :as => :select, :label => "Due",  :collection => Schedule::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_med' }
+        = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => { :class => 'label_med' }
+    %br
+    #form-main
+      .fields
+        .field-items
+          %h3 Items
+          .item_description
+            %strong Item Name and Description        
+          .item_qty 
+            %strong Qty
+          .item_cost
+            %strong Price
+          .item_type 
+            %strong / Unit
+          .item_tax
+            %strong Tax
+          .item_remove
+          .item_total        
       =f.simple_fields_for :schedule_items 
       = f.link_to_add "New Item", :schedule_items                  
 
-    %div{:id => "form-bottom"}
-      %h3 Further Notes  
-      =f.input_field :notes, :html => {:rows => 2}
+    #form-bottom
+      .fields
+        %h3 Further Notes  
+        =f.input_field :notes, :html => {:rows => 2}
      
     %p
       %button{:type=>"submit",:class=>"red"} Create Schedule

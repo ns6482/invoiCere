@@ -1,7 +1,7 @@
 =simple_nested_form_for  @schedule do |f|
   = f.error_messages
   = field_set_tag "Schedule invoice" do #,   :id => "form-main" do
-    = f.input :client_id, :as => :select, :collection => current_company.clients.accessible_by(current_ability),  :label_html => { :class => 'label_narrow' }
+    = f.input :client_id, :as => :select, :collection => current_company.clients.accessible_by(current_ability),  :label_html => { :class => 'label_narrow' }, :include_blank =>false
     = f.input :name, :label_html => { :class => 'label_narrow' }
     = f.input :frequency_type, :label => "Freq", :as => :select, :collection => ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], :include_blank => false, :label_html => { :class => 'label_narrow' }
     = f.input :frequency, :label => "No Repeats", :label_html => { :class => 'label_narrow' }
@@ -17,13 +17,15 @@
     -if @client
       -if @client.contacts.size > 0 
         = f.association :schedule_sends, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :label_html => { :class => 'label_narrow collection_check_boxes' }
+      -else
+        .20.z= f.submit "Send to clients contacts...", :name => "send_contacts"
     -else 
       .20.z= f.submit "Send to clients contacts...", :name => "send_contacts"
     .clear
     %br
     = f.input :enabled,   :as => :select, :label_html => { :class => 'label_narrow ' }, :label => "Enabled", :include_blank => false
 
-  = field_set_tag  do #,   :id => "form-main" do
+  = field_set_tag "Invoice Setup" do #,   :id => "form-main" do
     %div{:id => "form-top", :class => "invoice"}  
       .fields
         
@@ -41,28 +43,29 @@
         = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => { :class => 'label_med' }
     %br
     #form-main
+      .field-title
+        %h3 Items
       .fields
-        .field-items
-          %h3 Items
-          .item_description
-            %strong Item Name and Description        
-          .item_qty 
-            %strong Qty
-          .item_cost
-            %strong Price
-          .item_type 
-            %strong / Unit
-          .item_tax
-            %strong Tax
-          .item_remove
-          .item_total        
+        .item_description
+          %strong Item Name and Description        
+        .item_qty 
+          %strong Qty
+        .item_cost
+          %strong Price
+        .item_type 
+          %strong / Unit
+        .item_tax
+          %strong Tax
+        .item_remove
+        .item_total        
       =f.simple_fields_for :schedule_items 
       = f.link_to_add "New Item", :schedule_items                  
 
     #form-bottom
-      .fields
-        %h3 Further Notes  
+      .field-title
+        %h3 Further Notes
+      .fields  
         =f.input_field :notes, :html => {:rows => 2}
      
-    %p
-      %button{:type=>"submit",:class=>"red"} Create Schedule
+    #buttons
+      %button{:type=>"submit"} Create Schedule

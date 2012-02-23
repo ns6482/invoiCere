@@ -108,6 +108,10 @@ label.collection_check_boxes
     //padding-top: 4px
   //label
     //font-weight: bold
+#form-top, #form-main, #form-right, #form-bottom
+  border-style: solid
+  border-width: 1px
+  border-color: LightGrey 
 
 #form-top
   +column(10)
@@ -120,6 +124,7 @@ label.collection_check_boxes
     
   padding-top: 2px
   padding-bottom: 2px
+
 #form-main
   +column(18)   
   margin-bottom: 10px
@@ -157,9 +162,11 @@ label.collection_check_boxes
     +column(1, true)
     background: url('/images/icons/delete.png') norepeat
 
+.field-title
+  padding-top: 10px
+  padding-left: 10px
 
 .fields
-  padding-top: 10px
   padding-left: 10px
   //+prepend(1)
   +column(15)

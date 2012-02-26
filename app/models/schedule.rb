@@ -9,7 +9,7 @@ class Schedule < ActiveRecord::Base
     60 => "After 60 Days" 
    } 
 
-  attr_accessible :client_id, :name, :format, :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :schedule_items_attributes, :notes
+  attr_accessible :client_id, :name, :format, :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :schedule_items_attributes, :notes, :draft_only
 
   belongs_to :client
 
@@ -38,11 +38,13 @@ class Schedule < ActiveRecord::Base
     
     
     #TODO add schedule draft only option
-    #if self.draft_only 
-     #invoice.state = "draft"
-    #else
-     #invoice.state = "open"
-    #end
+    
+    
+    if self.draft_only 
+     invoice.state = "draft"
+    else
+     invoice.state = "open"
+    end
     
     invoice.invoice_date=Date.today  
     invoice.title = self.title

@@ -22,9 +22,8 @@
     -else 
       .20.z= f.submit "Send to clients contacts...", :name => "send_contacts"
     .clear
-    %br
     = f.input :enabled,   :as => :select, :label_html => { :class => 'label_narrow ' }, :label => "Enabled", :include_blank => false
-
+    = f.input :draft_only, :hint => "Otherwise invoice will be in open state",  :as => :select, :label_html => { :class => 'label_narrow ' }, :label => "Eail as draft", :include_blank => false
   = field_set_tag "Invoice Setup" do #,   :id => "form-main" do
     %div{:id => "form-top", :class => "invoice"}  
       .fields

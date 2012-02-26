@@ -123,9 +123,27 @@ class ScheduleTest < ActiveSupport::TestCase
 
 
     assert_equal schedule.schedule_items.count, invoice.invoice_items.count
-    
+    assert_equal invoice.state, "open" 
   end
   
+  def test_schedule_draft_only
+    
+    val = Invoice.count
+    schedule = schedules(:one)
+    schedule.frequency = 1
+    schedule.format = 2
+    schedule.frequency_type = "Yearly"
+    
+    schedule.schedule_items << schedule_items(:one)
+    schedule.schedule_items << schedule_items(:two)
+    schedule.draft_only = true
+   
+    schedule.save!
+    invoice = schedule.send_invoice!
+    
+    assert_equal Invoice.count, val+1
+    assert_equal invoice.state, "draft"
+  end
 
 
 end

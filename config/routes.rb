@@ -3,6 +3,7 @@ require 'no_subdomain'
 
 VisioInvoiceV3::Application.routes.draw do   
     
+
  constraints(NoSubdomain) do    
   devise_for :users
   resource :company, :only => [:new, :create], :constraints => {:subdomain => ""}
@@ -12,6 +13,7 @@ VisioInvoiceV3::Application.routes.draw do
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     
     resources :schedules#, :only => [:index, :new]
+    resources :items, :only => [:new, :create, :index, :destroy]
 
     resources :invoices do
       collection do

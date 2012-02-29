@@ -778,7 +778,7 @@ body.two-col #content {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 710px;
+  width: 750px;
   background: white;
   padding-left: 10px;
   padding-top: 10px;
@@ -2016,7 +2016,6 @@ label.collection_check_boxes {
   float: left;
   margin-right: 10px;
   width: 390px;
-  height: 160px;
   padding-top: 2px;
   padding-bottom: 2px;
 }
@@ -2059,13 +2058,22 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
-/* line 134, ../../sass/system_partials/_forms.sass */
+/* line 135, ../../sass/system_partials/_forms.sass */
+.form-height-long {
+  height: 190px;
+}
+
+/* line 139, ../../sass/system_partials/_forms.sass */
+.form-right-normal {
+  height: 160px;
+}
+
+/* line 143, ../../sass/system_partials/_forms.sass */
 #form-right {
   display: inline;
   float: left;
   margin-right: 0;
   width: 310px;
-  height: 160px;
   padding-top: 5px;
   margin-bottom: 10px;
 }
@@ -2073,18 +2081,18 @@ label.collection_check_boxes {
 * html #form-right {
   overflow-x: hidden;
 }
-/* line 137, ../../sass/system_partials/_forms.sass */
+/* line 146, ../../sass/system_partials/_forms.sass */
 #form-right input {
   width: 50px;
   margin: 0.1em 0;
   padding: 2px;
 }
-/* line 141, ../../sass/system_partials/_forms.sass */
+/* line 150, ../../sass/system_partials/_forms.sass */
 #form-right label {
   padding-left: 5px;
 }
 
-/* line 147, ../../sass/system_partials/_forms.sass */
+/* line 156, ../../sass/system_partials/_forms.sass */
 .field-items {
   display: inline;
   float: left;
@@ -2095,7 +2103,7 @@ label.collection_check_boxes {
 * html .field-items {
   overflow-x: hidden;
 }
-/* line 149, ../../sass/system_partials/_forms.sass */
+/* line 158, ../../sass/system_partials/_forms.sass */
 .field-items .item_type {
   display: inline;
   float: left;
@@ -2106,7 +2114,7 @@ label.collection_check_boxes {
 * html .field-items .item_type {
   overflow-x: hidden;
 }
-/* line 151, ../../sass/system_partials/_forms.sass */
+/* line 160, ../../sass/system_partials/_forms.sass */
 .field-items .item_description {
   display: inline;
   float: left;
@@ -2117,7 +2125,7 @@ label.collection_check_boxes {
 * html .field-items .item_description {
   overflow-x: hidden;
 }
-/* line 153, ../../sass/system_partials/_forms.sass */
+/* line 162, ../../sass/system_partials/_forms.sass */
 .field-items .item_qty {
   display: inline;
   float: left;
@@ -2128,7 +2136,7 @@ label.collection_check_boxes {
 * html .field-items .item_qty {
   overflow-x: hidden;
 }
-/* line 155, ../../sass/system_partials/_forms.sass */
+/* line 164, ../../sass/system_partials/_forms.sass */
 .field-items .item_cost {
   display: inline;
   float: left;
@@ -2139,7 +2147,7 @@ label.collection_check_boxes {
 * html .field-items .item_cost {
   overflow-x: hidden;
 }
-/* line 157, ../../sass/system_partials/_forms.sass */
+/* line 166, ../../sass/system_partials/_forms.sass */
 .field-items .item_total {
   display: inline;
   float: left;
@@ -2150,7 +2158,7 @@ label.collection_check_boxes {
 * html .field-items .item_total {
   overflow-x: hidden;
 }
-/* line 159, ../../sass/system_partials/_forms.sass */
+/* line 168, ../../sass/system_partials/_forms.sass */
 .field-items .item_tax {
   display: inline;
   float: left;
@@ -2161,7 +2169,7 @@ label.collection_check_boxes {
 * html .field-items .item_tax {
   overflow-x: hidden;
 }
-/* line 161, ../../sass/system_partials/_forms.sass */
+/* line 170, ../../sass/system_partials/_forms.sass */
 .field-items .item_remove {
   display: inline;
   float: left;
@@ -2174,13 +2182,13 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
-/* line 165, ../../sass/system_partials/_forms.sass */
+/* line 174, ../../sass/system_partials/_forms.sass */
 .field-title {
   padding-top: 10px;
   padding-left: 10px;
 }
 
-/* line 169, ../../sass/system_partials/_forms.sass */
+/* line 178, ../../sass/system_partials/_forms.sass */
 .fields {
   padding-left: 10px;
   display: inline;
@@ -2192,7 +2200,7 @@ label.collection_check_boxes {
 * html .fields {
   overflow-x: hidden;
 }
-/* line 173, ../../sass/system_partials/_forms.sass */
+/* line 182, ../../sass/system_partials/_forms.sass */
 .fields .item_type {
   display: inline;
   float: left;
@@ -2203,7 +2211,7 @@ label.collection_check_boxes {
 * html .fields .item_type {
   overflow-x: hidden;
 }
-/* line 175, ../../sass/system_partials/_forms.sass */
+/* line 184, ../../sass/system_partials/_forms.sass */
 .fields .item_description {
   display: inline;
   float: left;
@@ -2214,7 +2222,7 @@ label.collection_check_boxes {
 * html .fields .item_description {
   overflow-x: hidden;
 }
-/* line 177, ../../sass/system_partials/_forms.sass */
+/* line 186, ../../sass/system_partials/_forms.sass */
 .fields .item_qty {
   display: inline;
   float: left;
@@ -2225,7 +2233,7 @@ label.collection_check_boxes {
 * html .fields .item_qty {
   overflow-x: hidden;
 }
-/* line 179, ../../sass/system_partials/_forms.sass */
+/* line 188, ../../sass/system_partials/_forms.sass */
 .fields .item_cost {
   display: inline;
   float: left;
@@ -2236,7 +2244,7 @@ label.collection_check_boxes {
 * html .fields .item_cost {
   overflow-x: hidden;
 }
-/* line 181, ../../sass/system_partials/_forms.sass */
+/* line 190, ../../sass/system_partials/_forms.sass */
 .fields .item_total {
   display: inline;
   float: left;
@@ -2247,7 +2255,7 @@ label.collection_check_boxes {
 * html .fields .item_total {
   overflow-x: hidden;
 }
-/* line 183, ../../sass/system_partials/_forms.sass */
+/* line 192, ../../sass/system_partials/_forms.sass */
 .fields .item_tax {
   display: inline;
   float: left;
@@ -2258,7 +2266,7 @@ label.collection_check_boxes {
 * html .fields .item_tax {
   overflow-x: hidden;
 }
-/* line 185, ../../sass/system_partials/_forms.sass */
+/* line 194, ../../sass/system_partials/_forms.sass */
 .fields .item_remove {
   display: inline;
   float: left;
@@ -2271,7 +2279,7 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
-/* line 191, ../../sass/system_partials/_forms.sass */
+/* line 200, ../../sass/system_partials/_forms.sass */
 #form-main, #form-bottom, #form-top, #form-right {
   -webkit-border-radius: 8px 8px;
   -moz-border-radius: 8px / 8px;
@@ -2282,7 +2290,7 @@ label.collection_check_boxes {
   background-color: whitesmoke;
 }
 
-/* line 197, ../../sass/system_partials/_forms.sass */
+/* line 206, ../../sass/system_partials/_forms.sass */
 #filter_link {
   font-size: 12px;
   text-decoration: none;
@@ -2292,17 +2300,17 @@ label.collection_check_boxes {
   text-decoration: underline;
 }
 
-/* line 201, ../../sass/system_partials/_forms.sass */
+/* line 210, ../../sass/system_partials/_forms.sass */
 #interactive {
   display: none;
 }
 
-/* line 204, ../../sass/system_partials/_forms.sass */
+/* line 213, ../../sass/system_partials/_forms.sass */
 #load {
   display: none;
 }
 
-/* line 207, ../../sass/system_partials/_forms.sass */
+/* line 216, ../../sass/system_partials/_forms.sass */
 #search_form {
   display: inline;
   float: left;
@@ -2314,18 +2322,18 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
-/* line 210, ../../sass/system_partials/_forms.sass */
+/* line 219, ../../sass/system_partials/_forms.sass */
 .cancel_button {
   float: right;
 }
 
-/* line 215, ../../sass/system_partials/_forms.sass */
+/* line 224, ../../sass/system_partials/_forms.sass */
 #rt-form textarea {
   width: 390px;
   height: 219px;
 }
 
-/* line 220, ../../sass/system_partials/_forms.sass */
+/* line 229, ../../sass/system_partials/_forms.sass */
 #lt-form {
   padding-top: 5px;
   padding-right: 15px;
@@ -2347,150 +2355,150 @@ label.collection_check_boxes {
   overflow-x: hidden;
 }
 
-/* line 236, ../../sass/system_partials/_forms.sass */
+/* line 245, ../../sass/system_partials/_forms.sass */
 .\31 00 {
   width: 100%;
 }
 
-/* line 239, ../../sass/system_partials/_forms.sass */
+/* line 248, ../../sass/system_partials/_forms.sass */
 .\39 0 {
   float: left;
   width: 90%;
 }
 
-/* line 242, ../../sass/system_partials/_forms.sass */
+/* line 251, ../../sass/system_partials/_forms.sass */
 .\38 0 {
   float: left;
   width: 80%;
 }
 
-/* line 245, ../../sass/system_partials/_forms.sass */
+/* line 254, ../../sass/system_partials/_forms.sass */
 .\37 5 {
   float: left;
   width: 75%;
 }
 
-/* line 248, ../../sass/system_partials/_forms.sass */
+/* line 257, ../../sass/system_partials/_forms.sass */
 .\37 0 {
   float: left;
   width: 70%;
 }
 
-/* line 251, ../../sass/system_partials/_forms.sass */
+/* line 260, ../../sass/system_partials/_forms.sass */
 .\36 6 {
   float: left;
   width: 66.66%;
 }
 
-/* line 254, ../../sass/system_partials/_forms.sass */
+/* line 263, ../../sass/system_partials/_forms.sass */
 .\36 5 {
   float: left;
   width: 65%;
 }
 
-/* line 257, ../../sass/system_partials/_forms.sass */
+/* line 266, ../../sass/system_partials/_forms.sass */
 .\36 0 {
   float: left;
   width: 60%;
 }
 
-/* line 260, ../../sass/system_partials/_forms.sass */
+/* line 269, ../../sass/system_partials/_forms.sass */
 .\35 5 {
   float: left;
   width: 55%;
 }
 
-/* line 263, ../../sass/system_partials/_forms.sass */
+/* line 272, ../../sass/system_partials/_forms.sass */
 .\35 4 {
   float: left;
   width: 54%;
 }
 
-/* line 266, ../../sass/system_partials/_forms.sass */
+/* line 275, ../../sass/system_partials/_forms.sass */
 .\35 3 {
   float: left;
   width: 53%;
 }
 
-/* line 269, ../../sass/system_partials/_forms.sass */
+/* line 278, ../../sass/system_partials/_forms.sass */
 .\35 2 {
   float: left;
   width: 52%;
 }
 
-/* line 272, ../../sass/system_partials/_forms.sass */
+/* line 281, ../../sass/system_partials/_forms.sass */
 .\35 1 {
   float: left;
   width: 51%;
 }
 
-/* line 275, ../../sass/system_partials/_forms.sass */
+/* line 284, ../../sass/system_partials/_forms.sass */
 .\35 0 {
   float: left;
   width: 50%;
 }
 
-/* line 278, ../../sass/system_partials/_forms.sass */
+/* line 287, ../../sass/system_partials/_forms.sass */
 .\34 5 {
   float: left;
   width: 45%;
 }
 
-/* line 281, ../../sass/system_partials/_forms.sass */
+/* line 290, ../../sass/system_partials/_forms.sass */
 .\34 0 {
   float: left;
   width: 40%;
 }
 
-/* line 284, ../../sass/system_partials/_forms.sass */
+/* line 293, ../../sass/system_partials/_forms.sass */
 .\33 5 {
   float: left;
   width: 35%;
 }
 
-/* line 287, ../../sass/system_partials/_forms.sass */
+/* line 296, ../../sass/system_partials/_forms.sass */
 .\33 3 {
   float: left;
   width: 33.33%;
 }
 
-/* line 290, ../../sass/system_partials/_forms.sass */
+/* line 299, ../../sass/system_partials/_forms.sass */
 .\33 0 {
   float: left;
   width: 30%;
 }
 
-/* line 293, ../../sass/system_partials/_forms.sass */
+/* line 302, ../../sass/system_partials/_forms.sass */
 .\32 5 {
   float: left;
   width: 25%;
 }
 
-/* line 296, ../../sass/system_partials/_forms.sass */
+/* line 305, ../../sass/system_partials/_forms.sass */
 .\32 0 {
   float: left;
   width: 20%;
 }
 
-/* line 299, ../../sass/system_partials/_forms.sass */
+/* line 308, ../../sass/system_partials/_forms.sass */
 .\31 6 {
   float: left;
   width: 16.66%;
 }
 
-/* line 302, ../../sass/system_partials/_forms.sass */
+/* line 311, ../../sass/system_partials/_forms.sass */
 .\31 5 {
   float: left;
   width: 15%;
 }
 
-/* line 305, ../../sass/system_partials/_forms.sass */
+/* line 314, ../../sass/system_partials/_forms.sass */
 .\31 0 {
   float: left;
   width: 10%;
 }
 
-/* line 308, ../../sass/system_partials/_forms.sass */
+/* line 317, ../../sass/system_partials/_forms.sass */
 .\35 {
   float: left;
   width: 5%;

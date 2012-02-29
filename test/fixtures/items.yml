@@ -1,0 +1,11 @@
+one:
+  name: MyString
+  description: 
+  unit: MyString
+  price: MyString
+
+two:
+  name: MyString
+  description: 
+  unit: MyString
+  price: MyString

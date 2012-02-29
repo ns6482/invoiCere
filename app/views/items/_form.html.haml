@@ -1,0 +1,8 @@
+= simple_form_for @item do |f|
+  = f.error_messages 
+  = f.input :name, :label_html => {:class => "label_narrow"}
+  = f.input :description  , :label_html => {:class => "label_narrow"}
+  = f.input :unit, :label_html => {:class => "label_narrow"}
+  = f.input :price, :label_html => {:class => "label_narrow"}
+
+  = f.submit

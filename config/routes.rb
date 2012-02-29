@@ -13,7 +13,7 @@ VisioInvoiceV3::Application.routes.draw do
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     
     resources :schedules#, :only => [:index, :new]
-    resources :items, :only => [:new, :create, :index, :destroy]
+    resources :items#, :only => [:new, :create, :index, :destroy]
 
     resources :invoices do
       collection do

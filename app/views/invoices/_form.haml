@@ -1,25 +1,33 @@
 -if @invoice.status == "paid"
   %h2 Invoice has been paid, you can copy this invoice or reset to open
 -else
-  #invoice-main2
+  #invoice
     =simple_nested_form_for @invoice, :html => {:novalidate => true} do |f|      
-      =f.error_messages     
-      %div{:id => "form-top", :class => "invoice form-height-long"}  
-        %h3 Invoice Details
-        = f.input :title
-        = f.input :invoice_date, :label => "Date"
-        = f.association :client, :collection => current_company.clients.accessible_by(current_ability)
-        = f.input :business_id, :label => "Your ID"
-        =# f.input :purchase_order_id, :label => "Order ID"          
+      =f.error_messages
+           
+      %div{:id => "form-top", :class => "invoice form-height-long"}
+        
+        .fields  
+          %h3 Invoice Details
+          
+        .fields
+          = f.input :title, :label_html => {:class => "label_narrow"}
+          = f.input :invoice_date, :label => "Date", :label_html => {:class => "label_narrow"}
+          = f.association :client, :collection => current_company.clients.accessible_by(current_ability), :label_html => {:class => "label_narrow"}
+          = f.input :business_id, :label => "Your ID", :label_html => {:class => "label_narrow"}
+          =# f.input :purchase_order_id, :label => "Order ID"  
+                  
       %div{:id => "form-right", :class => "invoice form-height-long"}
-        = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %"
-        = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery"
-        = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee"
-        = f.input :due_days, :input_html => {:size => 1}, :label => "Due Days"
-        = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)"
+        .fields
+          = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => {:class => "label_narrow"}
+          = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery", :label_html => {:class => "label_narrow"}
+          = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => {:class => "label_narrow"}
+          = f.input :due_days, :input_html => {:size => 1}, :label => "Due Days", :label_html => {:class => "label_narrow"}
+          = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => {:class => "label_narrow"}
 
       #form-main
-        %h3 Items
+        .fields
+          %h3 Items
         .fields
           .item_description
             %strong Item Name and Description        
@@ -37,8 +45,10 @@
         =f.link_to_add "New Item", :invoice_items                  
 
       #form-bottom
-        %h3 Further Notes
-        =f.input_field :notes, :html => {:rows => 2}
+        .fields
+          %h3 Further Notes
+        .fields
+          =f.input_field :notes, :html => {:rows => 2}
       #buttons
         %button{:type=>"submit",:class=>"red"} Save
 

@@ -38,4 +38,21 @@ class ItemsController < BaseController
     @item.destroy
     redirect_to items_url, :notice => "Successfully destroyed item."
   end
+  
+  def delete_multiple
+
+   respond_to do |format|
+
+     i = 0
+     #arr_item = Array.new
+     @items_to_delete = items.find(params[:items_ids])
+     @items_to_delete.each do |item|
+       item.destroy 
+     end
+
+     flash[:notice] ='Items successfully deleted.'
+     format.html {redirect_to items_url}  
+     format.js { render :action => 'delete_multiple.js.erb'}
+   end
+  end
 end

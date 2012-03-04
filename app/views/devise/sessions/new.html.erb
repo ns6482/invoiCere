@@ -1,24 +1,25 @@
 <h2>Sign in</h2>
 
 <%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name) do |f| %>
-  <%= field_set_tag 'Inputs' do %>
+  <%= field_set_tag 'Enter your Login Credentials' do %>
 
-    <%= f.input :email %>
-    <%= f.input :password %>
+    <%= f.input :email, :label_html=>{:class => "label_narrow"} %>
+    <%= f.input :password, :label_html=>{:class => "label_narrow"} %>
 
 
     <% if !current_company %>
-      <%= f.input :company_id, :as => :string%>
+      <%= f.input :company_id, :as => :string, :label_html => {:class => "label_narrow"}%>
     <% else %>
       <%=  f.hidden_field :company_id, :value => current_company.name %>
     <% end %>
 
     <% if devise_mapping.rememberable?%>
-      <%= f.input :remember_me, :as => :radio%>
+      <%= f.input :remember_me, :as => :radio, :label_html => {:class => "label_narrow"}%>
     <% end%>
 
-
-    <%= f.button :submit, "Sign in" %>
+	<div id="buttons">
+   	  <%= f.button :submit, "Sign in" %>
+   	</div>
   <% end %>
 <% end %>
 <%= render :partial => "devise/shared/links" %>

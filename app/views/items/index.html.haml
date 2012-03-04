@@ -1,19 +1,30 @@
 - title "Items"
 
-%table
-  %tr
-    %th Name
-    %th Description
-    %th Unit
-    %th Price
-  - for item in @items
+-if @items.length > 0
+
+ =form_tag delete_multiple_clients_path, :method => :delete, :remote => true do
+  -if can? :delete, Item
+   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
+   %table
     %tr
+     %th
+     %th Name
+     %th Description
+     %th Unit
+     %th Price
+    - for item in @items
+     %tr
+      %td= check_box_tag "item_ids[]", item.id
       %td= item.name
       %td= item.description
       %td= item.unit
       %td= item.price
-      %td= link_to 'Show', item
       %td= link_to 'Edit', edit_item_path(item)
-      %td= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete
+-else
+ -if can? :create, Item
+  No Items setup, create a new item
+  = link_to " now", new_item_path  
 
-%p= link_to "New Item", new_item_path
+=content_for :right do
+ -if can? :create, Item
+  = link_to "New Item", new_item_path

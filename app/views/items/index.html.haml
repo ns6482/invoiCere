@@ -2,24 +2,25 @@
 
 -if @items.length > 0
 
- =form_tag delete_multiple_clients_path, :method => :delete, :remote => true do
+ =form_tag delete_multiple_items_path, :method => :delete, :remote => true do
   -if can? :delete, Item
    = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
-   %table
-    %tr
-     %th
-     %th Name
-     %th Description
-     %th Unit
-     %th Price
-    - for item in @items
+   %table{:class => "table-main"}
+    %thead
      %tr
-      %td= check_box_tag "item_ids[]", item.id
-      %td= item.name
-      %td= item.description
-      %td= item.unit
-      %td= item.price
-      %td= link_to 'Edit', edit_item_path(item)
+      %th
+      %th Name
+      %th Description
+      %th Unit
+      %th Price
+    %tbody
+     - for item in @items
+      %tr{:id => "item-row-" + item.id.to_s, :class=>"table-row " + cycle("odd", "even")}
+       %td= check_box_tag "item_ids[]", item.id
+       %td= link_to item.name, edit_item_path(item)
+       %td= item.description
+       %td= item.unit
+       %td= item.price
 -else
  -if can? :create, Item
   No Items setup, create a new item

@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
   has_many :deliveries, :through => :clients, :source => :invoices
   
   has_many :schedules, :through => :clients#, :source => :invoices
-
+  has_many :items
   #has_many :schedules,  :finder_sql =>
    # proc {"SELECT s.* " +
    # "FROM schedules  s JOIN invoices i ON s.invoice_id = i.id " +

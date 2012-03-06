@@ -4,17 +4,17 @@ class ItemsController < BaseController
 
 
   def index
-   # @items = Item.all
+    @items = current_company.items.all
   end
 
   def new
-    #@item = Item.new
+    @item = Item.new(:company_id=>current_company.id)
   end
 
   def create
     #@item = Item.new(params[:item])
     if @item.save
-      redirect_to @item, :notice => "Successfully created item."
+      redirect_to items_url, :notice => "Successfully created item."
     else
       render :action => 'new'
     end
@@ -45,7 +45,7 @@ class ItemsController < BaseController
 
      i = 0
      #arr_item = Array.new
-     @items_to_delete = items.find(params[:items_ids])
+     @items_to_delete = @items.find(params[:item_ids])
      @items_to_delete.each do |item|
        item.destroy 
      end

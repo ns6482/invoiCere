@@ -1,38 +1,34 @@
 $(function() {
-		var items = [
+	
+	var projects = [
 			{
-				name: "test 1",
-				description: "test desc 1",
-				unit: "hours",
-				price: 1
+				value: "jquery",
+				label: "jQuery",
+				desc: "the write less, do more, JavaScript library",
+				icon: "jquery_32x32.png"
 			},
 			{
-				name: "test 2",
-				description: "test desc 2",
-				unit: "hours 2",
-				price: 2
-			}];
-		
-		$( ".item_description" ).autocomplete({
-			minLength: 0,
-			source: items,
-			focus: function( event, ui ) {
-				$( ".item_description" ).val( ui.item.name );
-				return false;
+				value: "jquery-ui",
+				label: "jQuery UI",
+				desc: "the official user interface library for jQuery",
+				icon: "jqueryui_32x32.png"
 			},
-			select: function( event, ui ) {
-				//$( "#project" ).val( ui.item.label );
-				//$( "#project-id" ).val( ui.item.value );
-				$( ".item_description" ).val( ui.item.description );
-				//$( "#project-icon" ).attr( "src", "images/" + ui.item.icon );
-				return false;
+			{
+				value: "sizzlejs",
+				label: "Sizzle JS",
+				desc: "a pure-JavaScript CSS selector engine",
+				icon: "sizzlejs_32x32.png"
 			}
-		})
-		//.data( "autocomplete" )._renderItem = function( ul, item ) {
-		//	return $( "<li></li>" )
-		//		.data( "item.autocomplete", item )
-		//		.append( "<a>" + item.label + "<br>" + item.desc + "</a>" )
-		//		.appendTo( ul );
-		//};
+		];
 
-});
+	
+    var options = {
+        source: projects,
+        minLength: 1
+    };
+
+    $("input.item_description").live("keydown.autocomplete", function() {
+        $(this).autocomplete(options);
+        //alert($(this.id));
+    });
+    });

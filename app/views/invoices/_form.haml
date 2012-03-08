@@ -44,6 +44,13 @@
         = f.simple_fields_for :invoice_items
         =f.link_to_add "New Item", :invoice_items                  
 
+        .demo
+          #project-label 
+            Select a project (type "j" for a start):
+          %input{:id=>"project"}
+          %input{:type=>"hidden"}
+          %p{:id=>"project-description"}
+
       #form-bottom
         .fields
           %h3 Further Notes
@@ -51,6 +58,7 @@
           =f.input_field :notes, :html => {:rows => 2}
       #buttons
         %button{:type=>"submit",:class=>"red"} Save
+
 
     
     

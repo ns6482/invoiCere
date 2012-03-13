@@ -2,23 +2,20 @@ $(function() {
 	
 	var projects = [
 			{
-				value: "test item",
+				value: "test item @10.50/pack",
 				item_description: "test item",
-				qty: "1",
 				cost: "10.50",
 				item_type: "Pack"
 			},
 			{				
-				value: "test item2",
+				value: "test item2 @11.50/single",
 				item_description: "test item2",
-				qty: "2",
 				cost: "11.50",
 				item_type: "Single"
 			},
 			{							
-				value: "test item3",
+				value: "test item3 @12.50/hour",
 				item_description: "test item3",
-				qty: "4",
 				cost: "12.50",
 				item_type: "Hours"			
 			}
@@ -26,7 +23,8 @@ $(function() {
 
 	
     var options = {
-        source: projects,
+        source: "/items.json",
+        dataType: "json",
         minLength: 0, 
         select: function( event, ui ) {
         		//alert(ui.item.desc);
@@ -34,7 +32,6 @@ $(function() {
 				val = "#"+val.replace("item_description", "");
 				
 				$(val+"item_description").val(ui.item.item_description);
-				$(val+"qty").val(ui.item.qty);
 				$(val+"cost").val(ui.item.cost);
 				$(val+"item_type").val(ui.item.item_type);
 				

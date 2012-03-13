@@ -5,6 +5,18 @@ class ItemsController < BaseController
 
   def index
     @items = current_company.items.all
+    
+    respond_to do | format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @items }
+      format.json { 
+       
+        @items.map! {|item| {:value => item.name, :item_description => item.description, :item_type => item.unit,  :cost => item.price}} # 
+        render :json => @items 
+        
+       }
+    end
+
   end
 
   def new

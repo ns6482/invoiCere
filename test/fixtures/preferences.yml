@@ -1,0 +1,23 @@
+one:
+  date_format: MyString
+  time_format: MyString
+  number_format: MyString
+  fiscal: MyString
+  payment_stub: MyText
+  discount: 
+  shipping: 9.99
+  purchase_order_number: false
+  email_alerts: false
+  company_id: 1
+
+two:
+  date_format: MyString
+  time_format: MyString
+  number_format: MyString
+  fiscal: MyString
+  payment_stub: MyText
+  discount: 
+  shipping: 9.99
+  purchase_order_number: false
+  email_alerts: false
+  company_id: 1

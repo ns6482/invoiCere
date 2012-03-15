@@ -13,28 +13,39 @@
     
 #form-x
 =simple_form_for  @company, :url => company_path, :html => { :method => :put, :multipart => true  } do |f|
-  = f.input :name, :label => "Subdomain"  
+  = f.input :name, :label => "Subdomain", :label_html => {:class => "label_narrow"}
+
   =field_set_tag 'Settings', :id =>"tabs-1" do
     =f.simple_fields_for :setting do |s|
       = s.error_messages
-      = s.input :logo, :as => :file
+      = s.input :logo, :as => :file, :label_html => {:class => "label_narrow"}
+
       %br
-      = s.input :company_name
+      = s.input :company_name, :label_html => {:class => "label_narrow"}
+
       
       %br
-      = s.input :company_registration
-      
-      %br
-      
-      = s.input :vat
-      = s.input :vat_registration
+      = s.input :company_registration, :label_html => {:class => "label_narrow"}
+
       
       %br
       
-      = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }
-      = s.input :telephone
-      = s.input :fax
-      = s.input :email
-      = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }
+      = s.input :vat, :label_html => {:class => "label_narrow"}
+
+      = s.input :vat_registration, :label_html => {:class => "label_narrow"}
+
+      
+      %br
+      
+      = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }, :label_html => {:class => "label_narrow"}
+
+      = s.input :telephone, :label_html => {:class => "label_narrow"}
+
+      = s.input :fax, :label_html => {:class => "label_narrow"}
+
+      = s.input :email, :label_html => {:class => "label_narrow"}
+
+      = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }, :label_html => {:class => "label_narrow"}
+
 
       %button{:type=>"submit",:class=>"red"} Save

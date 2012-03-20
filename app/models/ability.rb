@@ -10,6 +10,8 @@ class Ability
       can [:invite], Client
       can [:invite], Contact
       can [:update, :read], Etemplate, :company_id => user.company_id
+      can [:update, :read], Preference, :company_id => user.company_id
+
       can [:update, :read], Setting, :company_id => user.company_id
       can [:create, :read, :update, :invite, :new_invite], User,  :company_id => user.company_id
       #can [:destroy], User, :owner => false,  :company_id => user.company_id

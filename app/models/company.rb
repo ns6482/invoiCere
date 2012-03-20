@@ -18,6 +18,7 @@ class Company < ActiveRecord::Base
 
   has_one :etemplate, :dependent => :destroy
   has_one :setting, :dependent => :destroy
+  has_one :preference, :dependent => :destroy
   
   after_create :set_setting
 
@@ -49,8 +50,15 @@ class Company < ActiveRecord::Base
      e = Etemplate.new()
      e.company_id = self.id
      e.save!
+     
+     p = Preferences.new()
+     p.company_id = self.id
+     p.save!
+     
      ##TODO put defaults here
-     ##setting.save!          
+     ##setting.save!
+     
+               
   end
 
 end

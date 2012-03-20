@@ -1,48 +1,18 @@
 - title "Edit Preferences"
 
-= form_for @preferences do |f|
+= simple_form_for @preference do |f|
   = f.error_messages
-  %p
-    = f.label :date_format
-    %br
-    = f.text_field :date_format
-  %p
-    = f.label :time_format
-    %br
-    = f.text_field :time_format
-  %p
-    = f.label :number_format
-    %br
-    = f.text_field :number_format
-  %p
-    = f.label :fiscal
-    %br
-    = f.text_field :fiscal
-  %p
-    = f.label :payment_stub
-    %br
-    = f.text_area :payment_stub
-  %p
-    = f.label :discount
-    %br
-    = f.text_field :discount
-  %p
-    = f.label :shipping
-    %br
-    = f.text_field :shipping
-  %p
-    = f.label :purchase_order_number
-    %br
-    = f.check_box :purchase_order_number
-  %p
-    = f.label :email_alerts
-    %br
-    = f.check_box :email_alerts
-  %p
-    = f.label :company_id
-    %br
-    = f.text_field :company_id
-  %p
-    = f.submit
+  = f.input :date_format, :collection => CurrencyCountry.all
+  = f.input :date_format , :label_html => {:class => "label_narrow"}
+  = f.input :time_format, :label_html => {:class => "label_narrow"}
+  = f.input :number_format, :label_html => {:class => "label_narrow"}
+  = f.input :fiscal, :label_html => {:class => "label_narrow"}
+  = f.input :payment_stub, :label_html => {:class => "label_narrow"}
+  = f.input :discount, :label_html => {:class => "label_narrow"}
+  = f.input :shipping, :label_html => {:class => "label_narrow"}
+  = f.input :purchase_order_number#, :label_html => {:class => "label_narrow"}
+  = f.input :email_alerts#, :label_html => {:class => "label_narrow"}
+  #buttons
+    %button{:type=>"submit",:class=>"red"} Save
 
 

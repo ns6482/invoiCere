@@ -6,7 +6,7 @@ class CreatePreferences < ActiveRecord::Migration
       t.string :number_format
       t.string :fiscal
       t.text :payment_stub
-      t.number :discount
+      t.integer :discount
       t.decimal :shipping
       t.boolean :purchase_order_number
       t.boolean :email_alerts

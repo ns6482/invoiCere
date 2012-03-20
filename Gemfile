@@ -39,7 +39,7 @@ gem "liquid"
 gem "RedCloth"
 gem "pdf-reader"
 gem "Ascii85"
-
+gem "active_hash"
 # Use unicorn as the web server
 # gem 'unicorn'
 

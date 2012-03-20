@@ -47,6 +47,7 @@ VisioInvoiceV3::Application.routes.draw do
     
     resource :company, :only => [:edit, :update, :show] do
       resource :etemplate, :only => [:edit, :update], :shallow =>true  
+      resource :preference, :only => [:edit, :update], :shallow => true
     end
     
     resources :clients do 

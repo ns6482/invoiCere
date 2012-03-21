@@ -1,6 +1,7 @@
 class CreatePreferences < ActiveRecord::Migration
   def self.up
     create_table :preferences do |t|
+      t.string :currency_format
       t.string :date_format
       t.string :time_format
       t.string :number_format

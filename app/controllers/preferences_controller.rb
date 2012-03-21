@@ -3,6 +3,7 @@ class PreferencesController < BaseController
 
   def edit
     @preference = current_company.preference
+
   end
 
   def update

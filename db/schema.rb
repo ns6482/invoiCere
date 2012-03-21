@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20120315204247) do
   end
 
   create_table "preferences", :force => true do |t|
+    t.string   "currency_format"
     t.string   "date_format"
     t.string   "time_format"
     t.string   "number_format"

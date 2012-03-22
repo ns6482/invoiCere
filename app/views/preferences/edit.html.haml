@@ -6,7 +6,7 @@
   = f.input :date_format , :label_html => {:class => "label_narrow"}
   = f.input :time_format, :label_html => {:class => "label_narrow"}
   = f.input :number_format, :label_html => {:class => "label_narrow"}
-  = f.input :fiscal, :label_html => {:class => "label_narrow"}
+  = f.input :fiscal, :collection => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], :label_html => {:class => "label_narrow"}
   = f.input :payment_stub, :label_html => {:class => "label_narrow"}
   = f.input :discount, :label_html => {:class => "label_narrow"}
   = f.input :shipping, :label_html => {:class => "label_narrow"}

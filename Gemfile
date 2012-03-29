@@ -40,6 +40,7 @@ gem "RedCloth"
 gem "pdf-reader"
 gem "Ascii85"
 gem "active_hash"
+gem 'countries'
 # Use unicorn as the web server
 # gem 'unicorn'
 

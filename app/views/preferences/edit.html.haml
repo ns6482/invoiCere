@@ -2,10 +2,13 @@
 
 = simple_form_for @preference do |f|
   = f.error_messages
-  = f.input :currency_format, :collection => PrefCurrencyCountry.all, :label_html => {:class => "label_narrow"}, :include_blank => false
+  =# f.input :currency_format, :collection => @countries, :label_html => {:class => "label_narrow"}, :include_blank => false
+  =# country_options_for_select('All')
+
+  = f.input :currency_format, :priority => [ "Albania"], :collection => @countries, :label_html => {:class => "label_narrow"}
   = f.input :date_format , :collection => @date_formats, :label_html => {:class => "label_narrow"}, :include_blank => false
-  = f.input :time_format, :as => :time_zone, :label_html => {:class => "label_narrow"}, :label => "Time Zone"
-  = f.input :number_format, :label_html => {:class => "label_narrow"}
+  = f.input :time_format, :label_html => {:class => "label_narrow"}, :collection => @time_formats, :label => "Time Format"
+  =# f.input :number_format, :label_html => {:class => "label_narrow"}
   = f.input :fiscal, :collection => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], :label_html => {:class => "label_narrow"}, :include_blank => false
   = f.input :payment_stub, :label_html => {:class => "label_narrow"}
   = f.input :discount, :label_html => {:class => "label_narrow"}

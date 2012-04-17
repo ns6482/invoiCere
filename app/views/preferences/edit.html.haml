@@ -1,7 +1,7 @@
 - title "Edit Preferences"
 
-= simple_form_for @preference do |f|
-  = f.error_messages
+=simple_form_for  @preference , :url => company_preference_path, :html => { :method => :put, :multipart => true  } do |f|
+  = #f.error_messages
   =# f.input :currency_format, :collection => @countries, :label_html => {:class => "label_narrow"}, :include_blank => false
   =# country_options_for_select('All')
 
@@ -11,8 +11,8 @@
   =# f.input :number_format, :label_html => {:class => "label_narrow"}
   = f.input :fiscal, :collection => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], :label_html => {:class => "label_narrow"}, :include_blank => false
   = f.input :payment_stub, :label_html => {:class => "label_narrow"}
-  = f.input :discount, :label_html => {:class => "label_narrow"}
-  = f.input :shipping, :label_html => {:class => "label_narrow"}
+  = f.input :discount, :label_html => {:class => "label_narrow"}, :label => "Discount amount/perc"
+  = f.input :shipping, :label_html => {:class => "label_narrow"}, :label => "Shipping amount"
   = f.input :purchase_order_number#, :label_html => {:class => "label_narrow"}
   = f.input :email_alerts#, :label_html => {:class => "label_narrow"}
   #buttons

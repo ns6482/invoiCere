@@ -16,16 +16,19 @@
           = f.association :client, :collection => current_company.clients.accessible_by(current_ability), :label_html => {:class => "label_narrow"}
           = f.input :business_id, :label => "Your ID", :label_html => {:class => "label_narrow"}
           =# f.input :purchase_order_id, :label => "Order ID"  
-                  
+ 
       %div{:id => "form-right", :class => "invoice form-height-long"}
         .fields
           = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => {:class => "label_narrow"}
-          = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery", :label_html => {:class => "label_narrow"}
+          = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Shipping", :label_html => {:class => "label_narrow"}
           = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => {:class => "label_narrow"}
           = f.input :due_days, :input_html => {:size => 1}, :label => "Due Days", :label_html => {:class => "label_narrow"}
           = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => {:class => "label_narrow"}
+        .fields
+          = f.input :currency, :collection => @countries, :label_html => {:class => "label_narrow"}
 
       #form-main
+
         .fields
           %h3 Items
         .fields

@@ -7,6 +7,8 @@ require 'prawn/layout'
 class InvoicesController < BaseController
   before_filter :get_clients, :only => [:index, :new, :edit]
   before_filter :find_invoice, :only => [:show, :edit, :destroy, :update]  
+  before_filter :get_countries, :only => [:edit, :new]
+  
   load_and_authorize_resource
 
   def index
@@ -179,6 +181,18 @@ class InvoicesController < BaseController
     #.accessible_by(current_ability, :read)
     ##clients.collect { |c| c.invoices }.flatten # select all invoices for all clients of the firm
     #@invoices = Invoice.find(:all, :joins => :client, :conditions => ["clients.company_id = ?", current_company.id])
+  end
+  
+  def get_countries
+    @countries = []
+    
+    Country.all.each do |d| 
+      c= Country.find_country_by_name(d[0])
+      if !c.currency.nil?
+        @countries << c.name + ", " + c.currency['code'] + " " + c.currency['name']
+      end
+    end
+
   end
   
 end

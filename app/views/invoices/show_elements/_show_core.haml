@@ -16,13 +16,15 @@
     %th Purchase Order ID
     %th Invoice Date
     %th Due Date
+    %th Currency
    %tr
     %td
      %strong= h @invoice.id
     %td= h @invoice.business_id
     %td= h @invoice.purchase_order_id
-    %td= h @invoice.invoice_date
+    %td= h current_company.preference.convert_date(@invoice.invoice_date)
     %td= h @invoice.due_date
+    %td= h @invoice.currency
  #invoice-title
   %h2= h @invoice.title
  #invoice-item-list

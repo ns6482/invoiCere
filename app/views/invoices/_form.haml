@@ -24,9 +24,7 @@
           = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => {:class => "label_narrow"}
           = f.input :due_days, :input_html => {:size => 1}, :label => "Due Days", :label_html => {:class => "label_narrow"}
           = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => {:class => "label_narrow"}
-        .fields
-          = f.input :currency, :collection => @countries, :label_html => {:class => "label_narrow"}
-
+        
       #form-main
 
         .fields

@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(:version => 20120417191715) do
     t.integer  "dd"
     t.string   "discount"
     t.string   "currency"
-    t.string   "date_display"
   end
 
   create_table "items", :force => true do |t|

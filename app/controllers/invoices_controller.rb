@@ -58,6 +58,7 @@ class InvoicesController < BaseController
       @invoice  = master_invoice.clone :include => :invoice_items
       @invoice.state = "draft"
       @invoice.invoice_date=Date.today
+      
 #      @invoice.invoice_items << InvoiceItem.new(:type=> "test", :description => "gg")
     else
       @invoice.invoice_date=Date.today

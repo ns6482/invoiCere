@@ -7,4 +7,24 @@ class Preference < ActiveRecord::Base
   validates_numericality_of :shipping
   validates_presence_of :currency_format, :date_format, :time_format
 
+  def convert_date(d)
+    
+    dt = DateTime.new(d.year,d.month, d.day, 00, 00)
+    
+    if self.date_format = "dt0"
+      val = dt.strftime("%Y %B %d") 
+    elsif self.date_format = "dt1"
+      val = dt.strftime("%d %B %Y") 
+    elsif self.date_format = "dt2"
+      val = dt.strftime("%B %d %Y") 
+    elsif self.date_format = "dt3"
+      val = dt.strftime("d/%m/%Y") 
+    elsif self.date_format = "dt4"
+      val = dt.strftime("%Y %m %d") 
+    else
+      val = dt.strftime("%d %B %Y") 
+    end
+    val
+  end
+  
 end

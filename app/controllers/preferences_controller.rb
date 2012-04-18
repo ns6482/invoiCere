@@ -3,6 +3,9 @@ class PreferencesController < BaseController
 
   before_filter :get_preference
 
+
+
+
   def get_preference
         @preference = current_company.preference
     

@@ -118,8 +118,8 @@ def to_pdf
 
    items =
    [
-   ["Invoice ID","Your ID", "Purchase Order ID", "Invoice Date", "Due Date"],
-   [@invoice.id,@invoice.business_id,@invoice.purchase_order_id,@invoice.invoice_date, @invoice.due_date]
+   ["Invoice ID","Your ID", "Purchase Order ID", "Invoice Date", "Due Date", "Currency"],
+   [@invoice.id,@invoice.business_id,@invoice.purchase_order_id,@current_company.preference.convert_date(@invoice.invoice_date), current_company.preference.convert_date(@invoice.due_date), current_company.preference.currency_format]
    ]
 
    header_table = make_table(items, :header => true) do
@@ -215,7 +215,7 @@ def to_pdf
         
    
     add_page_break_if_overflow do |pdf|
-             
+      move_down 5
       text "Payment Stub", :align => :left, :size => 11, :style => :bold
       text content, :align => :left, :size => 11, :style => :bold, :color => :white
       move_down 10

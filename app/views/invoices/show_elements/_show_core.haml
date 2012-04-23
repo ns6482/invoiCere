@@ -23,8 +23,8 @@
     %td= h @invoice.business_id
     %td= h @invoice.purchase_order_id
     %td= h current_company.preference.convert_date(@invoice.invoice_date)
-    %td= h @invoice.due_date
-    %td= h @invoice.currency
+    %td= h current_company.preference.convert_date(@invoice.due_date)
+    %td= h current_company.preference.currency_format
  #invoice-title
   %h2= h @invoice.title
  #invoice-item-list

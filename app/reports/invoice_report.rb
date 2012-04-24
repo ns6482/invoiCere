@@ -208,25 +208,29 @@ def to_pdf
       stroke do          
         line bounds.top_left, bounds.top_right       
       end
-      move_down 10
+      #move_down 5
      end
      
      undash
         
    
-    add_page_break_if_overflow do |pdf|
-      move_down 5
-      text "Payment Stub", :align => :left, :size => 11, :style => :bold
-      text content, :align => :left, :size => 11, :style => :bold, :color => :white
-      move_down 10
+    if @current_company.preference.payment_stub =1
+      
+     
+   
+      add_page_break_if_overflow do |pdf|
+        move_down 5
+        text "Payment Stub", :align => :left, :size => 11, :style => :bold
+        text content, :align => :left, :size => 11, :style => :bold, :color => :white
+        move_down 10
 
-       summary_items =
-       [
+        summary_items =
+        [
             ["Client Details",@invoice.client.name],
             ["Invoice Date",@invoice.invoice_date],
             ["Total due", @invoice.remaining_amount],
             ["Invoice ID", @invoice.id]
-       ]
+        ]
 
 
         summary_table = make_table(summary_items, :header => true, :width => 150) do
@@ -235,10 +239,9 @@ def to_pdf
             column(0).style(:font_style => :bold)
         end
     
-            summary_table.cells.style { |cell| cell.border_width = 0 }
-            summary_table.draw
+        summary_table.cells.style { |cell| cell.border_width = 0 }
+        summary_table.draw
        
-        
         stroke do
             line bounds.top_left, bounds.top_right
         end
@@ -267,11 +270,13 @@ def to_pdf
        text "#{@current_company.name}", :size => 8, :align => :center,  :style => :bold
        text "#{@current_company.setting.address}", :size => 8, :align => :center
        text company_contact, :size => 8, :align => :center
-  
-end
+    end
+    
+    
   end
+end
 
-  number_pages "Page <page> of <total>", :at => [margin_box.right-65, 0], :page_filter => :all, :size => 8
+  #number_pages "Page <page> of <total>", :at => [margin_box.right-65, -10], :page_filter => :all, :size => 8
 
   render
 end

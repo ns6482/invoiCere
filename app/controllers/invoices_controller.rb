@@ -34,7 +34,7 @@ class InvoicesController < BaseController
      format.html
      #format.pdf
      format.pdf do
-        send_data output, :filename => "hello.pdf", 
+        send_data output, :filename => current_company.name + "_" + @invoice.title + "_" + @invoice.id.to_s, 
                           :type => "application/pdf"
      end
 

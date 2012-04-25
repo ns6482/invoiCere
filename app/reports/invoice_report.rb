@@ -276,6 +276,9 @@ def to_pdf
   end
 end
 
+
+  
+
   #number_pages "Page <page> of <total>", :at => [margin_box.right-65, -10], :page_filter => :all, :size => 8
 
   render

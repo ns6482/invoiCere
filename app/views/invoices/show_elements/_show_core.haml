@@ -1,6 +1,11 @@
 #invoice-preview
  #invoice-client-name
   %h3= "Invoice for " +  @invoice.client.name
+  
+ #invoice-time-now
+  Date Printed: 
+  =current_company.preference.convert_datetime(@time)
+ %br 
  #invoice-client-address
   =render :partial => "clients/address", :locals => {:client => @invoice.client}
  #invoice-logo

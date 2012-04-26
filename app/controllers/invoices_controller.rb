@@ -69,7 +69,18 @@ class InvoicesController < BaseController
       #3.times do
        @invoice.invoice_items.build
       #end
-
+      
+      if current_company.preference.discount.size >0
+        @invoice.discount  = current_company.preference.discount
+      end
+      
+      if current_company.preference.shipping.size > 0 
+        @invoice.delivery_charge = current_company.preference.discount
+      end
+      
+      if current_company.setting.vat.size > 0 
+        @invoice.tax_rate = current_company.setting.vat
+      end    
     end
 
     #@invoice = Invoice.new(:invoice_date => Date.today)

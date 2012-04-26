@@ -61,7 +61,7 @@ def to_pdf
   time = Time.new
 
   repeat :all do
-    text "Printed on " + time.strftime("%B %d, %Y"), :align=> :right, :size => 8
+    text "Printed on " + @current_company.preference.convert_datetime(time), :align=> :right, :size => 8
   end
 
  

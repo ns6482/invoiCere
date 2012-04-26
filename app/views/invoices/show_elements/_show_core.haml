@@ -2,10 +2,6 @@
  #invoice-client-name
   %h3= "Invoice for " +  @invoice.client.name
   
- #invoice-time-now
-  Date Printed: 
-  =current_company.preference.convert_datetime(@time)
- %br 
  #invoice-client-address
   =render :partial => "clients/address", :locals => {:client => @invoice.client}
  #invoice-logo
@@ -57,5 +53,10 @@
      %strong= pluralize(@invoice.due_days, 'day')
      , the late fee is set to
      %strong= h number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+     
+  #invoice-time-now
+   Printed on  
+   =current_company.preference.convert_datetime(@time)
+ 
 #invoice-activity
  = render :partial => "invoices/history"

@@ -29,4 +29,14 @@ class InvoiceItem < ActiveRecord::Base
    
   end
   
+   def show_tax
+    if self.taxable = 1
+      val = self.invoice.tax_rate.to_s + "%" 
+    else
+      val = ""
+    end
+    
+    val
+  end
+  
 end

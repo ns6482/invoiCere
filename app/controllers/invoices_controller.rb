@@ -114,6 +114,9 @@ class InvoicesController < BaseController
   end
   
   def update
+    
+        @time = Time.now
+
     #todo
     #redirect if draft status
     

@@ -1904,7 +1904,7 @@ span.stars span {
   -khtml-border-radius: 2px;
   border-radius: 2px;
   font-family: arial, helvetica, verdana, "Lucida Grande", "Lucida Sans Unicode";
-  font-size: 14px;
+  font-size: 12px;
   font-weight: normal;
 }
 /* line 29, ../../sass/system_partials/_forms.sass */
@@ -2017,7 +2017,6 @@ label.collection_check_boxes {
   float: left;
   margin-right: 10px;
   width: 390px;
-  padding-bottom: 2px;
 }
 /* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #form-top {
@@ -2026,11 +2025,10 @@ label.collection_check_boxes {
 /* line 121, ../../sass/system_partials/_forms.sass */
 #form-top input {
   width: 170px;
-  padding: 2px;
 }
 /* line 124, ../../sass/system_partials/_forms.sass */
 #form-top label {
-  padding-left: 5px;
+  padding-left: 6px;
 }
 
 /* line 128, ../../sass/system_partials/_forms.sass */
@@ -2062,7 +2060,7 @@ label.collection_check_boxes {
 
 /* line 137, ../../sass/system_partials/_forms.sass */
 .form-height-long {
-  height: 190px;
+  height: 225px;
 }
 
 /* line 141, ../../sass/system_partials/_forms.sass */
@@ -2078,7 +2076,7 @@ label.collection_check_boxes {
   width: 310px;
   padding-top: 5px;
   padding-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 /* line 147, ../../../../.rvm/gems/ruby-1.9.3-p0/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #form-right {

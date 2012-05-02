@@ -136,7 +136,7 @@ def to_pdf
    text "#{@invoice.title}", :size => 14
    move_down 20
 
-   invoice_items =  [["Type","Description","Cost","Qty"]]
+   invoice_items =  [["Type","Description","Cost","Qty", "VAT"]]
    
    invoice_items += @invoice.invoice_items.map do |item|
         [
@@ -144,7 +144,9 @@ def to_pdf
             item.item_description,
             #number_to_currency(item.cost, :unit => "£", :separator => ".", :delimiter => ","),
             item.cost,
-          item.qty
+            item.qty, 
+            item.show_tax
+         
        ]
    end
 
@@ -231,8 +233,13 @@ def to_pdf
             ["Total due", @invoice.remaining_amount],
             ["Invoice ID", @invoice.id]
         ]
-
-
+        
+        if @current_company.preference.purchase_order_number = 1 
+          if @invoice.purchase_order_id.size >0 
+             summary_items <<  ["Purchase Order ID", @invoice.purchase_order_id]
+          end
+        end
+        
         summary_table = make_table(summary_items, :header => true, :width => 150) do
             cells.size = 8
             cells.padding = 2

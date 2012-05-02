@@ -2,11 +2,11 @@
  %tr
   %th
    %strong Item Subtotal:
-  %td= h number_to_currency @invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","
+  %td= h @invoice.total_cost#number_to_currency @invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","
  %tr
   %th
    %strong Item Subtotal inc Tax:
-  %td= h number_to_currency @invoice.total_cost_inc_tax, :unit => '£', :separator => ".", :delimiter => ","
+  %td= h @invoice_total_cost_inc_tax#number_to_currency @invoice.total_cost_inc_tax, :unit => '£', :separator => ".", :delimiter => ","
  
  -if !@invoice.discount.nil? and @invoice.discount.length >0 
 
@@ -16,18 +16,18 @@
     -if @invoice.discount.include? "%"
      %td= h @invoice.discount
     -else 
-     %td= h number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => "," 
+     %td= h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => "," 
  %tr
   %th
    %strong Delivery Charge:
-  %td= h number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => "," 
+  %td= h @invoice.delivery_charge#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => "," 
  %tr
   %th
    %strong Total:
   %td
-   %strong= h number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
+   %strong= h @invoice.total_cost_inc_tax_delivery#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
  %tr
   %th
    %strong Payment Due:
   %td
-   %strong=  number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","
+   %strong= h @invoice.remaining_amount #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","

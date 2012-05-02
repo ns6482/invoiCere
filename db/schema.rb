@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120417191715) do
+ActiveRecord::Schema.define(:version => 20120429161329) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(:version => 20120417191715) do
     t.decimal  "cost",                            :precision => 12, :scale => 2, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "taxable"
+    t.integer  "taxable"
   end
 
   create_table "invoices", :force => true do |t|

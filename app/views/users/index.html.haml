@@ -28,3 +28,8 @@
   %br
   -if can? :invite, User
     =link_to 'Invite User', new_user_invitation_path#, html_options = {:class => 'button'}
+  %br
+  %br
+  -if can? :update, Company
+    =link_to "Back to Settings", edit_company_path
+ 

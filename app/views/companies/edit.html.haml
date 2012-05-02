@@ -5,11 +5,15 @@
 =content_for :right do 
   -if can? :read, User 
     =link_to "Manage Users", users_path
-    %br
+  %br
+  -if can? :update, Etemplate
     =link_to "Edit Template", edit_company_etemplate_path
-    %br
-    =link_to "Preview Settings", company_path
-   
+  %br
+  -#if can? :update, Company
+    =#link_to "Preview Settings", company_path
+  %br
+  -if can? :update, Preference
+    =link_to "Edit Preferences", edit_company_preference_path
     
 #form-x
 =simple_form_for  @company, :url => company_path, :html => { :method => :put, :multipart => true  } do |f|

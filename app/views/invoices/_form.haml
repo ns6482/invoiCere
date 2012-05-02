@@ -15,7 +15,10 @@
           = f.input :invoice_date, :label => "Date", :label_html => {:class => "label_narrow"}
           = f.association :client, :collection => current_company.clients.accessible_by(current_ability), :label_html => {:class => "label_narrow"}
           = f.input :business_id, :label => "Your ID", :label_html => {:class => "label_narrow"}
-          =# f.input :purchase_order_id, :label => "Order ID"  
+          
+          -if current_company.preference.purchase_order_number =1
+            = f.input :purchase_order_id, :label => "Purchase Order ID", :label_html => {:class => "label_narrow"}
+ 
  
       %div{:id => "form-right", :class => "invoice form-height-long"}
         .fields

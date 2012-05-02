@@ -1,12 +1,12 @@
 %tr{:class=>"show_fields"}
  %td= h show_invoice_item.item_description
  %td= h show_invoice_item.qty
- %td= h number_to_currency show_invoice_item.cost, :unit => '£', :separator => ".", :delimiter => ","
+ %td= h show_invoice_item.cost
  %td= h show_invoice_item.item_type
  %td= h show_invoice_item.line_cost_inc_tax
  %td
-  -if show_invoice_item.taxable?
-   = h number_to_percentage(show_invoice_item.invoice.tax_rate, :precision => 2)
-  -else
-   NA
+  -#if show_invoice_item.taxable =0
+  = show_invoice_item.show_tax
+  =# h number_to_percentage(show_invoice_item.invoice.tax_rate, :precision => 2)
+  
  

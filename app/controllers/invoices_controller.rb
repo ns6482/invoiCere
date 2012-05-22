@@ -29,8 +29,6 @@ class InvoicesController < BaseController
 
 
     output = InvoiceReport.new(@invoice).to_pdf
-
-
     @time = Time.now
     
     respond_to do | format|

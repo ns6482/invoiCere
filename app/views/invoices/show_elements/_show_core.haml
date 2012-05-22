@@ -56,7 +56,7 @@
      
   #invoice-time-now
    Printed on  
-   =current_company.preference.convert_datetime(@time)
+   =current_company.preference.convert_datetime(Time.now)
  
 #invoice-activity
  = render :partial => "invoices/history"

@@ -51,8 +51,17 @@ class Company < ActiveRecord::Base
      e.company_id = self.id
      e.save!
      
-     p = Preferences.new()
+     p = Preference.new()
      p.company_id = self.id
+     
+     p.currency_format = "United Kingdom, GBP Pounds"
+     p.date_format = "dt0"
+     p.time_format = "24"
+     p.fiscal = "April"
+     p.shipping = 0
+     p.discount = 0
+     
+     
      p.save!
      
      ##TODO put defaults here

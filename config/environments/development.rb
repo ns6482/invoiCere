@@ -25,7 +25,9 @@ VisioInvoiceV3::Application.configure do
   
   config.action_mailer.delivery_method = :smtp
   
- 
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+  end
   #config.action_controller.session ||= {:domain => '.lvh.me'}
   
 end

@@ -6,8 +6,7 @@
  %tr
   %th
    %strong Item Subtotal inc Tax:
-  %td= h @invoice_total_cost_inc_tax#number_to_currency @invoice.total_cost_inc_tax, :unit => '£', :separator => ".", :delimiter => ","
- 
+  %td= h @invoice.total_cost_inc_tax#number_to_currency @invoice.total_cost_inc_tax, :unit => '£', :separator => ".", :delimiter => ","
  -if !@invoice.discount.nil? and @invoice.discount.length >0 
 
   %tr

@@ -5,6 +5,5 @@ class ChangeTaxableToInvoiceItems < ActiveRecord::Migration
 
   def self.down
     change_column :invoice_items, :taxable, :tiny_int
-
   end
 end

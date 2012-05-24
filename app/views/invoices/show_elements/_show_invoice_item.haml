@@ -5,9 +5,7 @@
  %td= h show_invoice_item.item_type
  %td= h show_invoice_item.line_cost_inc_tax
  %td
-  = show_invoice_item.id
-  =  show_invoice_item.taxable.to_i
-  = show_invoice_item.show_tax 
+  = h show_invoice_item.show_tax
   =# h number_to_percentage(show_invoice_item.invoice.tax_rate, :precision => 2)
   
  

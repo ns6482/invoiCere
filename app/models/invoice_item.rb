@@ -13,7 +13,7 @@ class InvoiceItem < ActiveRecord::Base
   end
 
   def line_cost_inc_tax
-   if self.taxable
+   if self.taxable==1
     val = ((self.cost * self.qty) *  ((self.invoice.tax_rate.to_f + 100)/100))
    else
      val = self.cost * self.qty
@@ -30,7 +30,7 @@ class InvoiceItem < ActiveRecord::Base
   end
   
    def show_tax
-    if self.taxable = 1
+    if self.taxable == 1
       val = self.invoice.tax_rate.to_s + "%" 
     else
       val = ""

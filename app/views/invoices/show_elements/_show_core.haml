@@ -23,9 +23,9 @@
      %strong= h @invoice.id
     %td= h @invoice.business_id
     %td= h @invoice.purchase_order_id
-    %td= h current_company.preference.convert_date(@invoice.invoice_date)
-    %td= h current_company.preference.convert_date(@invoice.due_date)
-    %td= h current_company.preference.currency_format
+    %td= h @invoice.client.company.preference.convert_date(@invoice.invoice_date)
+    %td= h @invoice.client.company.preference.convert_date(@invoice.due_date)
+    %td= h @invoice.client.company.preference.currency_format
  #invoice-title
   %h2= h @invoice.title
  #invoice-item-list
@@ -56,7 +56,7 @@
      
   #invoice-time-now
    Printed on  
-   =current_company.preference.convert_datetime(Time.now)
+   =@invoice.client.company.preference.convert_datetime(Time.now)
  
 #invoice-activity
  = render :partial => "invoices/history"

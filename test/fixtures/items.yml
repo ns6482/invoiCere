@@ -3,9 +3,12 @@ one:
   description: 
   unit: MyString
   price: MyString
+  company_id: 1
 
 two:
   name: MyString
   description: 
   unit: MyString
   price: MyString
+  company_id: 1
+

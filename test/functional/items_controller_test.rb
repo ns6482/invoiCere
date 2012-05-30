@@ -3,7 +3,7 @@ require 'test_helper'
 class ItemsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  fixtures :invoices, :clients, :companies, :preferences # fixture_file_name ...
+  fixtures :items
 
   def setup
    # @company = companies(:two)
@@ -42,7 +42,7 @@ class ItemsControllerTest < ActionController::TestCase
   def test_create_valid
     Item.any_instance.stubs(:valid?).returns(true)
     post :create
-    assert_redirected_to item_url(assigns(:item))
+    assert_redirected_to items_url#(assigns(:item))
   end
 
   def test_edit

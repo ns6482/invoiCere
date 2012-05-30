@@ -23,10 +23,6 @@ class InvoiceItemsControllerTest < ActionController::TestCase
     assert_template 'index'
   end
   
-  def test_show
-    get :show, :id => @invoice_item
-    assert_template 'show'
-  end
   
   def test_new
     get :new, :invoice_id => @invoice.id

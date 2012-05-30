@@ -3,7 +3,7 @@ require 'test_helper'
 class InvoicesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
-  fixtures :invoices, :clients, :companies # fixture_file_name ...
+  fixtures :invoices, :clients, :companies, :preferences # fixture_file_name ...
 
   def setup
    # @company = companies(:two)
@@ -11,6 +11,8 @@ class InvoicesControllerTest < ActionController::TestCase
     
     #@invoices = @company.invoices
     @request.host = @user.company.name + ".lvh.me"#@company.name + ".test"
+  
+    #assert_equal @user.company.prefernce.discount, "10%"
   
     sign_in @user
  
@@ -70,11 +72,6 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_template 'show'
     assert assigns :invoice
     assert_response :success
-  end
-
-  def test_new
-    get :new
-    assert_template 'new'
   end
   
   def test_create_invalid
@@ -141,10 +138,16 @@ class InvoicesControllerTest < ActionController::TestCase
     assert !Invoice.exists?(invoice.id)
   end
 
-  def test_default_date
+  def test_new
+    #get :new
+    assert_not_nil @user.company
+    assert_not_nil @user.company.preference
+    assert_equal 10, @user.company.preference.discount
+    
     get :new
     assert_response :success
     @invoice = assigns(:invoice)
+   
     assert_equal @invoice.invoice_date, Date.today
   end
 

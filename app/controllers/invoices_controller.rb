@@ -29,6 +29,8 @@ class InvoicesController < BaseController
 
 
     output = InvoiceReport.new(@invoice).to_pdf
+
+
     @time = Time.now
     
     respond_to do | format|
@@ -68,6 +70,7 @@ class InvoicesController < BaseController
        @invoice.invoice_items.build
       #end
       
+      
       if current_company.preference.discount.size >0
         @invoice.discount  = current_company.preference.discount
       end
@@ -78,7 +81,8 @@ class InvoicesController < BaseController
       
       if current_company.setting.vat.size > 0 
         @invoice.tax_rate = current_company.setting.vat
-      end    
+      end
+         
     end
 
     #@invoice = Invoice.new(:invoice_date => Date.today)

@@ -1,23 +1,23 @@
 one:
-  date_format: MyString
-  time_format: MyString
-  number_format: MyString
-  fiscal: MyString
-  payment_stub: MyText
-  discount: 
-  shipping: 9.99
+  date_format: dt0
+  time_format: 24
+  number_format: ##,##
+  fiscal: April
+  payment_stub: true
+  discount: 10%
+  shipping: 1.00
   purchase_order_number: false
   email_alerts: false
   company_id: 1
 
 two:
-  date_format: MyString
-  time_format: MyString
-  number_format: MyString
-  fiscal: MyString
-  payment_stub: MyText
-  discount: 
-  shipping: 9.99
+  date_format: dt0
+  time_format: 24
+  number_format: ##,##
+  fiscal: April
+  payment_stub: true
+  discount: 10%
+  shipping: 1.00
   purchase_order_number: false
   email_alerts: false
   company_id: 1

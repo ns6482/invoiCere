@@ -58,7 +58,7 @@ class InvoicesController < BaseController
 
     if params[:id]    
       master_invoice = current_company.invoices.find(params[:id])
-      @invoice  = master_invoice.clone :include => :invoice_items
+      @invoice  = master_invoice.dup :include => :invoice_items
       @invoice.state = "draft"
       @invoice.invoice_date=Date.today
       

@@ -1,0 +1,38 @@
+@import "fancy-buttons"
+@import "compass/css3/box-shadow"
+
+$green: darken(#57b42c, 8)
+$blue: adjust_hue($green, 110)
+$red: adjust_hue($green, -100)
+
+#buttons
+  //padding-top: $panel-vertical-height
+  float: right
+
+.fancy-button-base
+  +fancy-button
+  margin: 10px 10px
+  vertical-align: middle
+
+
+.button, button
+  @extend .fancy-button-base
+  &[disabled]
+
+a.button, button
+  
+  +fancy-button-structure
+  +fancy-button-colors
+  margin: 10px
+  vertical-align: middle
+  &.red
+    +fancy-button-colors($red)
+  &.blue
+    +fancy-button-colors($blue)
+  &.light
+    +fancy-button-colors-matte(#ddd)
+    +fancy-button-size(12px, 1em)
+
+a.schedule_icon  
+  background: transparent url("/images/icons/time.png") no-repeat center left
+  padding: 20px

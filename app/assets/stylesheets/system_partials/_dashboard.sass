@@ -1,0 +1,57 @@
+#dashboard-calendar
+ table
+  :border-collapse collapse
+  :width 40%
+  +inner-table-borders(1px, #7a98c6)
+  +outer-table-borders(1px)
+
+ th, td
+  :vertical-align top
+  //:background url(/images/ui-bg_glass_45_0078ae_1x400.png) repeat
+
+ .notmonth
+  :color #CCC
+
+ #month
+  :margin 0
+  //:padding-top 10px
+  //:padding-bottom 10px
+  :text-align left
+
+  a, a:hover
+   :text-decoration none
+   :padding 0 10px
+   :color #999
+
+ .today
+  :background-color #D7F2FF
+
+#dashboard-summary
+ +column(18)
+ .panel
+  h3
+   +box
+   
+.dashboard-table
+ table
+  :width 120px
+  td
+   :width 10px
+ 
+#dashboard-box
+ :border-style solid
+ :border-color black
+ ul
+  +box
+  +border-radius(4px, 4px)
+  +no-bullets    
+  li
+
+#dashboard-box-start
+ @extend #dashboard-box
+ +column(9)
+
+#dashboard-box-end
+ @extend #dashboard-box
+ +column(9,last)
+ 

@@ -19,7 +19,8 @@ class InvoiceItemsControllerTest < ActionController::TestCase
   end
 
   def test_index
-    get :index, :invoice_id => @invoice.id
+    invoice = invoices(:one)
+    get :index, :invoice_id => invoice.id
     assert_template 'index'
   end
   

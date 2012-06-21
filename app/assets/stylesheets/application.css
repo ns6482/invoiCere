@@ -1,0 +1,34 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ * 
+ * require'jquery-ui.css', :media => 'screen, projection'
+=# stylesheet_link_tag 'jquery.jscrollpane.css', :media => 'screen, projection'
+=# stylesheet_link_tag 'jquery.rating.css', :media => 'screen, projection'
+ * 
+ *= require_tree .
+ */
+
+/*
+=# javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js', 'nested_form', 'application', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js', 'jquery.collapser', 'jquery_ujs'#, 'jquery.form'
+=# javascript_include_tag 'jquery.effects.blind.js', 'jquery.effects.bounce.js','jquery.effects.clip.js', 'jquery.effects.core.js', 'jquery.effects.drop.js', 'jquery.effects.explode.js', 'jquery.effects.fade.js', 'jquery.effects.fold.js', 'jquery.effects.highlight.js', 'jquery.effects.pulsate.js', 'jquery.effects.scale.js', 'jquery.effects.shake.js', 'jquery.effects.slide.js', 'jquery.effects.transfer.js', 'jquery.qtip-1.0.0-rc3.min', 'jquery.jscrollpane.min','jquery.rating.pack', 'https://www.google.com/jsapi', 'highcharts', 'dashboard-graph', 'formToWizard', 'schedule-wizard', 'jquery.ui.autocomplete',  'itemAutoComplete.js', :cache => true
+=# csrf_meta_tag
+=# stylesheet_link_tag 'screen', :media => 'screen, projection'
+=# stylesheet_link_tag 'print', :media => 'print'
+#/[if IE]
+=# stylesheet_link_tag 'ie', :media => 'screen, projection'
+#/[if lt IE 7]
+=# stylesheet_link_tag 'ie6.css', :media => 'screen, projection'
+=# stylesheet_link_tag 'link_icons.css', :media => 'screen, projection'
+=# stylesheet_link_tag 'jquery-ui.css', :media => 'screen, projection'
+=# stylesheet_link_tag 'jquery.jscrollpane.css', :media => 'screen, projection'
+=# stylesheet_link_tag 'jquery.rating.css', :media => 'screen, projection'
+*/

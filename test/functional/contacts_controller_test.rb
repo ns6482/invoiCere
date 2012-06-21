@@ -24,7 +24,7 @@ class ContactsControllerTest < ActionController::TestCase
   end
   
   def test_show
-    get :show, :id => @contact
+    get :show, :id => @contact.id, :client_id => @client
     assert_template 'show'
     assert_response :success
   end
@@ -49,7 +49,7 @@ class ContactsControllerTest < ActionController::TestCase
 
   def test_edit
     #contact = contacts(:contact1)#Factory.create(:contact)
-    get :edit, :id => @contact
+    get :edit, :id => @contact.id
     assert_template 'edit'
     assert_response :success
   end
@@ -64,26 +64,26 @@ class ContactsControllerTest < ActionController::TestCase
   def test_update_valid
     Contact.any_instance.stubs(:valid?).returns(true)
     #contact = contacts(:contact1)#Factory.create(:contact)
-    put :update, :id => @contact
+    put :update, :id => @contact,  :client_id => @client.id
     assert_equal 'Contact was successfully updated.', flash[:notice]    
     assert_redirected_to client_path(@contact.client)
   end
 
   def test_destroy    
-    delete :destroy, :id=> @contact
+    delete :destroy, :id=> @contact.id, :client_id => @client.id
     assert_redirected_to client_path(@client)
     assert_equal 'Contact was successfully removed.', flash[:notice]
     assert !Contact.exists?(@contact)
   end
 
   def test_new_invite
-    get :new_invite , :id => @contact
+    get :new_invite , :id => @contact, :client_id => @client.id
     assert_template 'new_invite'
     assert_response :success
   end
 
   def test_invite
-    put :invite , :id => @contact
+    put :invite , :id => @contact, :client_id => @client
     assert_equal 'Invitation has been sent to contact', flash[:notice]
     assert_redirected_to contact_path(@contact)
     assert assigns :user

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120429161329) do
+ActiveRecord::Schema.define(:version => 20120608193828) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -272,6 +272,8 @@ ActiveRecord::Schema.define(:version => 20120429161329) do
     t.string   "email"
     t.string   "vat_registration"
     t.text     "payment_instructions_1"
+    t.string   "pay_gc_token"
+    t.integer  "pay_gc_enabled"
   end
 
   create_table "users", :force => true do |t|

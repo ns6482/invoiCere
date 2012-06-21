@@ -1,0 +1,38 @@
+$width: 24
+$left: 3
+$centre: 19
+$right: 3
+
+.two-col
+  //background:  darkgrey
+#dashboard-content
+  background: white
+  +container
+  #header, #footer
+    +column($width)
+  #dashboard-left
+    +column($left)
+  #dashboard-centre
+    +column($centre)
+    background: white
+    padding-left: 10px
+    padding-top: 10px
+    +blueprint-interaction
+    
+  #dashboard-right
+    +column($right, last)
+  #dashboard-centre-left
+    +column(15)
+    padding-bottom: 10px
+  #dashboard-centre-right
+    float: right
+    //+prepend(5)
+    //+column(4)
+    padding-bottom: 10px
+#header
+  background-color: white
+  
+
+#footer
+  padding: 10px  
+  text-align: center

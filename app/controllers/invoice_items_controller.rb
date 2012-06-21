@@ -1,9 +1,9 @@
 class InvoiceItemsController < BaseController
-  before_filter :find_invoice, :only => [:new, :create]  
+  before_filter :find_invoice, :only => [:new, :create, :index]  
   load_and_authorize_resource
   
   def index
-    @invoice_items = InvoiceItem.all
+    @invoice_items = @invoice.invoice_items.all
   end
   
   def show
@@ -11,7 +11,7 @@ class InvoiceItemsController < BaseController
   end
   
   def new    
-    @invoice_item = InvoiceItem.new
+    @invoice_item = @invoice.invoice_items.new
   end
   
   def create

@@ -1,0 +1,84 @@
+@import "compass/utilities/links/unstyled-link"
+
+$panel-vertical-height: 50px
+$width: 24
+$left: 3
+$centre: 18
+$right: 3
+
+#invoice-logo
+  +prepend(7)
+  :float right
+
+#invoice-client-address
+  +column(4)
+
+#invoice-title
+  +column(11)
+  :text-align center
+
+#invoice-header-details
+  :float right
+
+#toolbar
+  :padding 2px 2px
+  :padding-bottom 10px
+
+#invoice-side-panel
+  padding-top: $panel-vertical-height
+  ul
+    +no-bullets    
+    margin: 0
+    padding: 0
+    li                        
+      border-width: 1px            
+      padding: 0px
+      margin: 2px 0 0 2px      
+      background: #F8F8F8
+      border-bottom: 1px solid #E1E1E1
+      a        
+        color: black
+        border-color: white transparent #E7E7E7
+        border-style: solid
+        padding: 10px
+        +hover-link
+    padding: 0 0 10px 0px
+    
+    //+box
+
+#invoice-preview
+  +column($centre)
+  table
+    +outer-table-borders(1px)
+    +inner-table-borders(1px)
+  padding: 8px
+  border: 2px
+  border-color: DimGrey
+  border-style: solid
+
+
+#invoice-main
+  +column($centre)
+
+#invoice-item-list
+  +column($centre)
+
+#invoice-title
+  +column(8)
+
+#invoice-footer
+  +column($centre)
+
+#invoice-summary 
+  float: right
+  @extend .invoice-table
+
+#invoice-footer-late-fee
+  border: 2px
+  border-style: solid
+  padding-top: 10px
+  text-align: center  
+  font-size: 14px
+
+#invoice-list
+  //+column($centre)

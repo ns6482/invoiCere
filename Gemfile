@@ -5,9 +5,12 @@ source 'http://rubygems.org'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'rake', '~> 0.9.3.beta.1'
-gem 'rails', '3.0.10'
-gem 'devise'
-gem 'haml'
+#gem 'rails', '3.0.10'
+
+gem 'rails', '3.2.5'
+
+gem 'devise', '>= 2.0.0' 
+gem 'haml', '>= 3.1.4'
 gem "nifty-generators", :group => :development
 gem "friendly_id"
 gem "compass"
@@ -18,12 +21,12 @@ gem 'sqlite3'
 gem "fancy-buttons"
 gem "simple-navigation"
 
-gem 'activemerchant', '~> 1.10.0'
+#gem 'activemerchant', '~> 1.10.0'
 gem 'jquery-rails', '>= 1.0.12'
 
 
-gem 'devise_invitable'
-gem "meta_search" 
+gem 'devise_invitable', '>= 0.6.2'
+gem "meta_search", '>= 1.1.0' 
 
 #gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'
 gem 'will_paginate'#, '~> 3.0.0'
@@ -34,13 +37,18 @@ gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
 gem 'delorean'
 gem "haml-rails" 
 gem "deep_cloneable", "~> 1.3.0"
-gem 'mysql2', '< 0.3'
+#gem 'mysql2'#, '< 0.3'
+gem "mysql2", "~> 0.3.11"
+
 gem "liquid"
 gem "RedCloth"
 gem "pdf-reader"
 gem "Ascii85"
 gem "active_hash"
 gem 'countries'
+gem "gocardless"
+gem 'rack-ssl', :require => 'rack/ssl'
+gem "rails-asset-jqueryui"
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -60,7 +68,22 @@ gem 'countries'
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  #gem 'sass-rails',   "~> 3.1.0"
+  #gem 'coffee-rails', "~> 3.1.0"
+  
+  gem "sass-rails", "~> 3.2.4"
+  gem "coffee-rails", "~> 3.2.2"
+  gem 'uglifier'
+end
+
+
+
 group :development, :test do
+  gem "localtunnel"
   gem 'webrat'
   gem "mocha"
   gem 'factory_girl_rails'

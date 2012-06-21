@@ -3,6 +3,8 @@ require 'test_helper'
 class DeliveriesControllerTest < ActionController::TestCase  
    include Devise::TestHelpers
   
+   fixtures :invoices # fixture_file_name ...
+
    def setup
     @user = users(:user)#Factory.create(:user)
     @request.host = @user.company.name + ".lvh.me"
@@ -44,12 +46,14 @@ class DeliveriesControllerTest < ActionController::TestCase
   end
 
     def test_index
-    @invoice = invoices(:one)
-    #@invoice.save!
-    @delivery = Factory.build(:delivery, :invoice_id => @invoice.id)
-    @delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1", :client_id => @invoice.client.id)
-    @delivery.save!
-    get :index, :invoice_id => @invoice.id
+    invoice = invoices(:one)
+    #invoice.save!
+    delivery = Factory.build(:delivery, :invoice_id => invoice.id)
+    delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1", :client_id => invoice.client.id)
+    delivery.save!
+    
+    get :index, :invoice_id =>invoice.id
+    
     assert_template 'index'
     assert_response :success
   end

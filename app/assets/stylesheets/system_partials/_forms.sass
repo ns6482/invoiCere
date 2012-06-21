@@ -1,0 +1,323 @@
+$input_bg : #ffffff
+$input_border : #cccccc
+
+
+.label_narrow
+  width: 110px
+
+  
+.label_wide
+  width: 180px
+
+.label_med
+  width: 150px
+   
+.simple_form
+
+
+
+
+  input, textarea, select
+    background: $input_bg
+    border: 1px solid $input_border
+    +border-radius(2px)
+    font-family: arial, helvetica, verdana, "Lucida Grande", "Lucida Sans Unicode"
+    font-size: 12px
+    font-weight: normal
+    //width: 100%
+
+  div.input
+    margin-bottom: 2px
+
+
+  label
+    float: left
+    //width: 60px
+    text-align: left
+    //margin: 2px 10px
+
+    abbr
+      border: none
+      color: red
+      display: block
+      float: left
+      width: 4px
+      padding: 1px
+
+
+  .error
+    clear:   left
+    color:   black
+    display: block
+    margin-left: 120px
+    font-size:    12px
+
+  .hint
+    clear: left
+    //margin-left: 120px
+    font-size:    12px
+    color: #555
+    display: block
+    font-style: italic
+
+
+div.boolean, .simple_form input[type='submit']
+  margin-left: 120px
+
+div.boolean label, label.collection_radio
+  float: none
+  margin: 0
+
+label.collection_radio
+  margin-right: 10px
+  vertical-align: -2px
+  margin-left:   2px
+
+.field_with_errors
+  background-color: #FBC2C4
+
+input.radio
+  margin-right: 5px
+  vertical-align: -3px
+
+input.check_boxes
+  margin-left: 3px
+  vertical-align: -3px
+
+label.collection_check_boxes
+  float: none
+  margin: 0
+  vertical-align: -2px
+  margin-left:   2px
+
+
+#form-title  
+  color: black
+  text-align: center
+  padding-top: 5px
+  font-size: 1.2em
+
+.inline-errors
+  color: red
+.errorExplanation
+  color: red
+
+//form.simple_form
+  // +float-form-left
+  //li
+    //padding-top: 4px
+  //label
+    //font-weight: bold
+#form-top, #form-main, #form-right, #form-bottom
+  border-style: solid
+  border-width: 1px
+  border-color: LightGrey 
+
+#form-top
+  padding-top: 5px
+
+  +column(10)
+  //height: 160px
+  input
+    width: 170px
+    //padding: 2px
+  label
+    padding-left: 5px
+  //padding-bottom: 1px
+
+#form-main
+  padding-top: 5px
+  +column(18)   
+  margin-bottom: 10px
+  
+#form-bottom
+  padding-top: 5px
+  +column(18)
+
+.form-height-long
+  height: 225px
+
+
+.form-right-normal
+  height: 160px
+
+  
+#form-right
+  +column(8, true)
+  padding-top: 5px
+  //height: 160px
+  input
+    width: 50px
+    margin: 0.1em 0
+    padding: 2px
+  label
+    padding-left: 5px
+  padding-top: 5px
+ 
+  margin-bottom: 5px
+
+.field-items
+  +column(15)
+  .item_type
+    +column(3)
+  .item_description
+    +column(6)
+  .item_qty
+    +column(2)
+  .item_cost
+    +column(2)
+  .item_total
+    +column(2)
+  .item_tax
+    +column(1)
+  .item_remove
+    +column(1, true)
+    background: url('/images/icons/delete.png') norepeat
+
+.field-title
+  padding-top: 10px
+  padding-left: 10px
+
+.fields
+  padding-left: 10px
+  //+prepend(1)
+  +column(15)
+  .item_type
+    +column(3)
+  .item_description
+    +column(6)
+  .item_qty
+    +column(2)
+  .item_cost
+    +column(2)
+  .item_total
+    +column(2)
+  .item_tax
+    +column(1)
+  .item_remove
+    +column(1, true)
+    background: url('/images/icons/delete.png') norepeat
+
+
+  
+#form-main, #form-bottom, #form-top, #form-right
+  //:border 1px solid #999
+  +border-radius(8px, 8px)
+  //padding: 5px
+  background-color: whitesmoke
+  
+#filter_link
+  :font-size 12px
+  +hover-link
+
+#interactive
+  :display none
+
+#load
+  :display none
+
+#search_form
+  +column(24)
+
+.cancel_button    
+  :float right
+  
+#rt-form
+  //+column(3, true)
+  textarea
+    :width 390px
+    :height 219px
+    //:padding 5px
+
+#lt-form
+  padding-top: 5px
+  padding-right: 15px
+  float: left
+  width: 60px
+  text-align: left
+  //margin: 2px 10px
+  //+pull(2)
+  +column(3)
+  
+  
+=field($width)
+  @if $width != 100%
+    float: left
+  width: $width
+
+.\31 00
+  +field(100%)
+
+.\39 0
+  +field(90%)
+
+.\38 0
+  +field(80%)
+
+.\37 5
+  +field(75%)
+
+.\37 0
+  +field(70%)
+
+.\36 6
+  +field(66.66%)
+
+.\36 5
+  +field(65%)
+
+.\36 0
+  +field(60%)
+
+.\35 5
+  +field(55%)
+
+.\35 4
+  +field(54%)
+
+.\35 3
+  +field(53%)
+
+.\35 2
+  +field(52%)
+
+.\35 1
+  +field(51%)
+
+.\35 0
+  +field(50%)
+
+.\34 5
+  +field(45%)
+
+.\34 0
+  +field(40%)
+
+.\33 5
+  +field(35%)
+
+.\33 3
+  +field(33.33%)
+
+.\33 0
+  +field(30%)
+
+.\32 5
+  +field(25%)
+
+.\32 0
+  +field(20%)
+
+.\31 6
+  +field(16.66%)
+
+.\31 5
+  +field(15%)
+
+.\31 0
+  +field(10%)
+
+.\35
+  +field(5%)
+  
+ 

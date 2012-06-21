@@ -3,12 +3,31 @@ require 'no_subdomain'
 
 VisioInvoiceV3::Application.routes.draw do   
     
+ get "gocardless/index"
+
  constraints(NoSubdomain) do    
   devise_for :users
   resource :company, :only => [:new, :create], :constraints => {:subdomain => ""}
   resource :home, :only => [:index]#, :constraints => {:subdomain => 'www'}
+  
+  get "gocardless/index"
+  post "gocardless/submit"
+  get "gocardless/confirm"
+  get "gocardless/cb"
+  get "gocardless/setup_merchant"
+
+
  end
+ 
  constraints(Subdomain) do
+ 
+   get "gocardless/index"
+   post "gocardless/submit"
+   get "gocardless/confirm"
+   get "gocardless/setup_merchant"
+   get "gocardless/cb"
+
+
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     
     resources :schedules#, :only => [:index, :new]

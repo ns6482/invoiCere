@@ -1,0 +1,4 @@
+%h2 Signup up via GoCardless!
+= simple_form_for :user, :url => '/gocardless/submit' do |f|
+  = f.input :email
+  = f.submit

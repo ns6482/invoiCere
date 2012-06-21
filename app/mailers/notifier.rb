@@ -12,14 +12,16 @@ class Notifier < ActionMailer::Base
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client
-    subject    @delivery.invoice.title
-    recipients  @delivery.recipients
-    from       @company
-    content_type  "text/html"
-    body       @delivery.message
+    
+    mail(
+    :subject  =>   @delivery.invoice.title,
+    :recipients =>  @delivery.recipients,
+    :from   =>    @company,
+    :content_type =>  "text/html",
+    :body   =>  @delivery.message,
 
-    attachment :content_type => "application/octet-stream", :filename => "Invoice details - " + @invoice.title + ".pdf", :body => pdf_file
-
+    :attachment => {:content_type => "application/octet-stream", :filename => "Invoice details - " + @invoice.title + ".pdf", :body => pdf_file}
+  )
   end
 
   def invoice(delivery)

@@ -8,8 +8,13 @@ class ContactsControllerTest < ActionController::TestCase
     @request.host = @user.company.name + ".lvh.me"
     sign_in @user
 
-    @contact = contacts(:contact1)
     @client = clients(:client1)
+    @client.company_id = @user.company.id
+    @client.save
+
+    @contact = contacts(:contact1)
+    @contact.client_id = @client.id
+    @contact.save
 
   end
 
@@ -42,7 +47,7 @@ class ContactsControllerTest < ActionController::TestCase
   end
 
   def test_create_valid
-    post :create, :client_id => @client, :contact =>@contact.attributes
+    post :create, :client_id => @client, :contact =>FactoryGirl.attributes_for(:contact)
     assert_equal 'Contact was successfully created.', flash[:notice]
     assert_redirected_to client_path(@client)
   end

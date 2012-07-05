@@ -15,33 +15,33 @@ class ClientTest < ActiveSupport::TestCase
   end
 
   def test_name
-    @client = Factory.build(:client)
+    @client = FactoryGirl.build(:client)
     assert_equal @client.name, @client.company_name# + ' - ' + @client.address1
   end
 
   def test_display_address
-    @client = Factory.create(:client, :address1=> "a", :zip=>"   1234     ")
+    @client = FactoryGirl.create(:client, :address1=> "a", :zip=>"   1234     ")
     assert_equal @client.display_address, "a, test, Nuneaton, United Kingdom, 1234"
   end
 
   def test_display_contacts
-    @client = Factory.create(:client, :email=>"nehal.soni@gmail.com", :phone=> "  2323 ", :fax => "  12")
+    @client = FactoryGirl.create(:client, :email=>"nehal.soni@gmail.com", :phone=> "  2323 ", :fax => "  12")
     assert_equal @client.display_phone, "Phone: (2323)"
     assert_equal @client.display_fax, "Fax: (12)"
 
   end
   
   def test_should_not_save_with_bad_email
-    client = Factory.build(:client, :email=>"bademail")
+    client = FactoryGirl.build(:client, :email=>"bademail")
     assert !client.save, "Save client wth bad email"
 
-    client = Factory.build(:client, :email=>"bademail@")
+    client = FactoryGirl.build(:client, :email=>"bademail@")
     assert !client.save, "Save client with bad email"
     
-    client = Factory.build(:client, :email=>".com@,sds.com")
+    client = FactoryGirl.build(:client, :email=>".com@,sds.com")
     assert !client.save, "Save client with bad email"
 
-    client = Factory.build(:client, :email=>"goodemail@test.com")
+    client = FactoryGirl.build(:client, :email=>"goodemail@test.com")
     assert client.save, "Save client with good email"
   end
   

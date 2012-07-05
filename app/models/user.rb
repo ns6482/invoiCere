@@ -33,12 +33,12 @@ class User < ActiveRecord::Base
   def role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
   end
+  
 
   def self.find_for_authentication(conditions={})
     conditions[:companies] = { :name => conditions.delete(:company_id) }
     find(:first, :conditions => conditions, :include => :company)    
   end
-
 
   def has_roles?
    errors.add_to_base "User must have at least one role." if self.role_ids.blank?

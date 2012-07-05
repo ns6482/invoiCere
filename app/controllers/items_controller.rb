@@ -20,7 +20,8 @@ class ItemsController < BaseController
   end
 
   def new
-    @item = Item.new(:company_id=>current_company.id)
+    @item = Item.new
+    @item.company_id = current_company.id
   end
 
   def create

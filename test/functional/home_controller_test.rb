@@ -6,8 +6,8 @@ class HomeControllerTest < ActionController::TestCase
 
    def setup
     @company = companies(:two)
-    #@account = Factory.create(:account, :company_id => @company.id)
-    @user = Factory.create(:user, :company_id => @company.id)   
+    #@account = FactoryGirl.create(:account, :company_id => @company.id)
+    @user = FactoryGirl.create(:user, :company_id => @company.id)   
     @request.host = @company.name + ".lvh.me"
   end
 

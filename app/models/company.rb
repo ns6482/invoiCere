@@ -28,7 +28,7 @@ class Company < ActiveRecord::Base
   attr_accessible :name, :setting_attributes, :etemplate_attributes
   accepts_nested_attributes_for :users
 
-  has_friendly_id :name
+  friendly_id :name
 
   validates_format_of :name, :with => /^\w+$/i, :message => "can only contain letters and numbers."
 

@@ -4,12 +4,12 @@ class PaymentsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   def setup
-    @user = users(:user)#Factory.create(:user)
+    @user = users(:user)#FactoryGirl.create(:user)
     @request.host = @user.company.name + ".lvh.me"
     @invoice = invoices(:one)
     @invoice.state= "open"
     @invoice.save
-    @payment = Factory.build(:payment, :invoice_id => @invoice.id, :user_id => @user.id)
+    @payment = FactoryGirl.build(:payment, :invoice_id => @invoice.id, :user_id => @user.id)
     
     sign_in @user
 

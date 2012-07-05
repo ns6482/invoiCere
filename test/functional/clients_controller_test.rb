@@ -27,8 +27,9 @@ class ClientsControllerTest < ActionController::TestCase
 
   test "should create client" do            
     Client.any_instance.stubs(:valid?).returns(true)
+   
     assert_difference('Client.count') do
-      post :create,  :client =>Factory.attributes_for(:client)
+      post :create,  :client =>FactoryGirl.attributes_for(:client)
     end
     assert_equal 'Client was successfully created.', flash[:notice]
     assert_redirected_to clients_path()

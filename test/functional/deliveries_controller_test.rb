@@ -6,7 +6,7 @@ class DeliveriesControllerTest < ActionController::TestCase
    fixtures :invoices # fixture_file_name ...
 
    def setup
-    @user = users(:user)#Factory.create(:user)
+    @user = users(:user)#FactoryGirl.create(:user)
     @request.host = @user.company.name + ".lvh.me"
     sign_in @user
     
@@ -19,7 +19,7 @@ class DeliveriesControllerTest < ActionController::TestCase
 
  
   def test_new
-    invoice = invoices(:one)#Factory.create(:invoice)
+    invoice = invoices(:one)#FactoryGirl.create(:invoice)
     get :new, :invoice_id => invoice.id
     assert_template 'new'
     assert_response :success
@@ -27,7 +27,7 @@ class DeliveriesControllerTest < ActionController::TestCase
   
    def test_create_invalid
     invoice = invoices(:one)
-    #@delivery = Factory.build(:delivery)
+    #@delivery = FactoryGirl.build(:delivery)
     post :create, :invoice_id => invoice, :delivery =>{}
    # post :create, :delivery => @delivery.attributes
     assert_template 'new'
@@ -37,8 +37,8 @@ class DeliveriesControllerTest < ActionController::TestCase
    def test_show
     @invoice = invoices(:one)
     #@invoice.save!
-    @delivery = Factory.build(:delivery, :invoice_id => @invoice.id)
-    @delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1", :client_id => @invoice.client.id)
+    @delivery = FactoryGirl.build(:delivery, :invoice_id => @invoice.id)
+    @delivery.contacts << FactoryGirl.build(:contact, :first_name => "A", :last_name=>"1", :client_id => @invoice.client.id)
     @delivery.save!
     get :show, :id => @delivery.id
     assert_template 'show'
@@ -48,8 +48,8 @@ class DeliveriesControllerTest < ActionController::TestCase
     def test_index
     invoice = invoices(:one)
     #invoice.save!
-    delivery = Factory.build(:delivery, :invoice_id => invoice.id)
-    delivery.contacts << Factory.build(:contact, :first_name => "A", :last_name=>"1", :client_id => invoice.client.id)
+    delivery = FactoryGirl.build(:delivery, :invoice_id => invoice.id)
+    delivery.contacts << FactoryGirl.build(:contact, :first_name => "A", :last_name=>"1", :client_id => invoice.client.id)
     delivery.save!
     
     get :index, :invoice_id =>invoice.id

@@ -15,21 +15,21 @@ class ContactTest < ActiveSupport::TestCase
   end
 
   def test_should_not_save_with_bad_email
-    contact = Factory.build(:contact, :email=>"bademail")
+    contact = FactoryGirl.build(:contact, :email=>"bademail")
     assert !contact.save, "Save contact wth bad email"
 
-    contact = Factory.build(:contact, :email=>"bademail@")
+    contact = FactoryGirl.build(:contact, :email=>"bademail@")
     assert !contact.save, "Save contact with bad email"
 
-    contact = Factory.build(:contact, :email=>".com@,sds.com")
+    contact = FactoryGirl.build(:contact, :email=>".com@,sds.com")
     assert !contact.save, "Save contact with bad email"
 
-    contact = Factory.build(:contact, :email=>"goodemail@test.com")
+    contact = FactoryGirl.build(:contact, :email=>"goodemail@test.com")
     assert contact.save, "Save contact with good email"
   end
 
   def test_full_name
-    contact = Factory.build(:contact, :first_name =>"foo", :last_name => "foo1")
+    contact = FactoryGirl.build(:contact, :first_name =>"foo", :last_name => "foo1")
     assert contact.fullname, "foo foo1"
   end
   

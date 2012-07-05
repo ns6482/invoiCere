@@ -7,7 +7,7 @@ class DashboardControllerTest < ActionController::TestCase
     @company = companies(:two)    
     @adminUser = users(:user1)
     @standardUser = users(:user2)
-    @user = Factory.create(:user, :company_id => @company.id)
+    @user = FactoryGirl.create(:user, :company_id => @company.id)
     @request.host = @company.name + ".lvh.me"
 
     sign_in @user

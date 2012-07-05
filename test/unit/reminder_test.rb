@@ -3,17 +3,17 @@ require 'test_helper'
 class ReminderTest < ActiveSupport::TestCase
 
   def setup
-    @invoice = Factory.create(:invoice, :invoice_date => "01/01/2010", :due_days => 30)
+    @invoice = FactoryGirl.create(:invoice, :invoice_date => "01/01/2010", :due_days => 30)
     @reminder = @invoice.reminder
   end
 
   def test_should_be_invalid
-    reminder = Factory.build(:reminder, :days_before => nil)
+    reminder = FactoryGirl.build(:reminder, :days_before => nil)
     assert !reminder.valid?
   end
 
   def test_should_be_valid
-    reminder = Factory.build(:reminder, :days_before => 3)
+    reminder = FactoryGirl.build(:reminder, :days_before => 3)
     assert reminder.valid?
   end
 
@@ -23,13 +23,13 @@ class ReminderTest < ActiveSupport::TestCase
   end
 
   def test_next_send_date_default
-    invoice = Factory.create(:invoice, :invoice_date => "01/01/2010", :due_days => 0) 
+    invoice = FactoryGirl.create(:invoice, :invoice_date => "01/01/2010", :due_days => 0) 
     compare_date(invoice.due_date, invoice.reminder.next_send)
     assert_nil @reminder.last_send
   end
 
   def test_next_send_date_normal
-    invoice = Factory.create(:invoice, :invoice_date => "01/01/2010", :due_days => 3)
+    invoice = FactoryGirl.create(:invoice, :invoice_date => "01/01/2010", :due_days => 3)
     expected_date = "2010-01-08 00:00:00 UTC"
     assert_equal expected_date.to_s, invoice.reminder.next_send.to_s   
   end

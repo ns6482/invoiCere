@@ -5,7 +5,7 @@ class DashboardController < BaseController
   
   def show
   
-      @invoices = current_company.invoices.accessible_by(current_ability).includes(:payments)
+      @invoices = current_company.invoices.accessible_by(current_ability).joins(:payments)
 
       @invoices_states = @invoices.group_by {|i| i.formatted_state }
       
@@ -24,7 +24,7 @@ class DashboardController < BaseController
       if params[:gdate]
         @gdate = params[:gdate]
       else
-        @gdate =1
+        @gdate =1 
       end
   
     respond_to do | format |

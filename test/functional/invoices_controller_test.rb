@@ -7,7 +7,7 @@ class InvoicesControllerTest < ActionController::TestCase
 
   def setup
    # @company = companies(:two)
-    @user = users(:user)# Factory.create(:user, :company_id => @company.id)
+    @user = users(:user)# FactoryGirl.create(:user, :company_id => @company.id)
     
     #@invoices = @company.invoices
     @request.host = @user.company.name + ".lvh.me"#@company.name + ".test"
@@ -27,9 +27,9 @@ class InvoicesControllerTest < ActionController::TestCase
     sign_out @user
 
     #@companyx = companies(:one)
-    @user = users(:user)#Factory.create(:user, :company_id => @companyx.id)
+    @user = users(:user)#FactoryGirl.create(:user, :company_id => @companyx.id)
 
-    #@invoice = invoices(:one)#Factory.create(:invoice)
+    #@invoice = invoices(:one)#FactoryGirl.create(:invoice)
     #@invoices = @company.invoices
     @request.host = @user.company.name + ".lvh.me"#@companyx.name + ".test"
 
@@ -50,7 +50,7 @@ class InvoicesControllerTest < ActionController::TestCase
   def test_index_by_company_two
 
     sign_out @user
-    @user1 = users(:user1)#Factory.create(:user, :company_id => @companyx.id)
+    @user1 = users(:user1)#FactoryGirl.create(:user, :company_id => @companyx.id)
 
     sign_in @user1
     @request.host = @user1.company.name + ".lvh.me"#@companyx.name + ".test"
@@ -75,7 +75,9 @@ class InvoicesControllerTest < ActionController::TestCase
   end
   
   def test_create_invalid
-    invoice = Factory.attributes_for(:invoice, :id => 11, :client_id => nil)
+    invoice = {}#FactoryGirl.attributes_for(:invoice, :id => 11, :client_id => nil)
+    invoice.stubs(:valid?).returns(false)
+
     post :create, :invoice=> invoice
     assert_template 'new'
   end
@@ -85,10 +87,12 @@ class InvoicesControllerTest < ActionController::TestCase
     
     Client.any_instance.stubs(:valid?).returns(true)
     Invoice.any_instance.stubs(:valid?).returns(true)
-    client = Factory.create(:client, :company_name => "test", :company_id => @user.company_id)
+    client = FactoryGirl.create(:client, :company_name => "test", :company_id => @user.company_id)
 
-    invoice = Factory.attributes_for(:invoice, :id => 1, :client_id => client.id)
-
+    invoice = FactoryGirl.attributes_for(:invoice, :id => 1, :client_id => client.id)
+    invoice.stubs(:total_cost_inc_tax_delivery).returns(10)
+    invoice.stubs(:delivery_charge).returns(0)
+    
     post :create, :invoice=> invoice
     assert assigns :invoice
     assert_equal 'Successfully created invoice.', flash[:notice]
@@ -98,9 +102,9 @@ class InvoicesControllerTest < ActionController::TestCase
 #  def test_create_invalid_wrong_client
 
   #  @company = companies(:two)
-  #  client = Factory.create(:client, :company_name => "test", :company_id => @company.id)
+  #  client = FactoryGirl.create(:client, :company_name => "test", :company_id => @company.id)
 
-  #  invoice = Factory.attributes_for(:invoice, :id => 1, :client_id => client.id)
+  #  invoice = FactoryGirl.attributes_for(:invoice, :id => 1, :client_id => client.id)
   #  post :create, :invoice=> invoice
   #  assert assigns :invoice
   #  assert_template 'new'
@@ -162,7 +166,7 @@ class InvoicesControllerTest < ActionController::TestCase
   end
 
   def test_invoice_complete
-    #@invoice = Factory.create(:invoice, :state => "draft")
+    #@invoice = FactoryGirl.create(:invoice, :state => "draft")
     @invoice = invoices(:one)
     assert_equal "draft", @invoice.state
     put :update, :id => @invoice.id, :commit => "open"
@@ -175,7 +179,7 @@ class InvoicesControllerTest < ActionController::TestCase
    def test_invoice_pay
     @invoice2 = invoices(:one)
     @invoice2.open!
-    #invoice2 = Factory.create(:invoice, :state => "open")
+    #invoice2 = FactoryGirl.create(:invoice, :state => "open")
     assert_equal "open",@invoice2.state
     put :update, :id => @invoice2.id, :commit => "pay"
     #assert_equal  "paid", invoice2.state
@@ -186,8 +190,8 @@ class InvoicesControllerTest < ActionController::TestCase
 
    def test_invoice_copy
 
-     client = Factory.create(:client, :company_name => "test", :company_id => @user.company_id)
-     invoice2 = Factory.create(:invoice, :client_id => client.id)
+     client = FactoryGirl.create(:client, :company_name => "test", :company_id => @user.company_id)
+     invoice2 = FactoryGirl.create(:invoice, :client_id => client.id)
      get :new, :id =>invoice2.id
      #invoice = assert assigns(:invoice)
      #assert_false invoice.nil?

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class InvoiceItemTest < ActiveSupport::TestCase
   def test_should_be_valid
-    invoice_item = Factory.create(:invoice_item)
+    invoice_item = FactoryGirl.create(:invoice_item, :cost => 10, :item_type => "test", :item_description => "test", :qty => 10)
     assert invoice_item.valid?
   end
 
@@ -18,17 +18,17 @@ class InvoiceItemTest < ActiveSupport::TestCase
   end
 
   def test_failing_bad_qty_value
-    invoice_item = Factory.build(:invoice_item, :qty => "bad")
+    invoice_item = FactoryGirl.build(:invoice_item, :qty => "bad")
     assert !invoice_item.save
   end
 
   def test_failing_bad_cost_value
-    invoice_item = Factory.build(:invoice_item, :cost => "bad")
+    invoice_item = FactoryGirl.build(:invoice_item, :cost => "bad")
     assert !invoice_item.save
   end
 
   def test_total_cost
-    invoice_item = Factory.build(:invoice_item, :taxable => false)
+    invoice_item = FactoryGirl.build(:invoice_item, :taxable => false)
     invoice_item.cost = 10
     invoice_item.qty = 10
   
@@ -39,8 +39,8 @@ class InvoiceItemTest < ActiveSupport::TestCase
 
   def test_total_cost_inc_tax
 
-    invoice = Factory.create(:invoice, :tax_rate => 10)
-    invoice_item = Factory.build(:invoice_item, :invoice_id => invoice.id, :taxable => 1)
+    invoice = FactoryGirl.create(:invoice, :tax_rate => 10)
+    invoice_item = FactoryGirl.build(:invoice_item, :invoice_id => invoice.id, :taxable => 1)
     invoice_item.cost = 10
     invoice_item.qty = 10
    

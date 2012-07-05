@@ -9,36 +9,36 @@ class AbilityTest < ActiveSupport::TestCase
     viewer_role = roles(:viewer)
     client_role = roles(:client)
 
-    @adminUser = Factory.build(:user)
+    @adminUser = FactoryGirl.build(:user)
     @adminUser.roles << admin_role
     @adminUser.owner = true
     @adminUser.save!
 
-    @adminUserClient = Factory.build(:client, :company_id =>@adminUser.company_id)
+    @adminUserClient = FactoryGirl.build(:client, :company_id =>@adminUser.company_id)
 
-    @standardUser = Factory.build(:user)
+    @standardUser = FactoryGirl.build(:user)
     @standardUser.roles << standard_role
     @standardUser.save!
     
-    @contactAdminAbility = Factory.build(:contact, :client_id => @adminUserClient)
+    @contactAdminAbility = FactoryGirl.build(:contact, :client_id => @adminUserClient)
 
-    @standardUserClient = Factory.build(:client, :company_id =>@standardUser.company_id)
+    @standardUserClient = FactoryGirl.build(:client, :company_id =>@standardUser.company_id)
 
-    @viewerUser = Factory.build(:user)
+    @viewerUser = FactoryGirl.build(:user)
     @viewerUser.roles << viewer_role
     @viewerUser.save
 
-    @viewerUserClient = Factory.build(:client, :company_id =>@viewerUser.company_id)
+    @viewerUserClient = FactoryGirl.build(:client, :company_id =>@viewerUser.company_id)
 
-    @client = Factory.create(:client)
+    @client = FactoryGirl.create(:client)
     
-    @contact = Factory.create(:contact, :client_id => @client.id)
+    @contact = FactoryGirl.create(:contact, :client_id => @client.id)
     
-    @clientUser = Factory.build(:user, :company_id =>@client.company_id,  :client_id => @client.id)
+    @clientUser = FactoryGirl.build(:user, :company_id =>@client.company_id,  :client_id => @client.id)
     @clientUser.roles << client_role
     @clientUser.save!
 
-    @viewerUserClient = Factory.build(:client, :company_id =>@viewerUser.company_id)
+    @viewerUserClient = FactoryGirl.build(:client, :company_id =>@viewerUser.company_id)
        
     @adminAbility = Ability.new(@adminUser)
     @standardAbility = Ability.new(@standardUser)
@@ -134,7 +134,8 @@ class AbilityTest < ActiveSupport::TestCase
     assert @standardAbility.can?(:create, Comment.new)
     assert @standardAbility.can?(:read, Comment.new)
     assert @standardAbility.cannot?(:destroy, Comment.new)
-    @comment = Comment.new(:user_id => @standardUser.id)
+    @comment = Comment.new
+    @comment.user_id = @standardUser.id
     #assert @standardAbility.can?(:destroy,@comment)
 
   end
@@ -164,7 +165,7 @@ class AbilityTest < ActiveSupport::TestCase
     assert @clientAbility.cannot?(:invite, Client.new)
     assert @clientAbility.cannot?(:invite, Contact.new)
 
-    @invoice = Factory.create(:invoice, :client_id => @client.id)
+    @invoice = FactoryGirl.create(:invoice, :client_id => @client.id)
     assert @clientAbility.cannot?([:create, :update, :destroy, :read], Invoice.new)
     assert @clientAbility.can?(:read, @invoice)    
   end

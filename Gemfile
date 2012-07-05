@@ -16,7 +16,7 @@ gem "friendly_id"
 gem "compass"
 gem "simple_form"
 gem "paperclip"
-gem "cancan"
+gem "cancan", '>= 1.6'
 gem 'sqlite3'
 gem "fancy-buttons"
 gem "simple-navigation"
@@ -78,6 +78,7 @@ group :assets do
   gem "sass-rails", "~> 3.2.4"
   gem "coffee-rails", "~> 3.2.2"
   gem 'uglifier'
+  gem 'compass-rails'
 end
 
 
@@ -85,7 +86,8 @@ end
 group :development, :test do
   gem "localtunnel"
   gem 'webrat'
-  gem "mocha"
+  #gem "mocha"
   gem 'factory_girl_rails'
+  gem 'mocha', '0.10.0', :require => false
 end
 

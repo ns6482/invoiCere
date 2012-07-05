@@ -3,18 +3,18 @@ require "cancan"
 
 class NotifierTest < ActionMailer::TestCase
   def setup
-    @company = Factory.create(:company)
-    @client = Factory.create(:client, :company_id => @company.id)
-    @invoice = Factory.create(:invoice, :client_id=>@client.id)
-    @setting = Factory.create(:setting,:id=>1, :company_id => @company.id)
-    @delivery = Factory.build(:delivery, :invoice_id => @invoice.id)
+    @company = FactoryGirl.create(:company)
+    @client = FactoryGirl.create(:client, :company_id => @company.id)
+    @invoice = FactoryGirl.create(:invoice, :client_id=>@client.id)
+    @setting = FactoryGirl.create(:setting,:id=>1, :company_id => @company.id)
+    @delivery = FactoryGirl.build(:delivery, :invoice_id => @invoice.id)
     @schedule = schedules(:one)
   end
 
   def test_email_delivery
 
-    @delivery.contacts << Factory.build(:contact)
-    @delivery.contacts << Factory.build(:contact)
+    @delivery.contacts << FactoryGirl.build(:contact)
+    @delivery.contacts << FactoryGirl.build(:contact)
     @delivery.save!
     
     assert_emails 0
@@ -39,8 +39,8 @@ class NotifierTest < ActionMailer::TestCase
 
    def test_email_delivery_pdf
 
-    @delivery.contacts << Factory.build(:contact)
-    @delivery.contacts << Factory.build(:contact)
+    @delivery.contacts << FactoryGirl.build(:contact)
+    @delivery.contacts << FactoryGirl.build(:contact)
     @delivery.save!
 
     assert_emails 0
@@ -65,11 +65,11 @@ class NotifierTest < ActionMailer::TestCase
 
   def test_email_schedule
 
-    @schedule.contacts << Factory.build(:contact)
-    @schedule.contacts << Factory.build(:contact)
+    @schedule.contacts << FactoryGirl.build(:contact)
+    @schedule.contacts << FactoryGirl.build(:contact)
     @schedule.save!
 
-    #@invoice = Factory.create(:invoice)
+    #@invoice = FactoryGirl.create(:invoice)
 
     assert_emails 0
     # Send the email, then test that it got queued

@@ -11,7 +11,7 @@
     .20.a= f.input :default_message, :as => :select, :label => "Default message",  :label_html => { :class => 'label_narrow' }, :include_blank => false
     .80.z= f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}, :label_html => { :class => 'label_narrow' }
     .clear
-    = f.input :format, :as => :radio, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional collection_radio"}  
+    = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional collection_radio"}  
     %br
     .40.a= f.input :send_to_client, :as => :select, :label_html => { :class => 'label_narrow' }, :include_blank => false
     -if @client

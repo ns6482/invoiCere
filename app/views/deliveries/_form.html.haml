@@ -5,7 +5,7 @@
     = f.input :message, :input_html => { :rows => 3 }  
     = f.input :client_email,  :label=> @invoice.client.company_name
     = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To"
-    = f.input :format, :as => :radio, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional"}  
+    = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional"}  
     %br
     %button{:type=>"submit",:class=>"red"} Send
   %br

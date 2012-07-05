@@ -61,7 +61,12 @@ class Schedule < ActiveRecord::Base
     invoice.save!
     
    self.schedule_items.each do |s|
-      i = InvoiceItem.new(:invoice_id => invoice.id, :item_description => s.item_description,  :qty => s.qty, :cost => s.cost, :item_type => s.item_type)
+      i = InvoiceItem.new
+      i.invoice_id = invoice.id 
+      i.item_description = s.item_description
+      i.qty =  s.qty
+      i.cost= s.cost
+      i.item_type =  s.item_type
       i.save!
     end
     
@@ -72,7 +77,8 @@ class Schedule < ActiveRecord::Base
     self.save!
     
       
-    delivery = Delivery.new(:invoice_id => invoice.id, :message => self.message, :client_email => send_to_client, :format => self.format, :schedule => 1)
+    delivery = Delivery.new(:invoice_id => invoice.id, :message => self.message, :client_email => send_to_client, :format => self.format)
+    delivery.schedule = 1
     
     self.schedule_sends.each do |send|
       delivery.contacts << send.contact

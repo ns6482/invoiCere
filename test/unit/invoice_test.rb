@@ -8,7 +8,7 @@ class InvoiceTest < ActiveSupport::TestCase
 
   
   def test_should_be_valid
-    invoice = Factory.create(:invoice)
+    invoice = FactoryGirl.create(:invoice)
     assert invoice.valid?
   end
 
@@ -26,12 +26,12 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   def test_initial_status
-    invoice = Factory.create(:invoice)
+    invoice = FactoryGirl.create(:invoice)
     assert(invoice.state =='draft')
   end
 
   def test_status_open
-    invoice = Factory.build(:invoice, :state => "draft")    
+    invoice = FactoryGirl.build(:invoice, :state => "draft")    
     assert_equal "draft", invoice.state
     invoice.update_user = "test_user"
     invoice.open!
@@ -43,7 +43,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   def test_status_paid
-    invoice = Factory.create(:invoice)
+    invoice = FactoryGirl.create(:invoice)
     invoice.update_user = 'test_user'
     invoice.open!
     invoice.pay!
@@ -146,23 +146,23 @@ class InvoiceTest < ActiveSupport::TestCase
 
   
   def test_due_date
-    @invoice = Factory.create(:invoice, :invoice_date => "01/01/2010", :due_days => 30)
+    @invoice = FactoryGirl.create(:invoice, :invoice_date => "01/01/2010", :due_days => 30)
     @invoice.save!
     assert_equal  Date.strptime("{ 2010, 1, 31 }", "{ %Y, %m, %d }"),@invoice.due_date
   end
 
   def test_due_date_equals_invoice_date_when_due_days_empty
-    @invoice = Factory.create(:invoice, :invoice_date => "01/01/2010", :due_days => 0)
+    @invoice = FactoryGirl.create(:invoice, :invoice_date => "01/01/2010", :due_days => 0)
     @invoice.save!
     assert_equal  Date.strptime("{ 2010, 1, 01 }", "{ %Y, %m, %d }"),@invoice.due_date    
   end
 
   def test_formatted_state
     
-    draft_invoice = Factory.create(:invoice, :state => 'draft')
-    open_invoice = Factory.create(:invoice, :state => 'open', :invoice_date => Date.today-9, :due_days => 10)
-    completed_invoice = Factory.create(:invoice, :state => 'paid')
-    overdue_invoice = Factory.create(:invoice, :state => 'open', :invoice_date => Date.today-30, :due_days => 30)
+    draft_invoice = FactoryGirl.create(:invoice, :state => 'draft')
+    open_invoice = FactoryGirl.create(:invoice, :state => 'open', :invoice_date => Date.today-9, :due_days => 10)
+    completed_invoice = FactoryGirl.create(:invoice, :state => 'paid')
+    overdue_invoice = FactoryGirl.create(:invoice, :state => 'open', :invoice_date => Date.today-30, :due_days => 30)
 
     assert_equal("Draft",draft_invoice.formatted_state)
     assert_equal("Open",open_invoice.formatted_state)
@@ -172,7 +172,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   def test_reminder_created
-    invoice = Factory.create(:invoice)
+    invoice = FactoryGirl.create(:invoice)
     #assert_not_nil invoice.reminder
   end
 

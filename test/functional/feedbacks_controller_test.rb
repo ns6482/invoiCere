@@ -28,7 +28,7 @@ class FeedbacksControllerTest < ActionController::TestCase
   def test_create_invalid
     invoice = invoices(:one)
     Feedback.any_instance.stubs(:valid?).returns(false)
-    post :create, :invoice_id => invoice, :feedback =>{:rating => 1}
+    post :create, :invoice_id => invoice, :feedback =>{}
     assert_template 'new'
     assert_response :success
   end
@@ -36,7 +36,7 @@ class FeedbacksControllerTest < ActionController::TestCase
   def test_create_valid
     invoice = invoices(:one)
     Feedback.any_instance.stubs(:valid?).returns(true)
-    post :create,  :invoice_id => invoice, :feedback =>{:rating => 1}
+    post :create,  :invoice_id => invoice, :feedback =>{}
     assert_redirected_to feedback_url(assigns(:feedback))
   end
   
@@ -50,20 +50,20 @@ class FeedbacksControllerTest < ActionController::TestCase
   def test_update_invalid
     invoice = invoices(:one)
     Feedback.any_instance.stubs(:valid?).returns(false)
-    put :update, :id => Feedback.first,  :feedback =>{:rating => 1}
+    put :update, :id => Feedback.first,  :feedback =>{}
     assert_template 'edit'
   end
   
   def test_update_valid
     Feedback.any_instance.stubs(:valid?).returns(true)
-    put :update, :id => Feedback.first , :feedback =>{:rating => 1}
+    put :update, :id => Feedback.first , :feedback =>{}
     assert_redirected_to feedback_url(assigns(:feedback))
   end
   
   def test_destroy
     invoice = invoices(:one)
     feedback = Feedback.first
-    delete :destroy, :id => feedback,  :invoice_id => invoice, :feedback =>{:rating => 1}
+    delete :destroy, :id => feedback,  :invoice_id => invoice, :feedback =>{}
     assert_redirected_to invoice_url(invoice)
     assert !Feedback.exists?(feedback.id)
   end

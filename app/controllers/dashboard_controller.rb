@@ -1,4 +1,5 @@
 class DashboardController < BaseController
+  layout "dashboard"
 
   #load_and_authorize_resource :class => "Invoice"
   #load_and_authorize_resource :class => "Client"

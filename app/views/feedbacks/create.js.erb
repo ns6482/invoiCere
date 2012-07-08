@@ -1,2 +1,2 @@
-$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.delete(:notice)) %> </p>');
+$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
 $("#invoice-main").html("<%= escape_javascript(render("feedbacks")) %>").effect("slide");

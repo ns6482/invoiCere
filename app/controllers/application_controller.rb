@@ -45,12 +45,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-  #    name = Company.find(resource.company_id).name
-  #  if resource.is_a?(User) 
-  #    root_url(:subdomain => name )    
-  #  else
-  #   super
-  #  end
+      name = Company.find(resource.company_id).name
+    if resource.is_a?(User) 
+      root_url(:subdomain => name, :port => nil)    
+    else
+     super
+    end
   end
 
   def after_sign_out_path_for(resource_or_scope)

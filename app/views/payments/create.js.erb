@@ -1,4 +1,4 @@
-$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.delete(:notice)) %> </p>');
+$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
 $('#new_payment').hide('slow').empty();
 $(".notice").fadeOut(3000);
 $("#edit_invoice").remove();

@@ -15,8 +15,8 @@ class UserLoginTest < ActionController::IntegrationTest
     @company.setting = @setting
     @company.setting = @setting1
 
-    @user = Factory.create(:user, :company_id=> @company.id, :email => "test@test.com")
-    @user1 = Factory.create(:user, :company_id=> @company.id, :email => "test1@test.com")  
+    @user = FactoryGirl.create(:user, :company_id=> @company.id, :email => "test@test.com")
+    @user1 = FactoryGirl.create(:user, :company_id=> @company.id, :email => "test1@test.com")  
     #@user.save!
     #@user1.save!
 

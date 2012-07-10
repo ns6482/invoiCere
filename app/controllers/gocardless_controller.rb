@@ -40,7 +40,7 @@ class GocardlessController < BaseController
       :app_secret => 'B6l03urndX7H0Q6yQ16_ByjnGgHZWNqqzpM9RquXxvHPf5SOxbJomjeq1P8Gvz2R',
     )
     
-    url = c.new_merchant_url(:redirect_uri => 'http://lvh.me:3000/gocardless/cb')
+    url = c.new_merchant_url(:redirect_uri => 'https://foo.lvh.me:3000/gocardless/cb', :client_id => current_company.id, :scope => "manage_merchant", :response_type => "code")
 
     redirect_to url
   end

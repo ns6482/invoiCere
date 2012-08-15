@@ -51,5 +51,12 @@
 
       = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }, :label_html => {:class => "label_narrow"}
 
+      =field_set_tag 'Payment Managment', :id =>"tabs-2" do
+        %h3 GoCardless        
+        = s.input :pay_gc_token
+        = s.input :pay_gc_enabled, :as => :boolean
+        = link_to 'Setup GoCardless Account', gocardless_setup_merchant_path
+
+
 
       %button{:type=>"submit",:class=>"red"} Save

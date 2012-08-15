@@ -1,12 +1,14 @@
 $("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
 $('#new_payment').hide('slow').empty();
 $(".notice").fadeOut(3000);
-$("#edit_invoice").remove();
-$("#payment_invoice").remove();
-$("#draft_invoice").remove();
- $("#invoice-side-panel ul").append('<li id = "open_invoice"></li>');
-<% if can? :update, @invoice %>
-  $("#open_invoice").append("<%= escape_javascript(link_to "Revert to Open", invoice_path(:id => @invoice.id, :commit => 'open_again'), :method=> :put, :remote => true%><% )%>");
+<% if @invoice.state == "paid" %>
+	$("#edit_invoice").remove();
+	$("#payment_invoice").remove();
+	$("#draft_invoice").remove();
+ 	$("#invoice-side-panel ul").append('<li id = "open_invoice"></li>');
+	<% if can? :update, @invoice %>
+  		$("#open_invoice").append("<%= escape_javascript(link_to "Revert to Open", invoice_path(:id => @invoice.id, :commit => 'open_again'), :method=> :put, :remote => true%><% )%>");
+	<% end %>
 <% end %>
 
 

@@ -9,6 +9,7 @@ class Company < ActiveRecord::Base
   has_many :deliveries, :through => :clients, :source => :invoices
   
   has_many :schedules, :through => :clients#, :source => :invoices
+  has_many :payments, :through => :invoices
   has_many :items
   #has_many :schedules,  :finder_sql =>
    # proc {"SELECT s.* " +

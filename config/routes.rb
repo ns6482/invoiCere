@@ -15,6 +15,7 @@ VisioInvoiceV3::Application.routes.draw do
   get "gocardless/confirm"
   get "gocardless/cb"
   get "gocardless/setup_merchant"
+  post "gocardless/webhook"
 
 
  end
@@ -26,6 +27,9 @@ VisioInvoiceV3::Application.routes.draw do
    get "gocardless/confirm"
    get "gocardless/setup_merchant"
    get "gocardless/cb"
+   get "gocardless/new"
+   post "gocardless/webhook"
+   
 
 
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
@@ -44,11 +48,13 @@ VisioInvoiceV3::Application.routes.draw do
       
       resources :deliveries, :only => [:new, :create, :show, :index], :shallow =>true
       resources :payments,:only => [:new, :create, :index, :destroy], :shallow =>true
+      
       resource  :reminder, :only => [ :edit, :update, :show]
       resources :comments, :only => [:new, :create, :destroy, :index], :shallow =>true
       resources :invoice_items,  :shallow =>true
       resources :feedbacks, :shallow =>true
       resource  :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
+      
     end
 
     devise_for :users, :controllers => { :invitations => 'users/invitations' }

@@ -21,9 +21,8 @@ gem 'sqlite3'
 gem "fancy-buttons"
 gem "simple-navigation"
 
-#gem 'activemerchant', '~> 1.10.0'
-gem 'jquery-rails', '>= 1.0.12'
-
+gem 'activesupport',  '>= 2.3.11' 
+gem 'activemerchant',  "~> 1.28"
 
 gem 'devise_invitable', '>= 0.6.2'
 gem "meta_search", '>= 1.1.0' 

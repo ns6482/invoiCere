@@ -13,6 +13,9 @@ class Payment < ActiveRecord::Base
   before_validation :set_if_full_amount
   before_save :set_if_full_amount
   after_save :check_if_paid
+  
+  after_destroy :update_invoice_when_deleted
+  after_update  :update_invoice_when_status
   #after_destroy :reopen
 
   
@@ -38,15 +41,28 @@ class Payment < ActiveRecord::Base
   end
   
   def check_if_paid
-    if self.invoice.remaining_amount ==0 
+    if self.invoice.remaining_amount ==0 and self.invoice.state == "open" 
       self.invoice.pay!
     end
   end
   
 
+  def update_invoice_when_deleted
+      if self.invoice.state == "paid"
+        self.invoice.open_again!
+      end
+  end
+  
+  def update_invoice_when_status
+    
+     if self.status == "cancelled" and self.invoice.state == "paid"
+        self.invoice.open_again!
+      end
 
+  end
 
   
+
   #TODO - on delete need to reset to open invoice
   
 end

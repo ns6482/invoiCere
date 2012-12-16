@@ -29,7 +29,9 @@ VisioInvoiceV3::Application.routes.draw do
    get "gocardless/cb"
    get "gocardless/new"
    post "gocardless/webhook"
-   
+   get "payments/confirm"
+   post "payments/complete"
+
 
 
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|

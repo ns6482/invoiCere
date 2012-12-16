@@ -138,8 +138,8 @@ class Invoice < ActiveRecord::Base
   end
 
   def remaining_amount
-
-    total_payments = Payment.sum(:amount, :conditions => ['invoice_id = ?', self.id])
+    
+    total_payments = Payment.sum(:amount, :conditions => "invoice_id = #{self.id} and status <> 'cancelled'")
     
     val = self.total_cost_inc_tax_delivery
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120728204400) do
+ActiveRecord::Schema.define(:version => 20121010200217) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -276,6 +276,10 @@ ActiveRecord::Schema.define(:version => 20120728204400) do
     t.text     "payment_instructions_1"
     t.string   "pay_gc_token"
     t.integer  "pay_gc_enabled"
+    t.string   "paypal_login"
+    t.string   "paypal_sig"
+    t.string   "paypal_pwd"
+    t.string   "paypal_enabled"
   end
 
   create_table "users", :force => true do |t|

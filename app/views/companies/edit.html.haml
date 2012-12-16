@@ -53,10 +53,14 @@
 
       =field_set_tag 'Payment Managment', :id =>"tabs-2" do
         %h3 GoCardless        
-        = s.input :pay_gc_token
-        = s.input :pay_gc_enabled, :as => :boolean
+        = s.input :pay_gc_token, :label_html => {:class => "label_narrow"}
+        = s.input :pay_gc_enabled, :as => :boolean, :label_html => {:class => "label_narrow"}
         = link_to 'Setup GoCardless Account', gocardless_setup_merchant_path
-
-
-
+        %p
+        %h3 Paypal        
+        = s.input :paypal_login, :label_html => {:class => "label_narrow"}
+        = s.input :paypal_sig, :label_html => {:class => "label_narrow"}
+        = s.input :paypal_pwd, :label_html => {:class => "label_narrow"}
+        = s.input :paypal_enabled, :as => :boolean, :label_html => {:class => "label_narrow"}
+        
       %button{:type=>"submit",:class=>"red"} Save

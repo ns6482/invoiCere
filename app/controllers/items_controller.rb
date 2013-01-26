@@ -13,8 +13,18 @@ class ItemsController < BaseController
        
         @items.map! {|item| {:value => item.name, :item_description => item.description, :item_type => item.unit,  :cost => item.price}} # 
         render :json => @items 
-        
        }
+       format.csv {
+ 
+        items = CSV.generate do |csv|
+            csv << ["name", "description"]
+           
+            @items.each do |item|
+              csv << [item.name, item.description]
+            end
+        end
+ 
+         send_data items         }
     end
 
   end

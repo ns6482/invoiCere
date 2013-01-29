@@ -5,19 +5,31 @@ class ClientsController < BaseController
   load_and_authorize_resource
   # GET /clients
   # GET /clients.xml
-  def index
-    ##@clients = Client.all
+ def index
+      ##@clients = Client.all
 
-    @search = @clients.search(params[:search])
-    #@clients = @search.all
-    @clients = @search.paginate :page => params[:page], :per_page => 10
+      @search = @clients.search(params[:search])
+      #@clients = @search.all
+      @clients = @search.paginate :page => params[:page], :per_page => 10
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @clients }
-      format.js
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @clients }
+        format.js
+        format.csv {
+
+          items = CSV.generate do |csv|
+            csv << ["name", "description"]
+            @clients.each do |item|
+              csv << [item.company_name, item.address1]
+            end
+          end
+           
+          send_data items
+
+        }
+      end
     end
-  end
 
   # GET /clients/1
   # GET /clients/1.xml

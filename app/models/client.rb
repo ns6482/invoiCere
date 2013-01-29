@@ -61,6 +61,8 @@ class Client < ActiveRecord::Base
   def invited?
     User.exists?(:email => self.email, :company_id => self.company_id, :client_id => self.id)
   end
+  
+ 
 
   #   def editable_by?(some_user)
   #     some_user.admin? || some_user == user

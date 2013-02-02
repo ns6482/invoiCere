@@ -29,3 +29,5 @@
 =content_for :right do
  -if can? :create, Item
   = link_to "New Item", new_item_path
+ -if can? :read, Item
+  = link_to "Export", items_path(:format => 'csv')

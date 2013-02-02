@@ -14,5 +14,13 @@
   = link_to " now", new_invoice_path  
 
 =content_for :right do
- -if can? :create, Invoice
-  = link_to "New Invoice", new_invoice_path
+ %ul
+  %li  
+   -if can? :create, Invoice
+    = link_to "New Invoice", new_invoice_path
+  %li
+   -if can? :read, Schedule
+    = link_to "Reoccuring Invoices", schedules_path
+
+  
+  

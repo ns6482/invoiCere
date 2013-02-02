@@ -71,10 +71,10 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     primary.item :dashboard, 'Dashboard', root_path
     primary.item :invoices, 'Invoices', invoices_path, :if => Proc.new { can? :read, Invoice}#,   :link => {:remote => true}
-    primary.item :schedules, "Reocurring Invoices", schedules_path, :if => Proc.new { can? :read, Schedule}#
+    #primary.item :schedules, "Reocurring Invoices", schedules_path, :if => Proc.new { can? :read, Schedule}#
 
     primary.item :clients, 'Clients', clients_path, :if => Proc.new { can? :read, Client}
-    primary.item :inventory, "Items", items_path#, :if => Proc.new { can? :read, Item}
+    #primary.item :inventory, "Items", items_path#, :if => Proc.new { can? :read, Item}
 
 
 

@@ -16,5 +16,10 @@
   = link_to " now", new_client_path  
 
 =content_for :right do
- -if can? :create, Client
-  = link_to "New Client", new_client_path
+ %ul
+  -if can? :create, Client
+   %li
+    = link_to "New Client", new_client_path
+  -if can? :read, Client
+   %li 
+    = link_to "Export", clients_path(:format => 'csv')

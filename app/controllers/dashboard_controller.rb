@@ -6,7 +6,7 @@ class DashboardController < BaseController
   
   def show
   
-      @invoices = current_company.invoices.accessible_by(current_ability).joins(:payments)
+      @invoices = current_company.invoices.accessible_by(current_ability).joins(:payments).uniq
 
       @invoices_states = @invoices.group_by {|i| i.formatted_state }
       

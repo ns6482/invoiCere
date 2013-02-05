@@ -22,6 +22,19 @@ class InvoicesController < BaseController
       format.html # index.html.erb
       format.xml  { render :xml => @invoices }
       format.js
+       format.csv {
+
+          items = CSV.generate do |csv|
+            csv << ["id", "client id"]
+            @invoices.each do |item|
+              csv << [item.id, item.client_id]
+            end
+          end
+           
+          send_data items
+
+        }
+
     end
   end
   

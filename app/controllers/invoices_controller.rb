@@ -25,9 +25,18 @@ class InvoicesController < BaseController
        format.csv {
 
           items = CSV.generate do |csv|
-            csv << ["id", "client id"]
-            @invoices.each do |item|
-              csv << [item.id, item.client_id]
+            csv << ["id", "business id", "created at", "invoice date", "title", "notes", "tax rate", "delivery_charge", "purchase order id", "status", "late fee", "due days", "total cost", "total cost including delivery and tax", "due date", "opened date", "opened_by", "paid date", "paid by", "cancelled", "cancelled date", "cancelled by", "discount", "currency", "item id", "item description", "item quantity", "item cost", "item taxable", "item created at"]
+            @invoices.each do |inv|
+              csv << [inv.id, inv.business_id, inv.created_at, inv.invoice_date, inv.title, inv.notes, inv.tax_rate, inv.delivery_charge, inv.purchase_order_id, inv.state, inv.late_fee, inv.due_days, inv.total_cost, inv.total_cost_inc_tax_delivery, inv.due_date,  inv.opened_date, inv.opened_by, inv.paid_date, inv.paid_by, inv.cancelled, inv.cancelled_date, inv.cancelled_by, inv.discount, inv.currency, inv.invoice_items.first.id, inv.invoice_items.first.item_description, inv.invoice_items.first.qty, inv.invoice_items.first.cost, inv.invoice_items.first.taxable, inv.invoice_items.first.created_at]
+              if inv.invoice_items.count > 1
+                counter = 0
+                inv.invoice_items.each do |item|
+                  if counter != 0 then 
+                    csv << ["","","","","","","","","","","","","","","","","","","","","","", "", "",item.id]
+                  end 
+                  counter +=1
+                end
+              end
             end
           end
            

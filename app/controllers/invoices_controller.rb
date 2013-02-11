@@ -32,7 +32,7 @@ class InvoicesController < BaseController
                 counter = 0
                 inv.invoice_items.each do |item|
                   if counter != 0 then 
-                    csv << ["","","","","","","","","","","","","","","","","","","","","","", "", "",item.id]
+                    csv << ["","","","","","","","","","","","","","","","","","","","","","", "", "",item.id, item.item_description, item.qty, item.cost, item.taxable, item.created_at]
                   end 
                   counter +=1
                 end

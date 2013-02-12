@@ -3,8 +3,6 @@
   #invoice-side-panel
     = render "invoices/show_elements/toolbar"
 #interactive
-#invoice-tab
-  = render_navigation(:context => "invoice_history")
 #invoice-centre-panel
   #invoice-main
     = render "invoices/show_elements/show_core", :object =>  @deliveries

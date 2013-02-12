@@ -10,14 +10,14 @@ class Item < ActiveRecord::Base
   validates_numericality_of  :price
 
 
-def self.to_csv(all_items) 
+  def self.to_csv(all_items) 
         CSV.generate do |csv|
             csv << ["Name", "Description", "Unit", "Price", "Created"]           
             all_items.each do |item|
               csv << [item.name, item.description, item.unit, item.price, item.created_at]
             end
         end
-end
+  end
 
 
 end

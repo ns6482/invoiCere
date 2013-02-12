@@ -21,6 +21,9 @@
   %li
    -if can? :read, Schedule
     = link_to "Reoccuring Invoices", schedules_path
+  %li
+   -if can? :read, Invoice
+    = link_to "Export", invoices_path(:format => 'csv')
 
   
   

@@ -16,39 +16,7 @@ class ClientsController < BaseController
       format.html # index.html.erb
       format.xml  { render :xml => @clients }
       format.js
-      format.csv {
-
-        items = CSV.generate do |csv|
-          
-          
-          
-          csv << ["Name", "Address 1", "Address 2", "Zip", "City", "Country", "Phone", "Fax", "Email", "Created", "Contact Title", "Contact First Name", "Contact Last Name", "Contact Job Title", "Contact Email", "Contact Phone", "Contact Mobile", "Contact Fax", "Contact Created" ]
-          @clients.each do |cl|
-            val = [cl.company_name, cl.address1, cl.address2, cl.zip, cl.city, cl.country, cl.phone, cl.fax, cl.email, cl.created_at] 
-            
-            if cl.contacts.first
-              val += [cl.contacts.first.title, cl.contacts.first.first_name, cl.contacts.first.last_name, cl.contacts.first.job_title, cl.contacts.first.email, cl.contacts.first.phone, cl.contacts.first.mobile, cl.contacts.first.fax, cl.contacts.first.created_at]            
-            end
-            
-            csv << val
-            
-            counter = 0
-
-            if cl.contacts.count > 1
-              cl.contacts.each do |contact|
-                if counter != 0 then
-                  csv << ["", "", "", "", "", "", "", "", "", "", contact.first.title, contact.first_name, contact.last_name, contact.job_title, contact.email, contact.phone, contact.mobile, contact.fax, contact.created_at]
-                end
-                counter +=1
-              end
-            end
-
-          end
-        end
-
-        send_data items
-
-      }
+      format.csv { send_data Client.to_csv(@clients)}
     end
   end
 

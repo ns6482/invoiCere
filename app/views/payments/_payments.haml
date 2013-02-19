@@ -5,21 +5,27 @@
 -elsif @invoice.remaining_amount == 0 
   %h3 This invoice has been paid
 -if @invoice.payments.count >0
-  %table
-    %tr
-      %th Date
-      %th User
-      %th Amount
-      %th Payment type
-      %th Currency
-      %th Status
-    - for payment in @invoice.payments
-      %tr
-        %td= h payment.created_at.strftime('%Y-%m-%d %H:%M:%S')
-        %td= h payment.user.email
-        %td= h number_to_currency(payment.amount, :unit => '£', :separator => ".", :delimiter => ",")
-        %td= h payment.payment_type
-        %td= h payment.currency
-        %td= h payment.status
-        -if payment.status != 'cancelled' and payment.payment_type != 'gocardless'
-          %td= link_to 'Cancel', payment_path(payment, :invoice_id => @invoice.id), :confirm => 'Are you sure?', :method => :delete
+  =form_tag delete_multiple_invoice_payments_path(@invoice), :method => :delete, :remote => true do
+    -if can? :delete, Payment
+      = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
+    %table{:class => "table-main"}
+      %thead 
+        %tr
+          %th
+          %th Date
+          %th User
+          %th Amount
+          %th Payment type
+          %th Currency
+          %th Status
+        - for payment in @invoice.payments
+          %tr{:id => "payment-row-" + payment.id.to_s, :class=>"table-row " + cycle("odd", "even")}
+            %td
+              -if payment.status != 'cancelled' and payment.payment_type != 'gocardless'
+                = check_box_tag "payment_ids[]", payment.id
+            %td= h payment.created_at.strftime('%Y-%m-%d %H:%M:%S')
+            %td= h payment.user.email
+            %td= h number_to_currency(payment.amount, :unit => '£', :separator => ".", :delimiter => ",")
+            %td= h payment.payment_type
+            %td= h payment.currency
+            %td= h payment.status

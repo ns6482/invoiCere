@@ -1,7 +1,7 @@
 require "open-uri"
 
 class DeliveriesController < BaseController
-  before_filter :find_invoice, :only => [:new, :index]
+  before_filter :find_invoice, :only => [:new, :index, :delete_multiple]
   before_filter :find_delivery, :only => :show
   load_and_authorize_resource :invoice
   load_and_authorize_resource :delivery, :through => :invoice, :shallow => true
@@ -64,6 +64,29 @@ class DeliveriesController < BaseController
     notice  "Successfully destroyed delivery."
     redirect_to invoices_url
   end
+  
+   def delete_multiple
+
+    respond_to do |format|
+
+      i = 0
+      #arr_item = Array.new
+      #@payments_to_delete = @payments.find(params[:payment_ids])
+      @deliveries_to_delete =Delivery.where(:id => params[:delivery_ids], :invoice_id => @invoice.id)
+
+      @deliveries_to_delete.each do |delivery|
+        #logger.info payment.id
+        delivery.destroy
+      end
+
+      flash[:notice] ='Message successfully deleted.'
+      
+      format.html {    redirect_to invoice_url(@invoice)}
+      format.js { render :action => 'delete_multiple.js.erb'}
+    end
+
+  end
+  
 
   def find_invoice
     @invoice = current_company.invoices.find(params[:invoice_id])

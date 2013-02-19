@@ -1,4 +1,4 @@
-- title "Schedules"
+- title "Reocurring Invoices"
 
 %table
   %thead
@@ -22,5 +22,5 @@
 
 =content_for :right do
   -if can? :create, Schedule
-    = link_to "New Schedule", new_schedule_path
+    = link_to "New Reocurring Invoice", new_schedule_path
 

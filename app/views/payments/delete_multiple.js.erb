@@ -1,0 +1,13 @@
+$("#dashboard-centre").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
+$(".notice").fadeOut(3000);
+<%- @payments_to_delete.each do | i |  %>
+	$("#payment-row-" + "<%= escape_javascript(i.id.to_s) %>").animate({
+	    opacity: 0.0,
+	    left: '+=50',
+	    height: 'toggle'
+	  }, 1000, function() {
+	    // Animation complete.
+			$(".removed").slideUp();
+	  });
+<%- end %>
+

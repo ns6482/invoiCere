@@ -1,8 +1,11 @@
-- title "Invoice: " + @invoice.id.to_s + " - " + @invoice.title
-= content_for :left do
-  #invoice-side-panel
-    = render "invoices/show_elements/toolbar"
-#interactive
-#invoice-centre-panel
-  #invoice-main
+
+#showinvoice{:class=>"row"}
+  - title "Invoice: " + @invoice.id.to_s + " - " + @invoice.title
+#interactive{:class=>"row"}
+#invoice-centre-panel{:class=>"span10"}
+  #invoice-main{:class=>"span8"}
     = render "invoices/show_elements/show_core", :object =>  @deliveries
+  #invoice-side-panel{:class=>"span2"}
+    = render "invoices/show_elements/toolbar"
+  
+

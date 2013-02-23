@@ -13,8 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require nested_form
-//= reqyure main
+//= require main
 //= require jqueryui
 //= require jquery.collapser
 //= require jquery.effects.blind
@@ -40,4 +39,5 @@
 //= require schedule-wizard
 //= require jquery.ui.autocomplete
 //= require itemAutoComplete
+//= require jquery_nested_form
 //

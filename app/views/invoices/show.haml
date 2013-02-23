@@ -1,9 +1,16 @@
 - title "Invoice: " + @invoice.id.to_s + " - " + @invoice.title
-= content_for :left do
- #invoice-side-panel
-  = render "invoices/show_elements/toolbar"
 #interactive
-#invoice-centre-panel
- #invoice-main
-  = render "invoices/show_elements/show_core", :object =>  @deliveries
-
+#invoice-centre-panel{:class=> "row"}
+  #invoice-main{:class=>"span8"}
+    = render "invoices/show_elements/show_core", :object =>  @deliveries
+  #invoice-side-panel{:class=> "span2"}
+    = render "invoices/show_elements/toolbar"
+  
+%a#LaunchDemo.btn{"data-toggle" => "modal", :href => "#myModal", :role => "button"} Launch demo modal
+/ Modal
+#myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Modal header
+  .modal-body
+    %p One fine body…

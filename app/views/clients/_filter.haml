@@ -5,10 +5,10 @@
 #filter_box
   = simple_form_for @search, :html => {:remote => true}  do |f|
     -# f.inputs :id =>  "ajax_form" do
-    =field_set_tag 'Client Details' do
+    =field_set_tag do
       = f.input :company_name_contains, :label => "Name", :required => false
       = f.input :email_contains, :label => "Email", :required => false
-      = f.input :city_contains, :label => "City", :required => false
-      = f.input :country_contains, :label => "Country", :required => false
-      = f.input :zip_contains, :label => "Post Code", :required => false  
-    %button{:type=>"submit",:class=>"blue"} Search Clients
+      =# f.input :city_contains, :label => "City", :required => false
+      =# f.input :country_contains, :label => "Country", :required => false
+      =# f.input :zip_contains, :label => "Post Code", :required => false  
+    %button{:type=>"submit"} Search

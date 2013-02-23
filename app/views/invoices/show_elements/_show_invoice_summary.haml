@@ -1,32 +1,32 @@
-%table
+%table{:class=>"table table-condensed"}
  %tr
-  %th
-   %strong Item Subtotal:
+  %td
+   %strong Subtotal:
   %td= h @invoice.total_cost#number_to_currency @invoice.total_cost, :unit => '£', :separator => ".", :delimiter => ","
  %tr
-  %th
-   %strong Item Subtotal inc Tax:
+  %td
+   %strong Subtotal inc Tax:
   %td= h @invoice.total_cost_inc_tax#number_to_currency @invoice.total_cost_inc_tax, :unit => '£', :separator => ".", :delimiter => ","
  -if !@invoice.discount.nil? and @invoice.discount.length >0 
 
   %tr
-   %th
+   %td
     %strong Discount:
     -if @invoice.discount.include? "%"
      %td= h @invoice.discount
     -else 
      %td= h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => "," 
  %tr
-  %th
-   %strong Delivery Charge:
+  %td
+   %strong Delivery:
   %td= h @invoice.delivery_charge#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => "," 
  %tr
-  %th
+  %td
    %strong Total:
   %td
    %strong= h @invoice.total_cost_inc_tax_delivery#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
  %tr
-  %th
+  %td
    %strong Payment Due:
   %td
    %strong= h @invoice.remaining_amount #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","

@@ -30,6 +30,8 @@ class InvoicesController < BaseController
     output = InvoiceReport.new(@invoice).to_pdf
 
     @time = Time.now
+    
+    @delivery = Delivery.new
 
     respond_to do | format|
       format.html

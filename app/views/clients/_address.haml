@@ -1,25 +1,26 @@
-%p
+%address
  = client.address1
  -if client.address2
+  = client.address2
+ -if client.zip
+  ,
+  = client.zip
+ -if client.city
   %br
-   = client.address2
- %br
- = client.zip
- %br
- = client.city
- %br
- = client.country
- %br 
+  = client.city
+ -if client.country
+  ,
+  = client.country 
  -if client.phone
   %br
   Phone:
   = client.phone
  -if client.fax
-  %br
+  ,
   Fax:
   = client.fax
  -if client.email
-  %br
+  ,
   Email:
   = client.email
 

@@ -27,31 +27,31 @@
   :background-color #D7F2FF
 
 #dashboard-summary
- +column(18)
+ //+column(18)
  .panel
   h3
-   +box
+   //+box
    
 .dashboard-table
  table
-  :width 120px
+  //:width 120px
   td
-   :width 10px
+   //:width 10px
  
 #dashboard-box
  :border-style solid
  :border-color black
  ul
-  +box
+  //+box
   +border-radius(4px, 4px)
   +no-bullets    
   li
 
 #dashboard-box-start
  @extend #dashboard-box
- +column(9)
+ //+column(9)
 
 #dashboard-box-end
  @extend #dashboard-box
- +column(9,last)
+ //+column(9,last)
  

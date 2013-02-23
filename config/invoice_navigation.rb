@@ -14,7 +14,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :edit_invoice, "Edit #{@model}", edit_invoice_path( @invoice), :if => Proc.new { can? :update, @invoice and  @invoice.state != "paid"},  :link => {:remote => true}
 
 
-    primary.item :print_invoice, "Print", invoice_path( @invoice)
+    #primary.item :print_invoice, "Print", invoice_path( @invoice)
     primary.item :pdf_invoice, "PDF", invoice_path( @invoice, :format => :pdf)
     primary.item :reminder_invoice, "Setup Reminder",edit_invoice_reminder_path(@invoice), :if => Proc.new { can? :update, @invoice.reminder},  :link => {:remote => true}
     primary.item :email_invoice, "Send Email",new_invoice_delivery_path(@invoice), :if => Proc.new { can? :create, Delivery},  :link => {:remote => true}
@@ -31,6 +31,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :open_invoice, "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :if => Proc.new {can? :update, @invoice and @invoice.state == "paid"},  :link => {:remote => true}
 
     primary.item :feedback_invoice, "Feedback on Invoice",new_invoice_payment_path(@invoice), :if => Proc.new {can? :create, @feedback and @invoice.state == "closed"},  :link => {:class => 'interactive'}
+
+    primary.dom_class = 'nav nav-list'
 
   end
    

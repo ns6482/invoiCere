@@ -1,10 +1,15 @@
-.input_fields
-  =f.input_field :item_description, :class => 'item_description'
-  =f.input_field :qty, :class => 'item_qty',  :size => 3, :type => "text"
-  =f.input_field :cost,   :class => 'item_cost', :size => 3 , :type => "text" 
-  =f.input_field :item_type, :class => 'item_type'
-  =f.input_field :taxable,  :class => 'item_tax'
-  =f.link_to_remove "Remove" , :class => "item_remove "
-  .item_total
+.span3
+  =f.input_field :item_description, :class => 'item_description input-large'
+.span1
+  =f.input_field :qty, :class => 'item_qty input-mini',  :size => 3
+.span1 
+  =f.input_field :cost,   :class => 'item_cost input-mini', :size => 3 
+.span2 
+  =f.input_field :item_type, :class => 'item_type input-medium'
+.span1 
+  =f.input_field :taxable,  :class => 'item_tax input-mini'
+.span1 
+  =f.link_to_remove "Remove" , :class => "item_remove input-mini "
+.item_total
    
 

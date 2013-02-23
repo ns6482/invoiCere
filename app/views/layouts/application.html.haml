@@ -1,22 +1,30 @@
 %html{html_attrs(lang = 'en')}
-!!!
-%head
-  = render 'layouts/head'
-%body{:class => "two-col"}
-  #container
-    #header
-      #login_console
-        %ul{:class => "horizontal"}
-          = render 'devise/menu/registration_items'
-          = render 'devise/menu/login_items'          
-      #logo
-        %h3
-          VisioInvoice
-        %h4
-          Put some sexy quote here...
-    #content
-      -flash.each do |key, msg|
-        = content_tag :div, msg, :id => "flash_#{key}", :class => "#flash #{key}"
-      =yield
-    #footer
-      = render 'layouts/footer'
+  !!!
+  %head
+    = render 'layouts/head'
+  %body{:class => "two-col"}
+    #container
+      #header
+        #login_console
+          %ul{:class => "horizontal"}
+            = render 'devise/menu/registration_items'
+            = render 'devise/menu/login_items'          
+        #logo
+          %h3
+            VisioInvoice
+          %h4
+            Put some sexy quote here...
+      #content
+        - flash.each do |name, msg|
+          - if msg.is_a?(String)
+            %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
+              %a.close{"data-dismiss" => "alert"} ×
+              = content_tag :div, msg, :id => "flash_#{name}"
+        =yield
+      #footer
+        = render 'layouts/footer'
+
+
+
+
+       

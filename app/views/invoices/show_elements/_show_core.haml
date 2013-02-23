@@ -1,38 +1,36 @@
-#invoice-preview
- #invoice-client-name
-  %h3= "Invoice for " +  @invoice.client.name
-  
- #invoice-client-address
-  =render :partial => "clients/address", :locals => {:client => @invoice.client}
- #invoice-logo
-  -#todo delete company from client, or rename to name
-  = image_tag @invoice.client.company.setting.logo.url
-  %p
-   %h3= @invoice.client.company.name
- #invoice-header-details
-  %table
+#invoice-preview{:class => "row"}
+ #invoice-header-details{:class=> "span7"}
+  %table{:class=>"table table-condensed"}
    %tr
-    %th Invoice ID
-    %th Your ID
-    %th Purchase Order ID
-    %th Invoice Date
-    %th Due Date
-    %th Currency
-   %tr
-    %td
+    %th ID
+    %td 
      %strong= h @invoice.id
+   %tr
+    %th Your ID
     %td= h @invoice.business_id
+   %tr
+    %th Purchase Order
     %td= h @invoice.purchase_order_id
-    %td= h @invoice.client.company.preference.convert_date(@invoice.invoice_date)
-    %td= h @invoice.client.company.preference.convert_date(@invoice.due_date)
-    %td= h @invoice.client.company.preference.currency_format
- #invoice-title
-  %h2= h @invoice.title
- #invoice-item-list
-  %table{:id => 'invoice-items'}
+   %tr
+    %th Date
+    %td=h @invoice.client.company.preference.convert_date(@invoice.invoice_date)
+   %tr
+    %th Due
+    %td=h @invoice.client.company.preference.convert_date(@invoice.due_date)
+   %tr
+    %th Currency
+    %td=h @invoice.client.company.preference.currency_format
+   %tr
+    %th Client Info 
+    %td
+     %h4= @invoice.client.name
+     =render :partial => "clients/address", :locals => {:client => @invoice.client}
+
+ #invoice-item-list{:class=>"span8"}
+  %table{:id => 'invoice-items', :class => "table table-striped pull-left"}
    %thead
     %tr
-     %th Item Name and Description
+     %th Item
      %th Qty
      %th Unit Price
      %th Unit
@@ -40,9 +38,9 @@
      %th Tax
    %tbody
     =render :partial => "invoices/show_elements/show_invoice_item", :collection => @invoice.invoice_items, :as => :show_invoice_item
- #invoice-summary
+ #invoice-summary{:class=>"offset4 span3"}
   =render :partial => "invoices/show_elements/show_invoice_summary", :locals => {:invoice => @invoice}
- #invoice-footer
+ #invoice-footer{:class=>"span12"}
   %p
    %strong Notes
    =h @invoice.notes
@@ -58,5 +56,5 @@
    Printed on  
    =@invoice.client.company.preference.convert_datetime(Time.now)
  
-#invoice-activity
+#invoice-activity{:class=>"row"}
  = render :partial => "invoices/history"

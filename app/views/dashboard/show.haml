@@ -2,46 +2,45 @@
 
 =content_for :right do 
   %strong Quick Start
-  %ul{:id => "dashboard-list"}
-    %li
-      -if can? :create, Invoice
-        = link_to "New Invoice", new_invoice_path
-    %li
-      -if can? :create, Client
-        = link_to "New Client", new_client_path
+  %br
+  %div{:id => "dashboard-list", :class=> "btn-group btn-group-vertical"}
+    
+    -if can? :create, Invoice
+      = link_to "New Invoice", new_invoice_path, :class=> "btn btn-large btn-primary"
+    -if can? :create, Client
+      = link_to "New Client", new_client_path, :class=> "btn btn-large"
       
-
-#dashboard-box-start
-  %h3 YTD Breakdown
-  %ul{:id => "dashboard-list"}
-    %li 
-      %strong Total Invoiced:  
-      =number_to_currency @total_invoice, :unit => '£', :separator => ".", :delimiter => ","
-    %li
-      %strong Total Payments Received
-      =number_to_currency @total_paid, :unit => '£', :separator => ".", :delimiter => ","
-    %li
-      %strong Total Outstanding
-      =number_to_currency @total_outstanding, :unit => '£', :separator => ".", :delimiter => ","
-      (of which overdue)
-      =number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","
-      
-#dashboard-box-end
-  %h3 Accounts with Outstanding payments
-  %ul{:id => "dashboard-list"}
-    -@clients_outstanding.each do |client|
+%div{:class => 'row'}
+  #dashboard-box-start{:class=> 'span3 hero-unit'}
+    %h4 YTD Breakdown
+    %ul{:id => "dashboard-list"}
+      %li 
+        %strong Invoiced:  
+        =number_to_currency @total_invoice, :unit => '£', :separator => ".", :delimiter => ","
       %li
-        %strong=client.company_name
-        (
-        =client.count_invoices
-        invoices):     
-        %strong=number_to_currency (client.total_due.to_d ||= 0 - client.total_paid.to_d ||= 0).to_f, :unit => '£', :separator => ".", :delimiter => ","
-        (paid: 
-        =number_to_currency client.total_paid.to_f, :unit => '£', :separator => ".", :delimiter => ","
-        )
+        %strong Payments Received
+        =number_to_currency @total_paid, :unit => '£', :separator => ".", :delimiter => ","
+      %li
+        %strong Outstanding
+        =number_to_currency @total_outstanding, :unit => '£', :separator => ".", :delimiter => ","
+        (of which overdue)
+        =number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","
+        
+  #dashboard-box-end{:class=> 'span3 hero-unit'}
+    %h4 Outstanding payments
+    %ul{:id => "dashboard-list"}
+      -@clients_outstanding.each do |client|
+        %li
+          %strong=client.company_name
+          (
+          =client.count_invoices
+          invoices):     
+          %strong=number_to_currency (client.total_due.to_d ||= 0 - client.total_paid.to_d ||= 0).to_f, :unit => '£', :separator => ".", :delimiter => ","
+          (paid: 
+          =number_to_currency client.total_paid.to_f, :unit => '£', :separator => ".", :delimiter => ","
+          )
 
-#dashboard-summary
-  Select graph: 
+#dashboard-summary{:class=> 'row'}
   = select_tag :gdate, options_for_select([['This Month',1],['3 Months ago',3], ['6 Months ago', 6], ['12 Months      ago', 12]])
 
   #invoices_chart

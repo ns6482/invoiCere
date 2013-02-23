@@ -32,7 +32,7 @@ gem 'will_paginate'#, '~> 3.0.0'
 gem 'prawn', '~> 0.12.0', :submodules => true
 gem 'prawnto'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
-gem "nested_form", :git => 'git://github.com/ryanb/nested_form.git'
+gem "nested_form"#, :git => 'git://github.com/ryanb/nested_form.git'
 gem 'delorean'
 gem "haml-rails" 
 gem "deep_cloneable", "~> 1.3.0"
@@ -74,7 +74,10 @@ group :assets do
   #gem 'sass-rails',   "~> 3.1.0"
   #gem 'coffee-rails', "~> 3.1.0"
   
-  gem "sass-rails", "~> 3.2.4"
+  gem 'sass-rails', '~> 3.2'
+  gem 'bootstrap-sass', '~> 2.3.0.1'
+  
+  #gem "sass-rails", "~> 3.2.4"
   gem "coffee-rails", "~> 3.2.2"
   gem 'uglifier'
   gem 'compass-rails'

@@ -1,5 +1,5 @@
-.span3
-  =f.input_field :item_description, :class => 'item_description input-large'
+.span2
+  =f.input_field :item_description, :class => 'item_description input-medium'
 .span1
   =f.input_field :qty, :class => 'item_qty input-mini',  :size => 3
 .span1 
@@ -8,8 +8,10 @@
   =f.input_field :item_type, :class => 'item_type input-medium'
 .span1 
   =f.input_field :taxable,  :class => 'item_tax input-mini'
-.span1 
-  =f.link_to_remove "Remove" , :class => "item_remove input-mini "
-.item_total
-   
+.span1
+  .total
+.span1
+  =f.link_to_remove '<i class="icon-trash"></i> '.html_safe, :class => "btn btn-mini" 
+
+.row   
 

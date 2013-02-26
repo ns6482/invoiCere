@@ -5,7 +5,7 @@
 -if @invoices.count > 0
  =form_tag delete_multiple_invoices_path, :method => :delete, :remote => true do
   -if can? :delete, Invoice
-   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
+   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
   
   =render :partial=> "invoices" 
 -else

@@ -11,6 +11,7 @@
       =# f.input :total_cost_inc_tax_delivery_gte,:as => :numeric, :label =>  "Min Cost",:input_html => { :size => 10 } , :required => false
       =# f.input :total_cost_inc_tax_delivery_lte,:as => :numeric, :label => "Max Cost",:input_html => { :size => 10 } , :required => false
       = f.input :client_id_equals, :as => :select, :collection => @clients, :name => :company_name , :include_blank => true, :label=>"Client", :required => false
-      = f.input :state_equals_any, :as => :check_boxes , :collection => ["draft", "open", "paid"], :include_blank => true, :label=>"State", :required => false
+      = f.input :state_equals_any, :as => :check_boxes , :collection => ["draft", "open", "paid"], :include_blank => true, :label=>"State", :item_wrapper_class => 'inline', :required => false
       =# f.input :due_date_gte, :as => :date, :label => "Due Date From", :required => false
-      %button{:type=>"submit"} Search
+      %button{:class=> 'btn btn-small btn-primary', :type=>"submit"} Search
+      

@@ -12,12 +12,14 @@
 
 
         = f.input :title, :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
-        = f.input :invoice_date, :label => "Date", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
+        = f.input :invoice_date, :label => "Date", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-medium'}
         = f.association :client, :collection => current_company.clients.accessible_by(current_ability), :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
         = f.input :business_id, :label => "Your ID", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
         
         -if current_company.preference.purchase_order_number =1
           = f.input :purchase_order_id, :label => "Purchase Order ID", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
+ 
+ 
  
  
       %div{:id => "form-right", :class => "invoice form-height-long span2"}
@@ -33,7 +35,7 @@
         .fields
           %h3 Items
         .fields
-          .span3
+          .span2
             %strong Item       
           .span1
             %strong Qty
@@ -43,10 +45,14 @@
             %strong / Unit
           .span1
             %strong Tax
-          .item_remove
-          .item_total        
+          .span1
+            %strong Total
+          .span1
+          
+          
+                  
         = f.simple_fields_for :invoice_items
-        = f.link_to_add "New Item", :invoice_items                  
+        = f.link_to_add '<i class="icon-plus"></i> Add'.html_safe, :invoice_items, :class => "btn btn-small" 
 
 
       #form-bottom{:class => "span8"}
@@ -54,8 +60,12 @@
           %h3 Further Notes
         .fields          
           =f.input_field :notes, :rows => 2, :class=> 'input-block-level'
-      
-      %button{:type=>"submit",:class=>"btn"} Save
+        %br  
+        
+        #btn{:class => 'form-actions row pull-right'}
+          %button{:type=>"submit",:class=>"btn btn-primary btn-large"} Save Invoice
+          
+          
 
 
     

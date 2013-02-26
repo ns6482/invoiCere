@@ -47,7 +47,10 @@ gem "active_hash"
 gem 'countries'
 gem "gocardless"
 gem 'rack-ssl', :require => 'rack/ssl'
-gem "rails-asset-jqueryui"
+#gem "rails-asset-jqueryui"
+gem "jquery-rails"
+gem "jquery-ui-rails"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

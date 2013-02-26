@@ -77,7 +77,7 @@ SimpleNavigation::Configuration.run do |navigation|
     #primary.item :schedules, "Reocurring Invoices", schedules_path, :if => Proc.new { can? :read, Schedule}#
 
     primary.item :clients, 'Clients', clients_path, :if => Proc.new { can? :read, Client}
-    #primary.item :inventory, "Items", items_path#, :if => Proc.new { can? :read, Item}
+    primary.item :inventory, "Inventory", items_path, :if => Proc.new { can? :read, Item}
     primary.item :settings, 'Settings', edit_company_path, :if => Proc.new { can? :update, Company}
 
     primary.dom_class = 'nav nav-pills'

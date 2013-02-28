@@ -1,5 +1,5 @@
 - title "Invoice: " + @invoice.id.to_s + " - " + @invoice.title
-#interactive
+#interactive{:class => "modal hide fade"}
 #invoice-centre-panel{:class=> "row"}
   #invoice-main{:class=>"span8"}
     = render "invoices/show_elements/show_core", :object =>  @deliveries

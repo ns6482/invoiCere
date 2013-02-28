@@ -10,14 +10,12 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
+//= require jquery-1.9.1.min
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap
+//= require jquery-ui-1.10.1
 //= require main
 //= require jquery.collapser
-
-//= require jqueryui
-
 //= require jquery.qtip-1.0.0-rc3.min
 //= require jquery.jscrollpane.min
 //= require jquery.rating.pack
@@ -25,7 +23,8 @@
 //= require dashboard-graph
 //= require formToWizard
 //= require schedule-wizard
-//= require jquery.ui.autocomplete
 //= require itemAutoComplete
 //= require jquery_nested_form
+//= require_tree .
+
 //

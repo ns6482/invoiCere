@@ -1,17 +1,23 @@
 -if @invoices.nil?
   %h3 No Invoices
 -else
-  -@invoices_states.each do |state, invoices|
-    %h3{:class=> "state expIco"}= state + " (" + invoices.count.to_s + ")"
-    .panel
-      %div{:id=> state.to_s.tr(" ", "-")}
-        %table{:id => "invoices"}
-          %tr
-            %th Created
-            %th Client Name
-            %th Title
-            %th Invoice Date
-            %th Due Date
-            %th Total Cost
-          -invoices.each do |invoice|
-            = render :partial => "invoice", :object => invoice
+  %br
+  #accordian{:class => 'accordian'}
+    -@invoices_states.each do |state, invoices|
+      %div{:id=> state.to_s, :class=>'accordion-group'}
+        %div{:class=> 'accordian-heading'}
+          %div{:class=> 'accordion1'}
+            %a{:class=> "accordion-toggle btn btn-large btn-info btn-block", 'data-toggle'=>"collapse",  'data-parent'=>'#accordian', :href=>'#' + state.to_s.tr(" ", "-")}= state + " (" + invoices.count.to_s + ")"
+          %div{:id=> state.to_s.tr(" ", "-"), :class=> 'accordian-body collapse'}
+            %table{:id => "invoices", :class => "table"}
+              %thead
+                %tr
+                  %th Created
+                  %th Client Name
+                  %th Title
+                  %th Invoice Date
+                  %th Due Date
+                  %th Total Cost
+              %tbody
+                -invoices.each do |invoice|
+                  = render :partial => "invoice", :object => invoice

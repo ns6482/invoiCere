@@ -1,11 +1,21 @@
-=simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :method => :post, :remote => true } do |f|
-  = field_set_tag 'Send Email', :id => "form-main" do
-    =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
+%div{:class=>"modal-header"}
+  %button{:type=>"button", :class=>"close", 'data-dismiss'=>"modal",  'aria-hidden'=>"true"}
+    &times;
+  %h3 Modal header
+
+
+%div{:class=>'modal-body'}
+  =simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :method => :post, :remote => true } do |f|
+    =# field_set_tag 'Send Email', :id => "form-main" do
+    =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.hidden_field :invoice_id
     = f.input :message, :input_html => { :rows => 3 }  
     = f.input :client_email,  :label=> @invoice.client.company_name
-    = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To"
-    = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html => {:class => "optional"}  
-    %br
-    %button{:type=>"submit",:class=>"red"} Send
-  %br
+    - if @invoice.client.contacts.size > 0
+      = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To", :label_html => {:class=> 'checkbox inline'}
+    = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html=> {:class => 'radio inline'}, :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
+    
+  %div{:class=>'modal-footer'}
+    %button{:class=>"btn", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Close
+    %button{:type=>"submit",:class=>"btn btn-primary"} Send
+ 

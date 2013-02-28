@@ -47,7 +47,7 @@ $(function() {
 
     };
 
-    $("input.item_description").live("keydown.autocomplete", function() {
+    $(document).on("keydown.autocomplete", "input.item_description", function() {
         $(this).autocomplete(options);        
     });
     });

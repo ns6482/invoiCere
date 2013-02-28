@@ -98,7 +98,7 @@ $(document).ready(function() {
     setTimeout(hideFlashes, 10);
 
     // Change all select helpers to use ajax
-    $('select.order_by, select.order_as, select.page, select.per_page').live('click',function() {
+    $('select.order_by, select.order_as, select.page, select.per_page').on('click',function() {
         var onchange = $(this).attr('onchange').toString();
         var matches = onchange.match(/window\.location = "(.*)" \+ this/);
         var url = matches[matches.length - 1];
@@ -112,13 +112,13 @@ $(document).ready(function() {
     })
 
     // Change all link helpers to use ajax
-    $('a.ordering, a.descending, a.ascending, .pagination a, a.calendar_month').live('click', function() {
+    $('a.ordering, a.descending, a.ascending, .pagination a, a.calendar_month').on('click', function() {
         //$('#invoices').load(this.href);
         $.get(this.href, null, null, 'script');       
         return false;
     })
 
-    $('a.interactive').live('click', function() {
+    $('a.interactive').on('click', function() {
 
       $('#load').remove();
       $('#toolbar').append('<span id="load"><IMG SRC="/images/ajax-loading.gif"> </span>');
@@ -180,7 +180,7 @@ $(document).ready(function() {
 
 
 
-    $('#reminder_default_message').live('click', function()
+    $(document).on('click','#reminder_default_message', function()
     {
 
         if (this.checked){
@@ -195,7 +195,7 @@ $(document).ready(function() {
     );
 
 
-    $('#schedule_default_message').live('click', function()
+    $(document).on('click','#schedule_default_message', function()
     {
 
         if (this.checked){

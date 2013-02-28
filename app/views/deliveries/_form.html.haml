@@ -1,7 +1,7 @@
 %div{:class=>"modal-header"}
   %button{:type=>"button", :class=>"close", 'data-dismiss'=>"modal",  'aria-hidden'=>"true"}
     &times;
-  %h3 Modal header
+  %h3 Send Message
 
 
 %div{:class=>'modal-body'}
@@ -9,13 +9,13 @@
     =# field_set_tag 'Send Email', :id => "form-main" do
     =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.hidden_field :invoice_id
-    = f.input :message, :input_html => { :rows => 3 }  
-    = f.input :client_email,  :label=> @invoice.client.company_name
+    = f.input :message, :input_html => { :rows => 5 }  
+    = f.input :client_email,  :label=> @invoice.client.company_name, :item_wrapper_class => 'inline'
     - if @invoice.client.contacts.size > 0
-      = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To", :label_html => {:class=> 'checkbox inline'}
-    = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :wrapper_html=> {:class => 'radio inline'}, :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
+      = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To", :item_wrapper_class => 'inline'
+    = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
     
-  %div{:class=>'modal-footer'}
-    %button{:class=>"btn", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Close
-    %button{:type=>"submit",:class=>"btn btn-primary"} Send
+    %div{:class=>'modal-footer'}
+      %button{:class=>"btn", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Close
+      %button{:type=>"submit",:class=>"btn btn-primary"} Send
  

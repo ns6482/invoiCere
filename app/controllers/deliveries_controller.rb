@@ -40,9 +40,9 @@ class DeliveriesController < BaseController
 
         if @delivery.format ==2
           pdf_file = render_to_string(:action=>'show', :id => @invoice.id, :template=>'invoices/show.pdf.prawn')
-          Notifier.deliver_invoice_pdf(@delivery, pdf_file) # sends the email
+          Notifier.invoice_pdf(@delivery, pdf_file) # sends the email
         elsif @delivery.format ==1
-          Notifier.deliver_invoice(@delivery).deliver # sends the email
+          Notifier.invoice(@delivery).deliver # sends the email
         end
 
 

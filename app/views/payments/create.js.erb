@@ -1,5 +1,5 @@
 $("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
-$('#new_payment').hide('slow').empty();
+$('#interactive').modal('hide');
 $(".notice").fadeOut(3000);
 <% if @invoice.state == "paid" %>
 	$("#edit_invoice").remove();

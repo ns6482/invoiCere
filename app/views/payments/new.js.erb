@@ -1,8 +1,4 @@
-$("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>").effect("slide");
-$("#invoice-main").prepend("<%= escape_javascript(render("form")) %>")
+$("#interactive").html("<%= escape_javascript(render("form")) %>").effect("slide");
+$('#interactive').modal('show')
 
-$('#cancel').bind('click', function() {
-  $('#new_payment').hide('slow').empty();
-  return false;
- });
   

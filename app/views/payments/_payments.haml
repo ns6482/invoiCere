@@ -7,8 +7,8 @@
 -if @invoice.payments.count >0
   =form_tag delete_multiple_invoice_payments_path(@invoice), :method => :delete, :remote => true do
     -if can? :delete, Payment
-      = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
-    %table{:class => "table-main"}
+      = submit_tag 'Cancel', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class=> 'btn btn-small btn-danger'
+    %table{:class => "table table-striped"}
       %thead 
         %tr
           %th

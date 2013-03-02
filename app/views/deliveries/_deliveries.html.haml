@@ -5,10 +5,10 @@
 
   =form_tag delete_multiple_invoice_deliveries_path(@invoice), :method => :delete, :remote => true do
     -if can? :delete, Delivery
-      = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
+      = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
 
     #deliveries-main{:class => 'scroll-pane jspScrollable'}
-      %table{:class => 'table-main'}
+      %table{:class => 'table table-striped'}
         %thead
           %tr
             %th

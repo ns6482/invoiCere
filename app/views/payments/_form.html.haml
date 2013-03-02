@@ -1,10 +1,22 @@
-=simple_form_for [@invoice, @payment], :html => { :remote => false} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
-  =# f.error_messages
-  =field_set_tag "Log Payment", :id=>'form-main' do
-    =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
-    = f.input :pay_full_amount, :as=>:boolean, :label=>"Pay full amount (" + number_to_currency(@invoice.remaining_amount, :unit => '£', :separator => "   .", :delimiter => ",") + ")"
+%div{:class=>"modal-header"}
+  %button{:type=>"button", :class=>"close", 'data-dismiss'=>"modal",  'aria-hidden'=>"true"}
+    &times;
+  %h3 Make Payment
+
+
+%div{:class=>'modal-body'}
+  =simple_form_for [@invoice, @payment], :html => { :remote => false} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
+    =# f.error_messages
+    =#field_set_tag "Log Payment", :id=>'form-main' do
+    =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
+    = f.input :pay_full_amount, :as=>:boolean, :wrapper_html=> {:class=> 'checkbox'}, :label_html => {:class=>'checkbox'}, :label=>"Pay full amount (" + number_to_currency(@invoice.remaining_amount, :unit => '£', :separator => "   .", :delimiter => ",") + ")"
     = f.input :amount
     = f.input :payment_type, :as => :select, :collection => ["Cash", "GoCardless", "Paypal", "Cheque", "Other"]
     =# f.input :currency, :as => :select,  :collection => ["British Pounds", "US Dollars", "Euros"] 
-    = f.submit "Pay", :name => "pay"
+    =# f.submit "Pay", :name => "pay"
+    
+    %div{:class=>'modal-footer'}
+      %button{:class=>"btn", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Close
+      %button{:type=>"submit",:class=>"btn btn-primary"} Pay
+
     

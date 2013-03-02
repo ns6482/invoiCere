@@ -1,3 +1,4 @@
 $("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
-$('#new_comment').hide('slow').empty();
 $(".notice").fadeOut(3000);
+$('#interactive').modal('hide');
+

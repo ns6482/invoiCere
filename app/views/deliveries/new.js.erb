@@ -1,12 +1,5 @@
 
 $("#interactive").html("<%= escape_javascript(render("form")) %>").effect("slide");
-
-$('#cancel').bind('click', function() {
-  $('#new_delivery').hide('slow').empty();
-  return false;
- });
-
-
 $('#interactive').modal('show')
 
 

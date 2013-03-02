@@ -1,11 +1,13 @@
 - title "Users"
 %h3 System Logins
-%table
-  %tr
-    %th Email
-    %th Sign in count
-    %th Last sign in at
-  = render :partial => "user", :collection => @users
+%table{:class=>'table table-striped'}
+  %thead
+    %tr
+      %th Email
+      %th Sign in count
+      %th Last sign in at
+  %tbody
+    = render :partial => "user", :collection => @users
 %br
 %h3 Client Logins
 -if @clients.count > 0 

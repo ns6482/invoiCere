@@ -1,9 +1,17 @@
-= simple_form_for [@invoice,@comment], :html => {:remote => true } do |f|
-  = field_set_tag "Add Comment", :id => "form-main" do
-    =link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
-    =# f.error_messages
-    = f.input :title
-    = f.input :message, :input_html => { :rows => 3 }  
-  %button{:type=>"submit",:class=>"red"} Send
-  %br
-  %br
+%div{:class=>"modal-header"}
+  %button{:type=>"button", :class=>"close", 'data-dismiss'=>"modal",  'aria-hidden'=>"true"}
+    &times;
+  %h3 Send Message
+
+%div{:class=>'modal-body'}
+  = simple_form_for [@invoice,@comment], :html => {:remote => true } do |f|
+    = field_set_tag "Add Comment", :id => "form-main" do
+      =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
+      =# f.error_messages
+      = f.input :title
+      = f.input :message, :input_html => { :rows => 3 }  
+  
+      %div{:class=>'modal-footer'}
+        %button{:class=>"btn", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Close
+        %button{:type=>"submit",:class=>"btn btn-primary"} Add Comment
+

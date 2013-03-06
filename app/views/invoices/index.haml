@@ -18,12 +18,9 @@
   %li  
    -if can? :create, Invoice
     = link_to "New Invoice", new_invoice_path
-  %li
+  %li    
    -if can? :read, Schedule
     = link_to "Reoccuring Invoices", schedules_path
   %li
    -if can? :read, Invoice
     = link_to "Export", invoices_path(:format => 'csv')
-
-  
-  

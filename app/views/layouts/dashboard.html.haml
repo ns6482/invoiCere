@@ -18,7 +18,7 @@
       =h yield(:header)
   
     %ul{:class=>'nav nav-tabs'}
-      %li
+      %li{:class=> 'active'}
         =link_to 'Dashboard', root_path
       %li
         =link_to'Invoices', invoices_path, :if => Proc.new { can? :read, Invoice},   :link => {:remote => true}

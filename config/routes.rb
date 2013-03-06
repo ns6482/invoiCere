@@ -32,11 +32,13 @@ VisioInvoiceV3::Application.routes.draw do
    get "payments/confirm"
    post "payments/complete"
 
-
-
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     
-    resources :schedules#, :only => [:index, :new]
+    resources :schedules do
+      #resource :client, :only => [:new]
+    end#, :only => [:index, :new]
+    
+    
     resources :items do#, :only => [:new, :create, :index, :destroy]
       collection do
         delete :delete_multiple

@@ -184,10 +184,10 @@ $(document).ready(function() {
     {
 
         if (this.checked){
-            $("#reminder_custom_message_input").fadeOut(800);
+            $(".reminder_custom_message").fadeOut(800);
         }
         else {
-            $("#reminder_custom_message_input").fadeIn(800);
+            $(".reminder_custom_message").fadeIn(800);
         }
 
     }
@@ -197,12 +197,12 @@ $(document).ready(function() {
 
     $(document).on('click','#schedule_default_message', function()
     {
-
+    	
         if (this.checked){
-            $("#schedule_custom_message_input").fadeOut(800);
+            $(".schedule_custom_message").hide(800);
         }
         else {
-            $("#schedule_custom_message_input").fadeIn(800);
+            $(".schedule_custom_message").fadeIn(800);
         }
 
     }
@@ -251,7 +251,6 @@ $.fn.stars = function() {
 $(function() {
     $('span.stars').stars();
 });
-
 
 
 

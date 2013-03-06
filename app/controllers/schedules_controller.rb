@@ -14,7 +14,9 @@ class SchedulesController < BaseController
 
     #@schedule  = Schedule.new
     ##@schedule.client_id = params[:client_id]
-    #@client = current_company.clients.find(params[:client_id])
+    if params[:client_id]
+      @client = current_company.clients.find(params[:client_id])
+    end
     #@contacts = @client.contacts
     
     #@schedule.client = @client

@@ -2,24 +2,27 @@
 
 =content_for :right do 
   -if can? :update, Company
-    =link_to "Back to Settings", edit_company_path
+    =link_to "Back to Company and Payment Settings", edit_company_path
  
 =simple_form_for  @preference , :url => company_preference_path, :html => { :method => :put, :multipart => true  } do |f|
   = #f.error_messages
   =# f.input :currency_format, :collection => @countries, :label_html => {:class => "label_narrow"}, :include_blank => false
   =# country_options_for_select('All')
-
-  = f.input :currency_format, :priority => [ "Albania"], :collection => @countries, :label_html => {:class => "label_narrow"}
-  = f.input :date_format , :collection => @date_formats, :label_html => {:class => "label_narrow"}, :include_blank => false
-  = f.input :time_format, :label_html => {:class => "label_narrow"}, :collection => @time_formats, :label => "Time Format"
-  =# f.input :number_format, :label_html => {:class => "label_narrow"}
-  = f.input :fiscal, :collection => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], :label_html => {:class => "label_narrow"}, :include_blank => false
-  = f.input :payment_stub, :label_html => {:class => "label_narrow"}
-  = f.input :discount, :label_html => {:class => "label_narrow"}, :label => "Discount amount/perc"
-  = f.input :shipping, :label_html => {:class => "label_narrow"}, :label => "Shipping amount"
-  = f.input :purchase_order_number#, :label_html => {:class => "label_narrow"}
-  = f.input :email_alerts#, :label_html => {:class => "label_narrow"}
+  .row
+    .span5
+      = f.input :currency_format, :priority => [ "Albania"], :collection => @countries, :label_html => {:class => "input-block-level"}
+      = f.input :date_format , :collection => @date_formats, :label_html => {:class => "label_narrow"}, :include_blank => false
+      = f.input :time_format, :label_html => {:class => "label_narrow"}, :collection => @time_formats, :label => "Time Format"
+      = f.input :time_zone, priority: /UK/, :default => '(GMT+00:00) London', :allow_blank => false
+    =# f.input :number_format, :label_html => {:class => "label_narrow"}
+    .span5
+      = f.input :fiscal, :collection => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], :label_html => {:class => "label_narrow"}, :include_blank => false
+      = f.input :discount, :label_html => {:class => "label_narrow"}, :label => "Discount amount/perc"
+      = f.input :shipping, :label_html => {:class => "label_narrow"}, :label => "Shipping amount"
+      = f.input :payment_stub, :label => 'Show Payment Stub',  :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
+      = f.input :purchase_order_number, :label => 'Purchase Order Number Entry', :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'} 
+      = f.input :email_alerts,:label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}#, :label_html => {:class => "label_narrow"}
   #buttons
-    %button{:type=>"submit",:class=>"red"} Save
+  %button{:type=>"submit",:class=>"btn btn-primary pull-right"} Save Preferences
 
 

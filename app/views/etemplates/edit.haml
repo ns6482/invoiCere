@@ -9,28 +9,28 @@
 =simple_form_for  @etemplate , :url => company_etemplate_path, :html => { :method => :put, :multipart => true  } do |f|
 
   #tabs_etemplate
-    %ul
+    %ul{:class => "nav nav-tabs"}
       %li
-        %a{:href=> '#tabs-1'} Invoice Template
+        %a{:href=> '#tabs-1', 'data-toggle'=>"tab"} Invoice Template
       %li
-        %a{:href=> '#tabs-2'} Reminder Template
+        %a{:href=> '#tabs-2', 'data-toggle'=>"tab"} Reminder Template
       %li
-        %a{:href=> '#tabs-3'} Payment Template
+        %a{:href=> '#tabs-3', 'data-toggle'=>"tab"} Payment Template
             
     #tabs-1
       %h3 Invoice Email Template
-      = f.input :invoice_subject, :input_html => { :rows => 1 }, :label => "Subject"     
+      = f.input :invoice_subject, :input_html => { :rows => 1 , :class=> ''}, :label => "Subject"     
       %label Message     
       %br
       #template_setup
         %ul{:id => "lt-form"} 
           =render :partial => "placeholders_email"    
         #rt-form
-          = f.input :invoice_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+          = f.input :invoice_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
       %br
     #tabs-2
       %h3 Reminder Email Template
-      = f.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+      = f.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow input-block-level' }, :label => "Subject"
      
       %label Message     
       %br
@@ -38,11 +38,11 @@
         %ul{:id => "lt-form"}   
           =render :partial => "placeholders_payment"    
         #rt-form
-          = f.input :reminder_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+          = f.input :reminder_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
       %br
     #tabs-3
       %h3 Payment Thank you Email Template
-      = f.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow' }, :label => "Subject"
+      = f.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow input-block-level' }, :label => "Subject"
        
       %label Message     
       %br
@@ -50,6 +50,6 @@
         %ul{:id => "lt-form"}    
           =render :partial => "placeholders_reminder"    
         #rt-form
-          = f.input :paythank_message, :input_html => { :rows => 3, :class => 'autogrow' }, :label => false
+          = f.input :paythank_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
  
-    %button{:type=>"submit",:class=>"red"} Save
+    %button{:type=>"submit",:class=>"btn btn-large btn-primary pull-right"} Save

@@ -13,7 +13,7 @@
     = f.input :send_to_client, :as => :boolean, :label=> @invoice.client.company_name    
     = f.association :contacts, :collection => @contacts, :as => :check_boxes, :label => "Send To"
     =# f.input :contacts, :as => :check_boxes, :collection => @invoice.client.contacts, :label => "Send To Client Contacts"
-    = f.input :enabled,   :as => :boolean
+    = f.input :enabled,   :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
     %p
       %button{:type=>"submit",:class=>"red"} Update Schedule    
 

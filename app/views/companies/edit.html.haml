@@ -1,4 +1,4 @@
--title "Edit Company"
+-title "Edit Your Company Details and Payment Settings"
 
 = javascript_include_tag  "template_setup.js"
 
@@ -25,45 +25,36 @@
   =field_set_tag 'Settings', :id =>"tabs-1" do
     =f.simple_fields_for :setting do |s|
       = s.error_messages
-      = s.input :logo, :as => :file, :label_html => {:class => "label_narrow"}
-
-      %br
-      = s.input :company_name, :label_html => {:class => "label_narrow"}
-
-      
-      %br
-      = s.input :company_registration, :label_html => {:class => "label_narrow"}
-
-      
-      %br
-      
-      = s.input :vat, :label_html => {:class => "label_narrow"}
-
-      = s.input :vat_registration, :label_html => {:class => "label_narrow"}
-
-      
-      %br
-      
-      = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }, :label_html => {:class => "label_narrow"}
-
-      = s.input :telephone, :label_html => {:class => "label_narrow"}
-
-      = s.input :fax, :label_html => {:class => "label_narrow"}
-
-      = s.input :email, :label_html => {:class => "label_narrow"}
-
-      = s.input :payment_instructions_1, :input_html => { :rows => 3, :class => 'autogrow' }, :label_html => {:class => "label_narrow"}
+      .row
+        .span5
+          = s.input :logo, :as => :file, :label_html => {:class => "label_narrow"}
+          = s.input :company_name, :label_html => {:class => "label_narrow"}
+          = s.input :company_registration, :label_html => {:class => "label_narrow"}
+        .span5  
+          = s.input :vat, :label_html => {:class => "label_narrow"}
+          = s.input :vat_registration, :label_html => {:class => "label_narrow"}  
+      .row
+        .span5
+          = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }, :label_html => {:class => "label_narrow"}
+        .span5
+          = s.input :telephone, :label_html => {:class => "label_narrow"}
+          = s.input :fax, :label_html => {:class => "label_narrow"}
+          = s.input :email, :label_html => {:class => "label_narrow"}
+      .row
+        = s.input :payment_instructions_1, :input_html => { :rows => 2, :class => 'autogrow input-block-level' }, :label_html => {:class => "label_narrow"}
 
       =field_set_tag 'Payment Managment', :id =>"tabs-2" do
-        %h3 GoCardless        
-        = s.input :pay_gc_token, :label_html => {:class => "label_narrow"}
-        = s.input :pay_gc_enabled, :as => :boolean, :label_html => {:class => "label_narrow"}
-        = link_to 'Setup GoCardless Account', gocardless_setup_merchant_path
-        %p
-        %h3 Paypal        
-        = s.input :paypal_login, :label_html => {:class => "label_narrow"}
-        = s.input :paypal_sig, :label_html => {:class => "label_narrow"}
-        = s.input :paypal_pwd, :label_html => {:class => "label_narrow"}
-        = s.input :paypal_enabled, :as => :boolean, :label_html => {:class => "label_narrow"}
+        .row
+          .span3
+            %h3 GoCardless        
+            = s.input :pay_gc_token, :label_html => {:class => "label_narrow"}
+            = s.input :pay_gc_enabled, :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
+            = link_to 'Setup GoCardless Account', gocardless_setup_merchant_path
+          .span3
+            %h3 Paypal        
+            = s.input :paypal_login, :label_html => {:class => "label_narrow"}
+            = s.input :paypal_sig, :label_html => {:class => "label_narrow"}
+            = s.input :paypal_pwd, :label_html => {:class => "label_narrow"}
+            = s.input :paypal_enabled, :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
         
       %button{:type=>"submit",:class=>"red"} Save

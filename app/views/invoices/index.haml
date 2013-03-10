@@ -14,13 +14,13 @@
   = link_to " now", new_invoice_path  
 
 =content_for :right do
- %ul
-  %li  
-   -if can? :create, Invoice
-    = link_to "New Invoice", new_invoice_path
-  %li    
-   -if can? :read, Schedule
-    = link_to "Reoccuring Invoices", schedules_path
-  %li
-   -if can? :read, Invoice
-    = link_to "Export", invoices_path(:format => 'csv')
+ %div{:class => 'btn-group btn-group-vertical'}
+ 
+  -if can? :create, Invoice
+   = link_to "New Invoice", new_invoice_path, :class => 'btn btn-primary'
+    
+  -if can? :read, Schedule
+   = link_to "Reoccuring Invoices", schedules_path, :class => 'btn'
+ 
+  -if can? :read, Invoice
+   = link_to "Export to CSV", invoices_path(:format => 'csv'), :class => 'btn'

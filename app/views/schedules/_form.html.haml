@@ -25,10 +25,11 @@
           = f.submit "Send to clients contacts...", :name => "send_contacts"
       -#else 
         =# f.submit "Send to clients contacts...", :name => "send_contacts"
-      = f.input :enabled,   :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}, :label => "Enabled", :include_blank => false
       = f.input :draft_only,  :as => :boolean, :wrapper_html => {:class => 'checkbox'}, :label_html => { :class => 'checkbox' }, :label => "Email as draft", :include_blank => false
-      %span{:class => 'help-block'}
-        Otherwise invoice will be in open state
+      %span{:class => 'help-block'} Otherwise invoice will be in open state
+
+      = f.input :enabled,   :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}, :label => "Enabled", :include_blank => false
+
   = field_set_tag "Invoice Setup" do #,   :id => "form-main" do
   
     %div{:id => "form-top", :class => "invoice form-height-long span6"}             

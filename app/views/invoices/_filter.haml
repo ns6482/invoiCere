@@ -1,6 +1,7 @@
 #filter_link
-  %a{:href=>"javascript:void(0)"}
-    Show/Hide Filter
+  %a{:href=>"javascript:void(0)", :class => 'btn','data-toggle'=>"button"}
+    Filter
+    %i{:class=>"icon-search"}
   %br
 #filter_box
   = simple_form_for @search, :js_lib => :jquery, :html => {:remote => true} do |f|

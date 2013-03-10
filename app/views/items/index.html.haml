@@ -4,8 +4,8 @@
 
  =form_tag delete_multiple_items_path, :method => :delete, :remote => true do
   -if can? :delete, Item
-   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?'
-   %table{:class => "table-main"}
+   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+   %table{:class => "table table-striped"}
     %thead
      %tr
       %th

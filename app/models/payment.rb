@@ -43,6 +43,8 @@ class Payment < ActiveRecord::Base
   def check_if_paid
     if self.invoice.remaining_amount ==0 and self.invoice.state == "open" 
       self.invoice.pay!
+    else
+      Invoice.update_all("due_amount = #{self.invoice.remaining_amount}","id=#{self.invoice.id}")
     end
   end
   

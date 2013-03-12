@@ -126,7 +126,7 @@ class Invoice < ActiveRecord::Base
   def formatted_state
     val = ""
     if state == "open" and due
-      val = "Payment Due"
+      val = "Due"
     elsif state == "draft"
       val = "Draft"
     elsif state == "open"
@@ -134,6 +134,19 @@ class Invoice < ActiveRecord::Base
     else
       val = "Completed"
     end
+    val
+  end
+  
+   def formatted_state_badge
+    val = ""
+    if state == "open" and due
+      val = "badge-important"
+    elsif state == "draft"
+      val = "badge-info"
+    elsif state == "open"
+      val = "badge-success"
+    end
+    
     val
   end
 

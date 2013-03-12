@@ -8,7 +8,8 @@
       %th=sort_link @search, :title, "Title", {}, :remote => "true"      
       %th=sort_link @search, :state, "Status", {}, :remote => "true"
       %th=sort_link @search, :due_days, "Due Days" , {}, :remote => "true"
-      %th=sort_link @search, :total_cost_inc_tax_delivery, "Total Cost", {}, :remote => "true" 
+      %th=sort_link @search, :total_cost_inc_tax_delivery, "Amount", {}, :remote => "true" 
+      %th=sort_link @search, :due_amount, "Due", {}, :remote => "true"
       %th
   %tbody{:id => "invoices-body"}
     =render :partial => "invoices/invoice", :collection => @invoices

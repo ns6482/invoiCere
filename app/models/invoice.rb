@@ -86,7 +86,7 @@ class Invoice < ActiveRecord::Base
   
   def _total_cost
     total = self.invoice_items.find(:all,:select => "SUM(qty*cost) as total_cost")
-    @total = discountize(total.first.total_cost)    
+    @total = discountize(total.first.total_cost).to_i    
   end
 
 
@@ -101,24 +101,24 @@ class Invoice < ActiveRecord::Base
     end
     
     total_tax = self.invoice_items.find_all_by_taxable(true,:select => "SUM(qty*(cost*#{tax})) as total_cost")
-    @total_tax = total_tax.first.total_cost.to_f
-    @total_cost_inc_tax = @total_tax.to_f
+    @total_tax = total_tax.first.total_cost.to_i
+    @total_cost_inc_tax = @total_tax.to_i
     
     total = self.invoice_items.find_all_by_taxable([false, nil],:select => "SUM(qty*cost) as total_cost")
-    @total_cost_no_tax = total.first.total_cost.to_f
+    @total_cost_no_tax = total.first.total_cost.to_i
 
     @total_cost_inc_tax = @total_cost_no_tax + @total_cost_inc_tax
-    discountize(@total_cost_inc_tax)
+    discountize(@total_cost_inc_tax).to_i
   end
 
   def _total_cost_inc_tax_delivery
-    self.delivery_charge.to_f + self._total_cost_inc_tax
+    self.delivery_charge.to_i + self._total_cost_inc_tax.to_i
   end
 
   def update_invoice_totals    
-    self.total_cost = self._total_cost.to_f
-    self.total_cost_inc_tax = self._total_cost_inc_tax
-    self.total_cost_inc_tax_delivery = self._total_cost_inc_tax_delivery
+    self.total_cost = self._total_cost.to_i
+    self.total_cost_inc_tax = self._total_cost_inc_tax.to_i
+    self.total_cost_inc_tax_delivery = self._total_cost_inc_tax_delivery.to_i
 
     Invoice.update_all("total_cost = #{self.total_cost}, total_cost_inc_tax = #{self.total_cost_inc_tax}, total_cost_inc_tax_delivery = #{self.total_cost_inc_tax_delivery}","id=#{self.id}")
   end
@@ -152,14 +152,15 @@ class Invoice < ActiveRecord::Base
 
   def remaining_amount
     
-    total_payments = Payment.sum(:amount, :conditions => "invoice_id = #{self.id} and status = 'paid'")
+    total_payments = Payment.sum(:amount, :conditions => "invoice_id = #{self.id} and status in('paid','processing')")
     
     val = self.total_cost_inc_tax_delivery
 
     if !total_payments.nil?
       val = val - total_payments    
     end
-    self.remaining_amount = val.round(2)
+    
+    val#.round(2)
     
   end
 
@@ -171,12 +172,12 @@ class Invoice < ActiveRecord::Base
     
     if !self.discount.nil? and self.discount != "" #and !val.nil?
 
-      discount_calc= self.discount.gsub(/\%/, "").to_f
+      discount_calc= self.discount.gsub(/\%/, "")
  
       if self.discount.include? "%"
-        val = val - (val * (discount_calc/100))
+        val = val.to_d - (val.to_d * (discount_calc.to_d/100).to_d).to_i
       else
-        val = val - discount_calc
+        val = val.to_d - discount_calc.to_d
       end
     
     end

@@ -3,7 +3,7 @@ one:
   item_type: MyString
   item_description: MyString
   qty: 9.99
-  cost: 9.99
+  cost: 999
   taxable: true
 
 two:
@@ -11,5 +11,5 @@ two:
   item_type: MyString
   item_description: MyString
   qty: 9.99
-  cost: 9.99
+  cost: 999
   taxable: false

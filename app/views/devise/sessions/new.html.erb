@@ -1,6 +1,6 @@
 <h2>Sign in</h2>
 
-<%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name) do |f| %>
+<%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name), :class=> 'form-horizontal' do |f| %>
   <%= field_set_tag 'Enter your Login Credentials' do %>
 
     <%= f.input :email, :label_html=>{:class => "label_narrow"} %>
@@ -14,7 +14,7 @@
     <% end %>
 
     <% if devise_mapping.rememberable?%>
-      <%= f.input :remember_me, :as => :radio_buttons, :label_html => {:class => "label_narrow"}%>
+      <%= f.input :remember_me, :as => :radio_buttons, :label_html => {:class => "checkbox"}, :input_html => {:class => 'checkbox'}, :wrapper_html => {:class => 'checkbox'}%>
     <% end%>
 
 	<div id="buttons">

@@ -11,8 +11,8 @@ one:
   title: MyString
   notes: MyText
   tax_rate: 9.99
-  delivery_charge: 9.99
+  delivery_charge: 999
   business_id: MyString
   purchase_order_id: MyString
-  late_fee: 9.99
+  late_fee: 999
 

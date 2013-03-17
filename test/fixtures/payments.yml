@@ -1,13 +1,13 @@
 one:
   invoice_id: 1
   user_id: 1
-  amount: 10
+  amount: 1000
   payment_type: MyString
   currency: MyString
 
 two:
   invoice_id: 1
   user_id: 1
-  amount: 20
+  amount: 2000
   payment_type: MyString
   currency: MyString

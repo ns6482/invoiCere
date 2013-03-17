@@ -101,10 +101,14 @@ class PaymentTest < ActiveSupport::TestCase
      assert_equal(100, @invoice.remaining_amount)
 
      @payment = FactoryGirl.build(:payment, :amount=> 50, :invoice_id => @invoice.id)
-     assert @payment.save
-
-     assert_equal(50, @invoice.remaining_amount)
+     assert @payment.save!
+     
      assert_equal 1,  @invoice.payments.count
+     assert_equal(50, Payment.sum(:amount, :conditions => "invoice_id = #{@invoice.id}")) #and status = 'paid'"))
+     assert_equal(100,@invoice.total_cost_inc_tax_delivery)
+
+     assert_equal('processing', @payment.status)
+     assert_equal(50, @invoice.remaining_amount)
 
      @payment = FactoryGirl.build(:payment, :amount=> 30, :invoice_id => @invoice.id)
      assert @payment.save!

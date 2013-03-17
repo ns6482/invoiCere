@@ -16,4 +16,7 @@
   %td
     -if can? :update, invoice
       = link_to '<i class="icon-edit"></i> '.html_safe, edit_invoice_path(invoice), :class => 'btn'
+      =# link_to '<i class="icon-edit"></i> Copy'.html_safe, new_invoice_path(:id => invoice.id), :class => 'btnss'
+
+  
   

@@ -5,7 +5,7 @@
 -if @invoices.count > 0
  =form_tag delete_multiple_invoices_path, :method => :delete, :remote => true do
   -if can? :delete, Invoice
-   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-small btn-danger'
   
   =render :partial=> "invoices" 
 -else
@@ -17,7 +17,7 @@
  %div{:class => 'btn-group btn-group-vertical'}
  
   -if can? :create, Invoice
-   = link_to "New Invoice", new_invoice_path, :class => 'btn btn-primary'
+   = link_to '<i class="icon-plus icon-white"></i> New Invoice'.html_safe, new_invoice_path, :class => 'btn btn-primary'
     
   -if can? :read, Schedule
    = link_to "Reoccuring Invoices", schedules_path, :class => 'btn'

@@ -71,21 +71,21 @@ class InvoiceTest < ActiveSupport::TestCase
    @invoice.run_callbacks(:save)
   
    assert_equal(2,@invoice.invoice_items.length)
-   assert_equal(19.98,@invoice.total_items)  
-   assert_equal("199.6002",@invoice._total_cost.to_s)    
-   assert_equal("209.57022999",@invoice._total_cost_inc_tax.to_s)
+   assert_equal("2.5",@invoice.total_items.to_s)  
+   assert_equal(250,@invoice._total_cost)    
+   assert_equal(290,@invoice._total_cost_inc_tax)
 
-   total_cost_inc_tax_delivery = @invoice.delivery_charge.to_f + 209.57022999
-   assert_equal(total_cost_inc_tax_delivery.to_s,@invoice._total_cost_inc_tax_delivery.to_s)
+   total_cost_inc_tax_delivery = @invoice.delivery_charge.to_i + @invoice._total_cost_inc_tax
+   assert_equal(total_cost_inc_tax_delivery,@invoice._total_cost_inc_tax_delivery)
 
-   assert_equal("189.56", @invoice.remaining_amount.to_s)
+   assert_equal(305, @invoice.remaining_amount)
 
   end
   
   def test_discount_validation
 
     @invoice = invoices(:one)#Invoice.create( :tax_rate => 17.5, :title => "test", :invoice_date =>"01/01/2010", :client_id => 1)
-    @invoice.discount = "10.12"
+    @invoice.discount = "1012"
     assert @invoice.save
     
     @invoice.discount = "10%"
@@ -109,16 +109,16 @@ class InvoiceTest < ActiveSupport::TestCase
     
    @invoice.invoice_items << item1
    @invoice.invoice_items << item2
-   @invoice.discount = "9.00"
+   @invoice.discount = "10.00"
     
    @invoice.save
    #@invoice.run_callbacks(:after_save)
    @invoice.run_callbacks(:save)
   
    assert_equal(2,@invoice.invoice_items.length)
-   assert_equal(19.98,@invoice.total_items)  
-   assert_equal("190.6002",@invoice._total_cost.to_s)    
-   assert_equal("200.57022999",@invoice._total_cost_inc_tax.to_s)
+   assert_equal("2.5",@invoice.total_items.to_s)  
+   assert_equal("240",@invoice._total_cost.to_s)    
+   assert_equal("280",@invoice._total_cost_inc_tax.to_s)
 
   end
   
@@ -138,8 +138,8 @@ class InvoiceTest < ActiveSupport::TestCase
    #@invoice.run_callbacks(:after_save)
    @invoice.run_callbacks(:save)
   
-   assert_equal("179.64018",@invoice._total_cost.to_s)    
-   assert_equal("188.613206991",@invoice._total_cost_inc_tax.to_s)
+   assert_equal("225",@invoice._total_cost.to_s)    
+   assert_equal("261",@invoice._total_cost_inc_tax.to_s)
 
   end
 
@@ -167,7 +167,7 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal("Draft",draft_invoice.formatted_state)
     assert_equal("Open",open_invoice.formatted_state)
     assert_equal("Completed",completed_invoice.formatted_state)
-    assert_equal("Payment Due", overdue_invoice.formatted_state)
+    assert_equal("Due", overdue_invoice.formatted_state)
   
   end
 

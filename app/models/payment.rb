@@ -12,7 +12,6 @@ class Payment < ActiveRecord::Base
 
   before_validation :set_if_full_amount
   before_save :set_if_full_amount
-  before_save :set_status
   after_save :check_if_paid
   
   after_destroy :update_invoice_when_deleted
@@ -64,10 +63,6 @@ class Payment < ActiveRecord::Base
 
   end
   
-  def set_status
-    self.status = "processing"
-  end
-
   
 
   #TODO - on delete need to reset to open invoice

@@ -95,6 +95,7 @@ FactoryGirl.define do
    amount 5
    payment_type "cheque"
    currency "sterling"
+   status "paid"
   end
 
   factory :schedule do 

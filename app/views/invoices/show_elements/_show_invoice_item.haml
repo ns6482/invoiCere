@@ -1,9 +1,14 @@
 %tr{:class=>"show_fields"}
  %td= h show_invoice_item.item_description
  %td= h show_invoice_item.qty
- %td= h show_invoice_item.cost
+ %td
+  = currency_symbol
+  = h show_invoice_item.cost_cents
  %td= h show_invoice_item.item_type
- %td= h show_invoice_item.line_cost_inc_tax
+ 
+ %td
+  = currency_symbol
+  = h show_invoice_item.line_cost_inc_tax_cents
  %td
   = h show_invoice_item.show_tax
   =# h number_to_percentage(show_invoice_item.invoice.tax_rate, :precision => 2)

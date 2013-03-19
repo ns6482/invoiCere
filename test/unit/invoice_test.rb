@@ -2,7 +2,6 @@ require 'test_helper'
 require 'mocha'
 require 'delorean'
 
-
 class InvoiceTest < ActiveSupport::TestCase
 
 

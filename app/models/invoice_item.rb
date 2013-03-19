@@ -6,6 +6,10 @@ class InvoiceItem < ActiveRecord::Base
 
   attr_protected :id
 
+  monetize :cost, :as => "cost_cents"
+  monetize :line_cost_inc_tax, :as => "line_cost_inc_tax_cents"
+
+
   def company_id
     self.invoice.company_id
   end

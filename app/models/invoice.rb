@@ -80,6 +80,13 @@ class Invoice < ActiveRecord::Base
   after_save :update_invoice_totals
   after_create :setup_reminder
 
+
+  monetize :delivery_charge, :as => "delivery_charge_cents"
+  monetize :total_cost, :as => "total_cost_cents"
+  monetize :total_cost_inc_tax, :as => "total_cost_inc_tax_cents"
+  monetize :total_cost_inc_tax_delivery, :as => "total_cost_inc_tax_delivery_cents"
+  monetize :remaining_amount, :as => "remaining_amount_cents"
+
   def total_items
     self.invoice_items.sum(:qty)
   end
@@ -152,7 +159,7 @@ class Invoice < ActiveRecord::Base
 
   def remaining_amount
     
-    total_payments = Payment.sum(:amount, :conditions => "invoice_id = #{self.id} and status in('paid','processing')")
+    total_payments = Payment.sum(:amount, :conditions => "invoice_id = #{self.id} and status = 'paid'")
     
     val = self.total_cost_inc_tax_delivery
 
@@ -164,6 +171,7 @@ class Invoice < ActiveRecord::Base
     
   end
 
+ 
 
 
   private
@@ -177,7 +185,7 @@ class Invoice < ActiveRecord::Base
       if self.discount.include? "%"
         val = val.to_d - (val.to_d * (discount_calc.to_d/100).to_d).to_i
       else
-        val = val.to_d - discount_calc.to_d
+        val = (val.to_d) - discount_calc.to_d
       end
     
     end
@@ -213,6 +221,7 @@ class Invoice < ActiveRecord::Base
     false
   end
 
+  
 
   def clear_all_payments
     Payment.delete_all(:invoice_id => self.id)

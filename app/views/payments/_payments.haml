@@ -25,7 +25,9 @@
                 = check_box_tag "payment_ids[]", payment.id
             %td= h payment.created_at.strftime('%Y-%m-%d %H:%M:%S')
             %td= h payment.user.email
-            %td= h number_to_currency(payment.amount, :unit => '£', :separator => ".", :delimiter => ",")
+            %td
+              = currency_symbol 
+              = h payment.amount_cents
             %td= h payment.payment_type
             %td= h payment.currency
             %td= h payment.status

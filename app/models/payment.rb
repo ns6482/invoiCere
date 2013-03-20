@@ -18,6 +18,7 @@ class Payment < ActiveRecord::Base
   after_update  :update_invoice_when_status
   #after_destroy :reopen
 
+  monetize :amount, :as => "amount_cents"
   
   def overpaid? 
     unless amount.nil?

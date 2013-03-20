@@ -6,26 +6,27 @@
       =f.error_messages
            
       %div{:id => "form-top", :class => "invoice form-height-long span6"}
-
+        %div{:class => 'row'}
+          .span3
+            = f.input :business_id, :label => "Your ID", :input_html => {:class => ""}, :wrapper_html => {:class => ''}
+          .span3
+            -if current_company.preference.purchase_order_number =1
+              = f.input :purchase_order_id, :label => "Purchase Order ID", :input_html => {:class => ""}, :wrapper_html => {:class => ''}
+        .row
         = f.input :title, :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
-        = f.input :invoice_date, :label => "Date", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-medium'}
         = f.association :client, :collection => current_company.clients.accessible_by(current_ability), :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
-        = f.input :business_id, :label => "Your ID", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
+        = f.input :invoice_date, :label => "Date", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-medium'}
+
+        = f.input :currency
         
-        -if current_company.preference.purchase_order_number =1
-          = f.input :purchase_order_id, :label => "Purchase Order ID", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
- 
- 
- 
- 
       %div{:id => "form-right", :class => "invoice form-height-long span2"}
         .fields
           = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
           = f.input :delivery_charge_cents, :input_html => {:size => 1}, :label => "Shipping", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
-          = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
+          = f.input :late_fee_cents, :input_html => {:size => 1}, :label => "Late Fee", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
           = f.input :due_days, :input_html => {:size => 1}, :label => "Due Days", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
           = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
-        
+
       #form-main{:class=>'span10'}
 
         .fields

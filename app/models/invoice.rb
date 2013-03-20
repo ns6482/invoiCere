@@ -86,7 +86,8 @@ class Invoice < ActiveRecord::Base
   monetize :total_cost_inc_tax, :as => "total_cost_inc_tax_cents"
   monetize :total_cost_inc_tax_delivery, :as => "total_cost_inc_tax_delivery_cents"
   monetize :remaining_amount, :as => "remaining_amount_cents"
-
+  monetize :late_fee, :as => "late_fee_cents"
+  
   def total_items
     self.invoice_items.sum(:qty)
   end

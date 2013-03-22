@@ -6,7 +6,8 @@ require 'prawn/layout'
 class InvoicesController < BaseController
   before_filter :get_clients, :only => [:index, :new, :edit]
   before_filter :find_invoice, :only => [:show, :edit, :destroy, :update]
-  before_filter :get_countries, :only => [:edit, :new]
+  #before_filter :get_countries, :only => [:edit, :new]
+  before_filter :get_currencies, :only => [:edit, :new]
 
   load_and_authorize_resource
   def index
@@ -213,4 +214,20 @@ class InvoicesController < BaseController
 
   end
 
-end
+  def get_currencies
+    @currencies = all_currencies(Money::Currency.table)
+  end
+
+  # Returns an array of all currency id
+  def all_currencies(hash)
+  hash.inject([]) do |array, (id, attributes)|
+      priority = attributes[:priority]
+      if priority && priority < 40
+        array[priority] ||= []
+        array[priority] << id.to_currency
+      end
+      array
+  end.compact.flatten
+  end
+
+  end

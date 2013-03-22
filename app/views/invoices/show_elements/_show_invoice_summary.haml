@@ -3,8 +3,7 @@
   %td
    %strong Subtotal:
   %td
-   = currency_symbol
-   = @invoice.total_cost_cents
+   = csymb @invoice.currency, @invoice.total_cost_cents
  
  %tr
   %td

@@ -19,7 +19,7 @@
     %td=h @invoice.client.company.preference.convert_date(@invoice.due_date)
    %tr
     %th Currency
-    %td=h @invoice.client.company.preference.currency_format
+    %td=h @invoice.currency
    %tr
     %th Client Info 
     %td
@@ -50,7 +50,7 @@
      This invoice is due in
      %strong= pluralize(@invoice.due_days, 'day')
      , the late fee is set to
-     %strong= h @invoice.late_fee#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+     %strong= h @invoice.late_fee_cents#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
      
   #invoice-time-now
    Printed on  

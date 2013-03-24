@@ -1,10 +1,8 @@
 class PreferencesController < BaseController
   load_and_authorize_resource
 
-  before_filter :get_preference
-
-
-
+  before_filter :get_preference, :get_currencies
+  
 
   def get_preference
         @preference = current_company.preference
@@ -36,6 +34,10 @@ class PreferencesController < BaseController
     else
       render :action => "edit"
     end
+  end
+  
+    def get_currencies
+    @currencies = all_currencies(Money::Currency.table)
   end
   
   

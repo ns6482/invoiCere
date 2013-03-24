@@ -49,9 +49,10 @@
     %p
      This invoice is due in
      %strong= pluralize(@invoice.due_days, 'day')
-     , the late fee is set to
-     %strong= h @invoice.late_fee_cents#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
-     
+     -if @invoice.late_fee > 0
+      , the late fee is set to
+      %strong= h csymb @curr, @invoice.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+   
   #invoice-time-now
    Printed on  
    =@invoice.client.company.preference.convert_datetime(Time.now)

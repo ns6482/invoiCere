@@ -1,10 +1,6 @@
 !!!
 %html{html_attrs(lang = 'en')}
-  %body{:class => "two-col bp"}
-    #container
-      #dashboard-content
-        #dashboard-centre
-          =yield
-      #footer= render 'layouts/footer'
+  %body
+    =yield
     
 

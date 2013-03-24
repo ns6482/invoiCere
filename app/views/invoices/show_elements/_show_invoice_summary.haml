@@ -2,15 +2,11 @@
  %tr
   %td
    %strong Subtotal:
-  %td
-   = csymb @invoice.currency, @invoice.total_cost_cents
- 
+  %td= h csymb @curr, @invoice.total_cost_cents, @dae
  %tr
   %td
    %strong Subtotal inc Tax:
-  %td
-   = currency_symbol
-   = @invoice.total_cost_inc_tax_cents
+  %td= h csymb @curr, @invoice.total_cost_inc_tax_cents, @dae
  -if !@invoice.discount.nil? and @invoice.discount.length >0 
 
   %tr
@@ -19,24 +15,18 @@
     -if @invoice.discount.include? "%"
      %td= h @invoice.discount
     -else 
-     %td
-      = currency_symbol
-      = h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => ","       
+     %td= h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => ","       
  %tr
   %td
    %strong Delivery:
-  %td
-   = currency_symbol
-   = h @invoice.delivery_charge_cents#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
+  %td= h csymb @curr,  @invoice.delivery_charge_cents, @dae#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
  %tr
   %td
    %strong Total:
   %td
-   %strong= currency_symbol
-   %strong= h @invoice.total_cost_inc_tax_delivery_cents#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
+   %strong= h csymb @curr, @invoice.total_cost_inc_tax_delivery_cents, @dae#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
  %tr
   %td
    %strong Payment Due:
   %td
-   %strong= currency_symbol
-   %strong= h @invoice.remaining_amount_cents #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","
+   %strong= h csymb @curr,  @invoice.remaining_amount_cents, @dae #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","

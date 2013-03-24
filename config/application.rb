@@ -62,5 +62,10 @@ module VisioInvoiceV3
     
     
     config.sass.preferred_syntax = :sass
+    
+    config.to_prepare do
+      ActionMailer::Base.helper "application"
+    end
+
   end
 end

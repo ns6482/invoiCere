@@ -21,5 +21,18 @@ class BaseController < ApplicationController
       authenticate_user!
     end
   end
+  
+  # Returns an array of all currency id
+  def all_currencies(hash)
+  hash.inject([]) do |array, (id, attributes)|
+      priority = attributes[:priority]
+      if priority && priority < 40
+        array[priority] ||= []
+        array[priority] << id.to_currency
+      end
+      array
+  end.compact.flatten
+  end
+
 
 end

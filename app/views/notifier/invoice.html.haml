@@ -1,9 +1,98 @@
-%h1
-  Welcome to
-  = @client.company_name
-#message
-  -if !@delivery.message.nil?
-    =raw RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html
-    
-#details
-  = render :partial => "invoices/show_elements/show_core", :object => :invoice
+%h1 
+ Welcome to
+ = @client.company_name
+-if !@delivery.message.nil?
+ %table
+  %tr
+   %td
+    =raw RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html   
+
+%table{:cellpadding=>"1", :cellspacing=>"5", :border=>"0", :id=>"summaryTable"}
+ %tr
+  %th{:width => '50', :align => 'left'} ID
+  %th{:width => '50', :align => 'left'} Your ID
+  %th{:width => '50', :align => 'left'} Purchase Order
+  %th{:width => '100', :align => 'left'} Date
+  %th{:width => '100', :align => 'left'} Due
+  %th{:width => '50', :align => 'left'} Currency
+ %tr
+  %td 
+   %strong= h @invoice.id
+  %td= h @invoice.business_id
+  %td= h @invoice.purchase_order_id
+  %td= h @invoice.client.company.preference.convert_date(@invoice.invoice_date)
+  %td= h @invoice.client.company.preference.convert_date(@invoice.due_date)
+  %td= h @invoice.currency
+
+%h3= h @invoice.title
+
+%table{:cellpadding=>"1", :cellspacing=>"5", :border=>"0", :id=>"clientTable"}
+ %tr{:width=> '450', :align => 'left'}
+  %th Your Address 
+  %td
+   %strong= @invoice.client.name
+   =render :partial => "clients/address", :locals => {:client => @invoice.client}
+
+%h3 Items
+
+%table{:cellpadding=>"1", :cellspacing=>"5", :border=>"0", :id=>"invoiceItems"}
+ %thead
+  %tr
+   %th{:width => '100', :align => 'left'} Item
+   %th{:width => '50', :align => 'left'} Qty
+   %th{:width => '50', :align => 'left'} Unit Price
+   %th{:width => '50', :align => 'left'} Unit
+   %th{:width => '50', :align => 'left'} Total
+   %th{:width => '50', :align => 'left'} Tax
+ %tbody
+  - #TODO integrate dae local variable form preferences page
+  =render :partial => "invoice_item", :collection => @invoice.invoice_items, :as => :show_invoice_item, :locals => { :dae => false }
+
+%h3 Summary
+
+%table{:id=>"invoiceSummary"}
+ %tr{:width => '50', :align => 'left'}
+  %td
+   %strong Subtotal:
+  %td= h csymb @invoice.currency, @invoice.total_cost_cents, false
+ %tr{:width => '50', :align => 'left'}
+  %td
+   %strong Subtotal inc Tax:
+  %td= h csymb @invoice.currency, @invoice.total_cost_inc_tax_cents, false
+ -if !@invoice.discount.nil? and @invoice.discount.length >0 
+  %tr{:width => '50', :align => 'left'}
+   %td
+    %strong Discount:
+    -if @invoice.discount.include? "%"
+     %td= h @invoice.discount
+    -else 
+     %td= h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => ","       
+ %tr{:width => '50', :align => 'left'}
+  %td
+   %strong Delivery:
+  %td= h csymb @invoice.currency,  @invoice.delivery_charge_cents, false#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
+ %tr{:width => '50', :align => 'left'}
+  %td
+   %strong Total:
+  %td
+   %strong= h csymb @invoice.currency, @invoice.total_cost_inc_tax_delivery_cents, false#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
+ %tr{:width => '50', :align => 'left'}
+  %td
+   %strong Payment Due:
+  %td
+   %strong= h csymb @invoice.currency,  @invoice.remaining_amount_cents, false #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","
+ 
+%table{:id => 'footer'}
+ %tr
+  %td   
+   %strong Notes
+   =h @invoice.notes
+  -if @invoice.late_fee
+   #invoice-footer-late-fee
+    %p
+     This invoice is due in
+     %strong= pluralize(@invoice.due_days, 'day')
+     -if @invoice.late_fee > 0
+      , the late fee is set to
+      %strong= h csymb @curr, @invoice.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+   

@@ -17,6 +17,17 @@ def add_page_break_if_overflow (&block)
   end
 end
 
+def csymb(sym, val, display_at_end = false)
+    return unless val
+    
+    if !display_at_end 
+      result = sym.to_currency.symbol + val.to_s
+    else
+      result = val.to_s + sym.to_currency.symbol
+    end
+    
+    result    
+end
 
 
 
@@ -27,6 +38,8 @@ def initialize(invoice)
   @invoice = invoice
   @current_company = @invoice.client.company
   @content = ""
+  @curr = @invoice.currency
+  @dae = false
   super(:page_layout => :portrait, :page_size => "A4", :margin => [25,25,25,25])
 end
 
@@ -97,7 +110,9 @@ def to_pdf
     if @current_company.setting.logo?
       image open("http://#{request.host_with_port}#{@current_company.setting.logo.url}"), :fit => [80, 80], :align => :left, :valign => :top
     end
-
+   
+   move_down 0.5
+   
    text "#{@current_company.setting.company_name}", :size => 14, :align => :center,  :style => :bold
    text "#{@current_company.setting.address}", :size => 8, :align => :center
    text company_contact, :size => 8, :align => :center  
@@ -119,7 +134,7 @@ def to_pdf
    items =
    [
    ["Invoice ID","Your ID", "Purchase Order ID", "Invoice Date", "Due Date", "Currency"],
-   [@invoice.id,@invoice.business_id,@invoice.purchase_order_id,@current_company.preference.convert_date(@invoice.invoice_date), current_company.preference.convert_date(@invoice.due_date), current_company.preference.currency_format]
+   [@invoice.id,@invoice.business_id,@invoice.purchase_order_id,@current_company.preference.convert_date(@invoice.invoice_date), current_company.preference.convert_date(@invoice.due_date), @invoice.currency]
    ]
 
    header_table = make_table(items, :header => true) do
@@ -143,7 +158,8 @@ def to_pdf
             item.item_type,
             item.item_description,
             #number_to_currency(item.cost, :unit => "£", :separator => ".", :delimiter => ","),
-            item.cost,
+            #item.cost,
+            csymb(@curr, item.cost_cents,@dae),
             item.qty, 
             item.show_tax
          
@@ -162,10 +178,10 @@ def to_pdf
     summary_items =
     [
         ["Tax Rate",@invoice.tax_rate],
-        ["Item Subtotal",@invoice.total_cost],
-        ["Item Subtotal inc Tax", @invoice.total_cost_inc_tax],
-        ["Delivery Charge", @invoice.delivery_charge],
-        ["Total",@invoice.total_cost_inc_tax_delivery],
+        ["Item Subtotal",csymb(@curr, @invoice.total_cost_cents,@dae)],
+        ["Item Subtotal inc Tax", csymb(@curr,@invoice.total_cost_inc_tax_cents,@dae)],
+        ["Delivery Charge", csymb(@curr,@invoice.delivery_charge_cents,@dae)],
+        ["Total",csymb(@curr,@invoice.total_cost_inc_tax_delivery_cents,@dae)],
     ]
 
 

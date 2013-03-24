@@ -28,6 +28,10 @@ class InvoicesController < BaseController
 
   def show
 
+
+    @curr = @invoice.currency
+    @dae = false
+    
     output = InvoiceReport.new(@invoice).to_pdf
 
     @time = Time.now
@@ -52,6 +56,8 @@ class InvoicesController < BaseController
 
   def new
 
+    @invoice.currency = current_company.preference.currency_format
+    
     if params[:client_id]
       @invoice.client_id = params[:client_id]
     end
@@ -218,16 +224,5 @@ class InvoicesController < BaseController
     @currencies = all_currencies(Money::Currency.table)
   end
 
-  # Returns an array of all currency id
-  def all_currencies(hash)
-  hash.inject([]) do |array, (id, attributes)|
-      priority = attributes[:priority]
-      if priority && priority < 40
-        array[priority] ||= []
-        array[priority] << id.to_currency
-      end
-      array
-  end.compact.flatten
-  end
-
+  
   end

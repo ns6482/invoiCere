@@ -6,6 +6,9 @@ class PaymentsController < BaseController
   load_and_authorize_resource :invoice
   load_and_authorize_resource :payment, :through => :invoice, :shallow => true
   def index
+    @curr = @invoice.currency
+    @dae = false
+     
     respond_to do |format|
       format.html
       format.js

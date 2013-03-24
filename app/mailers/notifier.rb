@@ -1,12 +1,14 @@
 require "open-uri"
+require 'money'
 
 class Notifier < ActionMailer::Base
   layout 'email'
+  helper :application
 
   
   default :from => 'no-reply@example.com',
     :return_path => 'system@example.com'
-
+  
 
   def invoice_pdf(delivery, pdf_file)
     @delivery = delivery

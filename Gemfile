@@ -51,6 +51,7 @@ gem 'rack-ssl', :require => 'rack/ssl'
 gem "jquery-rails"
 gem "money"
 gem 'money-rails'
+gem 'roadie'
 #gem "jquery-ui-rails"
 
 # Use unicorn as the web server

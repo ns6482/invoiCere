@@ -10,7 +10,8 @@
   =# country_options_for_select('All')
   .row
     .span5
-      = f.input :currency_format, :priority => [ "Albania"], :collection => @countries, :label_html => {:class => "input-block-level"}
+      = f.input :currency_format, :collection => @currencies, :selected => 'gbp'
+      =# f.input :currency_format, :priority => [ "Albania"], :collection => @countries, :label_html => {:class => "input-block-level"}
       = f.input :date_format , :collection => @date_formats, :label_html => {:class => "label_narrow"}, :include_blank => false
       = f.input :time_format, :label_html => {:class => "label_narrow"}, :collection => @time_formats, :label => "Time Format"
       = f.input :time_zone, priority: /UK/, :default => '(GMT+00:00) London', :allow_blank => false

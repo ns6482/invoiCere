@@ -1,0 +1,9 @@
+%tr{:class=>"show_fields"}
+ %td.dataTableContent= h show_invoice_item.item_description
+ %td.dataTableContent= h show_invoice_item.qty
+ %td.dataTableContent= h csymb(show_invoice_item.invoice.currency, show_invoice_item.cost_cents, dae)
+ %td.dataTableContent= h show_invoice_item.item_type
+ %td.dataTableContent= h csymb(show_invoice_item.line_cost_inc_tax_cents, dae)
+ %td.dataTableContent= h show_invoice_item.show_tax
+  
+ 

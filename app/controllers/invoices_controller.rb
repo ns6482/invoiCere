@@ -31,17 +31,19 @@ class InvoicesController < BaseController
 
     @curr = @invoice.currency
     @dae = false
-    
-    output = InvoiceReport.new(@invoice).to_pdf
-
     @time = Time.now
     
     @delivery = Delivery.new
+
 
     respond_to do | format|
       format.html
       #format.pdf
       format.pdf do
+        
+    logo_url = current_company.setting.logo.url
+    output = InvoiceReport.new(@invoice, logo_url).to_pdf
+
         send_data output, :filename => current_company.name + "_" + @invoice.title + "_" + @invoice.id.to_s,
                           :type => "application/pdf"
       end

@@ -24,7 +24,8 @@
 
   =field_set_tag 'Settings', :id =>"tabs-1" do
     =f.simple_fields_for :setting do |s|
-      = s.error_messages
+      =s.error_notification
+      =display_base_errors @company.setting
       .row
         .span5
           = s.input :logo, :as => :file, :label_html => {:class => "label_narrow"}

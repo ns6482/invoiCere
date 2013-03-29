@@ -1,13 +1,19 @@
+-content_for :logo do    
+  %img{:id => "headerImage campaign-icon", "mc:allowtext" => "", "mc:edit" => "header_image", "mc:label" => "header_image", :src => @client.company.setting.logo.url, :style => "max-width:180px;"}/
+  %h2= @client.company.name
+
 -content_for :message do
   -if !@delivery.message.nil?
-    %table
+    %table{:width => '600px'}
       %tr
-        %td
+        %td{:align => 'left'}
           =raw RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html
+   
+-content_for :preheader do 
+  =#'Your invoice with id ' + @invoice.id.to_s + ' from ' + @company.name  
              
 -content_for :header do
   %h1 INVOICE
-  %h2= @client.company.name
   %h2= h @invoice.title
   
 -content_for :body do  
@@ -17,27 +23,26 @@
       %td
         %strong= @invoice.client.name
         =render :partial => "clients/address", :locals => {:client => @invoice.client}
-  %table{:cellpadding=>"1", :cellspacing=>"5", :border=>"0", :id=>"summaryTable"}
     %tr
-      %th{:width => '75', :align => 'left'} ID
-      %th{:width => '75', :align => 'left'} Your ID
-      %th{:width => '100', :align => 'left'} Purch Order
-      %th{:width => '150', :align => 'left'} Date
-      %th{:width => '150', :align => 'left'} Due
-      %th{:width => '50', :align => 'left'} Currency
+  %table.templateDataTable{:cellpadding=>"0", :cellspacing=>"0", :border=>"0", :id=>"summaryTable"}
     %tr
-      %td 
+      %th.dataTableHeading{:width => '75', :align => 'left'} ID
+      %th.dataTableHeading{:width => '75', :align => 'left'} Your ID
+      %th.dataTableHeading{:width => '100', :align => 'left'} Purch Order
+      %th.dataTableHeading{:width => '150', :align => 'left'} Date
+      %th.dataTableHeading{:width => '150', :align => 'left'} Due
+      %th.dataTableHeading{:width => '50', :align => 'left'} Currency
+    %tr
+      %td.dataTableContent 
         %strong= h @invoice.id
-      %td= h @invoice.business_id
-      %td= h @invoice.purchase_order_id
-      %td= h @invoice.client.company.preference.convert_date(@invoice.invoice_date)
-      %td= h @invoice.client.company.preference.convert_date(@invoice.due_date)
-      %td= h @invoice.currency
-    
- 
-  
-  %h2 Items
-  
+      %td.dataTableContent= h @invoice.business_id
+      %td.dataTableContent= h @invoice.purchase_order_id
+      %td.dataTableContent= h @invoice.client.company.preference.convert_date(@invoice.invoice_date)
+      %td.dataTableContent= h @invoice.client.company.preference.convert_date(@invoice.due_date)
+      %td.dataTableContent= h @invoice.currency
+    %tr
+  %br
+  %h2 Items  
   %table.templateDataTable{:cellpadding=>"0", :cellspacing=>"0", :border=>"0", :width=>"600", :id=>"invoiceItems"}
     %thead
       %tr
@@ -51,57 +56,58 @@
       - #TODO integrate dae local variable form preferences page
       =render :partial => "invoice_item", :collection => @invoice.invoice_items, :as => :show_invoice_item, :locals => { :dae => false }
   
- 
+  %br
+  
   %table
     %tr
       %td{:width=>"400"}
       %td{:width => "200", :align => 'right'}
         %table{:id=>"invoiceSummary"}
           %tr{:width => '50', :align => 'left'}
-            %td
-              %strong Subtotal:
-            %td= h csymb @invoice.currency, @invoice.total_cost_cents, false
+            %td.dataTableContent Subtotal:
+            %td.dataTableContent= h csymb @invoice.currency, @invoice.total_cost_cents, false
           %tr{:width => '50', :align => 'left'}
-            %td
-              %strong Subtotal inc Tax:
-            %td= h csymb @invoice.currency, @invoice.total_cost_inc_tax_cents, false
+            %td.dataTableContent Subtotal inc Tax:
+            %td.dataTableContent= h csymb @invoice.currency, @invoice.total_cost_inc_tax_cents, false
             
           -if !@invoice.discount.nil? and @invoice.discount.length >0 
             %tr{:width => '50', :align => 'left'}
-              %td
-                %strong Discount:
+              %td.dataTableContent Discount:
             -if @invoice.discount.include? "%"
-              %td= h @invoice.discount
+              %td.dataTableContent= h @invoice.discount
             -else 
-              %td= h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => ","       
+              %td.dataTableContent= h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => ","       
           %tr{:width => '50', :align => 'left'}
-            %td
-              %strong Delivery:
-            %td= h csymb @invoice.currency,  @invoice.delivery_charge_cents, false#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
+            %td.dataTableContent Delivery:
+            %td.dataTableContent= h csymb @invoice.currency,  @invoice.delivery_charge_cents, false#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
           %tr{:width => '50', :align => 'left'}
-            %td
-              %strong Total:
-            %td
-              %strong= h csymb @invoice.currency, @invoice.total_cost_inc_tax_delivery_cents, false#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
+            %td.dataTableContent Total:
+            %td.dataTableContent= h csymb @invoice.currency, @invoice.total_cost_inc_tax_delivery_cents, false#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
           %tr{:width => '50', :align => 'left'}
-            %td
-              %strong Payment Due:
-            %td
-              %strong= h csymb @invoice.currency,  @invoice.remaining_amount_cents, false #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","
+            %td.dataTableContent Payment Due:
+            %td.dataTableContent= h csymb @invoice.currency,  @invoice.remaining_amount_cents, false #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","
    
   %table{:id => 'footer', :border => "0"}
     %tr
       %td   
         %h2 Notes
     %tr
-      %td
-        =h @invoice.notes
+      %td=h @invoice.notes
      
-  %table.templateDataTable{:id=> 'due'}
-    %tr  
-      -if @invoice.due_days
-        %h2= "This invoice is due in " + pluralize(@invoice.due_days, 'day')
+  %table{:id=> 'due'}
+    %tr
+      %td  
+        -if @invoice.due_days
+          %h2= "This invoice is due in " + pluralize(@invoice.due_days, 'day')
           
-      -if @invoice.late_fee > 0
-        @h2 =', the late fee is set to ' + h csymb @curr, @invoice.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+        -if @invoice.late_fee > 0
+          @h2 =', the late fee is set to ' + h csymb @curr, @invoice.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+
+-content_for :footer do
+  %em Copyright © *|CURRENT_YEAR|* *|
+  =@client.company.name
+  |*, All rights reserved.
+  %br/
+  *|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
+  %br/ 
    

@@ -66,7 +66,6 @@
       * @style heading 2
       */
       h2, .h2{
-      /*@editable*/ color:#404040;
       display:block;
       /*@editable*/ font-family:Arial;
       /*@editable*/ font-size:18px;
@@ -463,14 +462,14 @@
                     %tr
                       %td{:valign => "top"}
                         %div{"mc:edit" => "std_preheader_content"}
-                          Your invoice with id @invoice.id from @company.name
+                          =yield :preheader
                       / *|IFNOT:ARCHIVE_PAGE|*
                       %td{:valign => "top", :width => "170"}
                         %div{"mc:edit" => "std_preheader_links"}
-                          Email not displaying correctly?
+                          Do more in your browser...
                           %br/
                           = succeed "." do
-                            %a{:href => "*|ARCHIVE|*", :target => "_blank"} View it in your browser
+                            %a{:href => "*|ARCHIVE|*", :target => "_blank"} View invoice in your browser
                       / *|END:IF|*
                   / // End Module: Standard Preheader \
             / // End Template Preheader \\           
@@ -485,7 +484,7 @@
                         %div{"mc:edit" => "Header_content"}
                           =yield :header
                       %td.headerContent
-                        %img{:id => "headerImage campaign-icon", "mc:allowtext" => "", "mc:edit" => "header_image", "mc:label" => "header_image", :src => "http://gallery.mailchimp.com/27aac8a65e64c994c4416d6b8/images/placeholder_180x100.gif", :style => "max-width:180px;"}/
+                        =yield :logo
                   / // End Template Header \\
               %tr
                 %td{:align => "center", :valign => "top"}
@@ -508,38 +507,13 @@
                     %tr
                       %td.footerContent{:valign => "top"}
                         / // Begin Module: Standard Footer \\
-                        %table{:border => "0", :cellpadding => "10", :cellspacing => "0", :width => "100%"}
-                          %tr
-                            %td#social{:colspan => "2", :valign => "middle"}
-                              %div{"mc:edit" => "std_social"}
-                                \
-                                %a{:href => "*|TWITTER:PROFILEURL|*"} follow on Twitter
-                                |
-                                %a{:href => "*|FACEBOOK:PROFILEURL|*"} friend on Facebook
-                                |
-                                = succeed "&nbsp;" do
-                                  %a{:href => "*|FORWARD|*"} forward to a friend
+                        %table{:border => "0", :cellpadding => "10", :cellspacing => "0", :width => "100%"}                          
                           %tr
                             %td{:valign => "top", :width => "350"}
                               %div{"mc:edit" => "std_footer"}
-                                %em Copyright © *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.
-                                %br/
-                                *|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
-                                %br/
-                                %strong Our mailing address is:
-                                %br/
-                                *|HTML:LIST_ADDRESS_HTML|**|END:IF|*
-                            %td#monkeyRewards{:valign => "top", :width => "190"}
-                              %div{"mc:edit" => "monkeyrewards"}
-                                *|IF:REWARDS|* *|HTML:REWARDS|* *|END:IF|*
-                          %tr
-                            %td#utility{:colspan => "2", :valign => "middle"}
-                              %div{"mc:edit" => "std_utility"}
-                                \
-                                %a{:href => "*|UNSUB|*"} unsubscribe from this list
-                                |
-                                = succeed "&nbsp;" do
-                                  %a{:href => "*|UPDATE_PROFILE|*"} update subscription preferences
+                                =yield :footer
+                               
+                          
                         / // End Module: Standard Footer \\
                   / // End Template Footer \\
             %br/

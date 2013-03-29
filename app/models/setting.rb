@@ -1,10 +1,21 @@
+
 class Setting < ActiveRecord::Base
   belongs_to :company
   attr_protected :company_id#, :setting_id
 
-  has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "100x100>" }#,
+  #has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "100x100>" }#,
   #:url => "/system/:attachment/:id/:style/:basename.:extension",
   #:path => ":rails_root/public/system/:attachment/:id/:style/:basename.:extension"
+  
+  
+  has_attached_file :logo,
+       :styles => {
+        :medium => "300x300>", 
+        :thumb => "100x100>" 
+       },
+     :storage => :s3,
+     :s3_credentials => "#{Rails.root}/config/s3.yaml",
+     :path => "/:style/:id/:filename"
 
   validates_numericality_of :vat, :allow_blank => true
   #validates_attachment_presence :logo

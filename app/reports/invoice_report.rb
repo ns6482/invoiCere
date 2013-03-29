@@ -34,12 +34,14 @@ end
 #pdf = Prawn::Document.new(:page_layout => :portrait, :page_size => "A4", :margin => [25,25,25,25])
 
 
-def initialize(invoice)
+def initialize(invoice, logo_url)
   @invoice = invoice
   @current_company = @invoice.client.company
   @content = ""
   @curr = @invoice.currency
   @dae = false
+  @logo_url = logo_url
+
   super(:page_layout => :portrait, :page_size => "A4", :margin => [25,25,25,25])
 end
 
@@ -108,7 +110,8 @@ def to_pdf
   bounding_box([margin_box.left, margin_box.top - 10], :width => margin_box.width, :height => margin_box.height - 120) do
    
     if @current_company.setting.logo?
-      image open("http://#{request.host_with_port}#{@current_company.setting.logo.url}"), :fit => [80, 80], :align => :left, :valign => :top
+      #image open("https://#{request.host_with_port}#{@current_company.setting.logo.url}"), :fit => [80, 80], :align => :left, :valign => :top
+      image open(@logo_url, "User-Agent" => "Ruby"), :fit => [80, 80], :align => :left, :valign => :top
     end
    
    move_down 0.5

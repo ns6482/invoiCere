@@ -30,7 +30,6 @@ class Notifier < ActionMailer::Base
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client
-    #@company = @client.company
   
     mail(:subject => @delivery.invoice.title, :from => @company, :to =>@delivery.recipients ) do |format|
       format.html { render :layout => 'email' }

@@ -28,21 +28,19 @@ class InvoicesController < BaseController
 
   def show
 
-
     @curr = @invoice.currency
     @dae = false
     @time = Time.now
-    
-    @delivery = Delivery.new
 
+    @delivery = Delivery.new
 
     respond_to do | format|
       format.html
       #format.pdf
       format.pdf do
-        
-    logo_url = current_company.setting.logo.url
-    output = InvoiceReport.new(@invoice, logo_url).to_pdf
+
+        logo_url = current_company.setting.logo.url
+        output = InvoiceReport.new(@invoice, logo_url).to_pdf
 
         send_data output, :filename => current_company.name + "_" + @invoice.title + "_" + @invoice.id.to_s,
                           :type => "application/pdf"
@@ -59,7 +57,7 @@ class InvoicesController < BaseController
   def new
 
     @invoice.currency = current_company.preference.currency_format
-    
+
     if params[:client_id]
       @invoice.client_id = params[:client_id]
     end
@@ -226,5 +224,4 @@ class InvoicesController < BaseController
     @currencies = all_currencies(Money::Currency.table)
   end
 
-  
-  end
+end

@@ -38,13 +38,13 @@
                 =link_to 'Company and Payment Settings', edit_company_path               
             -if can? :read, User 
               %li
-                =link_to "Manage Users", users_path              
+                =link_to "Manage User Logins", users_path              
             -if can? :update, Etemplate
               %li
-                =link_to "Edit Template", edit_company_etemplate_path                            
+                =link_to "Edit Email Templates", edit_company_etemplate_path                            
             -if can? :update, Preference
               %li
-                =link_to "Edit Preferences", edit_company_preference_path            
+                =link_to "Edit Invoice Preferences", edit_company_preference_path            
             -if can? :update, Item
               %li    
                 =link_to "Manage Inventory Items", items_path

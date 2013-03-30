@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130317122021) do
+ActiveRecord::Schema.define(:version => 20130330210457) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -167,7 +167,6 @@ ActiveRecord::Schema.define(:version => 20130317122021) do
     t.string   "number_format"
     t.string   "fiscal"
     t.decimal  "tax",                   :precision => 10, :scale => 0
-    t.boolean  "payment_stub"
     t.decimal  "discount",              :precision => 10, :scale => 0
     t.decimal  "shipping",              :precision => 10, :scale => 0
     t.boolean  "purchase_order_number"
@@ -176,6 +175,8 @@ ActiveRecord::Schema.define(:version => 20130317122021) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "time_zone"
+    t.text     "payment_instruction"
+    t.text     "footer"
   end
 
   create_table "reminders", :force => true do |t|
@@ -260,7 +261,7 @@ ActiveRecord::Schema.define(:version => 20130317122021) do
   end
 
   create_table "settings", :force => true do |t|
-    t.decimal  "vat",                    :precision => 10, :scale => 0
+    t.decimal  "vat",                  :precision => 10, :scale => 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
@@ -275,7 +276,6 @@ ActiveRecord::Schema.define(:version => 20130317122021) do
     t.string   "fax"
     t.string   "email"
     t.string   "vat_registration"
-    t.text     "payment_instructions_1"
     t.string   "pay_gc_token"
     t.integer  "pay_gc_enabled"
     t.string   "paypal_login"

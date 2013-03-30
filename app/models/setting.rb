@@ -2,6 +2,7 @@
 class Setting < ActiveRecord::Base
   belongs_to :company
   attr_protected :company_id#, :setting_id
+  attr_accessor :contact
 
   #has_attached_file :logo, :styles => { :medium => "300x300>", :thumb => "100x100>" }#,
   #:url => "/system/:attachment/:id/:style/:basename.:extension",
@@ -24,4 +25,35 @@ class Setting < ActiveRecord::Base
 
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates_format_of     :email, :with  => EmailRegex, :allow_blank => true
+  
+  def test
+    "test"
+  end
+  
+  def contact
+
+    company_contact = ""
+    
+    if self.telephone
+      if self.telephone.length > 0
+        company_contact += "Tel: #{self.telephone}   "
+      end
+    end
+
+    if self.fax
+      if self.fax.length >0
+        company_contact += "Fax: #{self.fax}   "
+      end
+    end
+
+    if self.email
+      if self.email.length >0
+        company_contact += "Email: #{self.email}"
+      end
+    end
+
+    company_contact
+  end
+
+  
 end

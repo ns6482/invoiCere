@@ -103,11 +103,25 @@
         -if @invoice.late_fee > 0
           @h2 =', the late fee is set to ' + h csymb @curr, @invoice.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
 
+  -if !@client.company.preference.payment_instruction.nil?
+    %br
+    %strong Payment Instructions
+    %br
+    %em= @client.company.preference.payment_instruction
+    
+    
+        
 -content_for :footer do
-  %em Copyright © *|CURRENT_YEAR|* *|
-  =@client.company.name
-  |*, All rights reserved.
+  %table
+    %tr
+      %td=@client.company.name
+    %tr
+      %td
+        %address
+          =@client.company.setting.address     
+          %br    
+          =@client.company.setting.contact
+  -if !@client.company.preference.footer.nil?
+    %em= @client.company.preference.footer
   %br/
-  *|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
-  %br/ 
    

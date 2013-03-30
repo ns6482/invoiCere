@@ -47,26 +47,7 @@ end
 
 def to_pdf
    
-  company_contact = ""
-  
-  if !@current_company.setting.telephone.nil?
-    if @current_company.setting.telephone.length > 0
-      company_contact += "Tel: #{@current_company.setting.telephone}   "
-    end
-  end
-
-  if !@current_company.setting.fax.nil?
-    if @current_company.setting.fax.length >0 
-      company_contact += "Fax: #{@current_company.setting.fax}   "
-     end
-  end
-
-  if !@current_company.setting.email.nil?
-    if @current_company.setting.email.length >0
-      company_contact += "Email: #{@current_company.setting.email}"
-    end
-  end
-  
+    
   
   
   ################################################################################
@@ -93,14 +74,17 @@ def to_pdf
         str = ''
         
         if !@current_company.setting.company_registration.nil?
-            str = "Company Registration No: #{@current_company.setting.company_registration}"
+            str = "Company Registration No: #{@current_company.setting.company_registration}, "
         end
 
         if !@current_company.setting.vat_registration.nil?
-            str = "VAT Registration No: #{@current_company.setting.vat_registration}"
+            str += "VAT Registration No: #{@current_company.setting.vat_registration}"
         end
-
-        text "Generated with VisioInvoice (C). 2011. All Rights Reserved", :align => :center, :size => 9
+        
+        if !@current_company.preference.footer.nil?
+          text @current_company.preference.footer, :align => :center, :size => 9
+        end
+        
         text str, :align => :center, :size => 9
     end
   end
@@ -118,7 +102,7 @@ def to_pdf
    
    text "#{@current_company.setting.company_name}", :size => 14, :align => :center,  :style => :bold
    text "#{@current_company.setting.address}", :size => 8, :align => :center
-   text company_contact, :size => 8, :align => :center  
+   text @current_company.setting.contact, :size => 8, :align => :center  
 
    text "#{@invoice.client.address1}", :size => 8, :align => :left
    text "#{@invoice.client.address2}", :size => 8, :align => :left
@@ -235,7 +219,7 @@ def to_pdf
      undash
         
    
-    if @current_company.preference.payment_stub =1
+    if !@current_company.preference.payment_instruction.nil?
       
      
    
@@ -289,13 +273,13 @@ def to_pdf
         end
        move_down 10
 
-       if !@current_company.setting.payment_instructions_1.nil?
-           text @current_company.setting.payment_instructions_1, :size => 8, :align => :left
+       if !@current_company.preference.payment_instruction.nil?
+           text @current_company.preference.payment_instruction, :size => 8, :align => :left
        end
         
        text "#{@current_company.name}", :size => 8, :align => :center,  :style => :bold
        text "#{@current_company.setting.address}", :size => 8, :align => :center
-       text company_contact, :size => 8, :align => :center
+       text @current_company.setting.contact, :size => 8, :align => :center
     end
     
     

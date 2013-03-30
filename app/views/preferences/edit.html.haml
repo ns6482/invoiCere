@@ -1,4 +1,4 @@
-- title "Edit Preferences"
+- title "Invoice Preferences"
 
 =content_for :right do 
   -if can? :update, Company
@@ -20,9 +20,14 @@
       = f.input :fiscal, :collection => ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], :label_html => {:class => "label_narrow"}, :include_blank => false
       = f.input :discount, :label_html => {:class => "label_narrow"}, :label => "Discount amount/perc"
       = f.input :shipping, :label_html => {:class => "label_narrow"}, :label => "Shipping amount"
-      = f.input :payment_stub, :label => 'Show Payment Stub',  :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
+      =# f.input :payment_stub, :label => 'Show Payment Stub',  :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
       = f.input :purchase_order_number, :label => 'Purchase Order Number Entry', :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'} 
       = f.input :email_alerts,:label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}#, :label_html => {:class => "label_narrow"}
+  .row
+    = f.input :payment_instruction, :input_html => { :rows => 2, :class => 'autogrow input-block-level' }, :label_html => {:class => "label_narrow"}
+  .row
+    = f.input :footer, :input_html => { :rows => 2, :class => 'autogrow input-block-level' }, :label_html => {:class => "label_narrow"}, :label => 'Invoice Footer'
+
   #buttons
   %button{:type=>"submit",:class=>"btn btn-primary pull-right"} Save Preferences
 

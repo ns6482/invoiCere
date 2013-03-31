@@ -1,4 +1,5 @@
 require 'mail'
+require 'money'
 
 class Delivery < ActiveRecord::Base
   attr_accessible :invoice_id, :message, :contact_ids, :recipients, :client_email, :format
@@ -72,6 +73,10 @@ class Delivery < ActiveRecord::Base
     Company.find(self.invoice.client.company_id).setting.telephone
   end
   
+  def company_contact
+    Company.find(self.invoice.client.company_id).setting.contact
+  end
+  
   def company_website
     #TODO company_website placeholder
   end
@@ -97,12 +102,18 @@ class Delivery < ActiveRecord::Base
   end
   
   def invoice_total_due
-    self.invoice.remaining_amount
+    Money.new(self.invoice.remaining_amount, self.invoice.currency).format(:symbol => true)
   end
   
   def invoice_paid_total 
     self.invoice.total_cost_inc_tax_delivery - self.invoice.remaining_amount 
   end
+  
+  def payment_instruction
+    Company.find(self.invoice.client.company_id).preference.payment_instruction
+  end
+  
+  
   
  
        

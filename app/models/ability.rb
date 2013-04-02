@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
  
     can :create, [User, Company] #registration
+    can :read, Invoice#preview invoice
  
     if user.role? :admin
       can [:invite], Client

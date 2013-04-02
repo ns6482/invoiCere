@@ -7,7 +7,8 @@
     %table{:width => '600px'}
       %tr
         %td{:align => 'left'}
-          =raw RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html
+          = raw @msg.to_html
+          =#raw RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.")).render('d' => @delivery)).to_html
    
 -content_for :preheader do 
   =#'Your invoice with id ' + @invoice.id.to_s + ' from ' + @company.name  

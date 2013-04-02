@@ -68,7 +68,7 @@ class Invoice < ActiveRecord::Base
   has_many :feedbacks, :dependent => :destroy
   has_one :reminder, :dependent => :destroy
 
-  attr_protected :total_cost, :total_cost_inc_tax, :total_cost_inc_tax_delivery, :opened_date, :opened_by, :paid_date, :paid_by
+  attr_protected :total_cost, :total_cost_inc_tax, :total_cost_inc_tax_delivery, :opened_date, :opened_by, :paid_date, :paid_by, :secret_id
 
   attr_accessor :company_id, :formatted_state, :update_user, :logo_url, :remaining_amount
   validates_presence_of :title,:invoice_date, :client_id
@@ -78,7 +78,7 @@ class Invoice < ActiveRecord::Base
     
   before_save :set_due_date#, :update_invoice_totals
   after_save :update_invoice_totals
-  after_create :setup_reminder
+  after_create :setup_reminder, :setup_secret_id
 
 
   monetize :delivery_charge, :as => "delivery_charge_cents"
@@ -246,6 +246,10 @@ class Invoice < ActiveRecord::Base
       reminder.save!
     end  
       
+  end
+  
+  def setup_secret_id
+    self.update_attribute(:secret_id, SecureRandom.urlsafe_base64)
   end
   
   def self.to_csv(all_invoices)

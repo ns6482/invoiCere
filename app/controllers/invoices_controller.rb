@@ -8,8 +8,10 @@ class InvoicesController < BaseController
   before_filter :find_invoice, :only => [:show, :edit, :destroy, :update]
   #before_filter :get_countries, :only => [:edit, :new]
   before_filter :get_currencies, :only => [:edit, :new]
+  
+  skip_before_filter :check_logged_in, :only => [:show]
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:show]
   def index
     @search = @invoices.search(params[:search])
 
@@ -193,8 +195,18 @@ class InvoicesController < BaseController
   private
 
   def find_invoice
-    @invoice = current_company.invoices.find(params[:id])
-    @invoice.invoice_items.count
+    if user_signed_in?
+      @invoice = current_company.invoices.find(params[:id])
+      authorize! :show, @invoice
+     else
+        @invoice = current_company.invoices.find_by_secret_id(params[:id])
+     end
+     
+     if @invoice       
+        @invoice.invoice_items.count
+      else
+        raise ActionController::RoutingError.new('Not Found')
+      end
   end
 
   def get_clients

@@ -5,8 +5,7 @@ class Delivery < ActiveRecord::Base
   attr_accessible :invoice_id, :message, :contact_ids, :recipients, :client_email, :format
   attr_accessor :company_id
   
-
-  liquid_methods :invoice_title, :company_name, :company_email, :company_fax, :company_phone, :company_website, :client_name, :invoice_id, :invoice_link, :invoice_date, :invoice_title, :invoice_due_date, :invoice_total_due
+  liquid_methods :invoice_title, :company_name, :company_email, :company_fax, :company_phone, :company_website, :client_name, :invoice_id, :direct_link, :invoice_date, :invoice_title, :invoice_due_date, :invoice_total_due
 
   belongs_to :invoice
   
@@ -80,7 +79,7 @@ class Delivery < ActiveRecord::Base
   def company_website
     #TODO company_website placeholder
   end
-  
+    
   def client_name
     self.invoice.client.name
   end
@@ -88,11 +87,7 @@ class Delivery < ActiveRecord::Base
   def invoice_id
     self.invoice.id
   end
-  
-  def invoice_link
-    #TODO invoice link placeholder
-  end
-  
+    
   def invoice_date
     self.invoice.invoice_date
   end

@@ -42,7 +42,9 @@ class DeliveriesController < BaseController
           pdf_file = render_to_string(:action=>'show', :id => @invoice.id, :template=>'invoices/show.pdf.prawn')
           Notifier.invoice_pdf(@delivery, pdf_file) # sends the email
         elsif @delivery.format ==1
-          Notifier.invoice(@delivery).deliver # sends the email
+                    
+          base = "#{request.protocol}#{request.host_with_port}"
+          Notifier.invoice(@delivery, base, "#{base}/invoices/#{@delivery.invoice.secret_id}").deliver # sends the email
         end
 
 

@@ -1,1 +1,56 @@
-= render_navigation(:context => "invoice")
+- if user_signed_in?
+  .well
+    %ul.nav.nav-list  
+      -if can? :read, @invoice
+        %li= link_to 'View',  invoice_path(@invoice), :class => 'interactive'
+      
+      -if can? :update, @invoice and  @invoice.state != "paid" 
+        %li= link_to 'Edit', edit_invoice_path(@invoice), :remote => true
+        
+      -if can? :read, @invoice    
+        %li= link_to "PDF", invoice_path( @invoice, :format => :pdf)
+ 
+  .well
+    %ul.nav.nav-list  
+      %li.nav-header Action
+      -if can? :update, @invoice.reminder
+        %li= link_to "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
+      
+      -if can? :create, Delivery    
+        %li= link_to "Email",new_invoice_delivery_path(@invoice), :remote => true
+      
+      -if can? :create, @invoice
+        %li= link_to "Copy", new_invoice_path(:id => @invoice.id)
+    
+      -if can? :update, @invoice and @invoice.state == "open"
+        %li= link_to "Pay",new_invoice_payment_path(@invoice),  :remote => true#:class => 'interactive'}
+        
+      -if can? :create, @feedback and @invoice.state == "closed"
+        %li= link_to "Feedback",new_invoice_feedback_path(@invoice),  :link => {:class => 'interactive'}
+       
+      -if can? :create, Comment
+        %li= link_to "Comment",new_invoice_comment_path(@invoice),  :remote => true
+        
+  .well 
+    %ul.nav.nav-list  
+      %li.nav-header Status
+      -if can? :update, @invoice and @invoice.state == "draft"
+        %li= link_to "Open",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put,  :remote => true
+      
+      -if can? :update, @invoice and @invoice.state == "open"
+        %li= link_to "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'revert_draft'),:method => :put, :remote => true
+    
+      -if can? :update, @invoice and @invoice.state == "paid"
+        %li= link_to "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :remote => true
+                
+  .well  
+    %ul.nav.nav-list  
+      %li.nav-header History
+      -if can? :read, Delivery
+        %li= link_to 'Emails', invoice_deliveries_path(@invoice), :remote => true    
+      -if can? :read, Payment and  @invoice.state !="draft"
+        %li= link_to 'Payments', invoice_payments_path(@invoice),  :remote => true      
+      -if can? :read, Comment
+        %li= link_to 'Comments', invoice_comments_path(@invoice), :remote => true    
+-else
+  =link_to "View as PDF", invoice_path( @invoice.secret_id, :format => :pdf)

@@ -1,6 +1,6 @@
 %h2 Send invitation
 
-- simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name) do |f|
+= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name) do |f|
   =field_set_tag '' do
     = f.input :name
     = f.input :email
@@ -8,5 +8,5 @@
       =f.collection_check_boxes :role_ids, Role.all, :id, :name
     %button{:type=>"submit",:class=>"red"} Send Invitation
     
-= link_to "Home", after_sign_in_path_for(resource_name)
+=# link_to "Home", after_sign_in_path_for(resource_name.company.id)
 

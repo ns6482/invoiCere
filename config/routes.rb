@@ -16,12 +16,14 @@ VisioInvoiceV3::Application.routes.draw do
   get "gocardless/cb"
   get "gocardless/setup_merchant"
   post "gocardless/webhook"
+  
 
 
  end
  
  constraints(Subdomain) do
- 
+   
+   get "preview/show" 
    get "gocardless/index"
    post "gocardless/submit"
    get "gocardless/confirm"

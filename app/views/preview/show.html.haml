@@ -1,0 +1,6 @@
+reached!
+-if @invoice
+  =@invoice.id
+  
+  =render :partial => 'invoices/show_elements/show_core', :locals => {:invoice => @invoice, :curr => @invoice.currency}
+

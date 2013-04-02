@@ -18,36 +18,36 @@
       =h yield(:header)
   
     
-
-    %ul{:class=>'nav nav-tabs'}
-      %li{:class=> 'active'}
-        =link_to 'Dashboard', root_path
-      -if can? :read, Invoice
-        %li
-          =link_to'Invoices', invoices_path
-      -if can? :read, Client
-        %li
-          =link_to 'Clients', clients_path
-      -if can? :update, Company
-        %li{:class => 'dropdown'}
-          =link_to raw("Settings" +("<b class= 'caret'></b>")), edit_company_path, :class => 'dropdown-toggle', 'data-toggle' => "dropdown", :role=>"button", 'data-target' => "#"
-                      
-          %ul{:class => 'dropdown-menu', :role=>"menu", 'aria-labelledby'=>"dLabel"}            
-            -if can? :update, Company
-              %li
-                =link_to 'Company and Payment Settings', edit_company_path               
-            -if can? :read, User 
-              %li
-                =link_to "Manage User Logins", users_path              
-            -if can? :update, Etemplate
-              %li
-                =link_to "Edit Email Templates", edit_company_etemplate_path                            
-            -if can? :update, Preference
-              %li
-                =link_to "Edit Invoice Preferences", edit_company_preference_path            
-            -if can? :update, Item
-              %li    
-                =link_to "Manage Inventory Items", items_path
+    -if current_user
+      %ul{:class=>'nav nav-tabs'}
+        %li{:class=> 'active'}
+          =link_to 'Dashboard', root_path
+        -if can? :read, Invoice
+          %li
+            =link_to'Invoices', invoices_path
+        -if can? :read, Client
+          %li
+            =link_to 'Clients', clients_path
+        -if can? :update, Company
+          %li{:class => 'dropdown'}
+            =link_to raw("Settings" +("<b class= 'caret'></b>")), edit_company_path, :class => 'dropdown-toggle', 'data-toggle' => "dropdown", :role=>"button", 'data-target' => "#"
+                        
+            %ul{:class => 'dropdown-menu', :role=>"menu", 'aria-labelledby'=>"dLabel"}            
+              -if can? :update, Company
+                %li
+                  =link_to 'Company and Payment Settings', edit_company_path               
+              -if can? :read, User 
+                %li
+                  =link_to "Manage User Logins", users_path              
+              -if can? :update, Etemplate
+                %li
+                  =link_to "Edit Email Templates", edit_company_etemplate_path                            
+              -if can? :update, Preference
+                %li
+                  =link_to "Edit Invoice Preferences", edit_company_preference_path            
+              -if can? :update, Item
+                %li    
+                  =link_to "Manage Inventory Items", items_path
 
 
                 

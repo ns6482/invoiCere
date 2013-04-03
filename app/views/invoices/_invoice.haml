@@ -10,8 +10,9 @@
     %span{:class =>  'badge ' + invoice.formatted_state_badge}
       = h invoice.formatted_state
   %td= h invoice.due_days
-  %td= h number_to_currency invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
-  %td= h number_to_currency invoice.due_amount, :unit => '£', :separator => ".", :delimiter => ","
+
+  %td= h csymb invoice.currency ||= current_company.preference.currency_format, invoice.total_cost_inc_tax_delivery_cents
+  %td= h csymb invoice.currency ||= current_company.preference.currency_format , invoice.remaining_amount_cents
 
   %td
     -if can? :update, invoice

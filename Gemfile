@@ -24,7 +24,7 @@ gem "simple-navigation"
 gem 'activesupport',  '>= 2.3.11' 
 gem 'activemerchant',  "~> 1.28"
 
-gem 'devise_invitable', '>= 0.6.2'
+gem 'devise_invitable'
 gem "meta_search", '>= 1.1.0' 
 
 #gem 'rd_searchlogic', :require => 'searchlogic', :git => 'git://github.com/railsdog/searchlogic.git'

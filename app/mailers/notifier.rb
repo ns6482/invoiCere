@@ -26,7 +26,7 @@ class Notifier < ActionMailer::Base
   )
   end
 
-  def invoice(delivery, login_link = nil, direct_link = nil)
+  def invoice(delivery, invoice_link = nil, direct_link = nil)
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client
@@ -36,7 +36,7 @@ class Notifier < ActionMailer::Base
 
     
   
-     @msg = RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.").gsub("{{d.invoice_link}}", "{{invoice_link}}").gsub("{{d.direct_link}}", "{{direct_link}}")).render('d' => @delivery,'login_link' => login_link, 'direct_link' => direct_link ))
+     @msg = RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.").gsub("{{d.invoice_link}}", "{{invoice_link}}").gsub("{{d.direct_link}}", "{{direct_link}}")).render('d' => @delivery,'invoice_link' => invoice_link, 'direct_link' => direct_link ))
     
   
     #TODO display subject text field for delivery

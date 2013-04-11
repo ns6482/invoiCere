@@ -75,7 +75,7 @@ VisioInvoiceV3::Application.routes.draw do
     devise_for :users, :controllers => { :invitations => 'users/invitations' }
     #devise_for :users, :controllers => { :invitations => 'users/new_invite' }
     
-    resources :users #do 
+    resources :users, :except => [:show] #do 
     #  collection do 
     #    get 'new_invite'
     #    post 'invite'

@@ -12,8 +12,6 @@ class UsersController < BaseController
     
   end
   
-  def show   
-  end
   
   def new       
   end
@@ -29,7 +27,7 @@ class UsersController < BaseController
     # @user.email = params[:user][:email]
     if @user.save
       flash[:notice] = "Successfully created user."
-      redirect_to @user
+      redirect_to root_path
     else
       render :action => 'new'
     end
@@ -37,18 +35,29 @@ class UsersController < BaseController
   
   def edit
     #@user.email = params[:user][:email]
+    
   end
   
   def update
+    
+    begin
+    @user.update_attribute(:email,  params[:user][:email])
+    @user.update_attribute(:password,  params[:user][:password])
+    
     if @password_required
       update_user(@user.update_with_password(params[:user]))
     else
-      update_user(@user.update_attributes(params[:user]))
+      update_user(@user.update_without_password(params[:user]))
     end
     
     #@user.update_attribute(:roles_ids, params[:user][:role_ids])
-    @user.update_attribute(:email,  params[:user][:email])
-    @user.update_attribute(:password,  params[:user][:password])
+   
+   rescue ActiveRecord::RecordNotUnique
+     flash[:error] = "Please choose another email address"
+     render :action => 'edit'
+   end
+    
+    
   end
   
   def destroy    
@@ -80,7 +89,7 @@ class UsersController < BaseController
   def update_user (success)
     if success
       flash[:notice] = "Successfully updated user."
-      redirect_to @user
+      redirect_to root_path
     else
       render :action => 'edit'
     end
@@ -113,5 +122,6 @@ class UsersController < BaseController
       @password_required = (current_user == @user)
     end
   end
+  
 
 end

@@ -4,8 +4,10 @@ class Ability
   def initialize(user)
     user ||= User.new
  
-    can :create, [User, Company] #registration
-    can :read, Invoice#preview invoice
+    if user.roles.size == 0
+      can :create, [User, Company] #registration
+      can :read, Invoice#preview invoice
+    end
  
     if user.role? :admin
       can [:invite], Client
@@ -53,10 +55,11 @@ class Ability
       can :delete, Comment, :id => user.id
       can [:read], Schedule
     elsif user.role? :client
-      can [:read, :update], Client, :client_id => user.client_id
+      can [:read], Company, :id => user.company_id
+      can [:read, :update], Client, :id => user.client_id
 
       can [:manage], Contact, :client_id => user.client_id
-      can [:update], User, :id => user.id
+      can [:update, :read], User, :id => user.id
       can [:read], Invoice, :client_id => user.client_id
       can [:read, :create, :update], Feedback #TODO only apply to client once setup
     end

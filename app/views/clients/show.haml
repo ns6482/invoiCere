@@ -12,9 +12,12 @@
     %td
       =@client.display_fax
 %br
--if can? :invite, @client
+-if can? :invite, Client
   - if !@client.invited?
-    = link_to 'Invite Client to Login', @client, :confirm => 'Are you sure?', :method => :invite, :class => 'btn btn-inverse pull-right'
+    =# link_to 'Send Login Invitation', @client, :confirm => 'Are you sure?', :method => :invite, :class => 'btn btn-primary pull-right'
+    = link_to 'Send Login Invitation', new_user_invitation_path(:client_id => @client.id)
+  - else
+    = link_to 'Resent Login Invitation', new_user_invitation_path(:client_id => @client.id)
 #contacts
   %h3 Contacts
   -if @client.contacts.size > 0

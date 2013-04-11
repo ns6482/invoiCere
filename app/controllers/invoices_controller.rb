@@ -214,6 +214,8 @@ class InvoicesController < BaseController
     @clients = current_company.clients.accessible_by(current_ability)#.accessible_by(current_ability, :read)
     @invoices = current_company.invoices.accessible_by(current_ability)
 
+  
+
   #@invoices = current_company.invoices.accessible_by(current_ability).find(:all)
   #.accessible_by(current_ability, :read)
   ##clients.collect { |c| c.invoices }.flatten # select all invoices for all clients of the firm

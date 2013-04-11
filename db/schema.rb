@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331135740) do
+ActiveRecord::Schema.define(:version => 20130403192430) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(:version => 20130331135740) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.datetime "invitation_accepted_at"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

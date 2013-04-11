@@ -43,4 +43,18 @@ class User < ActiveRecord::Base
   def has_roles?
    errors.add_to_base "User must have at least one role." if self.role_ids.blank?
   end
+  
+    
+  def update_with_password(params={})
+    params.delete(:email)
+    super(params)
+  end
+
+  
+  def update_without_password(params={})
+    params.delete(:email)
+    super(params)
+  end
+
+  
 end

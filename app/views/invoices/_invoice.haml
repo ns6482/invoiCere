@@ -1,23 +1,24 @@
-%tr{:id => "invoice-row-" + invoice.id.to_s, :class=> cycle("odd", "even") + " table-row"}
-  %td= check_box_tag "invoice_ids[]", invoice.id
-  %td= h invoice.invoice_date.strftime("%Y %b %d")
+- if can? :read, invoice
+  %tr{:id => "invoice-row-" + invoice.id.to_s, :class=> cycle("odd", "even") + " table-row"}
+    %td= check_box_tag "invoice_ids[]", invoice.id
+    %td= h invoice.invoice_date.strftime("%Y %b %d")
+    
+    %td= link_to_if can?(:read, invoice), invoice.id, invoice
+    %td 
+      %strong=invoice.client.name#link_to_if can?(:read, invoice.client), invoice.client.name, invoice.client
+    %td= h invoice.title
+    %td
+      %span{:class =>  'badge ' + invoice.formatted_state_badge}
+        = h invoice.formatted_state
+    %td= h invoice.due_days
   
-  %td= link_to_if can?(:read, invoice), invoice.id, invoice
-  %td 
-    %strong=invoice.client.name#link_to_if can?(:read, invoice.client), invoice.client.name, invoice.client
-  %td= h invoice.title
-  %td
-    %span{:class =>  'badge ' + invoice.formatted_state_badge}
-      = h invoice.formatted_state
-  %td= h invoice.due_days
-
-  %td= h csymb invoice.currency ||= current_company.preference.currency_format, invoice.total_cost_inc_tax_delivery_cents
-  %td= h csymb invoice.currency ||= current_company.preference.currency_format , invoice.remaining_amount_cents
-
-  %td
-    -if can? :update, invoice
-      = link_to '<i class="icon-edit"></i> '.html_safe, edit_invoice_path(invoice), :class => 'btn'
-      =# link_to '<i class="icon-edit"></i> Copy'.html_safe, new_invoice_path(:id => invoice.id), :class => 'btnss'
-
+    %td= h csymb invoice.currency ||= current_company.preference.currency_format, invoice.total_cost_inc_tax_delivery_cents
+    %td= h csymb invoice.currency ||= current_company.preference.currency_format , invoice.remaining_amount_cents
   
+    %td
+      -if can? :update, invoice
+        = link_to '<i class="icon-edit"></i> '.html_safe, edit_invoice_path(invoice), :class => 'btn'
+        =# link_to '<i class="icon-edit"></i> Copy'.html_safe, new_invoice_path(:id => invoice.id), :class => 'btnss'
   
+
+

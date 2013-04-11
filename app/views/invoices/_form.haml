@@ -14,7 +14,7 @@
               = f.input :purchase_order_id, :label => "Purchase Order ID", :input_html => {:class => ""}, :wrapper_html => {:class => ''}
         .row
         = f.input :title, :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
-        = f.association :client, :collection => current_company.clients.accessible_by(current_ability), :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
+        = f.association :client, :collection => @clients, :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
         = f.input :invoice_date, :label => "Date", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-medium'}
 
         = f.input :currency, :collection => @currencies, :selected => @invoice.currency.downcase, :required => true , :include_blank => false

@@ -13,13 +13,9 @@
 -if @clients.count > 0 
   - for client in @clients
     -if client.users.count >0
-      %h3=client.name
+      %h4=client.name
       =client.display_address   
-      %table
-        %tr
-          %th Email
-          %th Sign in count
-          %th Last sign in at
+      %table{:class=>'table table-striped'}      
         = render :partial => "user", :collection => client.users
 -else
   No Client Users

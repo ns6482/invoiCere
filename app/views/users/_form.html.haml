@@ -14,4 +14,4 @@
     -#if can? :read, Role
       =#f.collection_check_boxes :role_ids, Role.all, :id, :name
 
-  %button{:type=>"submit",:class=>"red"} Save
+  %button{:type=>"submit",:class=>"btn btn-primary pull-right"} Save

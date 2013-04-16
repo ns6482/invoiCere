@@ -1,20 +1,20 @@
 <h2>Sign in</h2>
 
-<%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name), :class=> 'form-horizontal' do |f| %>
+<%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name), :html=> {:class => 'form-inline'} do |f| %>
   <%= field_set_tag 'Enter your Login Credentials' do %>
 
-    <%= f.input :email, :label_html=>{:class => "label_narrow"} %>
-    <%= f.input :password, :label_html=>{:class => "label_narrow"} %>
+    <%= f.input :email %>
+    <%= f.input :password %>
 
 
     <% if !current_company %>
-      <%= f.input :company_id, :as => :string, :label_html => {:class => "label_narrow"}%>
+      <%= f.input :company_id, :as => :string%>
     <% else %>
       <%=  f.hidden_field :company_id, :value => current_company.name %>
     <% end %>
 
     <% if devise_mapping.rememberable?%>
-      <%= f.input :remember_me, :as => :radio_buttons, :label_html => {:class => "checkbox"}, :input_html => {:class => 'checkbox'}, :wrapper_html => {:class => 'checkbox'}%>
+      <%= f.input :remember_me, :as => :radio_buttons, :item_wrapper_class => 'radio inline'%>
     <% end%>
 
 	<div id="buttons">

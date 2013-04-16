@@ -12,13 +12,17 @@
  
   .well
     %ul.nav.nav-list  
-      %li.nav-header Action
+      %li.nav-header
       -if can? :update, @invoice.reminder
         %li= link_to "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
       
-      -if can? :create, Delivery    
-        %li= link_to "Email",new_invoice_delivery_path(@invoice), :remote => true
-      
+      -if can? :create, Delivery      
+        .dropdown        
+          = link_to raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle'
+          %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
+            %li= link_to "Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
+            %li= link_to "Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
+
       -if can? :create, @invoice
         %li= link_to "Copy", new_invoice_path(:id => @invoice.id)
     
@@ -33,7 +37,8 @@
         
   .well 
     %ul.nav.nav-list  
-      %li.nav-header Status
+      %li.nav-header 
+        ="Status: #{@invoice.formatted_state}"
       -if can? :update, @invoice and @invoice.state == "draft"
         %li= link_to "Open",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put,  :remote => true
       

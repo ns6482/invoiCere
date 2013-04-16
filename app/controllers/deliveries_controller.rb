@@ -19,11 +19,23 @@ class DeliveriesController < BaseController
   end
   
   def new
+    
+    
+    template =params[:template]
+    logger.debug "template " + template    
     #@invoice = Invoice.find(params[:invoice_id])
     @delivery = @invoice.deliveries.build
     @delivery.client_email  = true
     @delivery.format = 1
-    @delivery.message = current_company.etemplate.invoice_message
+    
+    if template == 'invoice' then  
+      @delivery.message = current_company.etemplate.invoice_message
+     else
+      @delivery.message = current_company.etemplate.reminder_message
+      end
+
+      
+    
     
     respond_to do |format|
       format.html

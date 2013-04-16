@@ -30,12 +30,9 @@ class Notifier < ActionMailer::Base
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client
-    
-    @can_login = client.users.count >0
       
     @msg = RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.").gsub("{{d.invoice_link}}", "{{invoice_link}}").gsub("{{d.direct_link}}", "{{direct_link}}")).render('d' => @delivery,'invoice_link' => invoice_link, 'direct_link' => direct_link ))
     
-  
     #TODO display subject text field for delivery
     mail(:subject => @delivery.invoice.title, :from => @company, :to =>@delivery.recipients ) do |format|
       format.html { render :layout => 'email' }

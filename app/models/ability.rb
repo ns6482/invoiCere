@@ -57,11 +57,12 @@ class Ability
     elsif user.role? :client
       can [:read], Company, :id => user.company_id
       can [:read, :update], Client, :id => user.client_id
-
+      can [:manage], Comment, :user_id => user.email
       can [:manage], Contact, :client_id => user.client_id
       can [:update, :read], User, :id => user.id
       can [:read], Invoice, :client_id => user.client_id
       can [:read, :create, :update], Feedback #TODO only apply to client once setup
+      can [:create], Payment
     end
   end
   

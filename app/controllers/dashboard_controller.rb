@@ -20,7 +20,7 @@ class DashboardController < BaseController
       @total_paid = @invoices.sum("payments.amount")
       @total_outstanding = @total_invoice.to_i - @total_paid.to_i
       
-      @clients_outstanding = current_company.clients.outstanding
+      @clients_outstanding = current_company.clients.outstanding.accessible_by(current_ability)
  
       if params[:gdate]
         @gdate = params[:gdate]

@@ -5,13 +5,16 @@
 
 
 %div{:class=>'modal-body'}
-  =simple_form_for [@invoice, @payment], :html => { :remote => false} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
+  =simple_form_for [@invoice, @payment], :html => { :remote => false, :class => 'form-inline'} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
     =# f.error_messages
     =#field_set_tag "Log Payment", :id=>'form-main' do
     =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
-    = f.input :pay_full_amount, :as=>:boolean, :wrapper_html=> {:class=> 'checkbox'}, :label_html => {:class=>'checkbox'}, :label=>"Pay full amount (" + @invoice.remaining_amount_cents.to_s + ")"
+    = f.input :pay_full_amount, :as=>:boolean, :wrapper_html=> {:class=> 'checkbox inline'}, :label_html => {:class=>'checkbox'}, :label=>"Pay full amount (" + @invoice.remaining_amount_cents.to_s + ")"
     = f.input :amount_cents
-    = f.input :payment_type, :as => :select, :collection => ["Cash", "GoCardless", "Paypal", "Cheque", "Other"]
+    - if @payment.payment_type == "Manual"
+      = f.input :payment_type, :as => :select, :collection => ["Cash", "Cheque"]
+    -#else
+      =#@payment.payment_type
     =# f.input :currency, :as => :select,  :collection => ["British Pounds", "US Dollars", "Euros"] 
     =# f.submit "Pay", :name => "pay"
     

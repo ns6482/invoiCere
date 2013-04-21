@@ -27,11 +27,11 @@
           = f.input :due_days, :input_html => {:size => 1}, :label => "Due Days", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
           = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
 
-      #form-main{:class=>'span10'}
+      #form-main.span8
 
-        .fields
+        .fields.row
           %h3 Items
-        .fields
+        .row
           .span2
             %strong Item       
           .span1
@@ -42,8 +42,6 @@
             %strong / Unit
           .span1
             %strong Tax
-          .span1
-            %strong Total
           .span1
           
           
@@ -58,11 +56,17 @@
         .fields          
           =f.input_field :notes, :rows => 2, :class=> 'input-block-level'
         %br  
+     
+      #form-accept_payments.span8
+        %h3 Client can pay by:
+        =f.input :payables, :as => :check_boxes, :collection => Invoice::PAYABLES, :item_wrapper_class => 'checkbox inline', :label => ''
         
-        #btn{:class => 'form-actions row pull-right'}
-          %button{:type=>"submit",:class=>"btn btn-primary btn-large"} Save Invoice
+      #btn{:class => 'form-actions row pull-right'}
+        %button{:type=>"submit",:class=>"btn btn-primary btn-large"} Save Invoice
           
-          
+     
+      
+    
 
 
     

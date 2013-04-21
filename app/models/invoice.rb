@@ -6,6 +6,9 @@ class Invoice < ActiveRecord::Base
   liquid_methods :title
 
   cattr_reader :per_page
+  
+  attr_accessible :payables
+  
   @@per_page = 10
 
 
@@ -68,6 +71,8 @@ class Invoice < ActiveRecord::Base
   has_many :feedbacks, :dependent => :destroy
   has_one :reminder, :dependent => :destroy
 
+  has_and_belongs_to_many :payables, :autosave => true
+
   attr_protected :total_cost, :total_cost_inc_tax, :total_cost_inc_tax_delivery, :opened_date, :opened_by, :paid_date, :paid_by, :secret_id
 
   attr_accessor :company_id, :formatted_state, :update_user, :logo_url, :remaining_amount
@@ -87,6 +92,23 @@ class Invoice < ActiveRecord::Base
   monetize :total_cost_inc_tax_delivery, :as => "total_cost_inc_tax_delivery_cents"
   monetize :remaining_amount, :as => "remaining_amount_cents"
   monetize :late_fee, :as => "late_fee_cents"
+  
+  
+  PAYABLES = %w[Paypal GoCardless Paymill]
+  
+  def payables=(payables)
+    self.payables_mask = (payables & PAYABLES).map { |r| 2**PAYABLES.index(r) }.inject(0, :+)
+  end
+
+  def payables
+    PAYABLES.reject do |r|
+      ((payables_mask || 0) & 2**PAYABLES.index(r)).zero?
+    end
+  end
+  
+  def can_pay_through?(payable)
+    payables.include?(payable.to_s)
+  end
   
   def total_items
     self.invoice_items.sum(:qty)

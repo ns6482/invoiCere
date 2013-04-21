@@ -17,6 +17,7 @@ class PaymentsController < BaseController
 
   def new
     respond_to do |format|
+      
       if @payment.invoice.remaining_amount ==0.0
         flash[:notice]= "Invoice has been paid for"
         format.html{redirect_to invoice_payments_url(@invoice)}
@@ -27,6 +28,8 @@ class PaymentsController < BaseController
         format.js {render :action => 'new'}
       else
         @payment = @invoice.payments.build
+        @payment.payment_type = params[:payment_type]
+
       format.html
       format.js
       end

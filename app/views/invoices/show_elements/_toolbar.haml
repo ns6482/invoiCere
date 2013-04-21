@@ -26,15 +26,24 @@
       -if can? :create, @invoice
         %li= link_to "Copy", new_invoice_path(:id => @invoice.id)
     
-      -if can? :update, @invoice and @invoice.state == "open"
-        %li= link_to "Pay",new_invoice_payment_path(@invoice),  :remote => true#:class => 'interactive'}
-        
       -if can? :create, @feedback and @invoice.state == "closed"
         %li= link_to "Feedback",new_invoice_feedback_path(@invoice),  :link => {:class => 'interactive'}
        
       -if can? :create, Comment
         %li= link_to "Comment",new_invoice_comment_path(@invoice),  :remote => true
         
+  -if can? :update, @invoice and @invoice.state == "open"
+    .well
+      %ul.nav.nav-list  
+        .dropdown
+          = link_to raw("Payment" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle'
+          %ul.dropdown-menu{:role=>"menu", 'ari-labelledby'=>"dLabel"}
+            -if @invoice.can_pay_through? "Paypal"
+              %li= link_to "Paypal",new_invoice_payment_path(@invoice, :payment_type=>'Paypal'),  :remote => true#:class => 'interactive'}
+            %li= link_to "GoCardless",new_invoice_payment_path(@invoice, :payment_type=>'GoCardless'),  :remote => true#:class => 'interactive'}
+            %li= link_to "Paymill",new_invoice_payment_path(@invoice, :payment_type=>'Paymill'),  :remote => true#:class => 'interactive'}
+            %li= link_to "Cheque or Cash",new_invoice_payment_path(@invoice, :payment_type=>'Manual'),  :remote => true#:class => 'interactive'}
+           
   .well 
     %ul.nav.nav-list  
       %li.nav-header 

@@ -288,12 +288,25 @@ insertAtCaret: function(myValue){
 
 
 $(function() {
-    $("#template_setup a").click(function () { 
- 		$(this).closest("#template_setup").find(".text").insertAtCaret("{{" + $(this).text() + "}}");
+    $(".placeholderable a").click(function () { 
+ 		$(this).closest(".placeholderable").find(".text").insertAtCaret("{{" + $(this).text() + "}}");
  		return false;
      });
      
 	$( "#tabs_etemplate").tabs();
 });
 
+$(function() {
 
+	$('#interactive').on('show', function () {
+		//alert('test');		
+		$('.placeholderable a').bind('click', function() {
+			$(this).closest(".placeholderable").find(".text").insertAtCaret("{{" + $(this).text() + "}}");
+ 			return false;
+		});
+		
+	})
+	
+	
+	
+});

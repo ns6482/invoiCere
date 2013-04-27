@@ -107,7 +107,7 @@ class Invoice < ActiveRecord::Base
   end
   
   def can_pay_through?(payable)
-    payables.include?(payable.to_s)
+    payables.include?(payable.to_s) or payable == "Manual"
   end
   
   def total_items

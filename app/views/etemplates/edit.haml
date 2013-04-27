@@ -1,6 +1,6 @@
 -title "Edit Etemplate"
 
-= javascript_include_tag  "template_setup.js"
+=# javascript_include_tag  "template_setup.js"
 
 =content_for :right do 
   -if can? :update, Company
@@ -22,7 +22,7 @@
       = f.input :invoice_subject, :input_html => { :rows => 1 , :class=> ''}, :label => "Subject"     
       %label Message     
       %br
-      #template_setup
+      #template_setup.placeholderable
         %ul{:id => "lt-form"} 
           =render :partial => "placeholders_email"    
         #rt-form
@@ -34,7 +34,7 @@
      
       %label Message     
       %br
-      #template_setup
+      #template_setup.placeholderable
         %ul{:id => "lt-form"}   
           =render :partial => "placeholders_payment"    
         #rt-form
@@ -46,7 +46,7 @@
        
       %label Message     
       %br
-      #template_setup 
+      #template_setup.placeholderable
         %ul{:id => "lt-form"}    
           =render :partial => "placeholders_reminder"    
         #rt-form

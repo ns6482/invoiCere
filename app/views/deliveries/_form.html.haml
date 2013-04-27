@@ -1,15 +1,16 @@
-%div{:class=>"modal-header"}
+.modal-header
   %button{:type=>"button", :class=>"close", 'data-dismiss'=>"modal",  'aria-hidden'=>"true"}
     &times;
   %h3 Send Message
 
 
-%div{:class=>'modal-body'}
-  =simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :method => :post, :remote => true } do |f|
-    =# field_set_tag 'Send Email', :id => "form-main" do
-    =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
+.modal-body
+  =simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :class => '',  :method => :post, :remote => true } do |f|
     = f.hidden_field :invoice_id
-    = f.input :message, :input_html => { :rows => 5 }  
+    .placeholderable
+      = render :partial => 'etemplates/placeholders_email'
+      
+      = f.input :message, :input_html => { :rows => 4, :style => 'width:500px' }  , :label => false
     = f.input :client_email,  :label=> @invoice.client.company_name, :item_wrapper_class => 'inline'
     - if @invoice.client.contacts.size > 0
       = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To", :item_wrapper_class => 'inline'

@@ -18,7 +18,13 @@ class PaymentsController < BaseController
   def new
     respond_to do |format|
       
-      if @payment.invoice.remaining_amount ==0.0
+      if !params[:payment_type]
+       flash[:error]= "Payment type not selected"
+       format.html{redirect_to invoice_url(@invoice)}
+      elsif !@invoice.can_pay_through? params[:payment_type]
+       flash[:error]= "Payment cannot be made this way "
+       format.html{redirect_to invoice_url(@invoice)}
+      elsif @payment.invoice.remaining_amount ==0.0
         flash[:notice]= "Invoice has been paid for"
         format.html{redirect_to invoice_payments_url(@invoice)}
         format.js {render :action => 'payments/index'}
@@ -30,8 +36,8 @@ class PaymentsController < BaseController
         @payment = @invoice.payments.build
         @payment.payment_type = params[:payment_type]
 
-      format.html
-      format.js
+        format.html
+        format.js
       end
     end
   end

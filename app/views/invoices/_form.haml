@@ -23,14 +23,12 @@
         .fields
           = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
           = f.input :delivery_charge_cents, :input_html => {:size => 1}, :label => "Shipping", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
-          = f.input :late_fee_cents, :input_html => {:size => 1}, :label => "Late Fee", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
           = f.input :due_days, :input_html => {:size => 1}, :label => "Due Days", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
           = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
+          = f.input :late_fee_cents, :input_html => {:size => 1}, :label => "Late Fee", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
 
       #form-main.span8
-
-        .fields.row
-          %h3 Items
+        %h3 Items
         .row
           .span2
             %strong Item       
@@ -42,22 +40,16 @@
             %strong / Unit
           .span1
             %strong Tax
-          .span1
-          
-          
-                  
+          .span1                            
         = f.simple_fields_for :invoice_items
         = f.link_to_add '<i class="icon-plus"></i> Add'.html_safe, :invoice_items, :class => "btn btn-small" 
-
-
-      #form-bottom{:class => "span8"}
-        .fields
-          %h3 Further Notes
-        .fields          
-          =f.input_field :notes, :rows => 2, :class=> 'input-block-level'
-        %br  
-     
-      #form-accept_payments.span8
+       
+        
+      #footer-notes.span8        
+        %h3 Further Notes          
+        =f.input_field :notes, :rows => 2, :class=> 'input-block-level'
+                    
+      #footer-pay.span8
         %h3 Client can pay by:
         =f.input :payables, :as => :check_boxes, :collection => Invoice::PAYABLES, :item_wrapper_class => 'checkbox inline', :label => ''
         

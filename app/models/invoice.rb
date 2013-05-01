@@ -116,7 +116,7 @@ class Invoice < ActiveRecord::Base
   
   def _total_cost
     total = self.invoice_items.find(:all,:select => "SUM(qty*cost) as total_cost")
-    @total = discountize(total.first.total_cost).to_i    
+    @total = total.first.total_cost.to_i    
   end
 
 
@@ -138,11 +138,11 @@ class Invoice < ActiveRecord::Base
     @total_cost_no_tax = total.first.total_cost.to_i
 
     @total_cost_inc_tax = @total_cost_no_tax + @total_cost_inc_tax
-    discountize(@total_cost_inc_tax).to_i
+    #@total_cost_inc_tax = discountize(@total_cost_inc_tax).to_i
   end
 
   def _total_cost_inc_tax_delivery
-    self.delivery_charge.to_i + self._total_cost_inc_tax.to_i
+    self.delivery_charge.to_i + discountize(self._total_cost_inc_tax).to_i
   end
 
   def update_invoice_totals    
@@ -194,7 +194,23 @@ class Invoice < ActiveRecord::Base
     
   end
 
- 
+  def discounted_value
+    
+    val =0
+    
+    if !self.discount.nil? and self.discount != "" and !val.nil?
+  
+      discount_calc= self.discount.gsub(/\%/, "")
+  
+      if self.discount.include? "%"
+        val = self.total_cost_inc_tax
+        val =  (((val.to_d * (discount_calc.to_d/100).to_d))/100).to_d
+      end
+      
+    end if
+    
+    val
+  end
 
 
   private
@@ -202,13 +218,13 @@ class Invoice < ActiveRecord::Base
   def discountize(val)
     
     if !self.discount.nil? and self.discount != "" #and !val.nil?
+        discount_calc= self.discount.gsub(/\%/, "") 
 
-      discount_calc= self.discount.gsub(/\%/, "")
  
       if self.discount.include? "%"
-        val = val.to_d - (val.to_d * (discount_calc.to_d/100).to_d).to_i
+        val =  (val.to_d  - (val.to_d * (discount_calc.to_d/100).to_d)).to_i
       else
-        val = (val.to_d) - discount_calc.to_d
+        val = (val.to_d) - (discount_calc.to_d*100)
       end
     
     end

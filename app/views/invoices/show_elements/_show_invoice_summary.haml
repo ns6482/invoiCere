@@ -13,9 +13,10 @@
    %td
     %strong Discount:
     -if @invoice.discount.include? "%"
-     %td= h @invoice.discount
+     %td= @invoice.discount
+     %td= h csymb @curr, number_with_precision(@invoice.discounted_value, :precision => 2), @dae
     -else 
-     %td= h @invoice.discount#number_to_currency @invoice.discount, :unit => '£', :separator => ".", :delimiter => ","       
+     %td= h csymb @curr,  @invoice.discount, @dae
  %tr
   %td
    %strong Delivery:

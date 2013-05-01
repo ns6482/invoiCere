@@ -1,4 +1,12 @@
-- title "Invoice: " + @invoice.id.to_s + " - " + @invoice.title
+- content_for :title, "Invoice - " +  @invoice.title
+.span6
+  %h1
+    INVOICE
+    =raw("<small>" + @invoice.title + "</small>")  
+  
+-if @invoice.state == 'draft'  
+  .badge
+    %h4= "DRAFT"
 #interactive{:class => "modal hide fade"}
 #invoice-centre-panel{:class=> "row"}
   #invoice-main{:class=>"span8"}

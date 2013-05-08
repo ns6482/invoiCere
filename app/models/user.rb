@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def has_roles?
-   errors.add_to_base "User must have at least one role." if self.role_ids.blank?
+    errors.add :base, "User must have at least one role." if self.role_ids.blank?
   end
   
     

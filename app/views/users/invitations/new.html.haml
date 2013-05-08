@@ -1,18 +1,18 @@
 %h2 Send invitation
 
-= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name) do |f|
+= simple_form_for  @user, :url => invitation_path(resource_name) do |f|
   =field_set_tag '' do
     .row
       .span3
-        = f.input :name, :input_html => {:value => @name}
+        = f.input :name#, :input_html => {:value => @name}
       .span3
-        = f.input :email, :input_html => {:value => @email}
+        = f.input :email#, :input_html => {:value => @email}
 
     -if can? :read, Role
       -if @client 
         =f.input :client_id, :collection => current_company.clients.accessible_by(current_ability), :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}, :selected => @client.id
       -else
-        =f.input :role_ids, :collection => @roles, :as => :check_boxes, :item_wrapper_class => 'checkbox inline', :label => 'Role'
+        =f.input :role_ids, :collection => Role.all(:conditions => ["name <> 'Client'"] ), :as => :check_boxes, :item_wrapper_class => 'checkbox inline', :label => 'Role'
         
   %button{:type=>"submit",:class=>"btn btn-primary pull-right"} Send Invitation
     

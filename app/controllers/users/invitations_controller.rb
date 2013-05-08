@@ -3,27 +3,40 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # POST /resource/invitation
   def create
+   
     
-     self.resource  = User.invite!(:email => params[:user][:email])
-     self.resource .company_id = current_company.id
-     self.resource .name = params[:user][:name]
+     @user = User.new
+     @user.company_id = current_company.id
+     @user.name = params[:user][:name]
+     @user.email = params[:user][:email]
+     
+
      
      if params[:user][:client_id]
-       self.resource.client_id = params[:user][:client_id]
-       self.resource.role_ids = [Role.find_by_name('Client').id] 
+       @user.client_id = params[:user][:client_id]
+       @user.role_ids = [Role.find_by_name('Client').id] 
      else
-       self.resource .role_ids = params[:user][:role_ids]
+       @user.role_ids = params[:user][:role_ids]
      end
      
-     self.resource .save!
-    
-     flash[:notice] = 'Invitation has been sent to user'
-     redirect_to users_url
+     if @user.save
+      @user.invite!#(:email => params[:user][:email])
+ 
+      flash[:notice] = 'Invitation has been sent to user'
+      redirect_to users_url
+     else
+        flash[:error] = @user.errors.full_messages.join(". ")
+
+        render :new
+        #super
+     end   
+     
+     
   end
   
   def new
-    @name = ''
-    @email = ''
+    #@name = ''
+    #@email = ''
     if params[:client_id]
       @client  =current_company.clients.accessible_by(current_ability).find(params[:client_id])
       
@@ -34,8 +47,6 @@ class Users::InvitationsController < Devise::InvitationsController
     #client, hide  roles input (make hidden)
     @roles = Role.all(:conditions => ["name <> 'Client'"] )
    
-   
- 
     super
    
   end

@@ -3,14 +3,26 @@ class SchedulesController < BaseController
   #before_filter :check_schedule_exists, :only => [:new, :edit]
   load_and_authorize_resource #:schedule,:through=> :invoice, :singleton => true, :except => :index
 
+  before_filter :get_currencies, :only => [:edit, :new]
+
   def index    
     @schedules = current_company.schedules    
   end
   
-  def show    
+  def show   
+    @curr = @schedule.currency
+    @dae = false
+    @time = Time.now
+ 
   end
   
   def new
+
+    @schedule.currency = current_company.preference.currency_format
+    @schedule.tax_rate = current_company.preference.tax
+    
+
+
 
     #@schedule  = Schedule.new
     ##@schedule.client_id = params[:client_id]
@@ -45,6 +57,8 @@ class SchedulesController < BaseController
      #   format.js{"edit.js"}
      # end
     #else
+    
+      @schedule.custom_message = current_company.etemplate.invoice_message
 
       respond_to do |format|
         format.html
@@ -69,12 +83,15 @@ class SchedulesController < BaseController
 
     respond_to do |format|
       
-      if params[:send_contacts]
-        @client = current_company.clients.find(@schedule.client_id)        
-        @contacts = @client.contacts
+      @schedule.base_request = "#{request.protocol}#{request.host_with_port}"
 
-        format.html{render :action => 'new'}
-      else
+      
+      #if params[:send_contacts]
+      #  @contacts = @client.contacts
+      #  @client = current_company.clients.find(@schedule.client_id)        
+
+      #  format.html{render :action => 'new'}
+      #else
          @client = current_company.clients.find( params[:schedule][:client_id])      
          @schedule.client_id =  @client.id 
          @contacts = @client.contacts
@@ -88,7 +105,7 @@ class SchedulesController < BaseController
           format.js
          end
         end
-      end
+      #end
   end
       
   def update
@@ -138,6 +155,10 @@ class SchedulesController < BaseController
       end
    end
    
+   def get_currencies
+    @currencies = all_currencies(Money::Currency.table)
+  end
+
    
     
 end

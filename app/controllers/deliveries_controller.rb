@@ -1,4 +1,5 @@
 require "open-uri"
+require "DeliveryMailer"
 
 class DeliveriesController < BaseController
   before_filter :find_invoice, :only => [:new, :index, :delete_multiple]
@@ -50,16 +51,21 @@ class DeliveriesController < BaseController
       #@delivery = Delivery.new(params[:delivery])
       if @delivery.save
 
-        if @delivery.format ==2
-          pdf_file = render_to_string(:action=>'show', :id => @invoice.id, :template=>'invoices/show.pdf.prawn')
-          Notifier.invoice_pdf(@delivery, pdf_file) # sends the email
-        elsif @delivery.format ==1
-                    
-          base = "#{request.protocol}#{request.host_with_port}"
-          Notifier.invoice(@delivery, base, "#{base}/invoices/#{@delivery.invoice.secret_id}").deliver # sends the email
-        end
+        base = "#{request.protocol}#{request.host_with_port}"
+         
+        Resque.enqueue(DeliveryMailer, @delivery.id, "#{request.protocol}#{request.host_with_port}")
 
 
+      # if @delivery.format ==2
+                
+
+#          pdf_file = render_to_string(:action=>'show', :id => @invoice.id, :template=>'invoices/show.pdf.prawn')
+    #      Notifier.invoice_pdf(@delivery, base, "#{base}/invoices/#{@delivery.invoice.secret_id}").deliver # sends the email
+#        elsif @delivery.format ==1
+#                    
+#          base = "#{request.protocol}#{request.host_with_port}"
+#          Notifier.invoice(@delivery, base, "#{base}/invoices/#{@delivery.invoice.secret_id}").deliver # sends the email
+ #       end
 
         flash[:notice] = "Invoice sent successfully"
         format.html {redirect_to invoice_path(@delivery.invoice.id)}

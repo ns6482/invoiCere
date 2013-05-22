@@ -3,7 +3,7 @@
     %ul.nav.nav-list  
       -if can? :read, @invoice
         %li= link_to 'View',  invoice_path(@invoice), :class => 'interactive'
-      
+            
       -if can? :update, @invoice and  @invoice.state != "paid" 
         %li= link_to 'Edit', edit_invoice_path(@invoice), :remote => true
         

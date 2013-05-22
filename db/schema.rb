@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419062651) do
+ActiveRecord::Schema.define(:version => 20130522062651) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -252,6 +252,9 @@ ActiveRecord::Schema.define(:version => 20130419062651) do
     t.decimal  "discount",          :precision => 10, :scale => 0
     t.integer  "format"
     t.boolean  "draft_only"
+    t.integer  "payables_mask"
+    t.string   "currency"
+    t.string   "base_request"
   end
 
   create_table "sends", :force => true do |t|

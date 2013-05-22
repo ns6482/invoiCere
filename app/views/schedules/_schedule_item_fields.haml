@@ -1,16 +1,7 @@
-.span2
+.controls.controls-row
   =f.input_field :item_description, :class => 'item_description span2'
-.span1
-  =f.input_field :qty, :class => 'item_qty span1',  :size => 3
-.span1 
-  =f.input_field :cost,   :class => 'item_cost span1', :size => 3 
-.span2 
-  =f.input_field :item_type, :class => 'item_type span2'
-.span1 
-  =f.input_field :taxable,  :class => 'item_tax span1'
-.span1
-  .total
-.span1
-  =f.link_to_remove '<i class="icon-trash"></i> '.html_safe, :class => "btn btn-mini" 
-
-.row   
+  =f.input_field :qty, :class => 'item_qty span1',  :size => 3 
+  =f.input_field :cost_cents,   :class => 'item_cost span1', :size => 3 
+  =f.input_field :item_type, :class => 'item_type span2' 
+  =f.input_field :taxable, :as => 'boolean', :class=> 'span1', :boolean_style => :inline, :label => false
+  =f.link_to_remove '<i class="icon-trash"></i> '.html_safe, :class => "btn btn-mini"

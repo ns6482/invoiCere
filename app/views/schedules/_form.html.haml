@@ -1,77 +1,98 @@
-=simple_nested_form_for  @schedule do |f|
-  = f.error_messages
-  = field_set_tag "Schedule invoice" do #,   :id => "form-main" do
-    %div{:id => "form-top", :class => "span10"}
-      
-      = f.input :client_id, :as => :select, :collection => current_company.clients.accessible_by(current_ability),  :input_html => { :class => 'input-block' }, :include_blank =>false
-      = f.input :name
-      = f.input :frequency_type, :label => "Freq", :as => :select, :collection => ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], :include_blank => false, :label_html => { :class => 'input-block' }
-      = f.input :frequency, :label => "No Repeats"
-      = f.input :next_send, :label => "Start date", :input_html => {:class=> 'span2'}
-      = f.input :end_date,  :include_blank => true, :input_html => {:class=> 'span2'}
-
-      %span{:class => 'help-block'} 
-        Leave blank to schedule forever
-      
-      = f.input :default_message, :as => :boolean, :label => "Default message", :include_blank => false, :label_html => {:class => 'checkbox'}, :wrapper_html => {:class => 'checkbox'}
-      = f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}
-      = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'inline', :label_html => {:class=>'inline'}
-      = f.input :send_to_client, :as => :select, :include_blank => false
-      
-      -if @client
-        -if @client.contacts.size > 0 
-          = f.association :schedule_sends, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :label_html => { :class => 'label_narrow collection_check_boxes' }
-        -else
-          = f.submit "Send to clients contacts...", :name => "send_contacts"
-      -#else 
-        =# f.submit "Send to clients contacts...", :name => "send_contacts"
-      = f.input :draft_only,  :as => :boolean, :wrapper_html => {:class => 'checkbox'}, :label_html => { :class => 'checkbox' }, :label => "Email as draft", :include_blank => false
-      %span{:class => 'help-block'} Otherwise invoice will be in open state
-
-      = f.input :enabled,   :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}, :label => "Enabled", :include_blank => false
-
-  = field_set_tag "Invoice Setup" do #,   :id => "form-main" do
-  
-    %div{:id => "form-top", :class => "invoice form-height-long span6"}             
-      = f.input :title, :label_html => { :class => 'label_narrow' },  :input_html => {:class => 'input-block-level'}
-      = f.input :business_id, :label => "Your ID", :label_html => { :class => 'label_narrow' },  :input_html => {:class => 'input-block-level'}
-      = f.input :purchase_order_id, :label => "Order ID", :label_html => { :class => 'label_narrow' }  ,  :input_html => {:class => 'input-block-level'}  
-      
-    %div{:id => "form-right", :class => "invoice form-height-long span2"}      
-      = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :label_html => { :class => 'label_med' }
-      = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery", :label_html => { :class => 'label_med' }
-      = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :label_html => { :class => 'label_med' }
-      = f.input :due_on, :as => :select, :label => "Due",  :collection => Schedule::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_med' }
-      = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :label_html => { :class => 'label_med' }
+#invoice{:class=>'row'}
+ 
+  =simple_nested_form_for  @schedule do |f|
+    = f.error_messages
+    = field_set_tag "Schedule invoice" do #,   :id => "form-main" do
+      .well
+        .row
+        = f.input :name, :label => "Name of Schedule"
+        = f.input :client_id, :as => :select, :collection => current_company.clients.accessible_by(current_ability),  :input_html => { :class => 'input-block' }, :include_blank =>false
+        .row
+          .span4
+            = f.input :frequency_type, :label => "Freq", :as => :select, :collection => ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], :include_blank => false, :label_html => { :class => 'input-block' }
+          .span4
+            = f.input :frequency, :label => "No Repeats (enter 0 to invoice forever)"
+        .row
+        = f.input :next_send, :label => "Start date", :input_html => {:class=> 'span2'}
+        .row
+        = f.input :end_date,  :include_blank => true, :input_html => {:class=> 'span2'}, :label => "End Date (leave blank to schedule forever)"
     
-    #form-main{:class=>'span10'}
-      .fields
-        %h3 Items
-      .fields
-        .span2
-          %strong Item       
-        .span1
-          %strong Qty
-        .span1
-          %strong Price
-        .span2 
-          %strong / Unit
-        .span1
-          %strong Tax
-        .span1
-          %strong Total
-        .span1
-
-      = f.simple_fields_for :schedule_items 
-      = f.link_to_add '<i class="icon-plus"></i> Add'.html_safe, :schedule_items, :class => "btn btn-small" 
-
-    #form-bottom{:class => "span8"}
-      .fields
-        %h3 Further Notes
-      .fields          
-        =f.input_field :notes, :rows => 2, :class=> 'input-block-level'
+        .row
+        = f.input :due_on, :as => :select, :label => "Due",  :collection => Schedule::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_med' }
+       
+        Email Settings         
+        =# f.input :default_message, :as => :boolean, :label => "Default message", :include_blank => false
+        Message
+        .placeholderable
+          = render :partial => 'etemplates/placeholders_email'
+          %br
+          = f.input :custom_message, :label => false, :input_html => { :rows => 4, :style => 'width:500px', :class => 'autogrow' }
+        = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'inline', :label_html => {:class=>'inline'}
+        =# f.input :send_to_client, :as => :select, :include_blank => false
         
+        -if @client
+          -if @client.contacts.size > 0 
+            = f.association :schedule_sends, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
+          -#else
+            =# f.submit "Send to clients contacts...", :name => "send_contacts"
+        -#else 
+          =# f.submit "Send to clients contacts...", :name => "send_contacts"
+        = f.input :draft_only,  :as => :boolean, :label => "Email as draft (otherwise will be Open)", :include_blank => false  
+        = f.input :enabled,   :as => :boolean, :label => "Enabled", :include_blank => false
+      .row
+    = field_set_tag "Invoice Setup" do #,   :id => "form-main" do
     
-    #btn{:class => 'form-actions row pull-right'}
-      %button{:type=>"submit",:class=>"btn btn-primary btn-large"} Create Reoccuring Invoice
+    
+      %div{:id => "form-top", :class => "invoice form-height-long span6"}             
+        = f.input :title, :label_html => { :class => 'label_narrow' },  :input_html => {:class => 'input-block-level'}
+        = f.input :business_id, :label => "Your ID", :label_html => { :class => 'label_narrow' },  :input_html => {:class => 'input-block-level'}
+        = f.input :purchase_order_id, :label => "Purchase Order ID", :label_html => { :class => 'label_narrow' }  ,  :input_html => {:class => 'input-block-level'}
+        
+        = f.input :currency, :collection => @currencies, :selected => @schedule.currency.downcase, :required => true , :include_blank => false
+        
+  
+                
+      %div{:id => "form-right", :class => "invoice form-height-long span2"}      
+        = f.input :tax_rate, :input_html => {:size => 1}, :label => "Tax %", :input_html => {:class => 'input-small'}, :value => @schedule.tax_rate
+        = f.input :delivery_charge, :input_html => {:size => 1}, :label => "Delivery", :input_html => {:class => 'input-small'}
+        = f.input :late_fee, :input_html => {:size => 1}, :label => "Late Fee", :input_html => {:class => 'input-small'}
+        = f.input :discount, :input_html => {:size => 4}, :label => "Discount (% or value)", :input_html => {:class => 'input-small'}
+      
+      #form-main{:class=>'span10'}
+        %h4 Items
+        .row
+          .span2
+            %strong Item       
+          .span1
+            %strong Qty
+          .span1
+            %strong Price
+          .span2 
+            %strong / Unit
+          .span1
+            %strong Tax
+          .span1
+  
+        = f.simple_fields_for :schedule_items 
+        = f.link_to_add '<i class="icon-plus"></i> Add'.html_safe, :schedule_items, :class => "btn btn-small" 
+  
+      #form-bottom{:class => "span8"}
+        .fields
+          %h4 Further Notes
+        .fields          
+          =f.input_field :notes, :rows => 2, :class=> 'input-block-level'
+          
+      #footer-pay.span8
+        %h4 Client can pay by:
+        =f.input :payables, :as => :check_boxes, :collection => Schedule::PAYABLES, :item_wrapper_class => 'checkbox inline', :label => ''
+    
 
+          
+          
+      .row
+      .control-group
+        .controls
+          =link_to "Cancel", schedules_path, :class => 'btn'
+          %button{:type=>"submit",:class=>"btn btn-primary btn-large pull-right"} Save Reoccuring Invoice
+
+  

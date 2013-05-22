@@ -4,4 +4,4 @@
     =  #link_to('Edit Account', { :controller => "users", :action => "edit", :id => @current_user.id })
 -else
   %li
-    = link_to('Signup', new_company_url(:subdomain => false))
+    = link_to('Signup', new_company_url(:host => request.domain))

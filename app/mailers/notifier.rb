@@ -2,6 +2,7 @@ require "open-uri"
 require 'money'
 
 class Notifier < ActionMailer::Base
+  #include Resque::Mailer
   layout 'email'
   helper :application
 
@@ -10,20 +11,28 @@ class Notifier < ActionMailer::Base
     :return_path => 'system@example.com'
   
 
-  def invoice_pdf(delivery, pdf_file)
+  def invoice_pdf(delivery, invoice_link = nil, direct_link = nil)
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client
+    @msg = RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.").gsub("{{d.invoice_link}}", "{{invoice_link}}").gsub("{{d.direct_link}}", "{{direct_link}}")).render('d' => @delivery,'invoice_link' => invoice_link, 'direct_link' => direct_link ))
     
-    mail(
-    :subject  =>   @delivery.invoice.title,
-    :recipients =>  @delivery.recipients,
-    :from   =>    @company,
-    :content_type =>  "text/html",
-    :body   =>  @delivery.message,
+    logo_url = @client.company.setting.logo.url
+    pdf_file =  InvoiceReport.new(@delivery.invoice, logo_url).to_pdf
+ 
+    attachments["invoice.pdf"] = {:mime_type => 'application/pdf', :content => pdf_file }
 
-    :attachment => {:content_type => "application/octet-stream", :filename => "Invoice details - " + @invoice.title + ".pdf", :body => pdf_file}
-  )
+
+    mail(
+      :subject  =>   @delivery.invoice.title,
+      :to =>  @delivery.recipients,
+      :from   =>    @company,
+      :body   =>  @delivery.message,
+      #:attachment => {:content_type => "application/octet-stream", :filename => "Invoice details - " + @invoice.title + ".pdf", :body => pdf_file}
+    ) do |format|
+       format.html { render :layout => 'email' }
+
+    end
   end
 
   def invoice(delivery, invoice_link = nil, direct_link = nil)

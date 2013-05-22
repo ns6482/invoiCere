@@ -29,7 +29,9 @@ class InvoicesController < BaseController
   end
 
   def show
-
+    
+    @style = params[:style]
+   
     @curr = @invoice.currency
     @dae = false
     @time = Time.now

@@ -1,0 +1,29 @@
+-content_for :logo do
+  -if @user.company.setting.logo 
+    %img{:id => "headerImage campaign-icon", "mc:allowtext" => "", "mc:edit" => "header_image", "mc:label" => "header_image", :src => @resource.company.setting.logo.url, :style => "max-width:180px;"}/
+  %h2= @user.company.name
+
+
+-content_for :header do
+  %h1 Invitation
+
+-content_for :body do
+  %table{:width => '600px'}
+    %tr
+      %td{:align => 'left'}
+        %p
+          Hello
+          =@user.name
+          
+        %p
+          = @user.company.name
+          has invited you to access their   
+          =link_to 'Invoice Management System', root_url(:protocol => 'https')
+          , you can accept it through the link below:
+
+        %p= link_to 'Accept invitation', accept_invitation_url(@resource, :invitation_token => @resource.invitation_token, :protocol => 'https')
+
+        %p
+          If you don't want to accept the invitation, please ignore this email.
+          %br
+          Your account won't be created until you access the link above and set your password.

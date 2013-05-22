@@ -9,7 +9,7 @@ class Schedule < ActiveRecord::Base
     60 => "After 60 Days" 
    } 
 
-  attr_accessible :client_id, :name, :format, :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :schedule_items_attributes, :notes, :draft_only
+  attr_accessible :client_id, :name, :format, :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :schedule_items_attributes, :notes, :draft_only, :currency, :payables
 
   belongs_to :client
 
@@ -27,18 +27,33 @@ class Schedule < ActiveRecord::Base
   validates_format_of :discount, :with => /^((0*?\.\d+(\.\d{1,2})?)|((\d+(\.\d{1,2})?)|(((100(?:\.0{1,2})?|0*?\.\d{1,2}|\d{1,2}(?:\.\d{1,2})?)\%))))$/, :message=> "must be a positive numerical or percentage value, maximum two decimal places allowed", :allow_nil => true  
 
 
+  monetize :delivery_charge, :as => "delivery_charge_cents"
+
+  PAYABLES = %w[Paypal GoCardless Paymill]
+  
+  def payables=(payables)
+    self.payables_mask = (payables & PAYABLES).map { |r| 2**PAYABLES.index(r) }.inject(0, :+)
+  end
+
+  def payables
+    PAYABLES.reject do |r|
+      ((payables_mask || 0) & 2**PAYABLES.index(r)).zero?
+    end
+  end
+  
+  def can_pay_through?(payable)
+    payables.include?(payable.to_s) or payable == "Manual"
+  end
+
+
   def send_invoice!
 
     #master_invoice = self.invoice        
     #invoice  = master_invoice.clone :include => :invoice_items
         
     invoice = Invoice.new
-    invoice.client_id = self.client_id 
-    invoice.state = "open"
-    
-    
-    #TODO add schedule draft only option
-    
+    invoice.client_id = self.client_id     
+       
     
     if self.draft_only 
      invoice.state = "draft"
@@ -57,6 +72,8 @@ class Schedule < ActiveRecord::Base
     invoice.discount = self.discount 
     invoice.due_date = Date.today + (self.due_on ||= 0)
     invoice.due_days = self.due_on ||= 0
+    invoice.currency = self.currency
+    invoice.payables = self.payables
     
     invoice.save!
     
@@ -67,6 +84,7 @@ class Schedule < ActiveRecord::Base
       i.qty =  s.qty
       i.cost= s.cost
       i.item_type =  s.item_type
+      i.taxable = s.taxable
       i.save!
     end
     
@@ -83,14 +101,14 @@ class Schedule < ActiveRecord::Base
     self.schedule_sends.each do |send|
       delivery.contacts << send.contact
     end
-
+    
     if delivery.format ==2
-          pdf_file = InvoiceReport.new(invoice).to_pdf
-          
-          Notifier.invoice_pdf(delivery, pdf_file) # sends the email
-    else 
-          Notifier.invoice(delivery) # sends the email   end
-    end
+     # pdf_file = render_to_string(:action=>'show', :id => invoice_id, :template=>'invoices/show.pdf.prawn')
+      Notifier.invoice_pdf(delivery, self.base_link, "#{self.base_link}/invoices/#{delivery.invoice.secret_id}").deliver # sends the email
+    elsif delivery.format ==1            
+      Notifier.invoice(delivery, self.base_link, "#{self.base_link}/invoices/#{delivery.invoice.secret_id}").deliver # sends the email
+    end    
+
     
     #Notifier.invoice(delivery) # sends the email
     

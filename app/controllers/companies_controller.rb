@@ -33,7 +33,7 @@ class CompaniesController < BaseController
       @company.save
       @user.company_id = @company.id
       @user.save
-      flash[:notice] = "Successfully created company."
+      flash[:notice] = "Welcome to VisioInvoice!"
       sign_in_and_redirect(@user, :subdomain => @company.name)
     else
       render :action => 'new'

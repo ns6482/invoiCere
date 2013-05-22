@@ -1,0 +1,20 @@
+@import "bootstrap"
+
+body, #content, #container
+  width: 100%
+  margin: 0
+  float: none
+  background: white url(none)
+
+a
+  &:link, &:visited
+    color: #00c
+    font-weight: bold
+    text-decoration: underline
+
+#content a
+  &:link:after, &:visited:after
+    content: " (" attr(href) ") "
+    
+#header, .nav, .noprint, .well
+  display: none

@@ -1,5 +1,5 @@
 class ScheduleSend < ActiveRecord::Base
-  belongs_to :schedule
+  belongs_to :invoice
   belongs_to :contact
   
   attr_accessor :company_id

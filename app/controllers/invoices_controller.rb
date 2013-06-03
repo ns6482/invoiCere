@@ -4,15 +4,18 @@ require 'prawn/core'
 require 'prawn/layout'
 
 class InvoicesController < BaseController
-  before_filter :get_clients, :only => [:index, :new, :edit]
+  before_filter :get_invoices, :only => [:index, :edit]
+  before_filter :get_clients , :except =>[:index, :show]
   before_filter :find_invoice, :only => [:show, :edit, :destroy, :update]
   #before_filter :get_countries, :only => [:edit, :new]
   before_filter :get_currencies, :only => [:edit, :new]
   
   skip_before_filter :check_logged_in, :only => [:show]
 
-  load_and_authorize_resource :except => [:show]
+  #load_and_authorize_resource :except => [:show]
   def index
+    authorize! :read, StandardInvoice
+
     @search = @invoices.search(params[:search])
 
     #@invoices = @search.all
@@ -29,6 +32,7 @@ class InvoicesController < BaseController
   end
 
   def show
+    authorize! :read, @invoice
     
     @style = params[:style]
    
@@ -59,7 +63,12 @@ class InvoicesController < BaseController
   #TODO create partial buttons and put into show part, create content for
 
   def new
+    
 
+
+    @invoice = StandardInvoice.new 
+    authorize! :create, @invoice
+    
     @invoice.currency = current_company.preference.currency_format
 
     if params[:client_id]
@@ -67,7 +76,7 @@ class InvoicesController < BaseController
     end
 
     if params[:id]
-      master_invoice = current_company.invoices.find(params[:id])
+      master_invoice = current_company.invoices.find(params[:id], :conditions => {:type => 'StandardInvoice'})
       @invoice  = master_invoice.dup :include => :invoice_items
       @invoice.state = "draft"
       @invoice.invoice_date=Date.today
@@ -99,19 +108,23 @@ class InvoicesController < BaseController
   end
 
   def create
+    
+   # @clients = current_company.clients.accessible_by(current_ability)#.accessible_by(current_ability, :read)
 
-    #@invoice = Invoice.new(params[:invoice])
-    #authorize! :create, @invoice
+
+    @invoice = StandardInvoice.new(params[:invoice])
+    authorize! :create, @invoice
 
     if  current_company.clients.exists?(@invoice.client)
       if @invoice.save
         flash[:notice] =   "Successfully created invoice."
         redirect_to @invoice
       else
-        flash[:notice] = "Please make sure fields are completed correctly"
+        flash[:error] = "Please make sure fields are completed correctly"
         render :action => 'new'
       end
     else
+      flash[:error] = "You must select a client"
       render :action => 'new'
     end
   end
@@ -121,7 +134,7 @@ class InvoicesController < BaseController
     #redirect if draft status
 
     #@invoice = Invoice.find(params[:id])
-    #authorize! :update, @invoice
+    authorize! :create, @invoice
   end
 
   def update
@@ -161,7 +174,7 @@ class InvoicesController < BaseController
           format.html{redirect_to @invoice}
         format.js
         else
-          flash[:error] = @invoice.errors.full_messages.join("\n")
+        flash[:error] = "Please make sure fields are completed correctly"
           format.html {render :action => 'edit'}
           format.js { render :action => 'edit'}
         end
@@ -180,11 +193,13 @@ class InvoicesController < BaseController
 
     respond_to do |format|
 
+      authorize! :delete, Invoice
+    
       i = 0
       #arr_item = Array.new
-      @invoices_to_delete = @invoices.find(params[:invoice_ids])
+      @invoices_to_delete = current_company.invoices.find(params[:invoice_ids], :conditions => {:type => 'StandardInvoice'})
       @invoices_to_delete.each do |invoice|
-      #invoice.destroy
+      invoice.destroy
       end
 
       flash[:notice] ='Invoices successfully deleted.'
@@ -198,10 +213,10 @@ class InvoicesController < BaseController
 
   def find_invoice
     if user_signed_in?
-      @invoice = current_company.invoices.find(params[:id])
+      @invoice = current_company.invoices.find(params[:id], :conditions => {:type => 'StandardInvoice'})
       authorize! :show, @invoice
      else
-        @invoice = current_company.invoices.find_by_secret_id(params[:id])
+        @invoice = current_company.standard_invoices.find_by_secret_id(params[:id])
      end
      
      if @invoice       
@@ -211,10 +226,18 @@ class InvoicesController < BaseController
       end
   end
 
+
   def get_clients
+    
+        @clients = current_company.clients.accessible_by(current_ability)#.accessible_by(current_ability, :read)
+
+    
+  end
+  
+  def get_invoices
     #authorize! :read, current_company
-    @clients = current_company.clients.accessible_by(current_ability)#.accessible_by(current_ability, :read)
-    @invoices = current_company.invoices.accessible_by(current_ability)
+    #@clients = current_company.clients.accessible_by(current_ability)#.accessible_by(current_ability, :read)
+    @invoices = current_company.invoices.accessible_by(current_ability).where(:type => 'StandardInvoice')
 
   
 

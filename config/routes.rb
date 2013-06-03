@@ -34,8 +34,10 @@ VisioInvoiceV3::Application.routes.draw do
    get "payments/confirm"
    post "payments/complete"
 
+
   #with_options :conditions => { :subdomain => /^[A-Za-z0-9-]+$/ } do |site|
     
+  
     resources :schedules do
       #resource :client, :only => [:new]
     end#, :only => [:index, :new]
@@ -68,7 +70,7 @@ VisioInvoiceV3::Application.routes.draw do
       resources :comments, :only => [:new, :create, :destroy, :index], :shallow =>true
       resources :invoice_items,  :shallow =>true
       resources :feedbacks, :shallow =>true
-      resource  :schedule, :only => [:show, :new, :create, :destroy, :edit, :update]
+      #resources  :schedules#, :only => [:show, :new, :create, :destroy, :edit, :update]
       
     end
 

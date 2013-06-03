@@ -1,5 +1,5 @@
 - title "Schedule"
-.hero-unit
+.well
   %table
     %tr 
       %td
@@ -42,6 +42,9 @@
   #invoice-header-details{:class=> "span7"}
     %table{:class=>"table table-condensed"}
       %tr
+        %th Invoice Title
+        %td= h @schedule.title
+      %tr
         %th Your ID
         %td= h @schedule.business_id
       %tr
@@ -73,7 +76,7 @@
           %th Total
           %th Tax
       %tbody
-        =render :partial => "invoices/show_elements/show_invoice_item", :collection => @schedule.schedule_items, :as => :show_invoice_item
+        =render :partial => "invoices/show_elements/show_invoice_item", :collection => @schedule.invoice_items, :as => :show_invoice_item
   #invoice-summary{:class=>"offset4 span3"}
     =render :partial => "invoices/show_elements/show_invoice_summary", :locals => {:invoice => @schedule}
   #invoice-footer{:class=>"span12"}
@@ -88,14 +91,8 @@
           -if @schedule.late_fee > 0
             , the late fee is set to
             %strong= h csymb @curr, @schedule.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
-   
-  #invoice-time-now
-    Printed on  
-    =@schedule.client.company.preference.convert_datetime(Time.now)
 
-%p
-  = link_to "Edit", edit_schedule_path(@schedule.id)
-  |
-  = link_to "Destroy", @schedule, :confirm => 'Are you sure?', :method => :delete
-  |
+-content_for :left do   
   = link_to "View All", schedules_path
+-content_for :right do   
+  = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary btn-large'

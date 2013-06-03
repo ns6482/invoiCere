@@ -25,6 +25,8 @@ class ClientsController < BaseController
   def show
     #@client = Client.find(params[:id])
 
+    @invoices = @client.invoices.where(:type => 'standardInvoice')
+    #TODO scheduled invoices
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @client }

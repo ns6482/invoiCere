@@ -19,7 +19,7 @@
   -if can? :create, Invoice
    = link_to '<i class="icon-plus icon-white"></i> New Invoice'.html_safe, new_invoice_path, :class => 'btn btn-primary'
     
-  -if can? :read, Schedule
+  -if can? :read, ScheduleInvoice
    = link_to "Reoccuring Invoices", schedules_path, :class => 'btn'
  
   -if can? :read, Invoice

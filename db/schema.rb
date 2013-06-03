@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522062651) do
+ActiveRecord::Schema.define(:version => 20130602145100) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -138,6 +138,22 @@ ActiveRecord::Schema.define(:version => 20130522062651) do
     t.integer  "due_amount"
     t.string   "secret_id"
     t.integer  "payables_mask"
+    t.string   "name"
+    t.integer  "frequency"
+    t.string   "frequency_type"
+    t.date     "last_sent"
+    t.date     "next_send"
+    t.integer  "due_on"
+    t.date     "end_date"
+    t.integer  "enabled"
+    t.integer  "send_to_client"
+    t.text     "message"
+    t.integer  "default_message"
+    t.text     "custom_message"
+    t.integer  "format"
+    t.boolean  "draft_only"
+    t.string   "base_request"
+    t.string   "type"
   end
 
   create_table "items", :force => true do |t|
@@ -219,7 +235,7 @@ ActiveRecord::Schema.define(:version => 20130522062651) do
   end
 
   create_table "schedule_sends", :force => true do |t|
-    t.integer  "schedule_id"
+    t.integer  "schedule_invoice_id"
     t.integer  "contact_id"
     t.string   "status"
     t.datetime "created_at"

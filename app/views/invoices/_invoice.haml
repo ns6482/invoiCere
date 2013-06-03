@@ -3,7 +3,8 @@
     %td= check_box_tag "invoice_ids[]", invoice.id
     %td= h invoice.invoice_date.strftime("%Y %b %d")
     
-    %td= link_to_if can?(:read, invoice), invoice.id, invoice
+    -if can?( :read, invoice)
+      %td= link_to invoice.id, invoice_path(invoice) #invoice.id, invoice
     %td 
       %strong=invoice.client.name#link_to_if can?(:read, invoice.client), invoice.client.name, invoice.client
     %td= h invoice.title

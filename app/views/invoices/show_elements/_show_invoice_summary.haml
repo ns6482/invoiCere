@@ -2,32 +2,32 @@
  %tr
   %td
    %strong Subtotal:
-  %td= h csymb @curr, @invoice.total_cost_cents, @dae
+  %td= h csymb @curr, invoice.total_cost_cents, @dae
  %tr
   %td
    %strong Subtotal inc Tax:
-  %td= h csymb @curr, @invoice.total_cost_inc_tax_cents, @dae
- -if !@invoice.discount.nil? and @invoice.discount.length >0 
+  %td= h csymb @curr, invoice.total_cost_inc_tax_cents, @dae
+ -if !invoice.discount.nil? and invoice.discount.length >0 
 
   %tr
    %td
     %strong Discount:
-    -if @invoice.discount.include? "%"
-     %td= @invoice.discount
+    -if invoice.discount.include? "%"
+     %td= invoice.discount
      %td= h csymb @curr, number_with_precision(@invoice.discounted_value, :precision => 2), @dae
     -else 
-     %td= h csymb @curr,  @invoice.discount, @dae
+     %td= h csymb @curr,  invoice.discount, @dae
  %tr
   %td
    %strong Delivery:
-  %td= h csymb @curr,  @invoice.delivery_charge_cents, @dae#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
+  %td= h csymb @curr,  invoice.delivery_charge_cents, @dae#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
  %tr
   %td
    %strong Total:
   %td
-   %strong= h csymb @curr, @invoice.total_cost_inc_tax_delivery_cents, @dae#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
+   %strong= h csymb @curr, invoice.total_cost_inc_tax_delivery_cents, @dae#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
  %tr
   %td
    %strong Payment Due:
   %td
-   %strong= h csymb @curr,  @invoice.remaining_amount_cents, @dae #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","
+   %strong= h csymb @curr,  invoice.remaining_amount_cents, @dae #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","

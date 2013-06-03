@@ -1,6 +1,6 @@
 -title @client.company_name
 
-%table{:class => 'table-bordered'}
+%table{:class => 'hero-unit'}
   %tr
     %td=@client.display_address
   %tr
@@ -27,7 +27,7 @@
 %br
 #invoices
   %h3 Invoices 
-  -if @client.invoices.size > 0 
+  -if @invoices.size > 0 
     %table{:id => "invoices", :class => 'table table-striped table-condensed'}
       %thead
         %tr
@@ -41,7 +41,7 @@
           %th
           %th
       %tbody{:id => "invoices_body"}
-        =render :partial => "invoices/invoice", :collection => @client.invoices
+        =render :partial => "invoices/invoice", :collection => @invoices
 
 =content_for :right do
 

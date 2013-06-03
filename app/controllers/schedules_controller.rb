@@ -1,15 +1,19 @@
 class SchedulesController < BaseController
   #before_filter :find_invoice, :except => :index
   #before_filter :check_schedule_exists, :only => [:new, :edit]
-  load_and_authorize_resource #:schedule,:through=> :invoice, :singleton => true, :except => :index
+  #load_and_authorize_resource :schedule_invoice#,:through=> :invoice, :singleton => true, :except => :index
 
-  before_filter :get_currencies, :only => [:edit, :new]
+
 
   def index    
-    @schedules = current_company.schedules    
+    @schedules = current_company.invoices.where(:type => 'ScheduleInvoice')    
   end
   
   def show   
+    
+    @schedule = current_company.invoices.find(params[:id], :conditions => {:type => 'ScheduleInvoice'})
+    authorize! :read, @schedule
+   
     @curr = @schedule.currency
     @dae = false
     @time = Time.now
@@ -17,6 +21,14 @@ class SchedulesController < BaseController
   end
   
   def new
+    
+    @method = 'post'
+    @action = 'create'
+    
+    @schedule  = ScheduleInvoice.new
+    authorize! :create, @schedule
+    
+    
 
     @schedule.currency = current_company.preference.currency_format
     @schedule.tax_rate = current_company.preference.tax
@@ -43,7 +55,7 @@ class SchedulesController < BaseController
     #  @client = current_company.clients.find(@schedule.client_id)        
     #  @contacts = @client.contacts
     #else
-      @schedule.schedule_items.build
+      @schedule.invoice_items.build
     #end
     
 
@@ -68,7 +80,12 @@ class SchedulesController < BaseController
   end
 
   def edit
-   @schedule = current_company.schedules.find(params[:id])
+   @method = 'put'
+   @action = 'update'
+
+   @schedule = current_company.invoices.find(params[:id], :conditions => {:type => 'ScheduleInvoice'})
+   authorize! :update, @schedule
+
    @client = @schedule.client
    @contacts = @schedule.client.contacts
    
@@ -83,6 +100,11 @@ class SchedulesController < BaseController
 
     respond_to do |format|
       
+      @schedule = ScheduleInvoice.new(params[:invoice])
+      
+      authorize! :create, @schedule
+
+      
       @schedule.base_request = "#{request.protocol}#{request.host_with_port}"
 
       
@@ -92,9 +114,10 @@ class SchedulesController < BaseController
 
       #  format.html{render :action => 'new'}
       #else
-         @client = current_company.clients.find( params[:schedule][:client_id])      
-         @schedule.client_id =  @client.id 
-         @contacts = @client.contacts
+      
+         #@client = current_company.clients.find( params[:schedule][:client_id])      
+         #@schedule.client_id =  @client.id 
+         #@contacts = @client.contacts
     
          if @schedule.save
           flash[:notice] = "Successfully created schedule."
@@ -111,15 +134,19 @@ class SchedulesController < BaseController
   def update
 
     respond_to do |format|
+      
+      @schedule = current_company.invoices.find(params[:id], :conditions => {:type => 'ScheduleInvoice'})
+      authorize! :update, @schedule
+
      
       @client = current_company.clients.find(@schedule.client_id)#(params[:schedule][:client_id])
       @schedule.client_id = @client.id
       @contacts = @client.contacts
       
       #if @schedule.valid?
-      if @schedule.update_attributes(params[:schedule])
+      if @schedule.update_attributes(params[:invoice])
         flash[:notice] = "Successfully updated schedule."
-        format.html {redirect_to :action => :index} #{redirect_to invoice_schedule_url(@invoice)}
+        format.html {redirect_to schedule_path(@schedule)} #{redirect_to invoice_schedule_url(@invoice)}
         format.js
       else
         format.html{render :action => 'edit'}

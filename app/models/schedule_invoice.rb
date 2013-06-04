@@ -66,21 +66,30 @@ class ScheduleInvoice < Invoice
     self.last_sent = Date.today
     self.next_send = get_next_send
     
-    self.save!
+    self.save
     
       
-    delivery = Delivery.new(:invoice_id => invoice.id, :message => self.message, :client_email => send_to_client, :format => self.format)
+    delivery = Delivery.new(:invoice_id => invoice.id, :client_email => send_to_client, :format => self.format)
     delivery.schedule = 1
+    
+    if self.default_message.nil?
+      delivery.message = self.custom_message
+    else
+      delivery.message = invoice.client.etemplate.invoice_message
+    end
+
     
     self.schedule_sends.each do |send|
       delivery.contacts << send.contact
     end
     
+    delivery.save
+    
     if delivery.format ==2
      # pdf_file = render_to_string(:action=>'show', :id => invoice_id, :template=>'invoices/show.pdf.prawn')
-      Notifier.invoice_pdf(delivery, self.base_link, "#{self.base_link}/invoices/#{delivery.invoice.secret_id}").deliver # sends the email
+      Notifier.invoice_pdf(delivery, self.base_request, "#{self.base_request}/invoices/#{delivery.invoice.secret_id}").deliver # sends the email
     elsif delivery.format ==1            
-      Notifier.invoice(delivery, self.base_link, "#{self.base_link}/invoices/#{delivery.invoice.secret_id}").deliver # sends the email
+      Notifier.invoice(delivery, self.base_request, "#{self.base_request}/invoices/#{delivery.invoice.secret_id}").deliver # sends the email
     end    
 
     

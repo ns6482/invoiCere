@@ -31,7 +31,7 @@
         
         -if @client
           -if @client.contacts.size > 0 
-            = f.association :schedule_sends, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
+            = f.association :contacts, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
           -#else
             =# f.submit "Send to clients contacts...", :name => "send_contacts"
         -#else 

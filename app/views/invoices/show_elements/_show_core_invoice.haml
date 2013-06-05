@@ -51,7 +51,7 @@
      %strong= pluralize(@invoice.due_days, 'day')
      -if @invoice.late_fee > 0
       , the late fee is set to
-      %strong= h csymb @curr, @invoice.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+      %strong= h csymb @invoice.currency, @invoice.late_fee_cents, false#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
    
   #invoice-time-now
    Printed on  

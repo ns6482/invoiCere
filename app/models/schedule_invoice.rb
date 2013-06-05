@@ -49,7 +49,7 @@ class ScheduleInvoice < Invoice
     invoice.payables = self.payables
     invoice.seed_schedule_id =self.id
     
-    invoice.save!
+    invoice.save
     
    self.invoice_items.each do |s|
       i = InvoiceItem.new
@@ -59,9 +59,11 @@ class ScheduleInvoice < Invoice
       i.cost= s.cost
       i.item_type =  s.item_type
       i.taxable = s.taxable
-      i.save!
+      i.save
     end
     
+    invoice.update_invoice_totals
+
     
     self.last_sent = Date.today
     self.next_send = get_next_send
@@ -72,12 +74,8 @@ class ScheduleInvoice < Invoice
     delivery = Delivery.new(:invoice_id => invoice.id, :client_email => send_to_client, :format => self.format)
     delivery.schedule = 1
     
-    if self.default_message.nil?
-      delivery.message = self.custom_message
-    else
-      delivery.message = invoice.client.etemplate.invoice_message
-    end
-
+    delivery.message = self.custom_message
+   
     
     self.schedule_sends.each do |send|
       delivery.contacts << send.contact

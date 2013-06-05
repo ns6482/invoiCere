@@ -39,11 +39,18 @@
 
 
 #invoice-preview{:class => "row"}
+
+  .span6
+    %h1
+      INVOICE
+      =raw("<small>" + @schedule.title + "</small>")  
+    
+  -if @schedule.draft_only == 'draft'  
+    .badge
+      %h4= "DRAFT"
+
   #invoice-header-details{:class=> "span7"}
     %table{:class=>"table table-condensed"}
-      %tr
-        %th Invoice Title
-        %td= h @schedule.title
       %tr
         %th Your ID
         %td= h @schedule.business_id

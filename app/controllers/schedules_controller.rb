@@ -33,6 +33,7 @@ class SchedulesController < BaseController
     @schedule.currency = current_company.preference.currency_format
     @schedule.tax_rate = current_company.preference.tax
     
+    @schedule.custom_message = current_company.etemplate.invoice_message
 
 
 

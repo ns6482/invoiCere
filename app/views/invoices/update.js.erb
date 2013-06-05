@@ -1,5 +1,5 @@
-$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
-$(".notice").fadeOut(3000);
 $("#dashboard-centre").empty();
-$("#dashboard-centre").html("<%= escape_javascript(render("invoices/show_elements/show")) %>");
-$("#invoice-side-panel").html("<%= escape_javascript(render("invoices/show_elements/toolbar")) %>");
+$("#dashboard-centre").prepend('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><div id="flash_notice"><%= escape_javascript(flash.discard(:notice)) %></div></div>');
+$("#dashboard-centre").append("<%= escape_javascript(render("invoices/show_elements/show")) %>");
+$(".alert").fadeOut(3000);
+

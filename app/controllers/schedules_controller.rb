@@ -1,3 +1,5 @@
+require "ReoccuringInvoice"
+
 class SchedulesController < BaseController
   #before_filter :find_invoice, :except => :index
   #before_filter :check_schedule_exists, :only => [:new, :edit]
@@ -13,6 +15,9 @@ class SchedulesController < BaseController
     
     @schedule = current_company.invoices.find(params[:id], :conditions => {:type => 'ScheduleInvoice'})
     authorize! :read, @schedule
+    
+    @invoices = current_company.invoices.where(:type => 'StandardInvoice', :seed_schedule_id => params[:id])
+#.find_by_seed_schedule_id(params[:id])
    
     @curr = @schedule.currency
     @dae = false
@@ -25,7 +30,18 @@ class SchedulesController < BaseController
     @method = 'post'
     @action = 'create'
     
-    @schedule  = ScheduleInvoice.new
+    
+    if params[:id]
+      master_invoice = current_company.invoices.find(params[:id], :conditions => {:type => 'ScheduleInvoice'})
+      @schedule  = master_invoice.dup :include => :invoice_items
+      @schedule.state = "draft"
+
+    #      @invoice.invoice_items << InvoiceItem.new(:type=> "test", :description => "gg")
+    else
+    
+      @schedule  = ScheduleInvoice.new
+    end
+    
     authorize! :create, @schedule
     
     
@@ -72,7 +88,7 @@ class SchedulesController < BaseController
     #else
     
       @schedule.custom_message = current_company.etemplate.invoice_message
-
+      
       respond_to do |format|
         format.html
         format.js
@@ -120,6 +136,7 @@ class SchedulesController < BaseController
          #@schedule.client_id =  @client.id 
          #@contacts = @client.contacts
     
+      
          if @schedule.save
           flash[:notice] = "Successfully created schedule."
           format.html {redirect_to :action => :index} #{redirect_to invoice_schedule_url(@invoice)}
@@ -161,6 +178,27 @@ class SchedulesController < BaseController
     flash[:notice] = "Successfully destroyed schedule."
     redirect_to schedules_url
   end
+
+  def delete_multiple
+
+    respond_to do |format|
+
+      authorize! :delete, ScheduleInvoice
+    
+      i = 0
+      #arr_item = Array.new
+      @schedules_to_delete = current_company.invoices.find(params[:invoice_ids], :conditions => {:type => 'ScheduleInvoice'})
+      @schedules_to_delete.each do |schedule|
+      schedule.destroy
+      end
+
+      flash[:notice] ='Reoccuring invoices successfully deleted.'
+      format.html {redirect_to invoices_url}
+      format.js { render :action => 'delete_multiple.js.erb'}
+    end
+
+  end
+
 
   private
   

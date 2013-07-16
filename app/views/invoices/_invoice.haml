@@ -15,7 +15,10 @@
   
     %td= h csymb invoice.currency ||= current_company.preference.currency_format, invoice.total_cost_inc_tax_delivery_cents
     %td= h csymb invoice.currency ||= current_company.preference.currency_format , invoice.remaining_amount_cents
-  
+    %td
+      -if invoice.seed_schedule_id
+        = link_to '<i class="icon-time"></i> '.html_safe, schedule_path(invoice.seed_schedule_id)
+
     %td
       -if can? :update, invoice
         = link_to '<i class="icon-edit"></i> '.html_safe, edit_invoice_path(invoice), :class => 'btn'

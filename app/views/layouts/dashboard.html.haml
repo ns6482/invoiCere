@@ -22,9 +22,12 @@
       %ul{:class=>'nav nav-tabs'}
         %li{:class=> 'active'}
           =link_to 'Dashboard', root_path
-        -if can? :read, Invoice
+        -if can? :read, StandardInvoice
           %li
             =link_to'Invoices', invoices_path
+        -if can? :read, ScheduleInvoice
+          %li
+            =link_to'Reocurring', schedules_path
         -if can? :read, Client
           %li
             =link_to 'Clients', clients_path

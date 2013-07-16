@@ -1,0 +1,6 @@
+morning:
+  cron: 34 22 * * *
+  args:
+  class: ReoccuringInvoice
+  description: "Creates all invoices from scheuled invoices"
+  queue: :reoccuring_invoice_queue

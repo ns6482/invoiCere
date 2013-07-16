@@ -54,6 +54,7 @@ gem 'money-rails'
 gem 'aws-sdk'
 gem 'resque'
 gem 'resque_mailer'
+gem  'resque-scheduler'
 #gem 'roadie'
 #gem "jquery-ui-rails"
 

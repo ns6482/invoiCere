@@ -1,30 +1,20 @@
 - title "Reocurring Invoices"
 -if @schedules.count > 0
+
+  =form_tag delete_multiple_schedules_path, :method => :delete, :remote => true do
+    -if can? :delete, Invoice
+      = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-small btn-danger'
   
-  %table{:class => 'table table-striped table-hover'}
-    %thead
-      %th Name
-      %th Client
-      %th Frequency
-      %th Frequency Type
-      %th Last Sent
-      %th Enabled    
-    - for schedule in @schedules    
-      %tr{:class=> cycle("odd", "even")}
-        %td= link_to schedule.name, schedule_path(schedule)      
-        %td= h schedule.client.name
-        %td= h schedule.frequency
-        %td= h schedule.frequency_type
-        %td= h schedule.last_sent
-        %td= h schedule.enabled
-        %td= link_to 'Edit', edit_schedule_path(schedule)      
-        %td= link_to 'Delete', schedule_path(schedule), :confirm => 'Are you sure?', :method => :delete
+    =render 'schedules'
+  
+  
 -else
   -if can? :create, ScheduleInvoice
     No Reocurring Invoices, create a new one
-    = link_to " now", new_invoice_path     
+    = link_to " now", new_schedule_path     
 
 =content_for :right do
   -if can? :create, ScheduleInvoice
-    = link_to "Create", new_schedule_path, :class => 'btn btn-primary btn-large'
+    = link_to '<i class="icon-plus icon-white"></i> New Reocurring Invoice'.html_safe, new_schedule_path, :class => 'btn btn-primary'
+
 

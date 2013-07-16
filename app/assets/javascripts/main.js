@@ -306,7 +306,13 @@ $(function() {
 		});
 		
 	})
+		
+});
+
+$(function() {
 	
-	
-	
+	$('#invoice_send_email').click(function() {
+		$('.email').fadeToggle();
+		return false;	
+	});
 });

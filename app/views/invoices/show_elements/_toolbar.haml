@@ -9,6 +9,9 @@
         
       -if can? :read, @invoice    
         %li= link_to "PDF", invoice_path( @invoice, :format => :pdf)
+        
+      -if can? :read, @invoice and @invoice.seed_schedule_id
+        %li= link_to 'Reocurring Invoice', schedule_path(@invoice.seed_schedule_id)
  
   .well
     %ul.nav.nav-list  

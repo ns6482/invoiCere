@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130602145100) do
+ActiveRecord::Schema.define(:version => 20130716200030) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -154,6 +154,9 @@ ActiveRecord::Schema.define(:version => 20130602145100) do
     t.boolean  "draft_only"
     t.string   "base_request"
     t.string   "type"
+    t.boolean  "payment_reminder"
+    t.boolean  "send_email"
+    t.integer  "repeats_left"
   end
 
   create_table "items", :force => true do |t|

@@ -39,6 +39,9 @@ VisioInvoiceV3::Application.routes.draw do
     
   
     resources :schedules do
+      collection do
+        delete :delete_multiple
+      end
       #resource :client, :only => [:new]
     end#, :only => [:index, :new]
     

@@ -1,0 +1,10 @@
+%table{:class => 'table table-striped table-hover'}
+  %thead
+    %th
+    %th Name
+    %th Client
+    %th Frequency
+    %th Frequency Type
+    %th Last Sent
+    %th Enabled    
+  %tbody= render :partial => "schedules/schedule", :collection => @schedules

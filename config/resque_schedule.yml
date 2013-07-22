@@ -4,3 +4,10 @@ morning:
   class: ReoccuringInvoice
   description: "Creates all invoices from scheuled invoices"
   queue: :reoccuring_invoice_queue
+  
+morning:
+  cron: 03 15 * * *
+  args:
+  class: ReminderInvoice
+  description: "Creates all invoice payment reminders"
+  queue: :reminder_invoice_queue

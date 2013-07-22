@@ -1,3 +1,5 @@
+require "ReminderInvoice"
+
 class RemindersController < BaseController
   before_filter :find_invoice  
   load_and_authorize_resource :reminder,:through=> :invoice, :singleton => true
@@ -16,6 +18,9 @@ class RemindersController < BaseController
   end
   
   def update
+    
+    Resque.enqueue(ReminderInvoice)
+    
     respond_to do |format|
       if !@reminder.update_attributes(params[:reminder])
         format.html {render :action => 'edit'}

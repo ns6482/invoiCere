@@ -121,6 +121,8 @@ class StandardInvoice < Invoice
       reminder.default_message = 1
       reminder.days_before= 3
       reminder.frequency = "Weekly"
+      
+      reminder.custom_message = self.client.company.etemplate.reminder_message
 
       if self.due_days ==0
         reminder.next_send  = self.due_date

@@ -11,7 +11,7 @@ class Notifier < ActionMailer::Base
     :return_path => 'system@example.com'
   
 
-  def invoice_pdf(delivery, invoice_link = nil, direct_link = nil)
+  def invoice_pdf(delivery, invoice_link = nil, direct_link = nil, subject = nil)
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client
@@ -35,7 +35,7 @@ class Notifier < ActionMailer::Base
     end
   end
 
-  def invoice(delivery, invoice_link = nil, direct_link = nil)
+  def invoice(delivery, invoice_link = nil, direct_link = nil, subject = nil)
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client

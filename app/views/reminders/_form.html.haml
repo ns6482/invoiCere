@@ -11,10 +11,23 @@
     =# field_set_tag "Setup reminder", :id => "form-main" do
     =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.error_messages      
-    = f.input :days_before,  :as => :select, :collection => 1..31
+    =# f.input :days_before,  :as => :select, :collection => 1..31
     = f.input :frequency, :as => :select, :collection => ["Daily", "Weekly", "Monthly" ,"Quarterly", "Yearly"]
-    = f.input :default_message, :as => :boolean
-    = f.input :custom_message, :input_html => { :rows => 3 , :class=> "autogrow"}
+    .email
+      %h4 Email          
+      =# f.input :default_message, :as => :boolean, :label => "Default message", :include_blank => false
+      Message
+      .placeholderable
+        = render :partial => 'etemplates/placeholders_email'
+        %br
+        .message
+          = f.input :custom_message, :label => false, :input_html => { :rows => 4, :style => 'width:200px', :class => 'autogrow' }
+      = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'inline', :label_html => {:class=>'inline'}
+   
+      -#if @client
+        -#if @client.contacts.size > 0 
+          =# f.association :contacts, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
+          
     = f.input :enabled, :as => :boolean
     
     %div{:class=>'modal-footer'}

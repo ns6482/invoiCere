@@ -2,7 +2,7 @@ class Reminder < ActiveRecord::Base
   attr_accessible :name,  :default_message, :custom_message, :last_send, :next_send, :enabled, :days_before, :last_send_status, :frequency, :format
   belongs_to :invoice
   validates_presence_of :days_before, :frequency
-  attr_accessor :message
+  attr_accessor :desc
   
   def remind
       
@@ -22,7 +22,7 @@ class Reminder < ActiveRecord::Base
     self.update_attribute("next_send", val)
   end
 
-  def message
+  def desc
     val = ''
     if self.enabled ==1
      val= "Reminder set " + self.frequency + ", starting " +  self.invoice.due_date.strftime("%d/%m/%Y")

@@ -16,7 +16,9 @@ class Notifier < ActionMailer::Base
     @invoice  = @delivery.invoice
     @client = @invoice.client
     @msg = RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.").gsub("{{d.invoice_link}}", "{{invoice_link}}").gsub("{{d.direct_link}}", "{{direct_link}}")).render('d' => @delivery,'invoice_link' => invoice_link, 'direct_link' => direct_link ))
-    
+        
+    @subject = @delivery.invoice.title if subject.nil?
+   
     logo_url = @client.company.setting.logo.url
     pdf_file =  InvoiceReport.new(@delivery.invoice, logo_url).to_pdf
  
@@ -24,7 +26,7 @@ class Notifier < ActionMailer::Base
 
 
     mail(
-      :subject  =>   @delivery.invoice.title,
+      :subject  =>   @subject,
       :to =>  @delivery.recipients,
       :from   =>    @company,
       :body   =>  @delivery.message,
@@ -39,11 +41,21 @@ class Notifier < ActionMailer::Base
     @delivery = delivery
     @invoice  = @delivery.invoice
     @client = @invoice.client
+    
+    if subject.nil?  
+      subject = @delivery.title
+    end
+    #subject = @delivery.invoice.title if subject.nil?
+    
       
     @msg = RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.").gsub("{{d.invoice_link}}", "{{invoice_link}}").gsub("{{d.direct_link}}", "{{direct_link}}")).render('d' => @delivery,'invoice_link' => invoice_link, 'direct_link' => direct_link ))
     
     #TODO display subject text field for delivery
-    mail(:subject => @delivery.invoice.title, :from => @company, :to =>@delivery.recipients ) do |format|
+    mail(
+      :subject => subject, 
+      :from => @company, 
+      :to =>@delivery.recipients 
+     ) do |format|
       format.html { render :layout => 'email' }
       #format.text      
     end

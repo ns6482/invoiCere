@@ -7,6 +7,7 @@
 .modal-body
   =simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :class => '',  :method => :post, :remote => true } do |f|
     = f.hidden_field :invoice_id
+    =# f.input :title
     .placeholderable
       = render :partial => 'etemplates/placeholders_email'
       

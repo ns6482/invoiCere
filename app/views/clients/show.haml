@@ -12,12 +12,15 @@
     %td
       =@client.display_fax
 %br
--if can? :invite, Client
-  - if !@client.invited?
-    =# link_to 'Send Login Invitation', @client, :confirm => 'Are you sure?', :method => :invite, :class => 'btn btn-primary pull-right'
-    = link_to 'Send Login Invitation', new_user_invitation_path(:client_id => @client.id)
-  - else
-    = link_to 'Resent Login Invitation', new_user_invitation_path(:client_id => @client.id)
+-if @client.email?
+  You can send a login invitation by setting up the clients email
+-else  
+  -if can? :invite, Client
+    - if !@client.invited?
+      =# link_to 'Send Login Invitation', @client, :confirm => 'Are you sure?', :method => :invite, :class => 'btn btn-primary pull-right'
+      = link_to 'Send Login Invitation', new_user_invitation_path(:client_id => @client.id)
+    - else
+      = link_to 'Resend Login Invitation', new_user_invitation_path(:client_id => @client.id)
 #contacts
   %h3 Contacts
   -if @client.contacts.size > 0

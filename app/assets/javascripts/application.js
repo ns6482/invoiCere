@@ -23,6 +23,7 @@
 //= require dashboard-graph
 //= require formToWizard
 //= require schedule-wizard
+//= require typeahead.min 
 //= require itemAutoComplete
 //= require jquery_nested_form
 //= require_tree .

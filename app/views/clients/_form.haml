@@ -1,15 +1,14 @@
-= simple_form_for @client do |f|
-  =field_set_tag 'Client Details' do
-    = f.hidden_field :company_id, :value => current_company.id
-    = f.input :company_name, :label => "Name", :input_html => {:class => 'input-xlarge'}
-    %br
-    = f.input :address1, :label => "Address", :input_class => 'input-large'
-    = f.input :address2, :label => false
-    = f.input :zip
-    = f.input :city
-    = f.input :country
-    = f.input :phone
-    = f.input :email  
+= simple_form_for @client, :html => {:class => 'form-horizontal'} do |f|
+  = f.hidden_field :company_id, :value => current_company.id
+  = f.input :company_name, :label => "Name", :input_html => {:class => 'input-xlarge'}
+  = f.input :address1, :label => "Address", :input_class => 'input-large'
+  = f.input :address2, :label => false
+  = f.input :zip
+  = f.input :city
+  = f.input :country
+  = f.input :phone
+  = f.input :email  
 
-    %button{:type=>"submit",:class=>"red"} Save
   
+  %button{:type=>"submit",:class=>"btn btn-primary btn-large pull-right"} Save
+

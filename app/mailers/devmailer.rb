@@ -4,4 +4,22 @@ class Devmailer < Devise::Mailer
   
    default :from => 'no-reply@example.com',
     :return_path => 'system@example.com'
+    
+    
+  def invitation_instructions(record, opts={}) 
+    super
+  end
+  
+  def confirmation_instructions(record, opts={}) 
+    super
+  end
+  
+  def reset_password_instructions(record, opts={}) 
+    super
+  end
+  
+  def unlock_instructions(record, opts={}) 
+    
+  end
+    
 end

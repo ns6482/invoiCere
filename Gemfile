@@ -55,6 +55,9 @@ gem 'aws-sdk'
 gem 'resque'
 gem 'resque_mailer'
 gem  'resque-scheduler'
+gem 'devise-async'
+gem 'country_select'
+
 #gem 'roadie'
 #gem "jquery-ui-rails"
 

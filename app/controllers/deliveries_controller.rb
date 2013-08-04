@@ -7,6 +7,8 @@ class DeliveriesController < BaseController
   load_and_authorize_resource :invoice
   load_and_authorize_resource :delivery, :through => :invoice, :shallow => true
 
+
+
   def index 
     #@deliveries = @invoice.deliveries#.paginate :page => params[:page], :per_page => 3
      respond_to do |format|
@@ -48,6 +50,9 @@ class DeliveriesController < BaseController
   def create
     
     respond_to do |format|
+      
+     
+      
       #@delivery = Delivery.new(params[:delivery])
       if @delivery.save
 
@@ -116,5 +121,7 @@ class DeliveriesController < BaseController
     d = Delivery.find(params[:id])
     @delivery = d if d.invoice.client.company_id == current_company
   end
+  
+ 
 
 end

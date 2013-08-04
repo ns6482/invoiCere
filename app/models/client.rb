@@ -9,9 +9,9 @@ class Client < ActiveRecord::Base
   has_many :users
   has_many :schedules
 
-  validates_presence_of :company_name, :address1, :email#,:company_id
+  validates_presence_of :company_name, :address1#,:company_id
   validates_uniqueness_of :company_name
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :unless => Proc.new {|c| c.email.blank?}
 
   attr_accessible :company_name, :address1, :address2, :zip, :city, :country, :phone, :fax, :email, :company_id
   attr_accessor :display_address, :display_fax, :display_phone

@@ -1,4 +1,4 @@
-$(function() {
+/*$(function() {
 	
 	var projects = [
 			{
@@ -51,3 +51,11 @@ $(function() {
         $(this).autocomplete(options);        
     });
     });
+    
+  */
+ 
+$('.item_description .typeahead').typeahead({
+	name: 'items',
+	prefetch: '/items.json',
+	limit: 10
+});

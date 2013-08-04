@@ -30,7 +30,7 @@ class ReminderInvoice
           Notifier.invoice_pdf(delivery, base_link, "#{base_link}/invoices/#{r.invoice.secret_id}", "Payment Reminder").deliver # sends the email
         end
         
-        #r.remind    
+        r.remind    
 
     end
     

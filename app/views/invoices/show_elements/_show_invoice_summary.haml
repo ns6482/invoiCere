@@ -7,7 +7,7 @@
   %td
    %strong Subtotal inc Tax:
   %td= h csymb invoice.currency, invoice.total_cost_inc_tax_cents, false
- -if !invoice.discount.nil? and invoice.discount.length >0 
+ -if !invoice.discount.nil? and invoice.discount.to_str != "0" 
 
   %tr
    %td

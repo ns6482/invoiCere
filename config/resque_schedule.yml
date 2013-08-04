@@ -6,7 +6,7 @@ morning:
   queue: :reoccuring_invoice_queue
   
 morning:
-  cron: 03 15 * * *
+  cron: 20 21 * * *
   args:
   class: ReminderInvoice
   description: "Creates all invoice payment reminders"

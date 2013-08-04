@@ -42,11 +42,8 @@ class Notifier < ActionMailer::Base
     @invoice  = @delivery.invoice
     @client = @invoice.client
     
-    if subject.nil?  
-      subject = @delivery.title
-    end
-    #subject = @delivery.invoice.title if subject.nil?
-    
+        @subject = @delivery.invoice.title if subject.nil?
+
       
     @msg = RedCloth.new(Liquid::Template.parse(@delivery.message.gsub("{{","{{d.").gsub("{{d.invoice_link}}", "{{invoice_link}}").gsub("{{d.direct_link}}", "{{direct_link}}")).render('d' => @delivery,'invoice_link' => invoice_link, 'direct_link' => direct_link ))
     

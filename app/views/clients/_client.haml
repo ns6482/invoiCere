@@ -11,8 +11,9 @@
         =h client.display_phone
         =h client.display_fax
         %br
-      %strong Email: 
-      =mail_to client.email
+      -if client.email.length > 0  
+        %strong Email: 
+        =mail_to client.email
   %td{:class => "table-side"}
     %dd
       - if @clients_outstanding.include? client.id

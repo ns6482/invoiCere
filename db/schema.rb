@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719120645) do
+ActiveRecord::Schema.define(:version => 20130806200752) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130719120645) do
     t.boolean  "client_email"
     t.boolean  "schedule"
     t.integer  "format"
+    t.string   "emails"
   end
 
   create_table "etemplates", :force => true do |t|
@@ -157,6 +158,8 @@ ActiveRecord::Schema.define(:version => 20130719120645) do
     t.boolean  "payment_reminder"
     t.boolean  "send_email"
     t.integer  "repeats_left"
+    t.string   "emails"
+    t.boolean  "client_email"
   end
 
   create_table "items", :force => true do |t|
@@ -200,6 +203,14 @@ ActiveRecord::Schema.define(:version => 20130719120645) do
     t.text     "footer"
   end
 
+  create_table "reminder_sends", :force => true do |t|
+    t.integer  "reminder_id"
+    t.integer  "contact_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reminders", :force => true do |t|
     t.integer  "default_message",  :default => 0
     t.text     "custom_message"
@@ -214,6 +225,8 @@ ActiveRecord::Schema.define(:version => 20130719120645) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "format"
+    t.string   "emails"
+    t.boolean  "client_email"
   end
 
   create_table "roles", :force => true do |t|

@@ -52,11 +52,14 @@ class SchedulesController < BaseController
     @schedule.custom_message = current_company.etemplate.invoice_message
 
 
+    
 
     #@schedule  = Schedule.new
     ##@schedule.client_id = params[:client_id]
     if params[:client_id]
       @client = current_company.clients.find(params[:client_id])
+    else
+      @client = @schedule.client
     end
     #@contacts = @client.contacts
     
@@ -156,6 +159,8 @@ class SchedulesController < BaseController
       @schedule = current_company.invoices.find(params[:id], :conditions => {:type => 'ScheduleInvoice'})
       authorize! :update, @schedule
 
+     @method = 'put'
+     @action = 'update'
      
       @client = current_company.clients.find(@schedule.client_id)#(params[:schedule][:client_id])
       @schedule.client_id = @client.id

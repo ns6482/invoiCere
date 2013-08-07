@@ -6,13 +6,18 @@
 
 .modal-body
   =simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'new_delivery', :class => '',  :method => :post, :remote => true } do |f|
+    -if f.error_messages
+      .alert.alert-danger
+        = f.error_messages
     = f.hidden_field :invoice_id
     =# f.input :title
     .placeholderable
       = render :partial => 'etemplates/placeholders_email'
       
       = f.input :message, :input_html => { :rows => 4, :style => 'width:500px' }  , :label => false
-    = f.input :client_email,  :label=> @invoice.client.company_name, :item_wrapper_class => 'inline'
+    -if @invoice.client.email.length > 0
+      = f.input :client_email,  :label=> @invoice.client.company_name + ' (' +@invoice.client.email + ')', :item_wrapper_class => 'inline'
+    = f.input :emails, :item_wrapper_class => 'inline', :label => 'Email (seperate using ;)'
     - if @invoice.client.contacts.size > 0
       = f.association :contacts, :as =>:check_boxes,   :collection => @invoice.client.contacts, :label => "Send To", :item_wrapper_class => 'inline'
     = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}

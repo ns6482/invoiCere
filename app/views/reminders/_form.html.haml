@@ -14,7 +14,6 @@
     =# f.input :days_before,  :as => :select, :collection => 1..31
     = f.input :frequency, :as => :select, :collection => ["Daily", "Weekly", "Monthly" ,"Quarterly", "Yearly"]
     .email
-      %h4 Email          
       =# f.input :default_message, :as => :boolean, :label => "Default message", :include_blank => false
       Message
       .placeholderable
@@ -23,10 +22,13 @@
         .message
           = f.input :custom_message, :label => false, :input_html => { :rows => 4, :style => 'width:200px', :class => 'autogrow' }
       = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'inline', :label_html => {:class=>'inline'}
-   
-      -#if @client
-        -#if @client.contacts.size > 0 
-          =# f.association :contacts, :collection => @client.contacts, :as => :check_boxes, :label => "Send To", :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
+      
+      -if @invoice.client.email.length > 0
+        = f.input :client_email,  :label=> @invoice.client.company_name + ' (' +@invoice.client.email + ')', :item_wrapper_class => 'inline'
+      = f.input :emails, :item_wrapper_class => 'inline', :label => 'Email (seperate using ;)'
+      
+      -if @invoice.client.contacts.size > 0 
+        = f.association :contacts, :collection => @invoice.client.contacts, :as => :check_boxes, :label => "Send To", :item_wrapper_class => 'inline', :label_html => {:class=> 'radio inline'}, :input_html => {:class=>'radio inline'}
           
     = f.input :enabled, :as => :boolean
     

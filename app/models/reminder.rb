@@ -4,6 +4,9 @@ class Reminder < ActiveRecord::Base
   validates_presence_of :days_before, :frequency
   attr_accessor :desc
   
+  has_many :reminder_sends
+  has_many :contacts, :through => :reminder_sends
+  
   def remind
       
    n = Time.now

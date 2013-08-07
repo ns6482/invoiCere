@@ -33,7 +33,7 @@ $(function() {
 				val = "#"+val.replace("item_description", "");
 				
 				$(val+"item_description").val(ui.item.item_description);
-				$(val+"cost").val(ui.item.cost);
+				$(val+"cost_cents").val(ui.item.cost);
 				$(val+"item_type").val(ui.item.item_type);
 				
 				

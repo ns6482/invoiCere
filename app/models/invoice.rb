@@ -13,6 +13,8 @@ class Invoice < ActiveRecord::Base
 
   validates_format_of :discount, :with => /^((0*?\.\d+(\.\d{1,2})?)|((\d+(\.\d{1,2})?)|(((100(?:\.0{1,2})?|0*?\.\d{1,2}|\d{1,2}(?:\.\d{1,2})?)\%))))$/, :message=> "must be a positive numerical or percentage value, maximum two decimal places allowed", :allow_blank => true, :allow_nil => true  
     
+  validates_format_of :emails, :with => /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$/,  :unless => Proc.new {|i| i.emails.blank?}
+  
   scope :for_year,
     :select => "invoices.*",
     :conditions => "invoice_date between '#{Date.new(Date.today.year,1,1)}' and '#{Date.new(Date.today.year+1,1,1)}'",

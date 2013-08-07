@@ -15,6 +15,14 @@ class Contact < ActiveRecord::Base
   def fullname
     first_name + " " + last_name
   end
+  
+  def display_phone
+    "Phone: (" + phone.strip + ")" unless phone.blank?
+  end
+  
+ def display_fax
+    "Fax: (" + fax.strip + ")" unless fax.blank?
+  end
 
   def name
     first_name + " " + last_name

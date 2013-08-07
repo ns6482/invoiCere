@@ -5,8 +5,8 @@
     =simple_nested_form_for @invoice, :html => {:novalidate => true} do |f|      
       =f.error_messages
            
-      %div{:id => "form-top", :class => "invoice form-height-long span6"}
-        %div{:class => 'row'}
+      #form-top.invoice.form-height-long.span6
+        .row
           .span3
             = f.input :business_id, :label => "Your ID", :input_html => {:class => ""}, :wrapper_html => {:class => ''}
           .span3
@@ -34,10 +34,8 @@
             %strong Item       
           .span1
             %strong Qty
-          .span1
-            %strong Price
-          .span1
-            %strong / Unit
+          .span0.5
+            %strong Price / Unit
           .span1
             %strong Tax
           .span1                            

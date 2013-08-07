@@ -25,7 +25,7 @@ class DeliveriesController < BaseController
     
     
     template =params[:template]
-    logger.debug "template " + template    
+    #logger.debug "template " + template    
     #@invoice = Invoice.find(params[:invoice_id])
     @delivery = @invoice.deliveries.build
     @delivery.client_email  = true
@@ -78,7 +78,7 @@ class DeliveriesController < BaseController
       else
         flash[:error] = @delivery.errors.full_messages.join("\n")
         format.html {render :action => 'new'}
-        format.js { render :partial => 'deliveries/form.html.haml', :status => "500" }
+        format.js { render :action => 'new'}
       end
     end
   end

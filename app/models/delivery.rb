@@ -2,7 +2,7 @@ require 'mail'
 require 'money'
 
 class Delivery < ActiveRecord::Base
-  attr_accessible :invoice_id, :message, :contact_ids, :recipients, :client_email, :format
+  attr_accessible :invoice_id, :message, :contact_ids, :recipients, :client_email, :format, :emails
   attr_accessor :company_id
   
   liquid_methods :invoice_title, :company_name, :company_email, :company_fax, :company_phone, :company_website, :client_name, :invoice_id, :direct_link, :invoice_date, :invoice_title, :invoice_due_date, :invoice_total_due, :payment_instruction
@@ -16,10 +16,19 @@ class Delivery < ActiveRecord::Base
 
   validates_presence_of :message
 
-  validate :has_contacts?
+  #validate :has_contacts?
+  validate :check_email?
+  
+  validates_format_of :emails, :with => /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$/,  :unless => Proc.new {|i| i.emails.blank?}
+
+  def check_email?
+    if self.emails.blank? and self.client_email=0 and self.invoice.client.email.length > 0  and self.contacts.blank?
+      errors.add :base, "Please enter an email address" + self.client.email
+    end 
+  end
 
   def has_contacts?
-    if self.contacts.blank? and !self.client_email
+    if self.contacts.blank? and self.client_email and self.emails.blank?
       errors.add :base,  "Please select at least one email address"
     end
   end
@@ -28,13 +37,15 @@ class Delivery < ActiveRecord::Base
 
     recipients = Array.new
 
-    if self.client_email
+    if self.client_email and self.invoice.client.email.length >0
       recipients << "\"#{self.invoice.client.company_name}\" <#{self.invoice.client.email}>"
     end
 
     for contact in self.contacts
       recipients << "\"#{contact.fullname.to_s}\" <#{contact.email.to_s}>"
     end
+    
+    recipients << self.emails
     
     recipients
     #    self.contacts.inject("") { |acc, contact| acc <<  "\"#{contact.fullname}\" <#{contact.email}>"}

@@ -1,11 +1,6 @@
-- title "Schedule"
-.well
+- title  h @schedule.name
+.well.span5
   %table
-    %tr 
-      %td
-        %strong Name:
-      %td
-        %strong= h @schedule.name
     %tr
       %td 
         %strong Repeats:
@@ -36,7 +31,14 @@
         %strong Enabled:
       %td
         %strong= h @schedule.enabled
-
+        
+    .btn-group.pull-right
+      -if can? :update, @schedule
+        = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary'
+      -if can? :create, @schedule
+        = link_to "Copy", new_schedule_path(:id=> @schedule.id), :class => 'btn'        
+          
+.row
 
 #invoice-preview{:class => "row"}
 
@@ -71,6 +73,7 @@
         %td
           %h4= @schedule.client.name
           =render :partial => "clients/address", :locals => {:client => @schedule.client}
+     
 
   #invoice-item-list{:class=>"span8"}
     %table{:id => 'invoice-items', :class => "table table-striped pull-left"}
@@ -119,13 +122,6 @@
         =render :partial => "invoices/invoice", :collection => @invoices
 
 
--content_for :left do   
-  =# link_to "View All", schedules_path
--content_for :right do
-  .well
-    %ul.nav.nav-list  
-      -if can? :edit, ScheduleInvoice
-        %li= link_to "Edit", edit_schedule_path(@schedule.id)
-      -if can? :create, ScheduleInvoice
-        %li= link_to "Copy", new_schedule_path(:id=> @schedule.id)
+  
+
    

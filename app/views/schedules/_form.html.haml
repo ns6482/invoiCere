@@ -1,6 +1,8 @@
 #invoice{:class=>'row'}
   =simple_nested_form_for  @schedule, :url => {:controller => 'schedules', :action => @action, :id => @schedule.id}, :method => @method do |f|
-    = f.error_messages
+    -if f.error_messages
+      .alert.alert-error
+        = f.error_messages
     = field_set_tag "Schedule invoice" do #,   :id => "form-main" do
       .well
         .row
@@ -23,10 +25,13 @@
         = f.input :payment_reminder,   :as => :boolean, :label => "Send Payment Reminder", :include_blank => false
 
         .row
+
         = f.input :send_email,   :as => :boolean, :label => "Send Email", :include_blank => false
 
         .email
-          %h4 Email          
+          %h4 Email   
+          
+    
           =# f.input :default_message, :as => :boolean, :label => "Default message", :include_blank => false
           Message
           .placeholderable
@@ -37,6 +42,12 @@
               = f.input :custom_message, :label => false, :input_html => { :rows => 4, :style => 'width:500px', :class => 'autogrow' }
           = f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'inline', :label_html => {:class=>'inline'}
           =# f.input :send_to_client, :as => :select, :include_blank => false
+        
+          -if @client.email.length > 0
+            = f.input :client_email,  :label=> @client.company_name + ' (' +@client.email + ')', :item_wrapper_class => 'inline'
+        
+          = f.input :emails, :item_wrapper_class => 'inline', :label => 'Email (seperate using ;)'
+
         
           -if @client
             -if @client.contacts.size > 0 

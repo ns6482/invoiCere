@@ -19,7 +19,7 @@ class Devmailer < Devise::Mailer
   end
   
   def unlock_instructions(record, opts={}) 
-    
+    super  
   end
     
 end

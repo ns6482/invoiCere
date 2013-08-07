@@ -1,13 +1,17 @@
 %table{:id => 'contacts'}
- -for contact in @client.contacts
-  %tr{:class=> cycle("odd", "even")}
-   %td 
-    =h mail_to contact.email, contact.fullname
-   %td
-    = link_to "Show", contact
-    |
-    = link_to "Edit", edit_contact_path(contact)
-    |
-    = link_to "Delete", contact, :confirm => 'Are you sure?', :method => :delete    
-  
+  -for contact in @client.contacts      
+    #contact.well
+      %strong=link_to_if can?(:update, contact), contact.fullname, edit_contact_path(contact)
+      %br
+      -if contact.display_phone or contact.display_fax
+        =h contact.display_phone
+        =h contact.display_fax
+        %br
+      -if contact.email.length > 0  
+        %strong Email: 
+        =mail_to contact.email
+      
+      = link_to "Delete", contact, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-small btn-danger pull-right'    
+
+
 

@@ -9,7 +9,7 @@ class ScheduleInvoice < Invoice
     60 => "After 60 Days" 
    } 
 
-  attr_accessible  :schedule_send_ids, :client_id, :name, :format, :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :invoice_items_attributes, :notes, :draft_only, :currency, :payables, :payment_reminder, :send_email
+  attr_accessible  :schedule_send_ids, :client_id, :name, :format, :frequency, :frequency_type, :last_sent, :next_send, :send_client, :due_on, :enabled, :end_date, :contact_ids, :send_to_client,:default_message, :custom_message, :title, :business_id, :purchase_order_id, :tax_rate, :delivery_charge, :late_fee, :discount, :invoice_items_attributes, :notes, :draft_only, :currency, :payables, :payment_reminder, :send_email, :client_email, :emails
 
   has_many :schedule_sends
   has_many :contacts, :through => :schedule_sends
@@ -17,7 +17,7 @@ class ScheduleInvoice < Invoice
   accepts_nested_attributes_for :contacts
 
   validates_presence_of :name, :next_send, :frequency, :frequency_type, :title, :client_id, :due_on
-  validates_numericality_of :due_on, :frequency, :repeats_left
+  validates_numericality_of :due_on, :frequency#, :repeats_left
   
   def send_invoice!
 

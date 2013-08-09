@@ -12,6 +12,8 @@
         =mail_to contact.email
       
       = link_to "Delete", contact, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-small btn-danger pull-right'    
-
+  -if can? :create, Contact
+    = link_to "New Contact", new_client_contact_path(@client), :class => 'btn btn-inverse pull-right'
+   
 
 

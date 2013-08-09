@@ -42,7 +42,7 @@ class Client < ActiveRecord::Base
   def display_address
     str = ""
     str += address1.strip
-    str += ", " + address2.strip unless address2.blank?
+    str += (", " + address2.strip) || ""
     str += ", " + city.strip unless city.blank?
     str += ", " + country.strip unless country.blank?
     str += ", " + zip.strip unless zip.blank?

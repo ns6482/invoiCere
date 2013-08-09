@@ -7,6 +7,9 @@ class Reminder < ActiveRecord::Base
   has_many :reminder_sends
   has_many :contacts, :through => :reminder_sends
   
+    accepts_nested_attributes_for :contacts
+
+  
   def remind
       
    n = Time.now

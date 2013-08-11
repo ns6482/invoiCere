@@ -40,20 +40,19 @@ class Client < ActiveRecord::Base
   end
 
   def display_address
-    str = ""
-    str += address1.strip
-    str += ", " + address2.strip unless address2.blank?
-    str += ", " + city.strip unless city.blank?
-    str += ", " + country.strip unless country.blank?
-    str += ", " + zip.strip unless zip.blank?
+    str = (address1.blank?  ? "" : address1) 
+    str += (address2.blank? ? "" : ', ' + address2)  
+    str += (city.blank? ? "" : ', ' + city)
+    str += (country.blank? ? "" : ', ' +  country)
+    str += (zip.blank? ? "" : ', ' + zip)
   end
 
   def display_phone
-    "Phone: (" + phone.strip + ")" unless phone.blank?
+    "Phone: (" + phone + ")" unless phone.blank?
   end
 
   def display_fax
-    "Fax: (" + fax.strip + ")" unless fax.blank?
+    "Fax: (" + fax + ")" unless fax.blank?
   end
 
   def invited?

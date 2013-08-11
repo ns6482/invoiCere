@@ -23,7 +23,7 @@
    %tr
     %th Client Info 
     %td
-     %h4= @invoice.client.name
+     %h4= link_to @invoice.client.name, edit_client_path(@invoice.client)
      =render :partial => "clients/address", :locals => {:client => @invoice.client}
 
  #invoice-item-list{:class=>"span8"}

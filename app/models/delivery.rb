@@ -9,7 +9,7 @@ class Delivery < ActiveRecord::Base
 
   belongs_to :invoice
   
-  has_many :sends
+  has_many :sends, :as => :sendable
   has_many :contacts, :through => :sends
   
   accepts_nested_attributes_for :contacts
@@ -22,16 +22,11 @@ class Delivery < ActiveRecord::Base
   validates_format_of :emails, :with => /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$/,  :unless => Proc.new {|i| i.emails.blank?}
 
   def check_email?
-    if self.emails.blank? and self.client_email=0 and self.invoice.client.email.length > 0  and self.contacts.blank?
-      errors.add :base, "Please enter an email address" + self.client.email
+    if self.emails.blank? and self.client_email==0 and self.invoice.client.email.length > 0  and self.contacts.blank?
+      errors.add :base, "Please choose at least one email address"
     end 
   end
 
-  def has_contacts?
-    if self.contacts.blank? and self.client_email and self.emails.blank?
-      errors.add :base,  "Please select at least one email address"
-    end
-  end
 
   def recipients
 

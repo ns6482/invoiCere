@@ -4,8 +4,14 @@ class Reminder < ActiveRecord::Base
   validates_presence_of :days_before, :frequency
   attr_accessor :desc
   
-  has_many :reminder_sends
-  has_many :contacts, :through => :reminder_sends
+  #has_many :reminder_sends
+  #has_many :contacts, :through => :reminder_sends
+  
+  has_many :sends, :as => :sendable
+  has_many :contacts, :through => :sends
+  
+  accepts_nested_attributes_for :contacts
+
   
     accepts_nested_attributes_for :contacts
 

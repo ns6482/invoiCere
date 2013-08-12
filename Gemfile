@@ -57,6 +57,7 @@ gem 'resque_mailer'
 gem  'resque-scheduler'
 gem 'devise-async'
 gem 'country_select'
+gem 'paymill'
 
 #gem 'roadie'
 #gem "jquery-ui-rails"

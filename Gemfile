@@ -92,7 +92,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.3.0.1'
   
   #gem "sass-rails", "~> 3.2.4"
-  gem "coffee-rails", "~> 3.2.2"
+  gem "coffee-rails"
   gem 'uglifier'
   gem 'compass-rails'
 end

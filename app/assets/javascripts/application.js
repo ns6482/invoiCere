@@ -25,6 +25,5 @@
 //= require schedule-wizard
 //= require itemAutoComplete
 //= require jquery_nested_form
+//= require subscription.js.coffee
 //= require_tree .
-
-//

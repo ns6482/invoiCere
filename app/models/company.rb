@@ -1,6 +1,7 @@
 class Company < ActiveRecord::Base
   extend FriendlyId
 
+  has_one :subscription
   has_many :users, :dependent => :destroy
   #has_many :accounts, :dependent => :destroy
   has_many :clients, :dependent => :destroy

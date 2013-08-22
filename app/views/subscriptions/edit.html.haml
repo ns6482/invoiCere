@@ -1,0 +1,17 @@
+%h2 Change Subscription
+
+.well
+  %p
+    You have chosen to change your subscription to the 
+    =@plan.name 
+    plan.
+  %p
+    Upgrading to this plan will change your cost to
+    %strong= number_to_currency @plan.price, :unit => '£' 
+    per month
+
+=link_to  'Cancel Change', subscription_path, :class => 'btn btn-large  btn-inverse pull-left'
+=link_to '<i class="icon-edit"></i> Change Plan '.html_safe, subscription_path(:plan_id => @plan.id),:method => :put, :confirm => 'Are you sure?', :class => 'btn btn-primary btn-large pull-right'
+
+  
+

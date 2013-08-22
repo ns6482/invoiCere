@@ -1,0 +1,36 @@
+%h1 Your Subscriptions
+    
+%ul.thumbnails  
+  -@plans.each do |plan|
+    
+    %li.span3
+      .thumbnail
+        .caption
+          %h2= plan.name
+
+          .price
+            %h3= number_to_currency plan.price, unit: "£"
+            per month        
+          .signup
+            -if !@subscription.nil?
+              -if @subscription.plan.price < plan.price 
+                = link_to "Upgrade", edit_subscription_path(:plan_id => plan.id), :class => 'btn btn-primary'
+              -elsif @subscription.plan.price > plan.price
+                = link_to "Downgrade", edit_subscription_path(:plan_id => plan.id), :class => 'btn btn-primary' 
+              -else
+                %a{:href => '#', :class =>'btn btn-success disabled'} Current Plan! 
+                %a{:href => '#', :class =>'btn'} Update Card! 
+
+            -else
+              -if plan.price>0
+                = link_to "Sign up!", new_subscription_path(:plan_id => plan.id), :class => 'btn btn-primary' 
+
+                                     
+   
+-content_for :right do
+  -if !@subscription.nil?
+    = link_to "Cancel your Account", subscription_path(:id => @subscription.id), :class => 'btn btn-danger'                          
+
+      
+
+  

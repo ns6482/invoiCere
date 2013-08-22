@@ -1,0 +1,11 @@
+.plan.hero-unit.span2
+  %h2
+    = plan.name
+  .details
+    .price
+      %h3
+      = number_to_currency plan.price, unit: "€"
+    .per_month per month
+    .signup
+      = link_to "Sign up", new_subscription_path(:plan_id => plan.id), :class => 'btn btn-primary'
+.clear

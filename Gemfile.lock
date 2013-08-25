@@ -316,7 +316,7 @@ DEPENDENCIES
   nested_form
   nifty-generators
   paperclip
-  paymill
+  paymill (~> 0.3.0)
   pdf-reader
   prawn (~> 0.12.0)
   prawnto

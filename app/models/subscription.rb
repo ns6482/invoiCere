@@ -9,6 +9,13 @@ class Subscription < ActiveRecord::Base
   attr_accessor :paymill_card_token
   
   
+  def next_capture_at
+    
+    s = Paymill::Subscription.find(self.paymill_id)
+    d = s.instance_variable_get('@next_capture_at')
+  end
+  
+  
   def upgrade_to_plan(plan_id)
     
     
@@ -17,9 +24,7 @@ class Subscription < ActiveRecord::Base
     if self.paymill_id 
         
       plan = Plan.find(plan_id)  
-      
-
-
+    
       if plan.paymill_id
         
         if plan.price > 0  then

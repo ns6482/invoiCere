@@ -16,6 +16,31 @@ class Subscription < ActiveRecord::Base
   end
   
   
+  def get_prorate(new_plan_id)
+    
+    #get new plan details
+    new_plan = Plan.find(new_plan_id)   
+         
+    #find out when the next billing date is      
+    next_bill = Time.at(Paymill::Subscription.find(self.paymill_id).instance_variable_get('@next_capture_at')).to_datetime
+    
+   
+    #get the number of days used since last payment    
+    used_days = (DateTime.now - (next_bill << 1)).to_i
+    
+    #total days in month for previous month
+    number_of_days_previous_month = ((DateTime.new next_bill.year, next_bill.month, 1)-1).day
+     
+    #used days / days in month * price diff will give us the pro-rated value 
+    price_diff = (new_plan.price - self.plan.price)
+    
+    (used_days.to_d / number_of_days_previous_month.to_d) * price_diff 
+    
+  end
+  
+
+  
+  
   def upgrade_to_plan(plan_id)
     
     
@@ -28,6 +53,16 @@ class Subscription < ActiveRecord::Base
       if plan.paymill_id
         
         if plan.price > 0  then
+          
+          #delete existing subscription
+          #create new subscription
+          
+          #if upgrading need to make pro-rated payment
+          
+          
+          #if downgrading need to make pro-rated refund
+           
+           #setup subscription as normal
         
           subscription = Paymill::Subscription.find(self.paymill_id)
           offer = Paymill::Offer.find(plan.paymill_id)

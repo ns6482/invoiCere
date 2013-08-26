@@ -50,10 +50,7 @@ class SchedulesController < BaseController
     @schedule.tax_rate = current_company.preference.tax
     
     @schedule.custom_message = current_company.etemplate.invoice_message
-
-
     
-
     #@schedule  = Schedule.new
     ##@schedule.client_id = params[:client_id]
     if params[:client_id]
@@ -77,8 +74,6 @@ class SchedulesController < BaseController
     #else
       @schedule.invoice_items.build
     #end
-    
-
     
     #@contacts = @invoice.client.contacts
     
@@ -123,10 +118,8 @@ class SchedulesController < BaseController
       @schedule = ScheduleInvoice.new(params[:invoice])
       
       authorize! :create, @schedule
-
       
       @schedule.base_request = "#{request.protocol}#{request.host_with_port}"
-
       
       #if params[:send_contacts]
       #  @contacts = @client.contacts

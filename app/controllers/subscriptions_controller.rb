@@ -20,6 +20,7 @@ def get_plan_new
   end
 
   def edit
+    @prorate = @subscription.get_prorate(@plan.id)
     #TODO get current subscription, option to upgrade, or downgrade (if lowest plan only downgrade)
   end
 

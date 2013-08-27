@@ -4,11 +4,21 @@
   %p
     You have chosen to change your subscription to the 
     =@plan.name 
-    plan.
+    plan.   
   %p
-    Upgrading to this plan will change your cost to
+    Upgrading to this plan will change your next month's cost to
     %strong= number_to_currency @plan.price, :unit => '£' 
     per month
+    
+.well   
+  -if @prorate < 0
+    %strong Note
+    Since you are downgrading your plan, you will be refunded 
+    %strong=number_to_currency @prorate.round(2).abs, :unit => '£'   
+  -else
+    %strong Note 
+    Since you are upgrading your plan, you will need to pay the prorated amount for this month of
+    %strong=number_to_currency @prorate.round(2), :unit => '£'   
 
 =link_to  'Cancel Change', subscription_path, :class => 'btn btn-large  btn-inverse pull-left'
 =link_to '<i class="icon-edit"></i> Change Plan '.html_safe, subscription_path(:plan_id => @plan.id),:method => :put, :confirm => 'Are you sure?', :class => 'btn btn-primary btn-large pull-right'

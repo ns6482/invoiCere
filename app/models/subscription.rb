@@ -54,17 +54,27 @@ class Subscription < ActiveRecord::Base
         
         if plan.price > 0  then
           
+          subscription = Paymill::Subscription.find(self.paymill_id)
+                   
           #delete existing subscription
-          #create new subscription
           
+          payment = subscription.payment
+          Paymill::Subscription.delete(self.paymill_id)
+
           #if upgrading need to make pro-rated payment
           
-          
-          #if downgrading need to make pro-rated refund
+          prorate = get_prorate(plan.id)
+
+          if prorate > 0           
+            Paymill::Transaction.create(amount: prorate, currency: 'gbp', payment: payment['id'], description: 'prorate #{self.paymill_id}')
+          else
+            #refund
+          end
+                    
+          #else if downgrading need to make pro-rated  partial refund, from the last subscription transaction
            
-           #setup subscription as normal
+          #create new subscription
         
-          subscription = Paymill::Subscription.find(self.paymill_id)
           offer = Paymill::Offer.find(plan.paymill_id)
           subscription.update_attributes :offer => plan.paymill_id
           self.update_attribute(:plan_id, plan_id)

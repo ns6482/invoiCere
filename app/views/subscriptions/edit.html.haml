@@ -6,16 +6,17 @@
     =@plan.name 
     plan.   
   %p
-    Upgrading to this plan will change your next month's cost to
+    Changing to this plan will mean that your next month's charge will be
     %strong= number_to_currency @plan.price, :unit => '£' 
     per month
     
-.well   
-  -if @prorate < 0
+-if @prorate < 0
+  .well
     %strong Note
     Since you are downgrading your plan, you will be refunded 
     %strong=number_to_currency @prorate.round(2).abs, :unit => '£'   
-  -else
+-elsif @prorate >0
+  .well
     %strong Note 
     Since you are upgrading your plan, you will need to pay the prorated amount for this month of
     %strong=number_to_currency @prorate.round(2), :unit => '£'   

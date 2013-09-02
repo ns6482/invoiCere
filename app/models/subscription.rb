@@ -55,29 +55,33 @@ class Subscription < ActiveRecord::Base
         if plan.price > 0  then
           
           subscription = Paymill::Subscription.find(self.paymill_id)
-                   
+          client =  subscription.client        
           #delete existing subscription
           
-          payment = subscription.payment
-          Paymill::Subscription.delete(self.paymill_id)
+          payment = subscription.instance_variable_get('@payment')['id']
 
           #if upgrading need to make pro-rated payment
           
-          prorate = get_prorate(plan.id)
+          prorate = (get_prorate(plan.id).round(2) * 100).to_i
 
           if prorate > 0           
             Paymill::Transaction.create(amount: prorate, currency: 'gbp', payment: payment['id'], description: 'prorate #{self.paymill_id}')
-          else
-            #refund
-          end
-                    
+          elsif prorate < 0
+            transaction_id = Paymill::Transaction.all(:description => 'Subscription#sub_b6e6c0ee3fa1f63fd23d Gold Plan', :order => 'created_at desc', status: 'closed').first.id          
+            Paymill::Refund.create(id: transaction.id, amount: prorate)
+          end          
           #else if downgrading need to make pro-rated  partial refund, from the last subscription transaction
            
           #create new subscription
         
           offer = Paymill::Offer.find(plan.paymill_id)
-          subscription.update_attributes :offer => plan.paymill_id
-          self.update_attribute(:plan_id, plan_id)
+          #subscription.update_attributes :offer => plan.paymill_id
+          Paymill::Subscription.delete(self.paymill_id)
+          
+
+          subscription = Paymill::Subscription.create offer: plan.paymill_id, client: client['id'], payment: payment
+
+          self.update_attributes(:plan_id => plan_id, :paymill_id => subscription.id)
 
         else
           Paymill::Subscription.delete(self.paymill_id)

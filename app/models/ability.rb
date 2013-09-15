@@ -28,6 +28,7 @@ class Ability
       can [:create, :update], Feedback #TODO only apply to client once setup
       can [:manage], ScheduleInvoice
       can [:manage], Item, :company_id => user.company_id
+      can [:manage], Subscription, :company_id => user.company_id
     elsif user.role? :standard
       cannot [:invite], Client
       cannot [:invite], Contact

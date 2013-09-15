@@ -6,7 +6,7 @@ jQuery ->
 
 subscription =
   setupForm: ->
-    $('#new_subscription').submit ->
+    $('.update_sub').submit ->
       $('input[type=submit]').attr('disabled', true)
       if $('#card_number').length
         subscription.processCard()
@@ -28,4 +28,4 @@ subscription =
       $('input[type=submit]').attr('disabled', false)
     else
       $('#subscription_paymill_card_token').val(result.token)
-      $('#new_subscription')[0].submit()
+      $('.update_sub')[0].submit()

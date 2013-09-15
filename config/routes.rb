@@ -115,10 +115,12 @@ VisioInvoiceV3::Application.routes.draw do
       end  
     end
     
-    resources :dashboard, :only => [:show]
+    #resources :dashboard, :only => [:show]
     
     resources :plans, :only => [:index]
+    
     resource :subscription
+
     
 
     

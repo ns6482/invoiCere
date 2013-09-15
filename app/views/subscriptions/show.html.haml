@@ -1,6 +1,7 @@
-%h1 Your Subscription
-.well.span12
-  -if !@subscription.nil?
+%h1 Manage Subscription
+
+-if !@subscription.nil?
+  .well.span8
     =Time.at(@subscription.next_capture_at).to_datetime.strftime("Next Payment due on %d/%m/%Y")
 
 %ul.thumbnails  
@@ -21,8 +22,8 @@
               -elsif @subscription.plan.price > plan.price
                 = link_to "Downgrade", edit_subscription_path(:plan_id => plan.id), :class => 'btn btn-primary' 
               -else
-                %a{:href => '#', :class =>'btn btn-success disabled'} Current Plan! 
-                %a{:href => '#', :class =>'btn'} Update Card! 
+                %a{:href => '#', :class =>'btn btn-success disabled'} Current Plan!                 
+                = link_to "Update Card", new_subscription_path, :class => 'btn'
 
             -else
               -if plan.price>0

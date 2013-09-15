@@ -1,4 +1,8 @@
 - title "Dashboard"
+=content_for :head do
+  = javascript_include_tag "dashboard-graph.js", "application"
+
+    
 
 =content_for :right do 
   %div{:id => "dashboard-list", :class=> "btn-group btn-group-vertical"}

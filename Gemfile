@@ -58,6 +58,7 @@ gem  'resque-scheduler'
 gem 'devise-async'
 gem 'country_select'
 gem 'paymill', "~> 0.3.0"
+gem 'thin'
 
 #gem 'roadie'
 #gem "jquery-ui-rails"

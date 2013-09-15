@@ -1,15 +1,20 @@
-%h1 
-  Signing up for 
-  = @plan.name
-%p
-  It's only
-  %strong
-    =number_to_currency @plan.price, unit: "€"
-    per month!
+
+-if !@update_card
+  %h1 
+    Signing up for 
+    = @plan.name
+  %p
+    It's only
+    %strong
+      =number_to_currency @plan.price, unit: "€"
+      per month!
+-else
+  %h1
+    Update Your Credit Card
 
 %h3= @email
 
-=simple_form_for  @subscription, :url => subscription_path, :html => { :method => :post, :multipart => true  } do |f|
+=simple_form_for  @subscription, :url => subscription_path, :html => { :method => :post, :multipart => true, :class => 'update_sub' } do |f|
   -if @subscription.errors.any?
     .alert.alert-error
       = pluralize(@subscription.errors.count, "error")
@@ -40,6 +45,6 @@
     %noscript
       JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
 
-  = f.submit "Subscribe", :class => 'btn btn-primary btn-large pull-right'
+  = f.submit !@update_card? "Subscribe" : "Update Card", :class => 'btn btn-primary btn-large pull-right'
  
 =link_to  'Cancel Change', subscription_path, :class => 'btn btn-large  btn-inverse pull-left'

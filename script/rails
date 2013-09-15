@@ -6,6 +6,7 @@ require 'rails/commands/server'
 require 'rack'
 require 'webrick'
 require 'webrick/https'
+require 'thin'
 
 module Rails
   class Server < ::Rack::Server

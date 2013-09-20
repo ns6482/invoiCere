@@ -1,5 +1,5 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :invoice_id, :user_id, :amount, :payment_type, :currency, :pay_full_amount
+  attr_accessible :invoice_id, :user_id, :amount, :payment_type, :currency, :pay_full_amount,:paymill_card_token, :amount_cents
   attr_accessor :pay_full_amount
   belongs_to :invoice
   belongs_to :user
@@ -16,6 +16,9 @@ class Payment < ActiveRecord::Base
   
   after_destroy :update_invoice_when_deleted
   after_update  :update_invoice_when_status
+  
+  attr_accessor :paymill_card_token
+  
   #after_destroy :reopen
 
   monetize :amount, :as => "amount_cents"
@@ -31,7 +34,18 @@ class Payment < ActiveRecord::Base
      errors.add :base, "Cannot make payment, this invoice is not open" if self.invoice.state == "draft"
   end
 
-
+  def save_paymill
+     # logger.debug "token:"
+     # logger.debug self.paymill_card_token
+    if valid?                
+      payment = Paymill::Transaction.create token: self.paymill_card_token, amount: self.amount, currency: self.currency, description: self.id
+      save!      
+    end
+  rescue Paymill::PaymillError => e
+    logger.error "Payment Error: #{e.message}"
+    errors.add :base, "There was a problem with your credit card. Please try again."
+    false
+  end
 
   private
 
@@ -63,6 +77,8 @@ class Payment < ActiveRecord::Base
       end
 
   end
+  
+  
   
   
 

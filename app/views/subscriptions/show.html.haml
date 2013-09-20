@@ -1,5 +1,8 @@
 %h1 Manage Subscription
 
+-content_for :left do
+  .offset1
+    =link_to "Back", edit_company_path
 -if !@subscription.nil?
   .well.span8
     =Time.at(@subscription.next_capture_at).to_datetime.strftime("Next Payment due on %d/%m/%Y")

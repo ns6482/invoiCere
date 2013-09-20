@@ -1,4 +1,7 @@
-
+-content_for :head do
+  :javascript
+    var PAYMILL_PUBLIC_KEY= '#{PAYMILL_PUBLIC_KEY}';
+  
 -if !@update_card
   %h1 
     Signing up for 
@@ -24,7 +27,7 @@
           %li= msg 
           
   = f.hidden_field :plan_id
-  = f.hidden_field :paymill_card_token
+  = f.hidden_field :paymill_card_token, :class => 'paymill_card_token'
   
   =#f.input :name
   =#f.input :email

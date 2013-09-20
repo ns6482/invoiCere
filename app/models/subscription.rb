@@ -103,8 +103,8 @@ class Subscription < ActiveRecord::Base
   end
   
    def save_new_card
-      logger.debug "token:"
-      logger.debug self.paymill_card_token
+     # logger.debug "token:"
+     # logger.debug self.paymill_card_token
     if valid?
       
       subscription = Paymill::Subscription.find(self.paymill_id)

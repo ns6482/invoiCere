@@ -8,7 +8,7 @@ class PaymentsController < BaseController
   def index
     @curr = @invoice.currency
     @dae = false
-     
+
     respond_to do |format|
       format.html
       format.js
@@ -17,13 +17,20 @@ class PaymentsController < BaseController
 
   def new
     respond_to do |format|
-      
+
+  
+
       if !params[:payment_type]
-       flash[:error]= "Payment type not selected"
-       format.html{redirect_to invoice_url(@invoice)}
+        flash[:error]= "Payment type not selected"
+        format.html{redirect_to invoice_url(@invoice)}
+      elsif params[:payment_type] == 'Paymill'
+        @payment = @invoice.payments.build
+        @payment.payment_type = params[:payment_type]
+        format.html {render :action => 'new_paymill'}
+        format.js {render :action => 'new_paymill'}
       elsif !@invoice.can_pay_through? params[:payment_type]
-       flash[:error]= "Payment cannot be made this way "
-       format.html{redirect_to invoice_url(@invoice)}
+        flash[:error]= "Payment cannot be made this way "
+        format.html{redirect_to invoice_url(@invoice)}
       elsif @payment.invoice.remaining_amount ==0.0
         flash[:notice]= "Invoice has been paid for"
         format.html{redirect_to invoice_payments_url(@invoice)}
@@ -36,9 +43,10 @@ class PaymentsController < BaseController
         @payment = @invoice.payments.build
         @payment.payment_type = params[:payment_type]
 
-        format.html
-        format.js
+      format.html
+      format.js
       end
+
     end
   end
 
@@ -110,6 +118,17 @@ class PaymentsController < BaseController
         else
           format.html{render :action => 'new'}
           format.js {render :action => 'new'}
+        end
+
+      elsif params[:payment][:payment_type] == "Paymill"
+        if @payment.save_paymill
+          flash[:notice] = "Successfully created payment."
+          format.html{redirect_to @invoice}
+          format.js {render :action => 'create'}
+        else
+                    
+          format.html{render :action => 'new_paymill'}
+          format.js {render :action => 'new_paymill'}
         end
 
       else
@@ -185,7 +204,7 @@ class PaymentsController < BaseController
       @payment.status = "paid"
       if @payment.save
 
-      #if @payment.save
+        #if @payment.save
         flash[:notice] = "Successfully created payment."
       end
     #format.html{redirect_to @invoice}
@@ -207,7 +226,6 @@ class PaymentsController < BaseController
     redirect_to invoice_url(@invoice)
   end
 
-
   def delete_multiple
 
     respond_to do |format|
@@ -218,20 +236,19 @@ class PaymentsController < BaseController
       @payments_to_delete =Payment.where(:id => params[:payment_ids], :invoice_id => @invoice.id)
 
       @payments_to_delete.each do |payment|
-        #logger.info payment.id
-        
+      #logger.info payment.id
+
         payment.update_attribute(:status, 'cancelled')
 
       end
 
       flash[:notice] ='Payments successfully deleted.'
-      
+
       format.html {    redirect_to invoice_url(@invoice)}
       format.js { render :action => 'delete_multiple.js.erb'}
     end
 
   end
-
 
   def find_invoice
     @invoice = current_company.invoices.find(params[:invoice_id])

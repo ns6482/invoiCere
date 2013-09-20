@@ -59,5 +59,9 @@
             = s.input :paypal_sig, :label_html => {:class => "label_narrow"}
             = s.input :paypal_pwd, :label_html => {:class => "label_narrow"}
             = s.input :paypal_enabled, :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
+          .span3
+            %h3 Paymill        
+            = s.input :paymill_public_key, :label_html => {:class => "label_narrow"}
+            = s.input :paymill_enabled, :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
         
-      %button{:type=>"submit",:class=>"red"} Save
+      %button{:type=>"submit",:class=>"btn btn-large btn-primary pull-right"} Save

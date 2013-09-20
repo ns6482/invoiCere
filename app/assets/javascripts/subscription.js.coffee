@@ -27,5 +27,5 @@ subscription =
       $('#paymill_error').text(error.apierror)
       $('input[type=submit]').attr('disabled', false)
     else
-      $('#subscription_paymill_card_token').val(result.token)
+      $('.paymill_card_token').val(result.token)
       $('.update_sub')[0].submit()

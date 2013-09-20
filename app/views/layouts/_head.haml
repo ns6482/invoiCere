@@ -5,6 +5,4 @@
   = stylesheet_link_tag 'application-print', :media => 'print'
   = javascript_include_tag "https://bridge.paymill.com/", "application"
   = csrf_meta_tags
-  :javascript
-    var PAYMILL_PUBLIC_KEY= '#{PAYMILL_PUBLIC_KEY}';
   = yield :head

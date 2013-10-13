@@ -3,42 +3,45 @@
 %html{html_attrs(lang = 'en')}
   %head
     = render 'layouts/head'
-  %body{:class => 'page page-index'}
-    #navigation{:class =>'wrapper'}
-      %div{:class => 'navbar  navbar-static-top'}
-        #header{:class => 'header'}
-          %div{:id=> 'header-inner container'}      
-            %div{:class => 'row-fluid'}
-   
-              #logo{:class =>'span5 offset1'}
-                %a{:class=>"brand", :href=>"#"} 
-                  %h1 VisInvoice
+  %body.page.page-index
+    #navigation.wrapper
+      .navbar.navbar-static-top
+        #header.header
+          #header-inner      
+            .row
+              #logo.span5.offset1
+                %a.brand{:href=>"#"} 
+                  %h1 InvoiCere
                   %small
-                    Subtext for header
-                  
-              #div{:class => 'span3'}
-                Some other stuff to put here
-   
-          %div{:class => 'container'}
-            %div{:class => 'navbar-inner'}
+                    Secure and Robust Online Invoicing                            
+          .row
+            .navbar-inner
       
-              %ul{:class => 'nav user-menu pull-right'}
+              %ul.nav.user-menu.pull-right
                 = render 'devise/menu/registration_items'
                 = render 'devise/menu/login_items' 
                 
-              %div{:class=>"nav-collapse collapse"}
-                %ul{:id =>"main-menu", :class=>"nav"}
+              .nav-collapse.collapse
+                #main-menu.nav
                   %li
-                    %a home
-    #container{:class => 'span11 offset1'}                                   
-      - flash.each do |name, msg|
-        - if msg.is_a?(String)
-          %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
-            %a.close{"data-dismiss" => "alert"} ×
-            = content_tag :div, msg, :id => "flash_#{name}"
-      =yield
-    .row  
-    #footer{:class => 'span11 offset1'}
+                    %a Features
+                  %li
+                    %a Pricing
+                  %li
+                    %a Demo
+                  %li
+                    %a Support
+    #container
+      .offset1                                   
+        - flash.each do |name, msg|
+          - if msg.is_a?(String)
+            %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
+              %a.close{"data-dismiss" => "alert"} ×
+              = content_tag :div, msg, :id => "flash_#{name}"
+      .offset1.span12
+        =yield
+    .row
+    #footer
       = render 'layouts/footer'
 
 

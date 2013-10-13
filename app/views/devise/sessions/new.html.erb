@@ -1,6 +1,6 @@
 <h2>Sign in</h2>
 
-<%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name), :html=> {:class => 'form-inline'} do |f| %>
+<%= simple_form_for resource_name, :as => resource, :url => session_path(resource_name), :html=> {:class => 'form-inline well'} do |f| %>
   <%= field_set_tag 'Enter your Login Credentials' do %>
 
     <%= f.input :email %>
@@ -18,7 +18,7 @@
     <% end%>
 
 	<div id="buttons">
-   	  <%= f.button :submit, "Sign in", :class=> 'btn btn-primary' %>
+   	  <%= f.button :submit, "Sign in", :class=> 'btn btn-large btn-primary' %>
    	</div>
   <% end %>
 <% end %>

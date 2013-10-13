@@ -1,10 +1,13 @@
+require 'PaymentStatus'
 class PaymentsController < BaseController
   include ActiveMerchant::Billing
 
   before_filter :find_invoice, :only => [:new, :index, :destroy, :delete_multiple]
+
   before_filter :get_paypal_details, :only => [:create, :complete, :confirm]
   load_and_authorize_resource :invoice
   load_and_authorize_resource :payment, :through => :invoice, :shallow => true
+  
   def index
     @curr = @invoice.currency
     @dae = false
@@ -26,6 +29,7 @@ class PaymentsController < BaseController
       elsif params[:payment_type] == 'Paymill'
         @payment = @invoice.payments.build
         @payment.payment_type = params[:payment_type]
+        @payment.currency = @payment.invoice.currency
         format.html {render :action => 'new_paymill'}
         format.js {render :action => 'new_paymill'}
       elsif !@invoice.can_pay_through? params[:payment_type]
@@ -124,7 +128,7 @@ class PaymentsController < BaseController
         if @payment.save_paymill
           flash[:notice] = "Successfully created payment."
           format.html{redirect_to @invoice}
-          format.js {render :action => 'create'}
+          #format.js {render :action => 'create'}
         else
                     
           format.html{render :action => 'new_paymill'}
@@ -221,7 +225,7 @@ class PaymentsController < BaseController
     #@payment.invoice.open_again!
     #end
 
-    @payment.destroy#(:status, 'cancelled')
+    @invoice.destroy#(:status, 'cancelled')
     flash[:notice] = "Successfully destroyed payment."
     redirect_to invoice_url(@invoice)
   end
@@ -253,6 +257,7 @@ class PaymentsController < BaseController
   def find_invoice
     @invoice = current_company.invoices.find(params[:invoice_id])
     @payments = Payment.find_all_by_invoice_id(params[:invoice_id], :include => :user)
+    check_paid
   end
 
   def find_payment
@@ -260,6 +265,15 @@ class PaymentsController < BaseController
     @payment = p if p.invoice.client.company_id == current_company
   end
 
+
+  def check_paid
+    if @invoice.state == 'paid'
+      flash[:error] = 'You have already paid for this invoice'
+      redirect_to @invoice
+    end  
+  end
+  
+  
   private
 
   def get_paypal_details

@@ -5,7 +5,7 @@
 %h1 
   Update Credit Card Details 
   = @plan.name
-=simple_form_for  @subscription, :url => update_card_subscription_path, :html => { :method => :put, :multipart => true  } do |f|
+=simple_form_for  @subscription, :url => update_card_subscription_path, :html => { :method => :put, :multipart => true , :class => 'update_sub' } do |f|
   -if @subscription.errors.any?
     .alert.alert-error
       = pluralize(@payment.errors.count, "error")

@@ -1,16 +1,10 @@
+
 -if !current_company.nil?
   -if current_company.setting.paymill_enabled = 1
     -content_for :head do
       :javascript
         var PAYMILL_PUBLIC_KEY ='#{current_company.setting.paymill_public_key}' ;
-
-%div{:class=>"modal-header"}
-  %button{:type=>"button", :class=>"close", 'data-dismiss'=>"modal",  'aria-hidden'=>"true"}
-    &times;
-  %h3 Make Payment
-
-%div{:class=>'modal-body'}
- 
+#payment-form.well.span10
   =simple_form_for [@invoice, @payment], :html => { :remote => false, :class => 'update_sub'} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
     -if @payment.errors.any?
       .alert.alert-error
@@ -19,29 +13,45 @@
         %ul
           -@payment.errors.full_messages.each do |msg|
             %li= msg 
+                        
+    #tdsecure-modal.modal.hide.fade
+      .modal-header
+        %button.close{:type=>"button", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
+          &times;
+        %h3 3D Secure Payment
+      #tdsecure-form.modal-body
+      .modal-footer
+        %button{:class=>"btn", 'data-dismiss'=>"modal"} Cancel    
+      
     =# f.error_messages
     =#field_set_tag "Log Payment", :id=>'form-main' do
     =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.hidden_field :paymill_card_token, :class => 'paymill_card_token'
-    = f.hidden_field :payment_type    
-    = f.input :pay_full_amount, :as => 'boolean', :label=>"Pay full amount (" + @invoice.remaining_amount_cents.to_s + ")"
-    = f.input :amount_cents   
-    = label_tag 'Credit Card Number'
-    = text_field_tag :card_number, nil, name: nil
-    = label_tag 'CCV Number'
-    = text_field_tag :card_code, nil, name: nil 
-    
-    =label_tag :card_month, "Card Expiration"
-    =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
-    =select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
+    = f.hidden_field :payment_type
+    .controls.controls-row     
+
+      = f.hidden_field :currency, :class => 'currency'
+    .controls.controls-row
+      .span3     
+        = f.input :pay_full_amount, :as => 'boolean', :label=>"Pay full amount (" + @invoice.remaining_amount_cents.to_s + ")"
+      .span2
+        = f.input :amount_cents, :input_html => {:class => 'amount'}   
+    .controls.controls-row
+      .span3
+        = label_tag 'Credit Card Number'
+        = text_field_tag :card_number, nil, name: nil
+      .span2
+        = label_tag 'CCV Number'
+        = text_field_tag :card_code, nil, name: nil 
+            
+    .controls.controls-row
+      .span10
+        =label_tag :card_month, "Card Expiration"
+        =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
+        =select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
      
     #paymill_error.error
       %noscript
         JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
-
- 
-    %div{:class=>'modal-footer'}
-      %button{:class=>"btn", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Close
-      %button{:type=>"submit",:class=>"btn btn-primary"} Pay
-
-    
+  
+    %button{:type=>"submit",:class=>"btn btn-primary pull-right btn-large"} Pay

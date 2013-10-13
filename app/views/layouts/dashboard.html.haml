@@ -3,6 +3,7 @@
 %html{html_attrs(lang = 'en')}  
   %head
     =render(:partial => 'layouts/head')
+
   %body
     #header{:class => "navbar navbar-inverse navbar-fixed-to row"}
       #top-bar{:class=>"navbar-inner"}
@@ -20,16 +21,16 @@
     
     -if current_user
       %ul{:class=>'nav nav-tabs'}
-        %li{:class=> 'active'}
+        %li#dashboard-nav
           =link_to 'Dashboard', root_path
         -if can? :read, StandardInvoice
-          %li
+          %li#invoice-nav
             =link_to'Invoices', invoices_path
         -if can? :read, ScheduleInvoice
-          %li
+          %li#reocurring-nav
             =link_to'Reocurring', schedules_path
         -if can? :read, Client
-          %li
+          %li#client-nav
             =link_to 'Clients', clients_path
         -if can? :update, Company
           %li{:class => 'dropdown'}

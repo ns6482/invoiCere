@@ -1,14 +1,16 @@
-- title "Signup to JustInvoice"
-=simple_form_for  @company, :url => company_path, :html => { :method => :post, :multipart => true  } do |f|
-  = f.input :name, :label => "Subdomain"
-  =f.simple_fields_for :user, @user do |u|
-    = u.error_messages
-    =# u.label "User Name"
-    = u.input :name
-    = u.input :email
-    = u.input :password
-    = u.input :password_confirmation
-  %button{:type=>"submit",:class=>"btn btn-primary"}
+- title "Signup to InvoiCere"
+%h2 Sign up now!
+.well
+  =simple_form_for  @company, :url => company_path, :html => { :method => :post, :multipart => true} do |f|
+    = f.input :name, :label => "Subdomain"
+    =f.simple_fields_for :user, @user do |u|
+      = u.error_messages
+      =# u.label "User Name"
+      = u.input :name
+      = u.input :email
+      = u.input :password
+      = u.input :password_confirmation
+  %button{:type=>"submit",:class=>"btn btn-large btn-primary pull-right"}
     Save
 %p
   = link_to "Cancel", root_path

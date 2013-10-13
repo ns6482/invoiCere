@@ -208,6 +208,24 @@ $(document).ready(function() {
     }
 
     );
+    
+    $('.feature').on('click', function(event)
+    {
+    	//$(event.target).parent().parent().find(".caption").toggle().css( "background", "yellow" );
+    	$( "li" ).removeClass( "active");
+    	$(".tab-content").empty();
+    	
+    	$(".console-body-inner").empty();
+    	$(event.target).parent().addClass("active");
+    	
+    	$(event.target).parent().find(".caption").clone().appendTo(".tab-content").toggle();
+
+
+
+    	return false;
+    		
+    }
+  );
 
     // Change our search form to ajax
     //$('#search_form').ajaxForm();

@@ -1,7 +1,8 @@
 - title "Dashboard"
 =content_for :head do
   = javascript_include_tag "dashboard-graph.js", "application"
-
+  :javascript
+    $("#dashboard-nav").addClass("active");
     
 
 =content_for :right do 

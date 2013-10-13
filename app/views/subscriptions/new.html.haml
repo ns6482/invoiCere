@@ -25,7 +25,15 @@
       %ul
         -@subscription.errors.full_messages.each do |msg|
           %li= msg 
-          
+  #tdsecure-modal.modal.hide.fade
+    .modal-header
+      %button.close{:type=>"button", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
+        &times;
+      %h3 3D Secure Payment
+    #tdsecure-form.modal-body
+    .modal-footer
+      %button{:class=>"btn", 'data-dismiss'=>"modal"} Cancel 
+            
   = f.hidden_field :plan_id
   = f.hidden_field :paymill_card_token, :class => 'paymill_card_token'
   
@@ -44,6 +52,9 @@
     =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
     =select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}
    
+    = hidden_field_tag :amount, nil, name: nil , :class => 'amount', :value => 5
+    = hidden_field_tag :currency, nil, name: nil , :class => 'currency', :value => 'GBP'
+    
   #paymill_error
     %noscript
       JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>

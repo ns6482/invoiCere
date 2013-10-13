@@ -58,7 +58,7 @@ class Subscription < ActiveRecord::Base
   def upgrade_to_plan(plan_id)
     
     #TODO add more offers that have no trial period, if upgrading or downgrading cannot have offer. Should be one off.
-    
+    #TODO check currency and plan are amount have not been altered
       plan = Plan.find(plan_id)  
     
       subscription = Paymill::Subscription.find(self.paymill_id)

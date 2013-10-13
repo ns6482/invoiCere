@@ -11,9 +11,10 @@ class Payment < ActiveRecord::Base
   validate :invoice_is_open?
 
   before_validation :set_if_full_amount
+  
+  
   before_save :set_if_full_amount
   after_save :check_if_paid
-  
   after_destroy :update_invoice_when_deleted
   after_update  :update_invoice_when_status
   
@@ -22,6 +23,7 @@ class Payment < ActiveRecord::Base
   #after_destroy :reopen
 
   monetize :amount, :as => "amount_cents"
+  
   
   def overpaid? 
     unless amount.nil?
@@ -37,9 +39,14 @@ class Payment < ActiveRecord::Base
   def save_paymill
      # logger.debug "token:"
      # logger.debug self.paymill_card_token
-    if valid?                
+    if valid?        
+              
       payment = Paymill::Transaction.create token: self.paymill_card_token, amount: self.amount, currency: self.currency, description: self.id
-      save!      
+      self.reference = payment.id
+      if save! #TODO paymill webhook to alter status
+        Resque.enqueue(PaymentStatus, self.id)
+      end
+            
     end
   rescue Paymill::PaymillError => e
     logger.error "Payment Error: #{e.message}"

@@ -21,16 +21,16 @@
     
     -if current_user
       %ul{:class=>'nav nav-tabs'}
-        %li#dashboard-nav
+        %li#dashboard-nav.active
           =link_to 'Dashboard', root_path
         -if can? :read, StandardInvoice
-          %li#invoice-nav
+          %li#invoices-nav
             =link_to'Invoices', invoices_path
         -if can? :read, ScheduleInvoice
-          %li#reocurring-nav
+          %li#reocurring-invoices-nav
             =link_to'Reocurring', schedules_path
         -if can? :read, Client
-          %li#client-nav
+          %li#clients-nav
             =link_to 'Clients', clients_path
         -if can? :update, Company
           %li{:class => 'dropdown'}

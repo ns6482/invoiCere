@@ -1,21 +1,22 @@
 -if @invoices.nil?
-  %h3 No Invoices
+  %h3 No Invoices Due
 -else
   %br
-  #accordian{:class => 'accordian'}
+  #due.span5
     -@invoices_states.each do |state, invoices|
-      %div{:id=> state.to_s, :class=>'accordion-group'}
-        %div{:class=> 'accordian-heading'}
-          %div{:class=> 'accordion1'}
-            %a{:class=> "accordion-toggle btn btn-large btn-info btn-block", 'data-toggle'=>"collapse",  'data-parent'=>'#accordian', :href=>'#' + state.to_s.tr(" ", "-")}= state + " (" + invoices.count.to_s + ")"
-          %div{:id=> state.to_s.tr(" ", "-"), :class=> 'accordian-body collapse'}
+      %div{:id=> state.to_s}
+        %div
+          %div
+            %h3
+              Invoices Due 
+              (
+              =h invoices.count.to_s
+              )
+          %div{:id=> state.to_s.tr(" ", "-")}
             %table{:id => "invoices", :class => "table"}
               %thead
                 %tr
-                  %th Created
                   %th Client Name
-                  %th Title
-                  %th Invoice Date
                   %th Due Date
                   %th Total Cost
               %tbody

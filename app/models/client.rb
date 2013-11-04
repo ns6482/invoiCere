@@ -4,6 +4,8 @@ class Client < ActiveRecord::Base
   @@per_page = 10
 
   belongs_to :company
+  belongs_to :summary
+  
   has_many :contacts, :dependent => :destroy
   has_many :invoices
   has_many :users
@@ -21,9 +23,13 @@ class Client < ActiveRecord::Base
   scope :due, where("invoices.due_date <= '#{Date.today}' and invoices.state = 'open'")
 
   scope :with_aggregates,
-  :select => "clients.*,MIN(invoices.due_date) AS min_due_date, SUM(invoices.total_cost_inc_tax_delivery) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(payments.amount) as total_paid ",
-  :joins => ["LEFT JOIN invoices ON invoices.client_id = clients.id LEFT JOIN payments ON invoices.id = payments.invoice_id"],
-  :group => "clients.id"
+  :select => "clients.company_id, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, invoices.currency, MIN(invoices.due_date) AS min_due_date, SUM(total_cost_inc_tax_delivery) AS total_amount,  SUM(invoices.due_amount) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(invoices.total_cost_inc_tax_delivery -invoices.due_amount) as total_paid",
+  :joins => [" LEFT OUTER JOIN invoices ON invoices.client_id = clients.id AND invoices.state = 'open'"],
+  :group => "clients.id, clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email,  invoices.currency"
+
+
+
+
 
   scope :outstanding, due.with_aggregates#.having("total_due >= 0")
 

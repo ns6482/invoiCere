@@ -209,6 +209,12 @@ $(document).ready(function() {
 
     );
     
+     $(window).bind("load", function() {     
+      $("#dashboard-nav").removeClass("active");
+      $("#" + this.document.title.toLowerCase().replace(" ", "-") + "-nav").addClass("active");
+    });
+
+  
     $('.feature').on('click', function(event)
     {
     	//$(event.target).parent().parent().find(".caption").toggle().css( "background", "yellow" );

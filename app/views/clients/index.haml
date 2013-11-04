@@ -16,10 +16,9 @@
   = link_to " now", new_client_path  
 
 =content_for :right do
- %ul
+ %div{:class => 'btn-group btn-group-vertical'}
+
   -if can? :create, Client
-   %li
-    = link_to "New Client", new_client_path
+   = link_to '<i class="icon-plus icon-white"></i> New Client'.html_safe, new_client_path, :class => 'btn btn-primary'
   -if can? :read, Client
-   %li 
-    = link_to "Export", clients_path(:format => 'csv')
+   = link_to "Export to CSV", clients_path(:format => 'csv'), :class => 'btn'

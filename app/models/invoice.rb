@@ -26,7 +26,7 @@ class Invoice < ActiveRecord::Base
   
   scope :ytd, by_date( Date.new(Date.today.year,1,1) , Date.today+1)
   scope :mtd, by_date( Date.new(Date.today.year,Date.today.month,1) , Date.today)
-  
+  scope :open, -> { where state: 'open' }  
 
   belongs_to :client
   has_many :invoice_items, :dependent => :destroy

@@ -4,7 +4,7 @@
   %td= check_box_tag "client_ids[]", client.id
   %td
     %dd{:class => "table-item"}
-      %h3=link_to_if can?(:read, client), client.company_name, client
+      %h3= h link_to_if can?(:read, client), client.company_name, client
       =h client.display_address
       %br
       -if client.display_phone or client.display_fax
@@ -13,28 +13,23 @@
         %br
       -if client.email.length > 0  
         %strong Email: 
-        =mail_to client.email
+        = h mail_to client.email
   %td{:class => "table-side"}
     %dd
-      - if @clients_outstanding.include? client.id
-        .alert
-          %strong Due: 
-          =h number_to_currency client.total_due.to_d ||= 0 - client.total_paid.to_d ||= 0, :unit => '£', :separator => ".", :delimiter => ","
-      - else
-        .success
-          %strong Due:
-          =h number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","        
-      %br
-      %strong Total Invoices: 
-      =client.count_invoices
-      %br
-      %strong Invoice Amount:
-      -if client.invoices.count > 0
-        =h number_to_currency client.total_due.to_d, :unit => '£', :separator => ".", :delimiter => ","
-      -else
-        0
-  
-      -#if can? :update, client
-        =# link_to 'Edit', edit_client_path(client)
-      -#if can? :destroy,client
-        =# link_to 'Delete', client, :confirm => 'Are you sure?', :method => :delete
+      - client.invoices.where(:state => 'open').group(:currency).select("currency, SUM(due_Amount) AS due_amount, SUM(total_cost_inc_tax_delivery) AS total_cost_inc_tax_delivery").each do |item|
+        .well.well-small
+          %strong=h item.currency
+          %ul.inline
+            %li
+              %strong Due:  
+              = h csymb item.currency, item.due_amount ||=0, false
+
+            %li
+              %strong Total:  
+              = h csymb item.currency, item.total_cost_inc_tax_delivery ||=0, false
+          
+     
+    %br
+    %strong Total Invoices: 
+    =client.invoices.where(:state => 'open').count
+

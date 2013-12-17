@@ -3,9 +3,52 @@ class DashboardController < BaseController
 
   #load_and_authorize_resource :class => "Invoice"
   #load_and_authorize_resource :class => "Client"
-  
+
+
   def show
+      @summaries_base = current_company.summaries.where(:tax_year =>  Time.now.year)
+      @summaries = @summaries_base.by_currency.to_a.group_by {|s|s.currency}
+      
+      graph_type = params[:graph] ||= "ti"
+      
+      colors = {:EUR => "Red", :GBP => 'Blue', :USD => 'Green'}
+      
+      @data = Array.new
+
+      @title = "Total Invoiced YTD"
+
+      @summaries_base.by_yr_mo.to_a.group_by {| s | s.currency }.each do |currency, summaries|
+        if graph_type == "ti" 
+          @data.push({:data => summaries.map{ | t | {:x => Time.mktime(t.yr,t.mo).to_i, :y => t.total_amount_closed}}, :name => currency, :color => colors[currency.to_sym]})
+         else           
+          @data.push({:data => summaries.map{ | t | {:x => Time.mktime(t.yr,t.mo).to_i, :y => t.total_payments}}, :name => currency, :color => colors[currency.to_sym]})
+          @title = "Total Payments YTD"
+         end
+      end
+      
+      @outstanding = @summaries_base.by_client_currency.group_by {|s|s.currency} 
+            
+      #TODO 
+      
+     
+      #1. add slider, legend to graph above, perhaps bar would look better 
+      #2. second summary, list of clients, i, name, total_due, minimum date, due_days (calculated) order by date asc
+      #3. add ability to filter out legends
+      #4. make graph partial, check queries n+1, perhaps graph controller
   
+      #@summaries_time = Hash.new { |h,k| h[k] = Hash.new { |h1,k1| h1[k1] = {}}}
+      #current_company.summaries.by_yr_mo.to_a.each do | summary|
+      #  @summaries_time[s.currency.to_sym][(s.yr.to_s + " " + s.mo.to_s).to_sym] = {:total_due => s.total_due, :count => s.count_due}
+      #end
+
+      #result.keys.each do | currency |
+      #  puts currency
+       # result[currency].keys.each do | time |
+       #    puts time
+       #   puts result[currency][time][:total_due]
+       # end
+      #end
+      
       @invoices = current_company.invoices.accessible_by(current_ability).where(:type=> 'StandardInvoice')
       @invoice_paid = @invoices.joins("JOIN payments ON payments.invoice_id = invoices.id").uniq
 
@@ -31,7 +74,7 @@ class DashboardController < BaseController
   
     respond_to do | format |
       format.html
-      format.js
+      format.js 
     end
   end
 

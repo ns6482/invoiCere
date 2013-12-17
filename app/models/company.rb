@@ -40,6 +40,8 @@ class Company < ActiveRecord::Base
     self.invoices.group_by {|i| i.formatted_state }
   end
 
+
+
   
   private
 

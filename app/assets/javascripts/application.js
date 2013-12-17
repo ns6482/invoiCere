@@ -25,3 +25,4 @@
 //= require itemAutoComplete
 //= require jquery_nested_form
 //= require subscription.js.coffee
+//= require rickshaw_with_d3

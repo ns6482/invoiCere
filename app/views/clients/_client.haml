@@ -16,20 +16,18 @@
         = h mail_to client.email
   %td{:class => "table-side"}
     %dd
-      - client.invoices.where(:state => 'open').group(:currency).select("currency, SUM(due_Amount) AS due_amount, SUM(total_cost_inc_tax_delivery) AS total_cost_inc_tax_delivery").each do |item|
+      - client.summaries.each do |item|
         .well.well-small
           %strong=h item.currency
           %ul.inline
             %li
               %strong Due:  
-              = h csymb item.currency, item.due_amount ||=0, false
-
+              = h csymb item.currency, item.total_due ||=0, false
             %li
               %strong Total:  
-              = h csymb item.currency, item.total_cost_inc_tax_delivery ||=0, false
-          
-     
-    %br
-    %strong Total Invoices: 
-    =client.invoices.where(:state => 'open').count
+              = h csymb item.currency, item.total_amount_open ||=0, false 
+            %li
+              %strong Open Count:
+              = h item.count_invoices_open
+    =#client.invoices.where(:state => 'open').count
 

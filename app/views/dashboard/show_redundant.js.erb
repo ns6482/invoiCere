@@ -1,0 +1,33 @@
+$(function () {
+	
+  new Highcharts.Chart({
+    chart: { 
+		renderTo: 'invoices_chart' 
+		, defaultSeriesType: 'line'	
+	},
+    title: { text: 'Invoices by Day' },
+    xAxis: { type: 'datetime' },
+    yAxis: {
+      title: { text: 'Pounds' }
+    },
+
+    tooltip: {
+      formatter: function () {
+        return Highcharts.dateFormat("%B %e %Y", this.x) + ': ' +
+          '£' + Highcharts.numberFormat(this.y, 2);
+      }
+    },    
+    series: [{
+      name: "Invoices",
+      pointInterval: <%= 1.day * 1000 %>,
+      pointStart: <%= Integer(@gdate).months.ago.at_midnight.to_i * 1000 %>,
+      data: <%= invoices_chart_series(@invoices, Integer(@gdate).months.ago) %>
+	},
+	{
+	  name: "Payments",
+	  pointInterval: <%= 1.day * 1000 %>,
+	  pointStart: <%= Integer(@gdate).months.ago.at_midnight.to_i * 1000 %>,
+	  data: <%= payments_chart_series(@invoices, Integer(@gdate).months.ago) %>
+    }]
+  });
+});

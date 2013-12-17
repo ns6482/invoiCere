@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027214758) do
+ActiveRecord::Schema.define(:version => 20131128204128) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -209,6 +209,8 @@ ActiveRecord::Schema.define(:version => 20131027214758) do
     t.string   "time_zone"
     t.text     "payment_instruction"
     t.text     "footer"
+    t.string   "fiscal_start"
+    t.string   "fiscal_end"
   end
 
   create_table "reminders", :force => true do |t|
@@ -333,10 +335,15 @@ ActiveRecord::Schema.define(:version => 20131027214758) do
     t.integer  "total_amount_open"
     t.integer  "total_amount_closed"
     t.integer  "count_invoices_open"
+    t.integer  "count_due"
     t.integer  "count_invoices_due"
     t.integer  "count_invoices_closed"
     t.integer  "count_invoices_draft"
     t.datetime "min_due_date"
+    t.integer  "yr"
+    t.integer  "mo"
+    t.integer  "tax_year"
+    t.integer  "total_payments"
   end
 
   create_table "users", :force => true do |t|

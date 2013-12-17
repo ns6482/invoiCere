@@ -108,14 +108,13 @@ VisioInvoiceV3::Application.routes.draw do
       end
     end
     
-    resources :dashboard do 
+    resource :dashboard do 
       member do 
         get 'show'
     #    post 'invite'
       end  
     end
     
-    #resources :dashboard, :only => [:show]
     
     resources :plans, :only => [:index]
     

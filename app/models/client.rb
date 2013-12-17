@@ -4,7 +4,7 @@ class Client < ActiveRecord::Base
   @@per_page = 10
 
   belongs_to :company
-  belongs_to :summary
+  has_many :summaries
   
   has_many :contacts, :dependent => :destroy
   has_many :invoices
@@ -20,18 +20,18 @@ class Client < ActiveRecord::Base
 
   attr_searchable :company_name, :address1, :address2, :zip, :city, :country, :phone, :email
 
-  scope :due, where("invoices.due_date <= '#{Date.today}' and invoices.state = 'open'")
 
-  scope :with_aggregates,
-  :select => "clients.company_id, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, invoices.currency, MIN(invoices.due_date) AS min_due_date, SUM(total_cost_inc_tax_delivery) AS total_amount,  SUM(invoices.due_amount) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(invoices.total_cost_inc_tax_delivery -invoices.due_amount) as total_paid",
-  :joins => [" LEFT OUTER JOIN invoices ON invoices.client_id = clients.id AND invoices.state = 'open'"],
-  :group => "clients.id, clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email,  invoices.currency"
+  scope :outstanding,
+  :select => "clients.company_id, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, summaries.currency, summaries.min_due_date AS min_due_date, summaries.total_amount_open,  summaries.total_due AS total_due, summaries.count_invoices_open, summaries.total_amount_open-summaries.total_due AS total_paid",
+  :joins => [" LEFT OUTER JOIN summaries ON summaries.client_id = clients.id"],
+  :group => "clients.id, clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email,  summaries.currency"
 
-
-
-
-
-  scope :outstanding, due.with_aggregates#.having("total_due >= 0")
+  scope :due, 
+  :select => "clients.id, clients.company_name, SUM(summaries.total_due)",
+  :joins => ["INNER JOIN summaries ON summaries.client_id = clients.id"],
+  :group => "clients.id, clients.company_name", 
+  :having => "SUM(summaries.total_due) > 0"
+  
 
   scope :users,
   :select => "clients.*",
@@ -53,6 +53,8 @@ class Client < ActiveRecord::Base
     str += (country.blank? ? "" : ', ' +  country)
     str += (zip.blank? ? "" : ', ' + zip)
   end
+
+
 
   def display_phone
     "Phone: (" + phone + ")" unless phone.blank?

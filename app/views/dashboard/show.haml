@@ -1,9 +1,8 @@
 - title "Dashboard"
 =content_for :head do
-  = javascript_include_tag "dashboard-graph.js", "application"
   :javascript
     $("#dashboard-nav").addClass("active");
-    
+   
 
 =content_for :right do 
   %div{:id => "dashboard-list", :class=> "btn-group btn-group-vertical"}
@@ -13,41 +12,53 @@
     -if can? :create, Client
       = link_to "New Client", new_client_path, :class=> "btn btn-large"
       
-%div{:class => 'row'}
-  #dashboard-box-start.span5
-    %h4 YTD Breakdown
-    %ul#dashboard-list.well.unstyled
-      %li 
-        %strong Invoiced:  
-        =number_to_currency @total_invoice, :unit => '£', :separator => ".", :delimiter => ","
-      %li
-        %strong Payments Received
-        =number_to_currency @total_paid, :unit => '£', :separator => ".", :delimiter => ","
-      %li
-        %strong Outstanding
-        =number_to_currency @total_outstanding, :unit => '£', :separator => ".", :delimiter => ","
-        (of which overdue)
-        =number_to_currency 0, :unit => '£', :separator => ".", :delimiter => ","
-        
-  #dashboard-box-end.span5
-    %h4 Outstanding payments
-    %ul#dashboard-list.well.unstyled
-      -@clients_outstanding.each do |client|
-        %li
-          %strong=client.company_name
+.row
+  -@summaries.each do |currency, s|
+    .currency.span3
+      %strong=currency
+      %ul.well.well-small.unstyled
+        -s.each do |t|
+          %li
+            Total Due:  
+            =t.total_due
+          %li.muted
+            =pluralize(t.count_due, 'invoice')
+          %li
+            Total Amount:  
+            =t.total_amount_open
+          %li.muted
+            =pluralize(t.count_invoices_open, 'invoice')
+          %li
+            Total Closed:  
+            =t.total_amount_closed
+          %li.muted
+            =pluralize(t.count_invoices_closed, 'invoice')
+#dropdown-graph.dropdown
+  %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
+    =raw("View by" +("<b class= 'caret'></b>"))
+  %ul{:class => "dropdown-menu", :role=>"menu" ,"aria-labelledby" => "dLabel"}
+    %li= link_to "Invoices", {:action => :show, :graph => 'ti'}, :remote => true, :class => 'graph_link'
+    %li= link_to "Payments", {:action => :show, :graph => 'tp'}, :remote => true , :class => 'graph_link'
+
+#graph 
+  =render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :datag => @data, :gtitle => @title }
+
+.row
+%h4 Payments Due
+-@outstanding.each do | currency, s |
+  %strong=currency
+  %table.payments.striped 
+    -s.each do |t|
+      %tr
+        %td
+          = link_to t.company_name, client_path(t.client_id)
           (
-          =client.count_invoices
-          invoices):     
-          %strong=number_to_currency (client.total_due.to_d ||= 0 - client.total_paid.to_d ||= 0).to_f, :unit => '£', :separator => ".", :delimiter => ","
-          (paid: 
-          =number_to_currency client.total_paid.to_f, :unit => '£', :separator => ".", :delimiter => ","
-          )
-
-#dashboard-summary{:class=> 'row'}
-  = select_tag :gdate, options_for_select([['This Month',1],['3 Months ago',3], ['6 Months ago', 6], ['12 Months ago', 12]])
-  #invoices_chart
-
-= render :partial => "summary"
+          =pluralize(t.count_due, 'invoice')
+          ) 
+          
+          %strong Total Due:
+          =t.total_due
+                
 .row
 %br
 #dashboard-recent

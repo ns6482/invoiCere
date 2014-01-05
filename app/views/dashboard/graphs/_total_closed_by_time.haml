@@ -1,45 +1,69 @@
 #graph-title
-  %h2=gtitle
 #chart_container
   #y_axis
   #chart
 #legend
+#slider
 
-             
-:javascript
-  var graph = new Rickshaw.Graph( {
-    element: document.querySelector('#chart'),
-    renderer: 'line',
-    height: 200,
-    width: 600,
-    series: #{raw datag.to_json}
-   });
-   graph.render();
-
-                           
-    var detail = new Rickshaw.Graph.HoverDetail({
-                graph: graph
-    });
-   
-    var x_axis = new Rickshaw.Graph.Axis.Time({
-      graph: graph,
-    });
-    x_axis.graph.update();
-   
-    var y_axis = new Rickshaw.Graph.Axis.Y({
-      graph: graph,
-      orientation: 'left',
-      tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
-      element: document.getElementById('y_axis')
-     } );
-     y_axis.graph.update();
+=content_for :head do  
+  :javascript
     
-     var legend = new Rickshaw.Graph.Legend({
-      graph: graph,
-      element: document.querySelector('#legend')
-     });
-                     
-    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
-      graph: graph,
-      legend: legend
-    } );
+     $(function () {
+     
+          var chart;
+          var options = { 
+            chart: {
+              renderTo: 'container',
+              defaultSeriesType: 'spline'
+            },
+            title: {
+                    text: 'Invoices Closed',
+                    x: -20 //center
+                },
+        
+                xAxis: {
+                    categories: #{raw summary_x_axis(start_date)}
+                },
+                yAxis: {
+                    title: {
+                        text: 'Amount'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+           
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: #{raw summary_y_axis(summaries, start_date, type)}
+
+          }
+          
+          $('.graph_link').click(function(){
+            var graph_type = $(this).attr('data-graph');
+            var title;
+                        
+            if (graph_type === 'invoice') {
+              options.series = #{raw summary_y_axis(summaries, start_date, 'invoice')};
+            }
+            else {
+              options.series = #{raw summary_y_axis(summaries, start_date, 'payment')};
+            }
+            
+            chart = new Highcharts.Chart(options);  
+            
+            $("#dropdown-graph").removeClass("open");
+  
+            return false;            
+          });
+          
+          chart = new Highcharts.Chart(options);    
+          
+          
+      });

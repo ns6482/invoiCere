@@ -1,0 +1,52 @@
+#graph2-title
+  %h4=gtitle
+#chart2_container
+  #y_axis2
+  #chart2
+#legend2
+#slider2
+
+             
+:javascript
+  var graph2 = new Rickshaw.Graph( {
+    element: document.querySelector('#chart2'),
+    renderer: 'bar',
+    height: 200,
+    width: 600,
+    series: #{raw datag.to_json}
+   });
+   graph2.render();
+
+                           
+    var detail = new Rickshaw.Graph.HoverDetail({
+                graph: graph2
+    });
+   
+    var x_axis = new Rickshaw.Graph.Axis.Time({
+      graph: graph2,
+    });
+    x_axis.graph2.update();
+   
+    var y_axis = new Rickshaw.Graph.Axis.Y({
+      graph: graph2,
+      orientation: 'left',
+      tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+      element: document.getElementById('y_axis2')
+     } );
+     y_axis.graph2.update();
+    
+     var legend = new Rickshaw.Graph.Legend({
+      graph: graph2,
+      element: document.querySelector('#legend2')
+     });
+                     
+    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle( {
+      graph: graph2,
+      legend: legend
+    } );
+    
+    var slider = new Rickshaw.Graph.RangeSlider({
+      graph: graph2,
+      element: document.querySelector('#slider2')
+    });
+    

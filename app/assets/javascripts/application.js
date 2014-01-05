@@ -19,10 +19,12 @@
 //= require jquery.qtip-1.0.0-rc3.min
 //= require jquery.jscrollpane.min
 //= require jquery.rating.pack
-//= require highcharts
 //= require formToWizard
 //= require schedule-wizard
 //= require itemAutoComplete
 //= require jquery_nested_form
 //= require subscription.js.coffee
 //= require rickshaw_with_d3
+//= require highcharts
+//= require exporting
+

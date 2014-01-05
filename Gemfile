@@ -60,6 +60,7 @@ gem 'country_select'
 gem 'paymill', "~> 0.3.0"
 gem 'thin'
 gem 'rickshaw_rails'
+
 #gem 'roadie'
 #gem "jquery-ui-rails"
 

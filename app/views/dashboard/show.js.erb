@@ -1,3 +1,6 @@
-$("#graph").html("<%= escape_javascript(render(:partial => 'dashboard/graphs/total_closed_by_time', :locals => { :datag => @data, :gtitle => @title })) %>")
 $("#dropdown-graph").removeClass("open");
+$("#graph").html("<%= escape_javascript(render(:partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :summaries => @summaries_by_yr_mo, :start_date => @start_date, :type => @graph_type})) %>")
+
+
+   
 

@@ -11,7 +11,7 @@
       = link_to "New Invoice", new_invoice_path, :class=> "btn btn-large btn-primary"
     -if can? :create, Client
       = link_to "New Client", new_client_path, :class=> "btn btn-large"
-      
+%h4 YTD      
 .row
   -@summaries.each do |currency, s|
     .currency.span3
@@ -37,30 +37,33 @@
   %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
     =raw("View by" +("<b class= 'caret'></b>"))
   %ul{:class => "dropdown-menu", :role=>"menu" ,"aria-labelledby" => "dLabel"}
-    %li= link_to "Invoices", {:action => :show, :graph => 'ti'}, :remote => true, :class => 'graph_link'
-    %li= link_to "Payments", {:action => :show, :graph => 'tp'}, :remote => true , :class => 'graph_link'
-
-#graph 
-  =render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :datag => @data, :gtitle => @title }
-
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => 'invoice'} Invoice Amount
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => 'payment'} Payment Amount
+    
+#container{:style=>"min-width: 310px; height: 400px; margin: 0 auto"}
+#graph
+  =render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :summaries => @summaries_by_yr_mo, :start_date => @start_date , :type => @graph_type }
+%br
 .row
 %h4 Payments Due
--@outstanding.each do | currency, s |
-  %strong=currency
-  %table.payments.striped 
-    -s.each do |t|
-      %tr
-        %td
-          = link_to t.company_name, client_path(t.client_id)
-          (
-          =pluralize(t.count_due, 'invoice')
-          ) 
-          
-          %strong Total Due:
-          =t.total_due
-                
-.row
+.well.well-large
+  -@outstanding.each do | currency, s |
+    %strong=currency
+    %table.payments.striped 
+      -s.each do |t|
+        %tr
+          %td
+            = link_to t.company_name, client_path(t.client_id)
+            (
+            =pluralize(t.count_due, 'invoice')
+            ) 
+            
+            %strong Total Due:
+            =t.total_due
+ 
 %br
 #dashboard-recent
-  %h3 Recent Activity   
+  %h4 Recent Activity   
 

@@ -13,7 +13,7 @@
       = link_to "New Client", new_client_path, :class=> "btn btn-large"
 %h4 YTD      
 .row
-  -@summaries.each do |currency, s|
+  -@summaries_ytd.each do |currency, s|
     .currency.span3
       %strong=currency
       %ul.well.well-small.unstyled
@@ -33,16 +33,32 @@
             =t.total_amount_closed
           %li.muted
             =pluralize(t.count_invoices_closed, 'invoice')
-#dropdown-graph.dropdown
+.row
+#dropdown-graph-type.dropdown
   %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
-    =raw("View by" +("<b class= 'caret'></b>"))
+    =raw("Report On" +("<b class= 'caret'></b>"))
   %ul{:class => "dropdown-menu", :role=>"menu" ,"aria-labelledby" => "dLabel"}
     %li
-      %a{:class => 'graph_link', :href => '#', 'data-graph' => 'invoice'} Invoice Amount
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => 'invoices'} Invoice Amount
     %li
-      %a{:class => 'graph_link', :href => '#', 'data-graph' => 'payment'} Payment Amount
-    
-#container{:style=>"min-width: 310px; height: 400px; margin: 0 auto"}
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => 'payments'} Payment Amount
+#dropdown-graph-date.dropdown
+  %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
+    =raw("Date Range" +("<b class= 'caret'></b>"))
+  %ul{:class => "dropdown-menu", :role=>"menu" ,"aria-labelledby" => "dLabel"}
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => '2'} 2 Years
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => '1F'} Fiscal Year
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => '1'} Last Year
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => '0.5'} 6 Months
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => '0.25'} 3 Months
+    %li
+      %a{:class => 'graph_link', :href => '#', 'data-graph' => '0.1'} Current Month
+        
 #graph
   =render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :summaries => @summaries_by_yr_mo, :start_date => @start_date , :type => @graph_type }
 %br

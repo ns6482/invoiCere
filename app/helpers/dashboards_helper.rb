@@ -4,7 +4,7 @@ module DashboardsHelper
        x = []
        (0..11).each  do | i |
          dt = start_date.to_date >> i
-         x[i] = dt
+         x[i] = dt.strftime('%b %y')
        end
        x.to_a.to_json
     end
@@ -29,4 +29,38 @@ module DashboardsHelper
        
        y.to_json
     end
+    
+    def summary_y_axis2(summs, start_date, graph_type)
+       
+       
+       currencies = ['EUR', 'GBP']
+       
+       months = Hash.new { |h,k| h[k] = {} }
+       (0..11).each  do | i |
+         dt = start_date.to_date >> i
+         currencies.each do |c|
+          months[dt][c.to_sym] = 0
+          end
+        end
+         
+       summs.to_a.each do | total |         
+         dt = Date.new(total.yr, total.mo)
+         if months.has_key?(dt)
+          months[dt][total.currency.to_sym] =  (graph_type == 'invoices' ? total.total_amount_closed : total.total_payments)
+         end 
+       end
+
+       data = []
+       data.push(['Date'] | currencies)
+       
+       months.keys.each do | month|
+         data.push([month.strftime('%b %y')] + months[month].values)
+       end
+       
+       data
+       
+            
+    end
+    
+    
 end

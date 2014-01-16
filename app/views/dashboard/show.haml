@@ -47,11 +47,11 @@
     =raw("Date Range" +("<b class= 'caret'></b>"))
   %ul{:class => "dropdown-menu", :role=>"menu" ,"aria-labelledby" => "dLabel"}
     %li
-      %a{:class => 'graph_time', :href => '#', 'data-graph' => '12'} Last 12 Months
+      %a{:class => 'graph_time', :href => '#', 'data-graph' => '-12'} Last 12 Months
     %li
-      %a{:class => 'graph_time', :href => '#', 'data-graph' => '6'} Last 6 Months
+      %a{:class => 'graph_time', :href => '#', 'data-graph' => '-6'} Last 6 Months
     %li
-      %a{:class => 'graph_time', :href => '#', 'data-graph' => '3'} Last 3 Months
+      %a{:class => 'graph_time', :href => '#', 'data-graph' => '-3'} Last 3 Months
 #graph
   =render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :summaries => @summaries_by_yr_mo, :start_date => @start_date , :type => @graph_type }
 %br

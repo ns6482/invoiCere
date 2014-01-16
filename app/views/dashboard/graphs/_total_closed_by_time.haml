@@ -8,15 +8,17 @@
   :javascript
      var data_invoices = #{raw summary_y_axis2(summaries, start_date, 'invoices')};
      var data_payments = #{raw summary_y_axis2(summaries, start_date, 'payments')};
-
+     
+     var data_6 = []
+     data_6.push(data_invoices[0])
      
     google.load("visualization", "1", {packages:["corechart"]});
 
     $(function() {
       var graph_type = 'invoices';
+      var last_n = 12;
       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
       var data = google.visualization.arrayToDataTable(graph_type === 'invoices' ? data_invoices : data_payments);
-      var data_segment = data;
       google.setOnLoadCallback(drawItems);
       
       function drawItems() {               
@@ -42,7 +44,6 @@
         $('.graph_link').click(function(){
           graph_type = $(this).attr('data-graph');
           data = google.visualization.arrayToDataTable(graph_type === 'invoices' ? data_invoices : data_payments);
-
           drawItems(); 
           $("#dropdown-graph-type").removeClass("open");
            
@@ -50,9 +51,13 @@
         });
             
         $('.graph_time').click(function(){
-          graph_type = $(this).attr('data-graph');
-          //drawItems(graph_type);
-          alert(graph_type); 
+          last_n = $(this).attr('data-graph');
+          
+          data = google.visualization.arrayToDataTable(data_6.concat(graph_type === 'invoices' ? data_invoices.slice(last_n) : data_payments.slice(last_n)));;
+           
+            
+          
+          drawItems();
           $("#dropdown-graph-date").removeClass("open");
            
           return false;            

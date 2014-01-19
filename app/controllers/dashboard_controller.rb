@@ -23,7 +23,11 @@ class DashboardController < BaseController
      
     @start_date = Date.today.at_beginning_of_month >> -11
     @summaries_by_yr_mo = summaries_base.by_yr_mo
-    @summaries_by_day = summaries_base.where("yr = ? and mo = ?", Date.today.year, Date.today.month)
+    
+    
+    
+    @clients = current_company.summaries.by_client_currency.where("yr >= ?", Date.today.year-1).order("total_amount_closed DESC")
+
                
     @outstanding = summaries_base.by_client_currency.to_a.group_by {|s | s.currency}
  

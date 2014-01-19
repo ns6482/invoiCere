@@ -62,5 +62,36 @@ module DashboardsHelper
             
     end
     
+     def summary_y_axis3(sums, start_date, graph_type)
+       
+      
+       clients= sums.to_a.map { | c | c.company_name}
+       
+       sums = sums.group_by {| s | s.currency}
+       
+       summaries = Hash.new { |h,k| h[k] = {} }
+         
+       sums.to_a.each do | currency, totals |
+         totals.each do | s|         
+          summaries[s.company_name.to_sym][currency.to_sym] =  (graph_type == 'invoices' ? s.total_amount_closed : s.total_payments) + 0
+         end
+       end
+
+       data = []
+       data.push(['Client'] | sums.keys)
+       
+       summaries.keys.each do | client|
+         data.push([client.to_s] + summaries[client].values)
+       end
+       
+       data
+       
+            
+    end
+    
+    
+  
+    
+    
     
 end

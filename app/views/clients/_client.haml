@@ -16,18 +16,18 @@
         = h mail_to client.email
   %td{:class => "table-side"}
     %dd
-      - client.summaries.each do |item|
+      -# client.summaries.each do |item|
         .well.well-small
           %strong=h item.currency
           %ul.inline
             %li
               %strong Due:  
-              = h csymb item.currency, item.total_due ||=0, false
+              =# h csymb item.currency, item.total_due ||=0, false
             %li
               %strong Total:  
-              = h csymb item.currency, item.total_amount_open ||=0, false 
+              =# h csymb item.currency, item.total_amount_open ||=0, false 
             %li
               %strong Open Count:
-              = h item.count_invoices_open
+              =# h item.count_invoices_open
     =#client.invoices.where(:state => 'open').count
 

@@ -27,20 +27,29 @@ class Client < ActiveRecord::Base
   :group => "clients.id, clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email,  summaries.currency"
 
   scope :due, 
-  :select => "clients.id, clients.company_name, SUM(summaries.total_due)",
+  :select => "clients.id,  SUM(summaries.total_due)",
   :joins => ["INNER JOIN summaries ON summaries.client_id = clients.id"],
   :group => "clients.id, clients.company_name", 
   :having => "SUM(summaries.total_due) > 0"
+  
+  
+  scope :by_open,
+  :select => "clients.company_id, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, MIN(summaries.min_due_date) AS min_due_date, SUM(summaries.count_invoices_open) as total_open",
+  :joins => [" LEFT OUTER JOIN summaries ON summaries.client_id = clients.id"],
+  :group => "clients.id, clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email"
+
   
 
   scope :users,
   :select => "clients.*",
   :joins => ["JOIN users ON clients.id = users.client_id"]
 
-  #:select => "clients.*, SUM(invoices.total_cost_inc_tax_delivery) AS total_due, COUNT(DISTINCT(invoices.id)) AS count_invoices, SUM(payments.amount) as total_paid ",
-  #:joins => ["JOIN 'invoices' ON invoices.client_id = clients.id LEFT JOIN payments ON invoices.id = payments.invoice_id"],
+  scope :by_due,
+  :select => "clients.id,  summaries.currency, SUM(summaries.total_due) AS total_due",
+  :joins => ["LEFT JOIN summaries ON summaries.client_id = clients.id"],
   #:conditions => "invoices.due_date <= '#{Date.today}' and invoices.state = 'open'",
-  #:group => "clients.id"
+  :group => "clients.id, summaries.currency"
+  
   def name
     company_name
   end

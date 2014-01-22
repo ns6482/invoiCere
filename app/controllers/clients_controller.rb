@@ -10,7 +10,7 @@ class ClientsController < BaseController
 
     @search = @clients.search(params[:search])
     #@clients = @search.all
-    @clients = @search.paginate :page => params[:page], :per_page => 10
+    @clients = @search.paginate :page => params[:page], :per_page => 2
 
     respond_to do |format|
       format.html # index.html.erb
@@ -128,8 +128,10 @@ class ClientsController < BaseController
     #authorize! :read, current_company
     
     #@clients_outstanding = current_company.clients.accessible_by(current_ability).with_aggregates.due.map {|client| client.id}
-    @clients = Client.accessible_by(current_ability).includes("summaries").uniq#.accessible_by(current_ability, :read)
-    
+    @clients = current_company.clients.accessible_by(current_ability).by_open#.accessible_by(current_ability, :read)    
+    @totals = Hash.new { |k,v| k[v] = {}}
+    current_company.clients.accessible_by(current_ability).by_due.to_a.map { | x | @totals[x.id][x.currency.to_sym] = x.total_due ||= 0}
+     
   end
 
   def find_client

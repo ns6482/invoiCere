@@ -7,7 +7,8 @@
  =form_tag delete_multiple_clients_path, :method => :delete, :remote => true do
   -if can? :delete, Client
    = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
-  = render :partial => "clients"
+  #clients 
+   = render :partial => "clients"
   
 -else
  

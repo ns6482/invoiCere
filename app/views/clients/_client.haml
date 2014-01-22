@@ -3,7 +3,7 @@
 %tr{:id => "client-row-" + client.id.to_s, :class=>"table-row " + cycle("odd", "even")}
   %td= check_box_tag "client_ids[]", client.id
   %td
-    %dd{:class => "table-item"}
+    %dd.table-item
       %h3= h link_to_if can?(:read, client), client.company_name, client
       =h client.display_address
       %br

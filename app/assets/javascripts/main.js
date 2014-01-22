@@ -111,12 +111,9 @@ $(document).ready(function() {
         })
     })
 
-    // Change all link helpers to use ajax
-    $('a.ordering, a.descending, a.ascending, .pagination a, a.calendar_month').on('click', function() {
-        //$('#invoices').load(this.href);
-        $.get(this.href, null, null, 'script');       
-        return false;
-    })
+$('a.ordering, a.descending, a.ascending, .pagination a, a.calendar_month').attr("data-remote", true);
+
+   
 
     $('a.interactive').on('click', function() {
 

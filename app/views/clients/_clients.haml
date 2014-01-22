@@ -1,4 +1,4 @@
-%table{:id => "table-clients", :class => "table table-hover"}
+%table#table-clients.table.table-hover
   %thead
     %tr
       %th
@@ -7,5 +7,4 @@
       %th
   %tbody
     =render :partial => "client", :collection => @clients
-%p
-  = will_paginate @clients
+= will_paginate @clients, :remote => true

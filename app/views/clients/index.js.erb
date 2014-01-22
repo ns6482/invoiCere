@@ -1,1 +1,4 @@
-$("#table-clients").html("<%= escape_javascript(render("clients")) %>")
+$("#clients").html("<%= escape_javascript(render("clients")) %>")
+$(".pagination").find("a").attr("data-remote", true);
+
+

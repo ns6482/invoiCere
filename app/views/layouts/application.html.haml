@@ -9,7 +9,7 @@
         #header.header
           #header-inner      
             .row
-              #logo.span5.offset1
+              #logo.col-md-5.col-md-offset-1
                 %a.brand{:href=>"#"} 
                   %h1 InvoiCere
                   %small
@@ -32,13 +32,13 @@
                   %li
                     %a Support
     #container
-      .offset1                                   
+      .col-md-offset-1                                   
         - flash.each do |name, msg|
           - if msg.is_a?(String)
             %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
               %a.close{"data-dismiss" => "alert"} ×
               = content_tag :div, msg, :id => "flash_#{name}"
-      .offset1.span12
+      .col-md-offset-1.col-md-12
         =yield
     .row
     #footer

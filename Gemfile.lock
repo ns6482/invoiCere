@@ -50,7 +50,7 @@ GEM
       nokogiri (< 1.6.0)
       uuidtools (~> 2.1)
     bcrypt-ruby (3.1.1)
-    bootstrap-sass (2.3.0.1)
+    bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.10)
@@ -101,8 +101,6 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    fancy-buttons (1.2.0)
-      compass (>= 0.11)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     friendly_id (4.0.10)
@@ -295,10 +293,9 @@ DEPENDENCIES
   activemerchant (~> 1.28)
   activesupport (>= 2.3.11)
   aws-sdk
-  bootstrap-sass (~> 2.3.0.1)
+  bootstrap-sass (~> 3.0.3.0)
   cancan (>= 1.6)
   coffee-rails
-  compass
   compass-rails
   countries
   country_select
@@ -308,7 +305,6 @@ DEPENDENCIES
   devise-async
   devise_invitable
   factory_girl_rails
-  fancy-buttons
   friendly_id
   gocardless
   haml (>= 3.1.4)
@@ -335,7 +331,7 @@ DEPENDENCIES
   resque-scheduler
   resque_mailer
   rickshaw_rails
-  sass-rails (~> 3.2)
+  sass-rails (>= 3.2)
   simple-navigation
   simple_form
   sqlite3

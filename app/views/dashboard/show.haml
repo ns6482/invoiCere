@@ -12,34 +12,35 @@
     -if can? :create, Client
       = link_to "New Client", new_client_path, :class=> "btn btn-large"
 .row
-%h4 YTD      
-#ytd_summary.span10   
-  .span8.well.well-small.span5
+#ytd_summary.col-md-10.well.well-sm
+  .panel-heading
+    %h4 YTD
+  .panel-body      
     -@summaries_ytd.each do |currency, s|
-      .currency.span
+      .currency.col-md-5
         %strong=currency
-        %ul.well-small.unstyled
+        %ul.well-small.list-unstyled
           -s.each do |t|
             %li
               Total Due:  
               =t.total_due
-            %li.muted
+            %li.text-muted
               =pluralize(t.count_due, 'invoice')
             %li
               Total Amount:  
               =t.total_amount_open
-            %li.muted
+            %li.text-muted
               =pluralize(t.count_invoices_open, 'invoice')
             %li
               Total Closed:  
               =t.total_amount_closed
-            %li.muted
+            %li.text-muted
               =pluralize(t.count_invoices_closed, 'invoice')
-  .span4           
-    #chart_div2{:style=>"width: 500px; height: 200px;"}      
-            
+.col-md-4           
+  #chart_div2{:style=>"width: 500px; height: 200px;"}      
+          
 .row
-#dropdown_1.span2
+#dropdown_1.col-md-2
   #dropdown-graph-type.dropdown
     %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
       =raw("Report On" +("<b class= 'caret'></b>"))
@@ -48,7 +49,7 @@
         %a{:class => 'graph_link', :href => '#', 'data-graph' => 'invoices'} Invoice Amount
       %li
         %a{:class => 'graph_link', :href => '#', 'data-graph' => 'payments'} Payment Amount
-#dropwdown_2.span2.pull-right        
+#dropwdown_2.col-md-2.pull-right        
   #dropdown-graph-date.dropdown
     %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
       =raw("Date Range" +("<b class= 'caret'></b>"))
@@ -60,7 +61,7 @@
       %li
         %a{:class => 'graph_time', :href => '#', 'data-graph' => '-3'} Last 3 Months
   
-#chart_div.span7{:style=>"width: 800px; height: 400px;"}
+#chart_div.col-md-7{:style=>"width: 800px; height: 400px;"}
 =render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :summaries => @summaries_by_yr_mo, :clients => @clients, :start_date => @start_date , :type => @graph_type }
 %br
 .row

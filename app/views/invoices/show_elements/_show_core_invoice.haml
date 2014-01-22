@@ -1,6 +1,6 @@
-#invoice-preview{:class => "row"}
- #invoice-header-details{:class=> "span7"}
-  %table{:class=>"table table-condensed"}
+#invoice-preview.row
+ #invoice-header-details.col-md-7
+  %table.table.table-condensed
    %tr
     %th ID
     %td 
@@ -26,8 +26,8 @@
      %h4= link_to @invoice.client.name, edit_client_path(@invoice.client)
      =render :partial => "clients/address", :locals => {:client => @invoice.client}
 
- #invoice-item-list{:class=>"span8"}
-  %table{:id => 'invoice-items', :class => "table table-striped pull-left"}
+ #invoice-item-list.col-md-8
+  %table#invoice-items.table.table-striped.pull-left
    %thead
     %tr
      %th Item
@@ -38,9 +38,9 @@
      %th Tax
    %tbody
     =render :partial => "invoices/show_elements/show_invoice_item", :collection => @invoice.invoice_items, :as => :show_invoice_item
- #invoice-summary{:class=>"offset4 span3"}
+ #invoice-summary{:class=>"col-md-offset-4 col-md-3"}
   =render :partial => "invoices/show_elements/show_invoice_summary", :locals => {:invoice => @invoice}
- #invoice-footer{:class=>"span12"}
+ #invoice-footer{:class=>"col-md-12"}
   %p
    %strong Notes
    =h @invoice.notes

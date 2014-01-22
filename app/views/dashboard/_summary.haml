@@ -2,7 +2,7 @@
   %h3 No Invoices Due
 -else
   %br
-  #due.span5
+  #due.col-md-5
     -@invoices_states.each do |state, invoices|
       %div{:id=> state.to_s}
         %div
@@ -13,7 +13,7 @@
               =h invoices.count.to_s
               )
           %div{:id=> state.to_s.tr(" ", "-")}
-            %table{:id => "invoices", :class => "table"}
+            %table#invoices.table
               %thead
                 %tr
                   %th Client Name

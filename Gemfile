@@ -13,12 +13,12 @@ gem 'devise', '>= 2.0.0'
 gem 'haml', '>= 3.1.4'
 gem "nifty-generators", :group => :development
 gem "friendly_id"
-gem "compass"
+#gem "compass"
 gem "simple_form"
 gem "paperclip"
 gem "cancan", '>= 1.6'
 gem 'sqlite3'
-gem "fancy-buttons"
+#gem "fancy-buttons"
 gem "simple-navigation"
 
 gem 'activesupport',  '>= 2.3.11' 
@@ -61,6 +61,7 @@ gem 'paymill', "~> 0.3.0"
 gem 'thin'
 gem 'rickshaw_rails'
 
+
 #gem 'roadie'
 #gem "jquery-ui-rails"
 
@@ -90,8 +91,8 @@ group :assets do
   #gem 'sass-rails',   "~> 3.1.0"
   #gem 'coffee-rails', "~> 3.1.0"
   
-  gem 'sass-rails', '~> 3.2'
-  gem 'bootstrap-sass', '~> 2.3.0.1'
+  gem 'sass-rails', '>= 3.2' # sass-rails needs to be higher than 3.2
+  gem 'bootstrap-sass', '~> 3.0.3.0'
   
   #gem "sass-rails", "~> 3.2.4"
   gem "coffee-rails"

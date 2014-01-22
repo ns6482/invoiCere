@@ -2,8 +2,7 @@
   %thead
     %tr
       %th
-      %th=sort_link @search, :company_name, "Client Name", {}, :remote => "true"
-      %th Outstanding Invoices
+      %th=sort_link @search, :company_name, "Client", {}, :remote => "true"
       %th
   %tbody
     =render :partial => "client", :collection => @clients

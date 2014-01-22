@@ -1,40 +1,39 @@
 - if user_signed_in?
-  .well
-    %ul.nav.nav-list  
-      -if can? :read, @invoice
-        %li= link_to 'View',  invoice_path(@invoice), :class => 'interactive'
-            
-      -if can? :update, @invoice and  @invoice.state != "paid" 
-        %li= link_to 'Edit', edit_invoice_path(@invoice), :remote => true
-        
-      -if can? :read, @invoice    
-        %li= link_to "PDF", invoice_path( @invoice, :format => :pdf)
-        
-      -if can? :read, @invoice and @invoice.seed_schedule_id
-        %li= link_to 'Reocurring Invoice', schedule_path(@invoice.seed_schedule_id)
- 
-  .well
-    %ul.nav.nav-list  
-      %li.nav-header
-      -if can? :update, @invoice.reminder
-        %li= link_to "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
+  
+  %ul.list-group
+    -if can? :read, @invoice
+      %li.interactive.list-group-item= link_to 'View',  invoice_path(@invoice)
+          
+    -if can? :update, @invoice and  @invoice.state != "paid" 
+      %li.list-group-item= link_to 'Edit', edit_invoice_path(@invoice), :remote => true
       
-      -if can? :create, Delivery      
-        .dropdown        
-          = link_to raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle'
-          %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
-            %li= link_to "Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
-            %li= link_to "Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
-
-      -if can? :create, @invoice
-        %li= link_to "Copy", new_invoice_path(:id => @invoice.id)
+    -if can? :read, @invoice    
+      %li.list-group-item= link_to "PDF", invoice_path( @invoice, :format => :pdf)
+      
+    -if can? :read, @invoice and @invoice.seed_schedule_id
+      %li.list-group-item= link_to 'Reocurring Invoice', schedule_path(@invoice.seed_schedule_id)
+ 
+  
+  %ul.list-group  
+    -if can? :update, @invoice.reminder
+      %li.list-group-item= link_to "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
     
-      -if can? :create, @feedback and @invoice.state == "closed"
-        %li= link_to "Feedback",new_invoice_feedback_path(@invoice),  :link => {:class => 'interactive'}
-       
-      -if can? :create, Comment
-        %li= link_to "Comment",new_invoice_comment_path(@invoice),  :remote => true
-        
+    -if can? :create, Delivery      
+      .dropdown        
+        = link_to raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle list-group-item'
+        %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
+          %li.list-group-item= link_to "Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
+          %li.list-group-item= link_to "Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
+
+    -if can? :create, @invoice
+      %li.list-group-item= link_to "Copy", new_invoice_path(:id => @invoice.id)
+  
+    -if can? :create, @feedback and @invoice.state == "closed"
+      %li.list-group-item= link_to "Feedback",new_invoice_feedback_path(@invoice),  :link => {:class => 'interactive'}
+     
+    -if can? :create, Comment
+      %li.list-group-item= link_to "Comment",new_invoice_comment_path(@invoice),  :remote => true
+      
   -if can? :update, @invoice and @invoice.state == "open"
     .well
       %ul.nav.nav-list  

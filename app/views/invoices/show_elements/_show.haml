@@ -1,13 +1,12 @@
 - content_for :title, "Invoice - " +  @invoice.title
-.col-md-6
-  %h1
-    INVOICE
-    =raw("<small>" + @invoice.title + "</small>")  
-  
+%h1
+  INVOICE
+  =raw("<small>" + @invoice.title + "</small>")  
+
 -if @invoice.state == 'draft'  
   .badge
     %h4= "DRAFT"
-#interactive.modal.hide.fade
+#interactive.modal.fade{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "interactive", "aria-hidden" => "true"}
 #invoice-centre-panel.row
   #invoice-main.col-md-10
     = render "invoices/show_elements/show_core", :object =>  @deliveries

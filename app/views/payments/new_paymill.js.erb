@@ -1,3 +1,5 @@
-$("#interactive").html("<%= escape_javascript(render("paymill")) %>");
-$('#interactive').modal('show')
+alert('hit');
+$('.modal-body').html("<%= escape_javascript(render("paymill")) %>");
+$('.modal-title').html('Make Payment Email');
+$('#tdsecure').modal('show');
 

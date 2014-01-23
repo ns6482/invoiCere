@@ -4,7 +4,7 @@
     -content_for :head do
       :javascript
         var PAYMILL_PUBLIC_KEY ='#{current_company.setting.paymill_public_key}' ;
-#payment-form.well.span10
+#payment-form.well.col-xs-10
   =simple_form_for [@invoice, @payment], :html => { :remote => false, :class => 'update_sub'} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
     -if @payment.errors.any?
       .alert.alert-error
@@ -14,38 +14,42 @@
           -@payment.errors.full_messages.each do |msg|
             %li= msg 
                         
-    #tdsecure-modal.modal.hide.fade
-      .modal-header
-        %button.close{:type=>"button", 'data-dismiss'=>"modal", 'aria-hidden'=>"true"}
-          &times;
-        %h3 3D Secure Payment
-      #tdsecure-form.modal-body
-      .modal-footer
-        %button{:class=>"btn", 'data-dismiss'=>"modal"} Cancel    
-      
+    #tdsecure.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "modal-title", role: "dialog", tabindex: "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+            %h4#modal-label.modal-title 3D Secure Payment
+          #tdsecure-form.modal-body
+            loading...
+          .modal-footer
+            %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+            %button.btn.btn-primary{type: "button"} Save changes
+    
+         
     =# f.error_messages
     =#field_set_tag "Log Payment", :id=>'form-main' do
     =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
     = f.hidden_field :paymill_card_token, :class => 'paymill_card_token'
     = f.hidden_field :payment_type
-    .controls.controls-row     
+    .row     
 
       = f.hidden_field :currency, :class => 'currency'
-    .controls.controls-row
-      .span3     
+    .row
+      .col-xs-3     
         = f.input :pay_full_amount, :as => 'boolean', :label=>"Pay full amount (" + @invoice.remaining_amount_cents.to_s + ")"
-      .span2
+      .col-xs-2
         = f.input :amount_cents, :input_html => {:class => 'amount'}   
-    .controls.controls-row
-      .span3
+    .row
+      .col-xs-3
         = label_tag 'Credit Card Number'
         = text_field_tag :card_number, nil, name: nil
-      .span2
+      .col-xs-2
         = label_tag 'CCV Number'
         = text_field_tag :card_code, nil, name: nil 
             
-    .controls.controls-row
-      .span10
+    .row
+      .col-xs-10
         =label_tag :card_month, "Card Expiration"
         =select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"}
         =select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}

@@ -5,18 +5,21 @@
     =render(:partial => 'layouts/head')
 
   %body
-    #header.navbar.navbar-inverse.navbar-fixed-to.row
-      #top-bar.navbar-inner
-        %a.brand{:href=>"#"} InvoiCere
-        #welcome_console.container
-          -if !current_user.nil?
-            -if !current_user.name.nil?
-              %strong="Welcome " + current_user.name
-            #settings_console
-              %ul.nav.pull-right
-                %li= render 'devise/menu/registration_items'
-                %li= render 'devise/menu/login_items'
-      =h yield(:header)
+    
+    %header.navbar.navbar-inverse.navbar-fixed-to.row
+      .container
+        #top-bar.navbar-header
+          %a.navbar-brand{:href=>"#"} InvoiCere
+          #welcome_console.container
+            -if !current_user.nil?
+             
+              #settings_console              
+                %ul.nav.navbar-nav.navbar-right
+                  -if !current_user.name.nil?
+                    %em.text-muted="Welcome " + current_user.name + "!"
+                  %li= render 'devise/menu/registration_items'
+                  %li= render 'devise/menu/login_items'
+          =h yield(:header)
   
     
     -if current_user
@@ -58,6 +61,19 @@
 
 
     #dashboard-content.container.row
+      #modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+              %h4#modal-label.modal-title=yield(:mtitle)
+            .modal-body
+              loading...
+            .modal-footer
+              %button.btn.btn-default{"data-dismiss" => "modal", type: "button"} Close
+              %button.btn.btn-primary{type: "button"} Save changes
+   
+      
       #dashboard-left.col-md-2
         = yield(:left)
       #dashboard-centre.col-md-8

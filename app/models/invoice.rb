@@ -27,7 +27,7 @@ class Invoice < ActiveRecord::Base
   scope :ytd, by_date( Date.new(Date.today.year,1,1) , Date.today+1)
   scope :mtd, by_date( Date.new(Date.today.year,Date.today.month,1) , Date.today)
   scope :open, -> { where state: 'open' }  
-
+ 
   belongs_to :client
   has_many :invoice_items, :dependent => :destroy
   
@@ -56,9 +56,9 @@ class Invoice < ActiveRecord::Base
   monetize :remaining_amount, :as => "remaining_amount_cents"
   monetize :late_fee, :as => "late_fee_cents"
   
-  
   PAYABLES = %w[Paypal GoCardless Paymill]
-  
+  PAYABLES_VIEW = [["Paypal","Paypal"], ["GoCardless","GoCardless"], ["Paymill","Paymill"]]
+
   def payables=(payables)
     self.payables_mask = (payables & PAYABLES).map { |r| 2**PAYABLES.index(r) }.inject(0, :+)
   end
@@ -134,6 +134,8 @@ class Invoice < ActiveRecord::Base
     
     val
   end
+  
+ 
 
 
   private

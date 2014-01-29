@@ -1,44 +1,33 @@
 - if user_signed_in?
   
-  %ul.list-group
-    -if can? :read, @invoice
-      %li.interactive.list-group-item= link_to 'View',  invoice_path(@invoice)
-          
-    -if can? :update, @invoice and  @invoice.state != "paid" 
-      %li.list-group-item= link_to 'Edit', edit_invoice_path(@invoice), :remote => true
+  .form-group 
+    .btn-group-vertical  
+      -if can? :update, @invoice.reminder
+        = link_to_btn "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
       
-    -if can? :read, @invoice    
-      %li.list-group-item= link_to "PDF", invoice_path( @invoice, :format => :pdf)
-      
-    -if can? :read, @invoice and @invoice.seed_schedule_id
-      %li.list-group-item= link_to 'Reocurring Invoice', schedule_path(@invoice.seed_schedule_id)
- 
-  
-  %ul.list-group  
-    -if can? :update, @invoice.reminder
-      %li.list-group-item= link_to "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
-    
-    -if can? :create, Delivery      
-      .dropdown        
-        = link_to raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle list-group-item'
+      -if can? :create, Delivery      
+                
+        = link_to_btn raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn btn-default dropdown-toggle'
         %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
-          %li.list-group-item= link_to "Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
-          %li.list-group-item= link_to "Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
+          %li= link_to "Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
+          %li= link_to "Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
 
-    -if can? :create, @invoice
-      %li.list-group-item= link_to "Copy", new_invoice_path(:id => @invoice.id)
-  
-    -if can? :create, @feedback and @invoice.state == "closed"
-      %li.list-group-item= link_to "Feedback",new_invoice_feedback_path(@invoice),  :link => {:class => 'interactive'}
-     
-    -if can? :create, Comment
-      %li.list-group-item= link_to "Comment",new_invoice_comment_path(@invoice),  :remote => true
+  .form-group
+    .btn-group-vertical  
+      -if can? :create, @invoice
+        = link_to_btn "Copy", new_invoice_path(:id => @invoice.id)
+    
+      -if can? :create, @feedback and @invoice.state == "closed"
+        = link_to_btn "Feedback",new_invoice_feedback_path(@invoice),  :link => {:class => 'interactive'}
+       
+      -if can? :create, Comment
+        = link_to_btn "Comment",new_invoice_comment_path(@invoice),  :remote => true
       
   -if can? :update, @invoice and @invoice.state == "open"
-    .well
-      %ul.nav.nav-list  
+    .form-group
+      .btn-group-vertical  
         .dropdown
-          = link_to raw("Payment" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle'
+          = link_to_btn raw("Pay" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn-primary dropdown-toggle'
           %ul.dropdown-menu{:role=>"menu", 'ari-labelledby'=>"dLabel"}
             -if @invoice.can_pay_through? "Paypal"
               %li= link_to "Paypal",new_invoice_payment_path(@invoice, :payment_type=>'Paypal'),  :remote => true#:class => 'interactive'}
@@ -46,27 +35,24 @@
             %li= link_to "Paymill",new_invoice_payment_path(@invoice, :payment_type=>'Paymill'),  :remote => false#:class => 'interactive'}
             %li= link_to "Cheque or Cash",new_invoice_payment_path(@invoice, :payment_type=>'Manual'),  :remote => true#:class => 'interactive'}
            
-  .well 
-    %ul.nav.nav-list  
-      %li.nav-header 
-        ="Status: #{@invoice.formatted_state}"
+  .form-group 
+    .btn-group-vertical  
       -if can? :update, @invoice and @invoice.state == "draft"
-        %li= link_to "Open",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put,  :remote => true
+        = link_to_btn "Open",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put,  :remote => true, :class => 'btn-danger'
       
       -if can? :update, @invoice and @invoice.state == "open"
-        %li= link_to "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'revert_draft'),:method => :put, :remote => true
+        = link_to_btn "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'revert_draft'),:method => :put, :remote => true
     
       -if can? :update, @invoice and @invoice.state == "paid"
-        %li= link_to "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :remote => true
+        = link_to_btn "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :remote => true
                 
-  .well  
-    %ul.nav.nav-list  
-      %li.nav-header History
+  .form-group  
+    .btn-group-vertical
       -if can? :read, Delivery
-        %li= link_to 'Emails', invoice_deliveries_path(@invoice), :remote => true    
+        = link_to_btn 'Emails', invoice_deliveries_path(@invoice), :remote => true    
       -if can? :read, Payment and  @invoice.state !="draft"
-        %li= link_to 'Payments', invoice_payments_path(@invoice),  :remote => true      
+        = link_to_btn 'Payments', invoice_payments_path(@invoice),  :remote => true      
       -if can? :read, Comment
-        %li= link_to 'Comments', invoice_comments_path(@invoice), :remote => true    
+        = link_to_btn 'Comments', invoice_comments_path(@invoice), :remote => true    
 -else
   =link_to "View as PDF", invoice_path( @invoice.secret_id, :format => :pdf)

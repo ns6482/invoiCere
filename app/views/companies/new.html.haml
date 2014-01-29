@@ -1,17 +1,16 @@
 - title "Signup to InvoiCere"
-%h2 Sign up now!
-.well
-  =simple_form_for  @company, :url => company_path, :html => { :method => :post, :multipart => true} do |f|
-    = f.input :name, :label => "Subdomain"
+%h3 Sign up now!
+.row
+  =simple_form_for  @company, :url => company_path, :html => {:class => "well col-md-8", :method => :post, :multipart => true} do |f|
+    = f.input :name, :label => "Subdomain", :hint => "your company subdomain, e.g. http://test.invoicere.com/"
     =f.simple_fields_for :user, @user do |u|
       = u.error_messages
       =# u.label "User Name"
-      = u.input :name
+      = u.input :name, :label => "Company Name"
       = u.input :email
       = u.input :password
       = u.input :password_confirmation
-  %button{:type=>"submit",:class=>"btn btn-large btn-primary pull-right"}
-    Save
-%p
-  = link_to "Cancel", root_path
+    %button{:type=>"submit",:class=>"btn btn-large btn-primary pull-right"} Save
+.row
+  %p= link_to "Cancel", root_path
 

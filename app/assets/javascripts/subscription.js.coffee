@@ -26,7 +26,7 @@ subscription =
       params = redirect.params
       body = document.getElementById('tdsecure-form')
       iframe = document.createElement("iframe")
-      iframe.className = "span6"
+      iframe.className = "col-md-6"
         
       link = document.createElement("link")
       link.setAttribute "href", "/assets/application.css?body=1"
@@ -72,6 +72,7 @@ subscription =
       if error
         $('#paymill_error').text(error.apierror)
         $('input[type=submit]').attr('disabled', false)
+        
       else
         $('.paymill_card_token').val(result.token)
         $('.update_sub')[0].submit()

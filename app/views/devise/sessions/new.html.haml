@@ -1,0 +1,14 @@
+%h2 Sign in
+= simple_form_for resource_name, :as => resource, :url => session_path(resource_name), :html=> {:class => 'form-horizontal'} do |f|
+  .form-group.well.col-xs-6
+    = f.input :email
+    = f.input :password
+    - if !current_company
+      = f.input :company_id, :as => :string
+    - else
+      = f.hidden_field :company_id, :value => current_company.name
+    - if devise_mapping.rememberable?
+      = f.input :remember_me, :as => :radio_buttons, :item_wrapper_class => 'radio-inline'
+    .buttons.pull-right
+      = f.button :submit, "Sign in", :class=> 'btn btn-large btn-primary'      
+      = render :partial => "devise/shared/links"

@@ -1,48 +1,44 @@
 !!! XML
 !!!
 %html{html_attrs(lang = 'en')}
-  %head
-    = render 'layouts/head'
-  %body.page.page-index
-    #navigation.wrapper
-      .navbar.navbar-static-top
-        #header.header
-          #header-inner      
-            .row
-              #logo.col-md-5.col-md-offset-1
-                %a.brand{:href=>"#"} 
-                  %h1 InvoiCere
-                  %small
-                    Secure and Robust Online Invoicing                            
-          .row
-            .navbar-inner
+  %head= render 'layouts/head'
+  %body
+  
+    %header.navbar.navbar-default{:role => 'banner'}
+      .container
+        .navbar-header          
+          %a.navbar-brand{:href=>"#"} 
+            InvoiCere
+          %small Secure and Robust Online Invoicing   
+        %nav.collapse.navbar-collapse.bs-navbar-collapse{:role => 'navigation'}
+          %ul.nav.navbar-nav  
+            %li
+              %a Features
+            %li
+              %a Pricing
+            %li
+              %a Demo
+            %li
+              %a Support
+            %li
+              %a About    
+          %ul.nav.navbar-nav.navbar-right  
+            = render 'devise/menu/registration_items'
+            
+            = render 'devise/menu/login_items'                        
+    .container
       
-              %ul.nav.user-menu.pull-right
-                = render 'devise/menu/registration_items'
-                = render 'devise/menu/login_items' 
-                
-              .nav-collapse.collapse
-                #main-menu.nav
-                  %li
-                    %a Features
-                  %li
-                    %a Pricing
-                  %li
-                    %a Demo
-                  %li
-                    %a Support
-    #container
-      .col-md-offset-1                                   
+      .row                                   
         - flash.each do |name, msg|
           - if msg.is_a?(String)
-            %div{:class => "alert alert-#{name == :notice ? "success" : "error"}"}
+            %div{:class => "alert alert-#{name == :notice ? "success" : "danger"}"}
               %a.close{"data-dismiss" => "alert"} ×
-              = content_tag :div, msg, :id => "flash_#{name}"
-      .col-md-offset-1.col-md-12
+              = content_tag :div, msg, :id => "flash_#{name}"            
+      .row
         =yield
-    .row
-    #footer
-      = render 'layouts/footer'
+ 
+    %footer
+      .container=render 'layouts/footer'
 
 
 

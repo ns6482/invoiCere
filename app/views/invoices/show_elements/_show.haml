@@ -2,6 +2,19 @@
 %h1
   INVOICE
   =raw("<small>" + @invoice.title + "</small>")  
+  
+  .btn-group
+    -if can? :read, @invoice
+      = link_to_btn 'View',  invoice_path(@invoice)
+          
+    -if can? :update, @invoice and  @invoice.state != "paid" 
+      = link_to_btn 'Edit', edit_invoice_path(@invoice), :remote => true
+      
+    -if can? :read, @invoice    
+      = link_to_btn "PDF", invoice_path( @invoice, :format => :pdf)
+      
+    -if can? :read, @invoice and @invoice.seed_schedule_id
+      = link_to_btn 'Reocurring Invoice', schedule_path(@invoice.seed_schedule_id)  
 
 -if @invoice.state == 'draft'  
   .badge

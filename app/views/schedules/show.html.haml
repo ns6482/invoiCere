@@ -1,127 +1,46 @@
-- title  h @schedule.name
-.well.span5
-  %table
-    %tr
-      %td 
-        %strong Repeats:
-      %td
-        %strong= h @schedule.frequency
-    %tr
-      %td
-        %strong Frequency:
-      %td
-        %strong= h @schedule.frequency_type
-    %tr
-      %td
-        %strong Last Sent:
-      %td
-        %strong= h @schedule.last_sent
-    %tr
-      %td
-        %strong Next Send:
-      %td
-        %strong= h @schedule.next_send
-    %tr
-      %td
-        %strong Due On:
-      %td
-        %strong= h @schedule.due_on
-    %tr
-      %td
-        %strong Enabled:
-      %td
-        %strong= h @schedule.enabled
-        
-    .btn-group.pull-right
-      -if can? :update, @schedule
-        = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary'
-      -if can? :create, @schedule
-        = link_to "Copy", new_schedule_path(:id=> @schedule.id), :class => 'btn'        
-          
+- content_for :title, "Schedule Invoice - " +  @schedule.title
 .row
-
-#invoice-preview{:class => "row"}
-
-  .span6
-    %h1
-      INVOICE
-      =raw("<small>" + @schedule.title + "</small>")  
-    
-  -if @schedule.draft_only == 'draft'  
-    .badge
-      %h4= "DRAFT"
-
-  #invoice-header-details{:class=> "span7"}
-    %table{:class=>"table table-condensed"}
+  .well.col-md-10
+    %table
       %tr
-        %th Your ID
-        %td= h @schedule.business_id
-      %tr
-        %th Purchase Order
-        %td= h @schedule.purchase_order_id
-      %tr
-        %th Date
-        %td=h @schedule.client.company.preference.convert_date(@schedule.next_send)
-      %tr
-        %th Due
-        %td=h @schedule.client.company.preference.convert_date(@schedule.next_send + @schedule.due_on)
-      %tr
-        %th Currency
-        %td=h @schedule.currency
-      %tr
-        %th Client Info 
+        %td 
+          %strong Repeats:
         %td
-          %h4= @schedule.client.name
-          =render :partial => "clients/address", :locals => {:client => @schedule.client}
-     
-
-  #invoice-item-list{:class=>"span8"}
-    %table{:id => 'invoice-items', :class => "table table-striped pull-left"}
-      %thead
-        %tr
-          %th Item
-          %th Qty
-          %th Unit Price
-          %th Unit
-          %th Total
-          %th Tax
-      %tbody
-        =render :partial => "invoices/show_elements/show_invoice_item", :collection => @schedule.invoice_items, :as => :show_invoice_item
-  #invoice-summary{:class=>"offset4 span3"}
-    =render :partial => "invoices/show_elements/show_invoice_summary", :locals => {:invoice => @schedule}
-  #invoice-footer{:class=>"span12"}
-    %p
-      %strong Notes
-      =h @schedule.notes
-    -if @schedule.late_fee
-      #invoice-footer-late-fee
-        %p
-          This invoice is due in
-          %strong= pluralize(@schedule.due_on, 'day')
-          -if @schedule.late_fee > 0
-            , the late fee is set to
-            %strong= h csymb @curr, @schedule.late_fee_cents, @dae#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
-
--if @invoices.size > 0 
-  #invoices
-    %h3 Invoices Generated
-    %table{:id => "invoices", :class => 'table table-striped table-condensed'}
-      %thead
-        %tr
-          %th
-          %th Date
-          %th Due Date
-          %th Title
-          %th Client
-          %th Status
-          %th Due Days 
-          %th Total Cost 
-          %th Total Due
-          %th
-      %tbody{:id => "invoices_body"}
-        =render :partial => "invoices/invoice", :collection => @invoices
-
-
-  
-
-   
+          %strong= h @schedule.frequency
+      %tr
+        %td
+          %strong Frequency:
+        %td
+          %strong= h @schedule.frequency_type
+      %tr
+        %td
+          %strong Last Sent:
+        %td
+          %strong= h @schedule.last_sent
+      %tr
+        %td
+          %strong Next Send:
+        %td
+          %strong= h @schedule.next_send
+      %tr
+        %td
+          %strong Due On:
+        %td
+          %strong= h @schedule.due_on
+      %tr
+        %td
+          %strong Enabled:
+        %td
+          %strong= h @schedule.enabled
+          
+      .btn-group-vertical.pull-right
+        -if can? :update, @schedule
+          = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary'
+        -if can? :create, @schedule
+          = link_to "Copy", new_schedule_path(:id=> @schedule.id), :class => 'btn btn-default'
+.row                  
+  %h1
+    INVOICE
+    =raw("<small>" + @schedule.title + "</small>")           
+  #invoice-centre-panel.row
+    #invoice-main.col-md-10= render "invoices/show_elements/show_core_invoice", :inv => @schedule  

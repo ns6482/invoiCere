@@ -1,7 +1,7 @@
 - if user_signed_in?
   
   .form-group 
-    .btn-group-vertical  
+    .btn-group-vertical.btn-group-sm  
       -if can? :update, @invoice.reminder
         = link_to_btn "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
       
@@ -9,11 +9,14 @@
                 
         = link_to_btn raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn btn-default dropdown-toggle'
         %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
-          %li= link_to "Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
-          %li= link_to "Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
+          %li= link_to "Send Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
+          %li= link_to "Send Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
+          %li.divider
+          %li= link_to 'View Emails Sent', invoice_deliveries_path(@invoice), :remote => true    
+
 
   .form-group
-    .btn-group-vertical  
+    .btn-group-vertical.btn-group-sm  
       -if can? :create, @invoice
         = link_to_btn "Copy", new_invoice_path(:id => @invoice.id)
     
@@ -21,22 +24,33 @@
         = link_to_btn "Feedback",new_invoice_feedback_path(@invoice),  :link => {:class => 'interactive'}
        
       -if can? :create, Comment
-        = link_to_btn "Comment",new_invoice_comment_path(@invoice),  :remote => true
+        = link_to_btn raw("Comment" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn btn-default dropdown-toggle'
+        %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
+          %li= link_to "Make Comment",new_invoice_comment_path(@invoice),  :remote => true
+          %li= link_to 'View Comments', invoice_comments_path(@invoice), :remote => true    
+
+      -else
+        -if can? :read, Comment
+          = link_to_btn 'Comments', invoice_comments_path(@invoice), :remote => true    
       
   -if can? :update, @invoice and @invoice.state == "open"
     .form-group
-      .btn-group-vertical  
+      .btn-group-vertical.btn-group-sm  
         .dropdown
-          = link_to_btn raw("Pay" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn-primary dropdown-toggle'
+          = link_to_btn raw("Payment" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn-primary dropdown-toggle'
           %ul.dropdown-menu{:role=>"menu", 'ari-labelledby'=>"dLabel"}
+            %li= link_to "Schedule Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
+            %li= link_to 'View Payments', invoice_payments_path(@invoice),  :remote => true      
+            %li.divider
             -if @invoice.can_pay_through? "Paypal"
               %li= link_to "Paypal",new_invoice_payment_path(@invoice, :payment_type=>'Paypal'),  :remote => true#:class => 'interactive'}
             %li= link_to "GoCardless",new_invoice_payment_path(@invoice, :payment_type=>'GoCardless'),  :remote => true#:class => 'interactive'}
             %li= link_to "Paymill",new_invoice_payment_path(@invoice, :payment_type=>'Paymill'),  :remote => false#:class => 'interactive'}
             %li= link_to "Cheque or Cash",new_invoice_payment_path(@invoice, :payment_type=>'Manual'),  :remote => true#:class => 'interactive'}
+            
            
   .form-group 
-    .btn-group-vertical  
+    .btn-group-vertical.btn-group-sm  
       -if can? :update, @invoice and @invoice.state == "draft"
         = link_to_btn "Open",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put,  :remote => true, :class => 'btn-danger'
       
@@ -46,13 +60,5 @@
       -if can? :update, @invoice and @invoice.state == "paid"
         = link_to_btn "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :remote => true
                 
-  .form-group  
-    .btn-group-vertical
-      -if can? :read, Delivery
-        = link_to_btn 'Emails', invoice_deliveries_path(@invoice), :remote => true    
-      -if can? :read, Payment and  @invoice.state !="draft"
-        = link_to_btn 'Payments', invoice_payments_path(@invoice),  :remote => true      
-      -if can? :read, Comment
-        = link_to_btn 'Comments', invoice_comments_path(@invoice), :remote => true    
 -else
-  =link_to "View as PDF", invoice_path( @invoice.secret_id, :format => :pdf)
+  =link_to_btn "View as PDF", invoice_path( @invoice.secret_id, :format => :pdf)

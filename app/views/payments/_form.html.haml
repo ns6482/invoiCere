@@ -1,4 +1,4 @@
-=simple_form_for [@invoice, @payment], :html => { :remote => false, :class => 'form-horizontal update_sub'} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
+=simple_form_for [@invoice, @payment], :html => { :remote => false, :class => 'update_sub'} do |f |#, :url => invoice_payments_path(@invoice), :html => {:id=> 'new_payment', :method => :post }do |f|
   =# f.error_messages
   =#field_set_tag "Log Payment", :id=>'form-main' do
   =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"

@@ -4,6 +4,15 @@ module ApplicationHelper
     user
   end
   
+  def render_th(heading, detail)
+    content_tag :tr do
+      content_tag :th do
+        concat heading
+        concat content_tag :td, detail
+      end
+    end
+  end
+  
    def csymb(sym, val, display_at_end = false)
     return unless val
     

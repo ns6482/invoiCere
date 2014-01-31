@@ -2,32 +2,19 @@
  .row
   #invoice-header-details.col-md-8
    %table.table.table-condensed
-    %tr
-     %th ID
-     %td 
-      %strong= h @invoice.id
-    %tr
-     %th Your ID
-     %td= h @invoice.business_id
-    %tr
-     %th Purchase Order
-     %td= h @invoice.purchase_order_id
-    %tr
-     %th Date
-     %td=h @invoice.client.company.preference.convert_date(@invoice.invoice_date)
-    %tr
-     %th Due
-     %td=h @invoice.client.company.preference.convert_date(@invoice.due_date)
-    %tr
-     %th Currency
-     %td=h @invoice.currency
+    =h render_th("ID", inv.id)
+    =h render_th "Your ID", inv.business_id
+    =h render_th "Purchase Order", inv.purchase_order_id
+    =h render_date_inv(inv)
+    =h render_due_inv(inv)
+    =h render_th "Currency", inv.currency        
     %tr
      %th Client Info 
      %td
-      %h4= link_to @invoice.client.name, edit_client_path(@invoice.client)
-      =render :partial => "clients/address", :locals => {:client => @invoice.client}
+      %h4= link_to inv.client.name, edit_client_path(inv.client)
+      =render :partial => "clients/address", :locals => {:client => inv.client}
   #invoice-state.col-md-4
-   %span.label.label-primary="Status: #{@invoice.formatted_state}"
+   %span.label.label-primary="Status: #{inv.formatted_state}"
  #invoice-item-list.col-md-12
   %table#invoice-items.table.table-striped.pull-left
    %thead
@@ -39,22 +26,23 @@
      %th Total
      %th Tax
    %tbody
-    =render :partial => "invoices/show_elements/show_invoice_item", :collection => @invoice.invoice_items, :as => :show_invoice_item
+    =render :partial => "invoices/show_elements/show_invoice_item", :collection => inv.invoice_items, :as => :show_invoice_item
  #invoice-summary{:class=>"col-md-offset-6 col-md-6"}
-  =render :partial => "invoices/show_elements/show_invoice_summary", :locals => {:invoice => @invoice}
- #invoice-footer{:class=>"col-md-12"}
+  =render :partial => "invoices/show_elements/show_invoice_summary", :locals => {:invoice => inv}
+
+ #invoice-footer.col-md-12
   %p
    %strong Notes
-   =h @invoice.notes
-  -if @invoice.late_fee
+   =h inv.notes
+  -if inv.late_fee
    #invoice-footer-late-fee
     %p
      This invoice is due in
-     %strong= pluralize(@invoice.due_days, 'day')
-     -if @invoice.late_fee > 0
+     %strong= pluralize(inv.due_days, 'day')
+     -if inv.late_fee > 0
       , the late fee is set to
-      %strong= h csymb @invoice.currency, @invoice.late_fee_cents, false#number_to_currency @invoice.late_fee, :unit => '£', :separator => ".", :delimiter => ","
+      %strong= h csymb inv.currency, inv.late_fee_cents, false#number_to_currency inv.late_fee, :unit => '£', :separator => ".", :delimiter => ","
    
   #invoice-time-now
    Printed on  
-   =@invoice.client.company.preference.convert_datetime(Time.now)
+   =inv.client.company.preference.convert_datetime(Time.now)

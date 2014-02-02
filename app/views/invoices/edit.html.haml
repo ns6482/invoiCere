@@ -1,4 +1,9 @@
 - title "Edit Invoice"
 =content_for :left do
   = link_to "Go Back to Invoice", @invoice
-= render :partial => 'form'
+-if @invoice.status == "paid"
+  %h2 Invoice has been paid, you can copy this invoice or reset to open
+-else
+  #invoice.row
+    =simple_nested_form_for @invoice, :html => {:novalidate => true} do |f|
+      =render "form_main", :f => f, :inv => @invoice   

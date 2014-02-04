@@ -1,3 +1,3 @@
 =simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'interactive', :class => '',  :method => :post, :remote => true } do |f|
-  =render "form_main", :f => f, :client => @invoice.client
+  =render "shared/delivery_form", :f => f, :client => @invoice.client, :type => "invoice"
  

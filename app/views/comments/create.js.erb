@@ -1,4 +1,5 @@
-$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
-$(".notice").fadeOut(3000);
-$('#interactive').modal('hide');
+$("#dashboard-centre").prepend("<%= escape_javascript(render "shared/flash", :name => :notice, :msg => "Comment Made" )%>");
+$('.modal').modal('hide');
+
+
 

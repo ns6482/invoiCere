@@ -4,6 +4,7 @@ module ApplicationHelper
     user
   end
   
+  
   def render_th(heading, detail)
     content_tag :tr do
       content_tag :th do

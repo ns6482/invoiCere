@@ -6,4 +6,4 @@
 -else
   #invoice.row
     =simple_nested_form_for @invoice, :html => {:novalidate => true} do |f|
-      =render "form_main", :f => f, :inv => @invoice   
+      =render "shared/invoices/form_main", :f => f, :inv => @invoice   

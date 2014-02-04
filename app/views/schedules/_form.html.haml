@@ -20,11 +20,11 @@
 
     .email.form-group
       =field_set_tag "Email Settings"  do            
-        .form-group= render "deliveries/form_main", :f => f, :client => @client           
+        .form-group= render "shared/delivery_form", :f => f, :client => @client           
         = f.input :enabled,   :as => :boolean, :label => "Enabled", :include_blank => false
       
     = field_set_tag "Invoice Setup" do #,   :id => "form-main" do
-      =render "invoices/form_main", :f => f , :inv => @schedule  
+      =render "shared/invoices/form_main", :f => f , :inv => @schedule  
  
       .row
       .control-group

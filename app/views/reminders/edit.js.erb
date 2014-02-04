@@ -1,5 +1,5 @@
-$("#interactive").html("<%= escape_javascript(render("form")) %>").effect("slide");
-$('#interactive').modal('show')
+$('.modal-body').html("<%= escape_javascript(render("form")) %>");
+$('.modal-title').html('Send Email');
 
 if ($('#reminder_default_message').is(':checked')){
   $("#reminder_custom_message_input").hide();
@@ -8,7 +8,6 @@ else {
   $("#reminder_custom_message_input").show();
 }
 
-
-
+$('#modal').modal('show');
 
 

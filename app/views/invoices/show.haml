@@ -22,7 +22,7 @@
 #interactive.modal.fade{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "interactive", "aria-hidden" => "true"}
 #invoice-centre-panel.row
   #invoice-main.col-md-10
-    =render 'invoices/show_elements/show_core_invoice', :inv => @invoice #:object => @invoice.deliveries
+    =render 'shared/invoices/show_core_invoice', :inv => @invoice #:object => @invoice.deliveries
   #invoice-side-panel.col-md-2.well
     = render "invoices/show_elements/toolbar"  
 .panel-body=render :partial => "invoices/history"

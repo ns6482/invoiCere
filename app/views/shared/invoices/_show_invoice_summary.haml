@@ -1,0 +1,33 @@
+%table.table.table-condensed
+ %tr
+  %td
+   %strong Subtotal:
+  %td= h csymb invoice.currency, invoice.total_cost_cents, false
+ %tr
+  %td
+   %strong Subtotal inc Tax:
+  %td= h csymb invoice.currency, invoice.total_cost_inc_tax_cents, false
+ -if !invoice.discount.nil? and invoice.discount.to_str != "0" 
+
+  %tr
+   %td
+    %strong Discount:
+    -if invoice.discount.include? "%"
+     %td= invoice.discount
+     %td= h csymb invoice.currency, number_with_precision(@invoice.discounted_value, :precision => 2), false
+    -else 
+     %td= h csymb invoice.currency,  invoice.discount, false
+ %tr
+  %td
+   %strong Delivery:
+  %td= h csymb invoice.currency,  invoice.delivery_charge_cents, false#number_to_currency @invoice.delivery_charge, :unit => '£', :separator => ".", :delimiter => ","
+ %tr
+  %td
+   %strong Total:
+  %td
+   %strong= h csymb invoice.currency, invoice.total_cost_inc_tax_delivery_cents, false#number_to_currency @invoice.total_cost_inc_tax_delivery, :unit => '£', :separator => ".", :delimiter => ","
+ %tr
+  %td
+   %strong Payment Due:
+  %td
+   %strong= h csymb invoice.currency,  invoice.remaining_amount_cents, false #number_to_currency @invoice.remaining_amount, :unit => '£', :separator => ".", :delimiter => ","

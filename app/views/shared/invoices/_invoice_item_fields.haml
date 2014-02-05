@@ -1,0 +1,9 @@
+.row
+  .col-xs-4= f.input_field :item_description, :class => 'item_description'
+  .col-xs-2= f.input_field :qty, :class => 'item_qty',  :size => 3
+  .col-xs-2= f.input_field :cost_cents,   :class => 'item_cost', :size => 3
+  .col-xs-2= f.input_field :item_type, :class => 'item_type'
+  .col-xs-1= f.input_field :taxable, :as => 'boolean', :label => false
+  .col-xs-1= f.link_to_remove '<i class="glyphicon glyphicon-remove"></i> '.html_safe, :class => "btn btn-default"
+
+

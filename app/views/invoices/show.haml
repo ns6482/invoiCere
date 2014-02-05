@@ -24,6 +24,6 @@
   #invoice-main.col-md-10
     =render 'shared/invoices/show_core_invoice', :inv => @invoice #:object => @invoice.deliveries
   #invoice-side-panel.col-md-2.well
-    = render "invoices/show_elements/toolbar"  
+    = render "invoices/toolbar"  
 .panel-body=render :partial => "invoices/history"
 =@invoice.name

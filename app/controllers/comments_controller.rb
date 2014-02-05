@@ -17,7 +17,7 @@ class CommentsController < BaseController
        
     respond_to do |format|
       format.html
-      format.js
+      format.js {render :action => '../shared/modal/new'}
     end
   end
   
@@ -33,10 +33,10 @@ class CommentsController < BaseController
       if @comment.save
         flash[:notice] = "Successfully created comment."
         format.html{redirect_to invoice_comments_path(@invoice)}
-        format.js
+        format.js{render :action => '../shared/modal/create'}
       else
         format.html{render :action => 'new'}
-        format.js {render :action => 'new'}
+        format.js {render :action => '../shared/modal/new'}
       end
     end
   end

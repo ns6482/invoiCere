@@ -42,7 +42,7 @@ class DeliveriesController < BaseController
     
     respond_to do |format|
       format.html
-      format.js
+      format.js {render :action => '../shared/modal/new'}
     end
 
  end
@@ -74,11 +74,11 @@ class DeliveriesController < BaseController
 
         flash[:notice] = "Invoice sent successfully"
         format.html {redirect_to invoice_path(@delivery.invoice.id)}
-        format.js
+        format.js{render :action => '../shared/modal/create'}
       else
         flash[:error] = @delivery.errors.full_messages.join("\n")
         format.html {render :action => 'new'}
-        format.js { render :action => 'new'}
+        format.js {render :action => '../shared/modal/new'}
       end
     end
   end

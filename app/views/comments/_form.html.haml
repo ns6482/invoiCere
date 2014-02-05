@@ -1,11 +1,5 @@
 = simple_form_for [@invoice,@comment], :html => {:remote => true } do |f|
   = field_set_tag "Add Comment", :id => "form-main" do
-    =#link_to image_tag("/images/icons/cancel.png"), invoice_path(@invoice), :id => "cancel", :class => "cancel_button"
-    =# f.error_messages
     = f.input :title
-    = f.input :message, :input_html => { :rows => 3 }  
-
-    .modal-footer
-      %button.btn.btn-default{'data-dismiss'=>"modal", 'aria-hidden'=>"true"} Close
-      %button.btn.btn-primary{:type=>"submit"} Add Comment
-
+    = f.input :message, :input_html => { :rows => 3 }
+    = render "shared/modal_footer"  

@@ -1,5 +1,7 @@
 =simple_form_for @invoice.reminder, :url => invoice_reminder_path(@invoice), :html => {:id=> 'interactive', :class => '',  :method => :post, :remote => true } do |f|
-  =render "shared/delivery_form", :f => f, :client => @invoice.client, :type => "reminder"
-  
+  =field_set_tag "Set Reminder Email", :id => "form-main" do
+    =render "shared/delivery_form", :f => f, :client => @invoice.client, :type => "reminder"
+    =render "shared/modal_footer"
+
 
 

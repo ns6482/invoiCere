@@ -1,23 +1,21 @@
-= field_set_tag "Send Email", :id => "form-main" do
+.form-group
+  -if f.error_messages
+    .alert.alert-danger= f.error_messages
+  =# f.hidden_field :invoice_id
+  =# f.input :title
+  .placeholderable
+    = render :partial => 'etemplates/placeholders_email'
+    -if type == "reminder"
+      =f.input :custom_message, :input_html => { :rows => 4, :style => 'width:500px' }  , :label => false
+    -else     
+      = f.input :message, :input_html => { :rows => 4, :style => 'width:500px' }  , :label => false
+  %strong Send To:
+  .form-group.well
+    -if client.email.length > 0
+      = f.input :client_email,  :label=> "Client: " + client.company_name.html_safe + ' (' +client.email.html_safe + ')'
+    - if client.contacts.size > 0
+      = f.association :contacts, :as =>:check_boxes,   :collection => client.contacts, :label => "Contacts:", :item_wrapper_class => 'radio-inline'
+    = f.input :emails, :label => 'Email (seperate using ;)'
   .form-group
-    -if f.error_messages
-      .alert.alert-danger= f.error_messages
-    =# f.hidden_field :invoice_id
-    =# f.input :title
-    .placeholderable
-      = render :partial => 'etemplates/placeholders_email'
-      -if type == "reminder"
-        =f.input :custom_message, :input_html => { :rows => 4, :style => 'width:500px' }  , :label => false
-      -else     
-        = f.input :message, :input_html => { :rows => 4, :style => 'width:500px' }  , :label => false
-    %strong Send To:
-    .form-group.well
-      -if client.email.length > 0
-        = f.input :client_email,  :label=> "Client: " + client.company_name.html_safe + ' (' +client.email.html_safe + ')'
-      - if client.contacts.size > 0
-        = f.association :contacts, :as =>:check_boxes,   :collection => client.contacts, :label => "Contacts:", :item_wrapper_class => 'radio-inline'
-      = f.input :emails, :label => 'Email (seperate using ;)'
-    .form-group
-      .col-xs-12= f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'radio-inline'
-  =render "shared/modal_footer"
+    .col-xs-12= f.input :format, :as => :radio_buttons, :collection => {"HTML" => 1, "PDF" => 2}, :item_wrapper_class => 'radio-inline'
    

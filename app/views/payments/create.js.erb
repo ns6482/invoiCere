@@ -1,4 +1,4 @@
-$("#dashboard-content").prepend('<p class="notice"><%= escape_javascript(flash.discard(:notice)) %> </p>');
+$("#dashboard-centre").prepend("<%= escape_javascript(render "shared/flash", :name => :notice, :msg => flash.discard(:notice) )%>");
 $('#interactive').modal('hide');
 $(".notice").fadeOut(3000);
 <% if @invoice.state == "paid" %>

@@ -1,46 +1,24 @@
 - content_for :title, "Schedule Invoice - " +  @schedule.title
 .row
-  .well.col-md-10
-    %table
-      %tr
-        %td 
-          %strong Repeats:
-        %td
-          %strong= h @schedule.frequency
-      %tr
-        %td
-          %strong Frequency:
-        %td
-          %strong= h @schedule.frequency_type
-      %tr
-        %td
-          %strong Last Sent:
-        %td
-          %strong= h @schedule.last_sent
-      %tr
-        %td
-          %strong Next Send:
-        %td
-          %strong= h @schedule.next_send
-      %tr
-        %td
-          %strong Due On:
-        %td
-          %strong= h @schedule.due_on
-      %tr
-        %td
-          %strong Enabled:
-        %td
-          %strong= h @schedule.enabled
-          
-      .btn-group-vertical.pull-right
-        -if can? :update, @schedule
-          = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary'
-        -if can? :create, @schedule
-          = link_to "Copy", new_schedule_path(:id=> @schedule.id), :class => 'btn btn-default'
-.row                  
+  .col-md-8                  
   %h1
     INVOICE
     =raw("<small>" + @schedule.title + "</small>")           
   #invoice-centre-panel.row
-    #invoice-main.col-md-10= render "shared/invoices/show_core_invoice", :inv => @schedule  
+    #invoice-main.col-md-10= render "shared/invoices/show_core_invoice", :inv => @schedule
+.row    
+  .row
+    #schedule-summary.well.col-md-3
+      %table
+        =render_th "Repeats:", @schedule.frequency
+        =render_th "Frequency:", @schedule.frequency_type
+        =render_th "Last Sent:", @schedule.last_sent
+        =render_th "Next Send", @schedule.next_send
+        =render_th "Due On:", @schedule.due_on
+        =render_th "Enabled:", @schedule.enabled    
+  .row
+    .btn-group.pull-right
+      -if can? :update, @schedule
+        = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary'
+      -if can? :create, @schedule
+        = link_to "Copy", new_schedule_path(:id=> @schedule.id), :class => 'btn btn-default'      

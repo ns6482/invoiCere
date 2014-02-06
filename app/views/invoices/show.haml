@@ -5,7 +5,7 @@
   
   .btn-group.pull-right
     -if can? :read, @invoice
-      = link_to_btn 'View',  invoice_path(@invoice)
+      = link_to_btn 'View',  invoice_path(@invoice), :remote => true, :class => 'btn btn-default'
           
     -if can? :update, @invoice and  @invoice.state != "paid" 
       = link_to_btn 'Edit', edit_invoice_path(@invoice), :remote => true
@@ -15,6 +15,20 @@
       
     -if can? :read, @invoice and @invoice.seed_schedule_id
       = link_to_btn 'Reocurring Invoice', schedule_path(@invoice.seed_schedule_id)  
+      
+    -if can? :create, Delivery      
+            
+      = link_to_btn raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn btn-default dropdown-toggle'
+      %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
+        %li= link_to "Send Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
+        %li.divider
+        %li= link_to "Send Payment Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
+        -if can? :update, @invoice.reminder
+          %li= link_to "Set Pay Reminder Message",edit_invoice_reminder_path(@invoice), :remote => true
+        %li.divider
+        %li= link_to 'View Emails Sent', invoice_deliveries_path(@invoice), :remote => true    
+  
+ 
 
 -if @invoice.state == 'draft'  
   .label.label-default

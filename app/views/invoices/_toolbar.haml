@@ -1,20 +1,5 @@
 - if user_signed_in?
   
-  .form-group 
-    .btn-group-vertical.btn-group-sm  
-      -if can? :update, @invoice.reminder
-        = link_to_btn "Pay Reminder",edit_invoice_reminder_path(@invoice), :remote => true
-      
-      -if can? :create, Delivery      
-                
-        = link_to_btn raw("Email" +("<b class= 'caret'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'btn btn-default dropdown-toggle'
-        %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
-          %li= link_to "Send Invoice" ,new_invoice_delivery_path(@invoice, :template => 'invoice'), :remote => true
-          %li= link_to "Send Reminder" ,new_invoice_delivery_path(@invoice, :template => 'reminder'), :remote => true
-          %li.divider
-          %li= link_to 'View Emails Sent', invoice_deliveries_path(@invoice), :remote => true    
-
-
   .form-group
     .btn-group-vertical.btn-group-sm  
       -if can? :create, @invoice

@@ -20,8 +20,8 @@
 
     .email.form-group
       =field_set_tag "Email Settings"  do            
-        .form-group= render "shared/delivery_form", :f => f, :client => @client           
-        = f.input :enabled,   :as => :boolean, :label => "Enabled", :include_blank => false
+        .form-group= render "shared/delivery_form", :f => f, :client => @client, :type => "reminder"           
+      =f.input :enabled,  :as => :boolean, :label => "Auto Email Sending Enabled", :include_blank => false
       
     = field_set_tag "Invoice Setup" do #,   :id => "form-main" do
       =render "shared/invoices/form_main", :f => f , :inv => @schedule  

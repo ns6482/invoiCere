@@ -1,3 +1,6 @@
 =simple_form_for @delivery, :url => invoice_deliveries_path(@invoice), :html => {:id=> 'interactive', :class => '',  :method => :post, :remote => true } do |f|
-  =render "shared/delivery_form", :f => f, :client => @invoice.client, :type => "invoice"
+  =field_set_tag "Send Email", :id => "form-main" do
+    =render "shared/delivery_form", :f => f, :client => @invoice.client, :type => "invoice"
+    =render "shared/modal_footer"
+
  

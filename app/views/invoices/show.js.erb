@@ -1,2 +1,1 @@
-$("#invoice-main").html("<%= escape_javascript(render("invoices/show_elements/show_core")) %>").effect("slide");
-
+$("#invoice-main").html("<%= escape_javascript(render 'shared/invoices/show_core_invoice', :inv => @invoice)%>");

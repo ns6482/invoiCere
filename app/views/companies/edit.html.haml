@@ -3,65 +3,67 @@
 = javascript_include_tag  "template_setup.js"
 
 =content_for :right do 
-  -if can? :read, Subscription 
-    =link_to "Your Subscription", subscription_path
-  %br
-  -if can? :read, User 
-    =link_to "Manage Users", users_path
-  %br
-  -if can? :update, Etemplate
-    =link_to "Edit Template", edit_company_etemplate_path
-  -#if can? :update, Company
-    =#link_to "Preview Settings", company_path
-  %br
-  -if can? :update, Preference
-    =link_to "Edit Preferences", edit_company_preference_path
-  %br
-  -if can? :update, Item    
-    =link_to "Manage Inventory", items_path
+
+  .btn-group-vertical.well  
+    -if can? :read, Subscription 
+      =link_to_btn "Your Subscription", subscription_path
+   
+    -if can? :read, User 
+      =link_to_btn "Manage Users", users_path
+    
+    -if can? :update, Etemplate
+      =link_to_btn "Edit Template", edit_company_etemplate_path
+    -#if can? :update, Company
+      =#link_to "Preview Settings", company_path
+    
+    -if can? :update, Preference
+      =link_to_btn "Edit Preferences", edit_company_preference_path
+   
+    -if can? :update, Item    
+      =link_to_btn "Manage Inventory", items_path
 
     
 #form-x
 =simple_form_for  @company, :url => company_path, :html => { :method => :put, :multipart => true  } do |f|
-  = f.input :name, :label => "Subdomain", :label_html => {:class => "label_narrow"}
+  = f.input :name, :label => "Subdomain"
 
-  =field_set_tag 'Settings', :id =>"tabs-1" do
+  =field_set_tag 'Company Details', :id =>"tabs-1" do
     =f.simple_fields_for :setting do |s|
       =s.error_notification
       =display_base_errors @company.setting
       .row
-        .span5
-          = s.input :logo, :as => :file, :label_html => {:class => "label_narrow"}
-          = s.input :company_name, :label_html => {:class => "label_narrow"}
-          = s.input :company_registration, :label_html => {:class => "label_narrow"}
-        .span5  
-          = s.input :vat, :label_html => {:class => "label_narrow"}
-          = s.input :vat_registration, :label_html => {:class => "label_narrow"}  
+        .col-md-6= s.input :logo, :as => :file
+        .col-md-6= s.input :company_name
       .row
-        .span5
-          = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }, :label_html => {:class => "label_narrow"}
-        .span5
-          = s.input :telephone, :label_html => {:class => "label_narrow"}
-          = s.input :fax, :label_html => {:class => "label_narrow"}
-          = s.input :email, :label_html => {:class => "label_narrow"}
+        .col-md-4= s.input :vat
+        .col-md-4= s.input :vat_registration  
+        .col-md-4= s.input :company_registration
+
+      .row
+        .col-md-12
+          = s.input :address, :input_html => { :rows => 3, :class => 'autogrow' }
+      .row
+        .col-md-4= s.input :telephone
+        .col-md-4= s.input :fax
+        .col-md-4= s.input :email
      
 
       =field_set_tag 'Payment Managment', :id =>"tabs-2" do
         .row
-          .span3
+          .col-md-4
             %h3 GoCardless        
-            = s.input :pay_gc_token, :label_html => {:class => "label_narrow"}
+            = s.input :pay_gc_token
             = s.input :pay_gc_enabled, :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
             = link_to 'Setup GoCardless Account', gocardless_setup_merchant_path
-          .span3
+          .col-md-4
             %h3 Paypal        
-            = s.input :paypal_login, :label_html => {:class => "label_narrow"}
-            = s.input :paypal_sig, :label_html => {:class => "label_narrow"}
-            = s.input :paypal_pwd, :label_html => {:class => "label_narrow"}
+            = s.input :paypal_login
+            = s.input :paypal_sig
+            = s.input :paypal_pwd
             = s.input :paypal_enabled, :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
-          .span3
+          .col-md-4
             %h3 Paymill        
-            = s.input :paymill_public_key, :label_html => {:class => "label_narrow"}
+            = s.input :paymill_public_key
             = s.input :paymill_enabled, :as => :boolean, :label_html => { :class => 'checkbox' }, :wrapper_html => {:class => 'checkbox'}
         
       %button{:type=>"submit",:class=>"btn btn-large btn-primary pull-right"} Save

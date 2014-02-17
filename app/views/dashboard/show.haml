@@ -8,80 +8,88 @@
   %div{:id => "dashboard-list", :class=> "btn-group btn-group-vertical"}
     
     -if can? :create, Invoice
-      = link_to "New Invoice", new_invoice_path, :class=> "btn btn-large btn-primary"
+      = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> Invoice'.html_safe, new_invoice_path, :class => 'btn-primary btn-lg'
     -if can? :create, Client
-      = link_to "New Client", new_client_path, :class=> "btn btn-large"
+      = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> Client'.html_safe, new_client_path, :class => 'btn-primary btn-lg'
 .row
-#ytd_summary.col-md-10.well.well-sm
+#ytd_summary.panel.panel-primary
   .panel-heading
-    %h4 YTD
+    .panel-title
+      YTD
   .panel-body      
     -@summaries_ytd.each do |currency, s|
-      .currency.col-md-5
+      .currency.col-md-3
         %strong=currency
-        %ul.well-small.list-unstyled
+        %ul.list-unstyled
           -s.each do |t|
             %li
-              Total Due:  
-              =t.total_due
+              Total Due:
+              %span.label.label-danger=t.total_due
             %li.text-muted
               =pluralize(t.count_due, 'invoice')
             %li
               Total Amount:  
-              =t.total_amount_open
+              %span.badge=t.total_amount_open
             %li.text-muted
               =pluralize(t.count_invoices_open, 'invoice')
             %li
               Total Closed:  
-              =t.total_amount_closed
+              .span.badge=t.total_amount_closed
             %li.text-muted
               =pluralize(t.count_invoices_closed, 'invoice')
-.col-md-4           
-  #chart_div2{:style=>"width: 500px; height: 200px;"}      
-          
 .row
-#dropdown_1.col-md-2
-  #dropdown-graph-type.dropdown
-    %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
-      =raw("Report On" +("<b class= 'caret'></b>"))
-    %ul{:class => "dropdown-menu", :role=>"menu" ,"aria-labelledby" => "dLabel"}
-      %li
-        %a{:class => 'graph_link', :href => '#', 'data-graph' => 'invoices'} Invoice Amount
-      %li
-        %a{:class => 'graph_link', :href => '#', 'data-graph' => 'payments'} Payment Amount
-#dropwdown_2.col-md-2.pull-right        
-  #dropdown-graph-date.dropdown
-    %a{:class => "dropdown-toggle", "data-toggle"=>"dropdown", :href=>"#"}
-      =raw("Date Range" +("<b class= 'caret'></b>"))
-    %ul{:class => "dropdown-menu", :role=>"menu" ,"aria-labelledby" => "dLabel"}
-      %li
-        %a{:class => 'graph_time', :href => '#', 'data-graph' => '-12'} Last 12 Months
-      %li
-        %a{:class => 'graph_time', :href => '#', 'data-graph' => '-6'} Last 6 Months
-      %li
-        %a{:class => 'graph_time', :href => '#', 'data-graph' => '-3'} Last 3 Months
-  
-#chart_div.col-md-7{:style=>"width: 800px; height: 400px;"}
-=render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :summaries => @summaries_by_yr_mo, :clients => @clients, :start_date => @start_date , :type => @graph_type }
-%br
-.row
-%h4 Payments Due
-.well.well-large
-  -@outstanding.each do | currency, s |
-    %strong=currency
-    %table.payments.striped 
-      -s.each do |t|
-        %tr
-          %td
-            = link_to t.company_name, client_path(t.client_id)
-            (
-            =pluralize(t.count_due, 'invoice')
-            ) 
+.panel.panel-primary
+  .panel-heading
+    .panel-title
+      Payments Due
+  .panel-body
+    -@outstanding.each do | currency, s |
+      .currency.col-md-5
+        %strong=currency
+        %ul.list-unstyled 
+          -s.each do |t|
+            %li
+              = link_to t.company_name, client_path(t.client_id)
+              (
+              =pluralize(t.count_due, 'invoice')
+              ) 
             
-            %strong Total Due:
-            =t.total_due
- 
-%br
-#dashboard-recent
-  %h4 Recent Activity   
+              %span.label.label-danger=t.total_due              
+.col-md-4           
+  #chart_div2{:style=>"width: 400px; height: 200px;"}      
+
+.row
+.panel.panel-primary          
+  #dropdown_1.col-md-2
+    #dropdown-graph-type.dropdown
+      %a.dropdown-toggle{"data-toggle"=>"dropdown", :href=>"#"}
+        =raw("Report On" +("<b class= 'caret'></b>"))
+      %ul.dropdown-menu{:role=>"menu" ,"aria-labelledby" => "dLabel"}
+        %li
+          %a.graph_link{:href => '#', 'data-graph' => 'invoices'} Invoice Amount
+        %li
+          %a.graph_link{:href => '#', 'data-graph' => 'payments'} Payment Amount
+  #dropdown_2.col-md-2.pull-right        
+    #dropdown-graph-date.dropdown
+      %a.dropdown-toggle{"data-toggle"=>"dropdown", :href=>"#"}
+        =raw("Date Range" +("<b class= 'caret'></b>"))
+      %ul.dropdown-menu{:role=>"menu" ,"aria-labelledby" => "dLabel"}
+        %li
+          %a.graph_time{:href => '#', 'data-graph' => '-12'} Last 12 Months
+        %li
+          %a.graph_time{:href => '#', 'data-graph' => '-6'} Last 6 Months
+        %li
+          %a.graph_time{:href => '#', 'data-graph' => '-3'} Last 3 Months
+  .panel-body    
+    #chart_div.col-md-7{:style=>"width: 600px; height: 400px;"}
+    =render :partial => 'dashboard/graphs/total_closed_by_time' , :locals => { :summaries => @summaries_by_yr_mo, :clients => @clients, :start_date => @start_date , :type => @graph_type }
+
+
+.row
+#dashboard-recent.panel.panel-primary
+  .panel-heading
+    .panel-title
+      Recent Activity
+  .panel-body
+       
 

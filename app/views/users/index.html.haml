@@ -21,12 +21,12 @@
   No Client Users
   
 =content_for :right do
-  .btn-group-vertical
+  .btn-group-vertical 
     -if can? :create, User
-      =link_to 'Setup User', new_user_path, html_options = {:class => 'btn btn-large btn-primary'}
+      =link_to_btn 'Setup User', new_user_path, html_options = {:class => 'btn btn-primary'}
     
     -if can? :invite, User
-      =link_to 'Invite User', new_user_invitation_path, html_options = {:class => 'btn btn-large '}
+      =link_to_btn 'Invite User', new_user_invitation_path, html_options = {:class => 'btn btn-default '}
     
   
   -#if can? :update, Company

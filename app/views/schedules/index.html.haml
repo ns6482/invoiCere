@@ -3,8 +3,8 @@
 
   =form_tag delete_multiple_schedules_path, :method => :delete, :remote => true do
     -if can? :delete, Invoice
-      = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-small btn-danger'
-  
+      = submit_tag '<i class="glyphicon glyphicon-remove"></i> Delete'.html_safe, :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-sm'
+
     =render 'schedules'
   
   
@@ -15,6 +15,6 @@
 
 =content_for :right do
   -if can? :create, ScheduleInvoice
-    = link_to '<i class="icon-plus icon-white"></i> New Reocurring Invoice'.html_safe, new_schedule_path, :class => 'btn btn-primary'
+    = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> New Reocurring Invoice'.html_safe, new_schedule_path, :class => 'btn-primary'
 
 

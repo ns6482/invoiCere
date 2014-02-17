@@ -1,6 +1,9 @@
 require 'transitions'
 
 class Invoice < ActiveRecord::Base
+  extend FriendlyId
+  
+  friendly_id :business_id, use: :slugged
   
   liquid_methods :title
 
@@ -10,7 +13,9 @@ class Invoice < ActiveRecord::Base
   
   @@per_page = 10
 
-
+  validates_presence_of :business_id
+  validates_uniqueness_of :business_id
+  
   validates_format_of :discount, :with => /^((0*?\.\d+(\.\d{1,2})?)|((\d+(\.\d{1,2})?)|(((100(?:\.0{1,2})?|0*?\.\d{1,2}|\d{1,2}(?:\.\d{1,2})?)\%))))$/, :message=> "must be a positive numerical or percentage value, maximum two decimal places allowed", :allow_blank => true, :allow_nil => true  
     
   validates_format_of :emails, :with => /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+([;.](([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})+)*$/,  :unless => Proc.new {|i| i.emails.blank?}
@@ -58,6 +63,8 @@ class Invoice < ActiveRecord::Base
   
   PAYABLES = %w[Paypal GoCardless Paymill]
   PAYABLES_VIEW = [["Paypal","Paypal"], ["GoCardless","GoCardless"], ["Paymill","Paymill"]]
+  INVOICE_STATES_VIEW = {:draft => "default",  :open => "danger",   :closed => "success"}
+
 
   def payables=(payables)
     self.payables_mask = (payables & PAYABLES).map { |r| 2**PAYABLES.index(r) }.inject(0, :+)
@@ -134,6 +141,7 @@ class Invoice < ActiveRecord::Base
     
     val
   end
+  
   
  
 

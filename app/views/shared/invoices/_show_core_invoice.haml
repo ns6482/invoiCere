@@ -2,8 +2,8 @@
  .row
   #invoice-header-details.col-md-8
    %table.table.table-condensed
-    =h render_th("ID", inv.id)
-    =h render_th "Your ID", inv.business_id
+    =#h render_th("ID", inv.id)
+    =h render_th "ID", inv.business_id
     =h render_th "Purchase Order", inv.purchase_order_id
     =h render_date_inv(inv)
     =h render_due_inv(inv)

@@ -1,12 +1,10 @@
 -title "Clients"
-
-= render :partial => "filter"
-%br
 -if @clients.length > 0
 
  =form_tag delete_multiple_clients_path, :method => :delete, :remote => true do
-  -if can? :delete, Client
-   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+  -if can? :delete, Invoice   
+   = submit_tag '<i class="glyphicon glyphicon-remove"></i> Delete'.html_safe, :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-sm'
+  
   #clients 
    = render :partial => "clients"
   
@@ -17,9 +15,12 @@
   = link_to " now", new_client_path  
 
 =content_for :right do
- %div{:class => 'btn-group btn-group-vertical'}
-
+ .btn-group-vertical
   -if can? :create, Client
-   = link_to '<i class="icon-plus icon-white"></i> New Client'.html_safe, new_client_path, :class => 'btn btn-primary'
+   = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> Client'.html_safe, new_client_path, :class => 'btn-primary'
+
   -if can? :read, Client
-   = link_to "Export to CSV", clients_path(:format => 'csv'), :class => 'btn'
+   = link_to_btn '<i class="glyphicon glyphicon glyphicon-export"></i> Export'.html_safe, clients_path(:format => 'csv')
+  
+  = render :partial => "filter"  
+

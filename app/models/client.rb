@@ -1,4 +1,7 @@
 class Client < ActiveRecord::Base
+  extend FriendlyId
+  
+  friendly_id :business_id, use: :slugged
 
   cattr_reader :per_page
   @@per_page = 10
@@ -11,11 +14,11 @@ class Client < ActiveRecord::Base
   has_many :users
   has_many :schedules
 
-  validates_presence_of :company_name, :address1#,:company_id
-  validates_uniqueness_of :company_name
+  validates_presence_of :company_name, :address1, :business_id#,:company_id
+  validates_uniqueness_of :company_name, :business_id
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :unless => Proc.new {|c| c.email.blank?}
 
-  attr_accessible :company_name, :address1, :address2, :zip, :city, :country, :phone, :fax, :email, :company_id
+  attr_accessible :company_name, :address1, :address2, :zip, :city, :country, :phone, :fax, :email, :company_id, :business_id
   attr_accessor :display_address, :display_fax, :display_phone
 
   attr_searchable :company_name, :address1, :address2, :zip, :city, :country, :phone, :email
@@ -34,9 +37,9 @@ class Client < ActiveRecord::Base
   
   
   scope :by_open,
-  :select => "clients.company_id, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, MIN(summaries.min_due_date) AS min_due_date, SUM(summaries.count_invoices_open) as total_open",
+  :select => "clients.company_id, clients.business_id, clients.slug, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, MIN(summaries.min_due_date) AS min_due_date, SUM(summaries.count_invoices_open) as total_open",
   :joins => [" LEFT OUTER JOIN summaries ON summaries.client_id = clients.id"],
-  :group => "clients.id, clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email"
+  :group => "clients.id, clients.business_id, clients.slug,  clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email"
 
   
 
@@ -75,6 +78,10 @@ class Client < ActiveRecord::Base
 
   def invited?
     User.exists?(:email => self.email, :company_id => self.company_id, :client_id => self.id)
+  end
+
+  def should_generate_new_friendly_id?
+    new_record? || slug.blank?
   end
 
   def self.to_csv(all_clients)

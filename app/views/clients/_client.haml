@@ -1,6 +1,6 @@
 
 
-%tr{:id => "client-row-" + client.id.to_s, :class=>"table-row " + cycle("odd", "even")}
+%tr{:id => "client-row-" + client.id.to_s}
   %td= check_box_tag "client_ids[]", client.id
   %td
     %dd.table-item
@@ -16,7 +16,7 @@
         = h mail_to client.email
  
 
-  %td.table-side.well.well-small
+  %td.table-side
     %ul.no-style
       %li      
         %strong Open: 

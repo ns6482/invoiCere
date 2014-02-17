@@ -4,7 +4,8 @@
 
  =form_tag delete_multiple_items_path, :method => :delete, :remote => true do
   -if can? :delete, Item
-   = submit_tag 'Delete', :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger'
+   = submit_tag '<i class="glyphicon glyphicon-remove"></i> Delete'.html_safe, :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-sm'
+
    %table{:class => "table table-striped"}
     %thead
      %tr
@@ -27,10 +28,10 @@
   = link_to " now", new_item_path  
 
 =content_for :right do
- %ul
-  %li
-   -if can? :create, Item
-    = link_to "New Item", new_item_path
-  %li
-   -if can? :read, Item
-    = link_to "Export", items_path(:format => 'csv')
+ .btn-group-vertical
+  -if can? :create, Item
+   = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> Item'.html_safe, new_item_path(@invoice), :class => 'btn-primary', :remote => "true"
+  
+  -if can? :read, Item
+   = link_to_btn '<i class="glyphicon glyphicon glyphicon-export"></i> Export'.html_safe, invoices_path(:format => 'csv')
+

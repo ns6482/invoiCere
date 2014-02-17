@@ -1,24 +1,34 @@
 - content_for :title, "Schedule Invoice - " +  @schedule.title
+%h2 Schedule Details
+.row    
+  %ul.list-inline.well
+    %li
+      %strong Repeats:
+      .span.badge=@schedule.frequency
+    %li
+      %strong Frequency:
+      .span.badge=@schedule.frequency_type
+    %li
+      %strong Payment Due Days
+      .span.badge=@schedule.due_on
+    %li
+      %strong Last Sent:
+      .span.badge=@schedule.last_sent
+    %li
+      %strong Next Send
+      .span.badge=@schedule.next_send     
+  %h4
+    .span.label.pull-right{:class => "label-success"}
+      =@schedule.enabled ==1 ? "Enabled" : "Disabled"    
+  .btn-group
+    -if can? :update, @schedule
+      = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary'
+    -if can? :create, @schedule
+      = link_to "Copy", new_schedule_path(:id=> @schedule.id), :class => 'btn btn-default'
 .row
-  .col-md-8                  
   %h1
     INVOICE
     =raw("<small>" + @schedule.title + "</small>")           
   #invoice-centre-panel.row
     #invoice-main.col-md-10= render "shared/invoices/show_core_invoice", :inv => @schedule
-.row    
-  .row
-    #schedule-summary.well.col-md-3
-      %table
-        =render_th "Repeats:", @schedule.frequency
-        =render_th "Frequency:", @schedule.frequency_type
-        =render_th "Last Sent:", @schedule.last_sent
-        =render_th "Next Send", @schedule.next_send
-        =render_th "Due On:", @schedule.due_on
-        =render_th "Enabled:", @schedule.enabled    
-  .row
-    .btn-group.pull-right
-      -if can? :update, @schedule
-        = link_to "Edit", edit_schedule_path(@schedule.id), :class => 'btn btn-primary'
-      -if can? :create, @schedule
-        = link_to "Copy", new_schedule_path(:id=> @schedule.id), :class => 'btn btn-default'      
+              

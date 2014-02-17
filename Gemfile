@@ -12,7 +12,7 @@ gem 'rails', '3.2.5'
 gem 'devise', '>= 2.0.0' 
 gem 'haml', '>= 3.1.4'
 gem "nifty-generators", :group => :development
-gem "friendly_id"
+gem "friendly_id", "~> 4.0.10"
 #gem "compass"
 gem "simple_form"
 gem "paperclip"
@@ -59,7 +59,7 @@ gem 'devise-async'
 gem 'country_select'
 gem 'paymill', "~> 0.3.0"
 gem 'thin'
-gem 'rickshaw_rails'
+#gem 'rickshaw_rails'
 
 
 #gem 'roadie'

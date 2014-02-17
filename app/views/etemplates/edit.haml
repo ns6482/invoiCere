@@ -6,50 +6,42 @@
   -if can? :update, Company
     =link_to "Back to Settings", edit_company_path
  
+
+ 
 =simple_form_for  @etemplate , :url => company_etemplate_path, :html => { :method => :put, :multipart => true  } do |f|
 
-  #tabs_etemplate
-    %ul{:class => "nav nav-tabs"}
+  #tabs-etemplate-main
+  
+    %ul#tabs_etemplate.nav.nav-tabs
+      %li.active
+        %a{href: "#tab1"} Invoice Template
       %li
-        %a{:href=> '#tabs-1', 'data-toggle'=>"tab"} Invoice Template
+        %a{href: "#tab2"} Reminder Template
       %li
-        %a{:href=> '#tabs-2', 'data-toggle'=>"tab"} Reminder Template
-      %li
-        %a{:href=> '#tabs-3', 'data-toggle'=>"tab"} Payment Template
-            
-    #tabs-1
-      %h3 Invoice Email Template
-      = f.input :invoice_subject, :input_html => { :rows => 1 , :class=> ''}, :label => "Subject"     
-      %label Message     
-      %br
-      #template_setup.placeholderable
-        %ul{:id => "lt-form"} 
-          =render :partial => "placeholders_email"    
-        #rt-form
-          = f.input :invoice_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
-      %br
-    #tabs-2
-      %h3 Reminder Email Template
-      = f.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow input-block-level' }, :label => "Subject"
-     
-      %label Message     
-      %br
-      #template_setup.placeholderable
-        %ul{:id => "lt-form"}   
-          =render :partial => "placeholders_payment"    
-        #rt-form
-          = f.input :reminder_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
-      %br
-    #tabs-3
-      %h3 Payment Thank you Email Template
-      = f.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow input-block-level' }, :label => "Subject"
+        %a{href: "#tab3"} Payment Thank You Template
+    #content.tab-content
+      #tab1.tab-pane.active
+        = f.input :invoice_subject, :input_html => { :rows => 1 , :class=> ''}, :label => "Subject"     
+        %label Message     
+        %br
+        #template_setup.placeholderable
+          %ul#lt-form= render :partial => "placeholders_email"    
+          #rt-form= f.input :invoice_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
        
-      %label Message     
-      %br
-      #template_setup.placeholderable
-        %ul{:id => "lt-form"}    
-          =render :partial => "placeholders_reminder"    
-        #rt-form
-          = f.input :paythank_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
- 
+      #tab2.tab-pane
+        = f.input :reminder_subject, :input_html => { :rows => 1, :class => 'autogrow input-block-level' }, :label => "Subject"       
+        %label Message     
+        %br
+        #template_setup.placeholderable
+          %ul#lt-form= render "placeholders_payment"    
+          #rt-form= f.input :reminder_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
+      #tab3.tab-pane
+        = f.input :paythank_subject, :input_html => { :rows => 1, :class => 'autogrow input-block-level' }, :label => "Subject"
+         
+        %label Message     
+        %br
+        #template_setup.placeholderable
+          %ul#lt-form= render  "placeholders_reminder"    
+          #rt-form= f.input :paythank_message, :input_html => { :rows => 6, :class => 'autogrow input-block-level' }, :label => false
+  
     %button{:type=>"submit",:class=>"btn btn-large btn-primary pull-right"} Save

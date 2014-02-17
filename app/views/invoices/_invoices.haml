@@ -1,9 +1,9 @@
-%table{:id => "table-invoices", :class => "table table-hover"}
+%table#table-invoices.table
   %thead
     %tr
       %th
+      %th=sort_link @search, :business_id, "Id", {}, :remote => "true"
       %th=sort_link @search, :invoice_date, "Date", {}, :remote => "true"
-      %th=sort_link @search, :id, "Id", {}, :remote => "true"
       %th=sort_link @search, :client_company_name, "Client", {}, :remote => "true"
       %th=sort_link @search, :title, "Title", {}, :remote => "true"      
       %th=sort_link @search, :state, "Status", {}, :remote => "true"
@@ -12,9 +12,7 @@
       %th=sort_link @search, :due_amount, "Due", {}, :remote => "true"
       %th
       %th
-  %tbody{:id => "invoices-body"}
-    =render :partial => "invoices/invoice", :collection => @invoices
-%p
-  = will_paginate @invoices
+  %tbody#invoices-body=render :partial => "invoices/invoice", :collection => @invoices
+%p= will_paginate @invoices
   
 

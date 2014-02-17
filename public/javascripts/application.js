@@ -209,22 +209,7 @@ $(document).ready(function() {
 
     );
 
-    // Change our search form to ajax
-    //$('#search_form').ajaxForm();
-
-    //hide dashboard panels
-    $('.panel').hide();
-
-    //dashboard panel collapser
-    $('.state').collapser({
-        target: 'next',
-        effect: 'slide',
-        changeText: 0,
-        expandClass: 'expIco',
-        collapseClass: 'collIco'
-    }, function(){
-        $('.panel').slideUp();
-    });
+    
 
     
              

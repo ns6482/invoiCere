@@ -1,5 +1,5 @@
-$("#dashboard-centre").empty();
-$("#dashboard-centre").prepend('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><div id="flash_notice"><%= escape_javascript(flash.discard(:notice)) %></div></div>');
-$("#dashboard-centre").append("<%= escape_javascript(render("invoices/show_elements/show")) %>");
-$(".alert").fadeOut(3000);
+$("#invoice-main").html("<%= escape_javascript(render 'shared/invoices/show_core_invoice', :inv => @invoice)%>");
+$("#invoice-side-panel").html("<%= escape_javascript(render "invoices/toolbar")%>"); 
+$("#dashboard-centre").prepend("<%= escape_javascript(render "shared/flash", :name => :notice, :msg => flash.discard(:notice) )%>");
+
 

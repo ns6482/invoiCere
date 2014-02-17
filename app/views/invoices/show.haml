@@ -29,11 +29,6 @@
         %li= link_to 'View Emails Sent', invoice_deliveries_path(@invoice), :remote => true    
   
  
-
--if @invoice.state == 'draft'  
-  .label.label-default
-    %h4= "DRAFT"
-#interactive.modal.fade{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "interactive", "aria-hidden" => "true"}
 #invoice-centre-panel.row
   #invoice-main.col-md-10
     =render 'shared/invoices/show_core_invoice', :inv => @invoice #:object => @invoice.deliveries

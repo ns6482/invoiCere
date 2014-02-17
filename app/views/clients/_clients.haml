@@ -2,7 +2,7 @@
   %thead
     %tr
       %th
-      %th=sort_link @search, :company_name, "Client", {}, :remote => "true"
+      %th=sort_link @search, :company_name, "Sort", {}, :remote => "true"
       %th
   %tbody
     =render :partial => "client", :collection => @clients

@@ -16,9 +16,33 @@
               #settings_console              
                 %ul.nav.navbar-nav.navbar-right
                   -if !current_user.name.nil?
-                    %em.text-muted="Welcome " + current_user.name + "!"
-                  %li= render 'devise/menu/registration_items'
-                  %li= render 'devise/menu/login_items'
+                    = link_to raw("Hello " + current_user.name.to_s + ("<b class= 'caret text-muted'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle text-muted'
+                    %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
+                      %li= render 'devise/menu/registration_items'
+                      %li= render 'devise/menu/login_items'
+                  
+                  -if can? :update, Company
+                    %li.dropdown
+                      =link_to raw(("<i class= 'glyphicon glyphicon-cog'></i>")), edit_company_path, :class => 'dropdown-toggle', 'data-toggle' => "dropdown", :role=>"button", 'data-target' => "#"
+                      %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}            
+                        -if can? :update, Company
+                          %li
+                            =link_to 'Company and Payment Settings', edit_company_path               
+                        -if can? :read, User 
+                          %li
+                            =link_to "Manage User Logins", users_path              
+                        -if can? :update, Etemplate
+                          %li
+                            =link_to "Edit Email Templates", edit_company_etemplate_path                            
+                        -if can? :update, Preference
+                          %li
+                            =link_to "Edit Invoice Preferences", edit_company_preference_path            
+                        -if can? :update, Item
+                          %li    
+                            =link_to "Manage Inventory Items", items_path
+               
+               
+                  
           =h yield(:header)
   
     
@@ -35,26 +59,7 @@
         -if can? :read, Client
           %li#clients-nav
             =link_to 'Clients', clients_path
-        -if can? :update, Company
-          %li.dropdown
-            =link_to raw("Settings" +("<b class= 'caret'></b>")), edit_company_path, :class => 'dropdown-toggle', 'data-toggle' => "dropdown", :role=>"button", 'data-target' => "#"
-                        
-            %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}            
-              -if can? :update, Company
-                %li
-                  =link_to 'Company and Payment Settings', edit_company_path               
-              -if can? :read, User 
-                %li
-                  =link_to "Manage User Logins", users_path              
-              -if can? :update, Etemplate
-                %li
-                  =link_to "Edit Email Templates", edit_company_etemplate_path                            
-              -if can? :update, Preference
-                %li
-                  =link_to "Edit Invoice Preferences", edit_company_preference_path            
-              -if can? :update, Item
-                %li    
-                  =link_to "Manage Inventory Items", items_path
+        
 
 
                 

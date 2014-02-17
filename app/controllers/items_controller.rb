@@ -21,17 +21,30 @@ class ItemsController < BaseController
   end
 
   def new
+    
     @item = Item.new
     @item.company_id = current_company.id
+    
+    respond_to do | format |
+      format.js {render :action => '../shared/modal/new'}
+      format.html
+    end
+   
   end
 
   def create
-    #@item = Item.new(params[:item])
+
+   respond_to do | format |
+     
     if @item.save
-      redirect_to items_url, :notice => "Successfully created item."
+     format.js {render :action => '../shared/modal/create'}
+     format.html {render :action => 'index'}
     else
-      render :action => 'new'
+      format.html {render :action => 'new'}
+      format.js {render :action => '../shared/modal/new'}      
     end
+   end
+    
   end
 
   def edit

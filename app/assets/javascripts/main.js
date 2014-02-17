@@ -230,22 +230,7 @@ $('a.ordering, a.descending, a.ascending, .pagination a, a.calendar_month').attr
     }
   );
 
-    // Change our search form to ajax
-    //$('#search_form').ajaxForm();
 
-    //hide dashboard panels
-    $('.panel').hide();
-
-    //dashboard panel collapser
-    $('.state').collapser({
-        target: 'next',
-        effect: 'slide',
-        changeText: 0,
-        expandClass: 'expIco',
-        collapseClass: 'collIco'
-    }, function(){
-        $('.panel').slideUp();
-    });
 
     
              
@@ -314,12 +299,19 @@ $(function() {
  		return false;
      });
      
-	$( "#tabs_etemplate").tabs();
+     
+     $('#tabs_etemplate a').click(function (e) {
+  		e.preventDefault();
+	  	$(this).tab('show');
+	});
+
+     
+	//$( "#tabs_etemplate").tabs();
 });
 
 $(function() {
 
-	$('#interactive').on('show', function () {
+	$('.modal').on('show', function () {
 		//alert('test');		
 		$('.placeholderable a').bind('click', function() {
 			$(this).closest(".placeholderable").find(".text").insertAtCaret("{{" + $(this).text() + "}}");

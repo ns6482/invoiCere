@@ -1,8 +1,9 @@
-= simple_form_for @item do |f|
+= simple_form_for @item, :html => {:remote => true} do |f|
   = f.error_messages 
   = f.input :name, :label_html => {:class => "label_narrow"}
   = f.input :description  , :label_html => {:class => "label_narrow"}
   = f.input :unit, :label_html => {:class => "label_narrow"}
   = f.input :price, :label_html => {:class => "label_narrow"}
+  =render "shared/modal_footer"
 
-  = f.submit 'Save Item', :class => 'btn btn-primary pull-right'
+  =# f.submit 'Save Item', :class => 'btn btn-primary pull-right'

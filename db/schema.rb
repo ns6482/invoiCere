@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131128204128) do
+ActiveRecord::Schema.define(:version => 20140212213405) do
 
   create_table "clients", :force => true do |t|
     t.string   "company_name"
@@ -27,7 +27,11 @@ ActiveRecord::Schema.define(:version => 20131128204128) do
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
+    t.string   "business_id"
   end
+
+  add_index "clients", ["slug"], :name => "index_clients_on_slug", :unique => true
 
   create_table "comments", :force => true do |t|
     t.integer  "invoice_id"
@@ -160,7 +164,10 @@ ActiveRecord::Schema.define(:version => 20131128204128) do
     t.integer  "repeats_left"
     t.string   "emails"
     t.boolean  "client_email"
+    t.string   "slug"
   end
+
+  add_index "invoices", ["slug"], :name => "index_invoices_on_slug", :unique => true
 
   create_table "items", :force => true do |t|
     t.integer  "company_id"

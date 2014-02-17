@@ -1,15 +1,19 @@
 - if can? :read, invoice
-  %tr{:id => "invoice-row-" + invoice.id.to_s, :class=> cycle("odd", "even") + " table-row"}
-    %td= check_box_tag "invoice_ids[]", invoice.id
-    %td= h invoice.invoice_date.strftime("%Y %b %d")
+  %tr{:id => "invoice-row-" + invoice.business_id.to_s}
+    %td= check_box_tag "invoice_ids[]", invoice.business_id
     
     -if can?( :read, invoice)
-      %td= link_to invoice.id, invoice_path(invoice) #invoice.id, invoice
+      %td= link_to invoice.business_id, invoice_path(invoice) #invoice.id, invoice
+    -else
+      %td= invoice.business_id
+    
+    %td= h invoice.invoice_date.strftime("%Y %b %d")
+    
     %td 
       %strong=invoice.client.name#link_to_if can?(:read, invoice.client), invoice.client.name, invoice.client
     %td= h invoice.title
     %td
-      %span{:class =>  'badge ' + invoice.formatted_state_badge}
+      %span{:class =>  'label label-' + Invoice::INVOICE_STATES_VIEW[invoice.state.to_sym]}
         = h invoice.formatted_state
     %td= h invoice.due_days
   

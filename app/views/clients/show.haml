@@ -12,7 +12,7 @@
     %td
       =@client.display_fax
 %br
--if @client.email?
+-if !@client.email?
   You can send a login invitation by setting up the clients email
 -else  
   -if can? :invite, Client

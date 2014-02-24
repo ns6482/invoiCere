@@ -12,7 +12,7 @@
       %th=sort_link @search, :due_amount, "Due", {}, :remote => "true"
       %th
       %th
-  %tbody#invoices-body=render :partial => "invoices/invoice", :collection => @invoices
+  %tbody#invoices-body=render :partial => "invoices/invoice", :collection => @invoices, :locals => {:show_checkboxes => true}
 %p= will_paginate @invoices
   
 

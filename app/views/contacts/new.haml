@@ -1,14 +1,4 @@
 -title "New Contact"
-=simple_form_for [@client,@contact] do |f|
-  =field_set_tag 'Contact Details' do
-    = f.input :title , :as => :select, :collection => ["Mr", "Mrs", "Miss", "Dr", "Prof","Lady", "Sir"]
-    = f.input :first_name
-    = f.input :last_name
-    = f.input :job_title
-    = f.input :email
-    = f.input :phone
-    = f.input :mobile
-    = f.input :fax 
-    %button{:type=>"submit",:class=>"btn btn-primary"} Save
+=render "new"
 %p
   = link_to "Back", client_path(@client)

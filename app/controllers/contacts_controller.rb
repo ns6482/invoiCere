@@ -1,61 +1,69 @@
 class ContactsController < BaseController
-  #load_and_authorize_resource
-  before_filter :find_client, :only => [:index, :new, :create]
-  #  before_filter :find_contact, :only => [:show, :edit, :destroy]
+  before_filter :find_client, :only => [:index, :new, :create, :destroy]
   load_and_authorize_resource :client
-  load_and_authorize_resource :contact, :through => :client, :shallow => true
+  load_and_authorize_resource :contact, :through => :client#, :shallow => true
   
   def index
-    #@client = Client.find(params[:client_id])
-    #@contacts = @client.contacts
   end
 
   def show    
-    #@contact = Contact.find(params[:id])
   end
     
   def new
-    #@client = Client.find(params[:client_id])
-    #@contact = @client.contacts.build
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
   
-  def create
-    #@client = Client.find(params[:client_id])
-    #@contact = @client.contacts.build(params[:contact])
-    
-    if @contact.save
-      flash[:notice] = "Contact was successfully created."
-      redirect_to client_path(@client)
-    else
-      render :action => 'new'
+  def create    
+    respond_to do |format|
+
+      if @contact.save
+        flash[:notice] = "Contact was successfully created."
+        format.html{redirect_to client_path(@client)}
+        format.js {render :action => 'update'}
+      else
+        format.html{render :action => 'new'}
+        format.js {render :action => 'new'}
+      end
+      
     end
   end
   
   def edit
-    #@contact = Contact.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js 
+    end
   end
   
   def update
-    #@contact = Contact.find(params[:id])
-    if @contact.update_attributes(params[:contact])
-      flash[:notice] = 'Contact was successfully updated.'
-      redirect_to client_path(@client)
-    else
-      render :action => 'edit'
+    respond_to do |format|
+      if @contact.update_attributes(params[:contact])
+        flash[:notice] = 'Contact was successfully updated.'
+        format.html{redirect_to client_path(@client)}
+        format.js {render :action => 'update'}
+      else
+        format.js {render :action => 'edit'}
+      end
     end
   end
   
   def destroy    
-    #@contact = Contact.find(params[:id])
-    #TODO
-    #need to mark as deleted, because there could exist deliveries/reminders that relate to a devliery
-    @contact.destroy
-    flash[:notice] = 'Contact was successfully removed.'
-    redirect_to client_path(@client)
+  
+    respond_to do | format |
+      flash[:notice] = 'Contact was successfully removed.'
+      
+      #TODO
+      #need to mark as deleted, because there could exist deliveries/reminders that relate to a devliery
+      @contact.destroy      
+      format.html{redirect_to client_path(@client)}
+      format.js {render :action => 'update'}
+    end
   end
 
   def new_invite
-    # @contact = Contact.find(params[:id])
   end
 
   def invite
@@ -71,7 +79,6 @@ class ContactsController < BaseController
 
   def find_contact
     @contact = Contact.find_by_sql("SELECT id FROM contacts WHERE client_id = ? AND id = ?", @client.id, params[:id])
-    #@contact = contacts.find(params[:id])
   end
 
   private

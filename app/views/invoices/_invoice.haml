@@ -1,6 +1,7 @@
 - if can? :read, invoice
   %tr{:id => "invoice-row-" + invoice.business_id.to_s}
-    %td= check_box_tag "invoice_ids[]", invoice.business_id
+    - if show_checkboxes 
+      %td= check_box_tag "invoice_ids[]", invoice.business_id
     
     -if can?( :read, invoice)
       %td= link_to invoice.business_id, invoice_path(invoice) #invoice.id, invoice

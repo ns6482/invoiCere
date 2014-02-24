@@ -5,23 +5,7 @@
  =form_tag delete_multiple_items_path, :method => :delete, :remote => true do
   -if can? :delete, Item
    = submit_tag '<i class="glyphicon glyphicon-remove"></i> Delete'.html_safe, :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-sm'
-
-   %table{:class => "table table-striped"}
-    %thead
-     %tr
-      %th
-      %th Name
-      %th Description
-      %th Unit
-      %th Price
-    %tbody
-     - for item in @items
-      %tr{:id => "item-row-" + item.id.to_s, :class=>"table-row " + cycle("odd", "even")}
-       %td= check_box_tag "item_ids[]", item.id
-       %td= link_to item.name, edit_item_path(item)
-       %td= item.description
-       %td= item.unit
-       %td= item.price
+  #items= render :partial => "items", :locals => {:items => @items}
 -else
  -if can? :create, Item
   No Items setup, create a new item
@@ -30,7 +14,7 @@
 =content_for :right do
  .btn-group-vertical
   -if can? :create, Item
-   = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> Item'.html_safe, new_item_path(@invoice), :class => 'btn-primary', :remote => "true"
+   = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> Item'.html_safe, new_item_path(@item), :class => 'btn-primary', :remote => "true"
   
   -if can? :read, Item
    = link_to_btn '<i class="glyphicon glyphicon glyphicon-export"></i> Export'.html_safe, invoices_path(:format => 'csv')

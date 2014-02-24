@@ -16,14 +16,14 @@
               #settings_console              
                 %ul.nav.navbar-nav.navbar-right
                   -if !current_user.name.nil?
-                    = link_to raw("Hello " + current_user.name.to_s + ("<b class= 'caret text-muted'></b>")) ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle text-muted'
+                    = link_to ("Hello " + current_user.name.to_s + ("<b class= 'caret text-muted'></b>")).html_safe ,'#' ,  'data-toggle'=>"dropdown", :class => 'dropdown-toggle text-muted'
                     %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}   
                       %li= render 'devise/menu/registration_items'
                       %li= render 'devise/menu/login_items'
                   
                   -if can? :update, Company
                     %li.dropdown
-                      =link_to raw(("<i class= 'glyphicon glyphicon-cog'></i>")), edit_company_path, :class => 'dropdown-toggle', 'data-toggle' => "dropdown", :role=>"button", 'data-target' => "#"
+                      =link_to (("<i class= 'glyphicon glyphicon-cog'></i>")).html_safe, edit_company_path, :class => 'dropdown-toggle', 'data-toggle' => "dropdown", :role=>"button", 'data-target' => "#"
                       %ul.dropdown-menu{:role=>"menu", 'aria-labelledby'=>"dLabel"}            
                         -if can? :update, Company
                           %li
@@ -68,7 +68,9 @@
     #dashboard-content.container.row
       #modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
         .modal-dialog
-          .modal-content            
+          .modal-content
+            .modal-header
+              %h4.modal-title                        
             .modal-body
               loading...
               
@@ -80,7 +82,7 @@
         - flash.each do |name, msg|
           =render "shared/flash", :name => name, :msg => msg        
         -if show_title?
-          #form-title.row
+          #form-title            
             %h3=h yield(:title)      
         =yield
       #dashboard-right.col-md-2

@@ -1,19 +1,37 @@
-%table{:id => 'contacts'}
+%ul#contacts.list-group{:id => 'contacts'}
   -for contact in @client.contacts      
-    #contact.well
-      %strong=link_to_if can?(:update, contact), contact.fullname, edit_contact_path(contact)
-      %br
-      -if contact.display_phone or contact.display_fax
-        =h contact.display_phone
-        =h contact.display_fax
-        %br
-      -if contact.email.length > 0  
-        %strong Email: 
-        =mail_to contact.email
-      
-      = link_to "Delete", contact, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-small btn-danger pull-right'    
-  -if can? :create, Contact
-    = link_to "New Contact", new_client_contact_path(@client), :class => 'btn btn-inverse pull-right'
-   
+    %li.list-group-item{:id => "contact-" + contact.id.to_s}
+      %address
+    
+        %strong=contact.fullname
+        = h contact.job_title
+        %br        
+        -if !contact.phone.blank?
+          %strong Phone:
+          %abbr{:title=>'phone'}=h contact.phone
+          %br
+        -if !contact.fax.blank?
+          %strong Fax:
+          %abbr{:title=>'fax'}=h contact.fax
+          %br
+        -if !contact.mobile.blank?
+          %strong Mobile:
+          %abbr{:title=>'mobile'}=h contact.mobile
+          %br
+        -if !contact.email.blank?
+          %strong Email: 
+          =mail_to contact.email
+          
+          
+        .btn-group.pull-right
+          %button.btn.btn-default.dropdown-toggle{:type=>"button", 'data-toggle'=>"dropdown"}
+            Modify Contact
+            %span.caret             
+          %ul.dropdown-menu{:role=>"menu"}            
 
+            -if can? :delete, contact
+              %li= link_to 'Delete'.html_safe, client_contact_path(@client, contact), :confirm => 'Are you sure?', :method => :delete, :remote => true    
+     
+            - if can?(:update, contact)
+              %li=link_to 'Edit', edit_client_contact_path(@client, contact), :remote => true
 

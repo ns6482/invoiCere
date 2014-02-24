@@ -100,7 +100,7 @@ VisioInvoiceV3::Application.routes.draw do
       member do
           put 'invite'
       end
-      resources :contacts, :shallow =>true do  
+      resources :contacts do#, :shallow =>true do  
         member do
           put 'invite'
           get 'new_invite'                            

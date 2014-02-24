@@ -37,7 +37,10 @@ class ItemsController < BaseController
    respond_to do | format |
      
     if @item.save
-     format.js {render :action => '../shared/modal/create'}
+     @items = current_company.items.all
+
+     format.js #{render :action => '../shared/modal/create'}
+     
      format.html {render :action => 'index'}
     else
       format.html {render :action => 'new'}
@@ -70,13 +73,13 @@ class ItemsController < BaseController
 
    respond_to do |format|
 
-     i = 0
+
      #arr_item = Array.new
      @items_to_delete = @items.find(params[:item_ids])
      @items_to_delete.each do |item|
        item.destroy 
      end
-
+     
      flash[:notice] ='Items successfully deleted.'
      format.html {redirect_to items_url}  
      format.js { render :action => 'delete_multiple.js.erb'}

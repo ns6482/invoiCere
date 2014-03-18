@@ -55,7 +55,7 @@
             =link_to'Invoices', invoices_path
         -if can? :read, ScheduleInvoice
           %li#reocurring-invoices-nav
-            =link_to'Reocurring', schedules_path
+            =link_to'Reocurring', schedule_invoices_path
         -if can? :read, Client
           %li#clients-nav
             =link_to 'Clients', clients_path

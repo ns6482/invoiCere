@@ -329,7 +329,13 @@ $(function() {
 		//return false;	
 	});
 	
-	
+  $(function() {
+    $('.form_datetime').datetimepicker({
+      
+  		pickTime: false
+
+    });
+  });
 	
 });
 

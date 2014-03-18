@@ -52,6 +52,8 @@ GEM
     bcrypt-ruby (3.1.1)
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
+    bootstrap3-datetimepicker-rails (2.1.30)
+      momentjs-rails (~> 2.5.0)
     builder (3.0.4)
     cancan (1.6.10)
     chronic (0.9.1)
@@ -144,6 +146,8 @@ GEM
     mime-types (1.24)
     mocha (0.10.0)
       metaclass (~> 0.0.1)
+    momentjs-rails (2.5.1)
+      railties (>= 3.1)
     money (5.1.1)
       i18n (~> 0.6.0)
     money-rails (0.8.1)
@@ -292,6 +296,7 @@ DEPENDENCIES
   activesupport (>= 2.3.11)
   aws-sdk
   bootstrap-sass (~> 3.0.3.0)
+  bootstrap3-datetimepicker-rails (~> 2.1.30)
   cancan (>= 1.6)
   coffee-rails
   compass-rails
@@ -312,6 +317,7 @@ DEPENDENCIES
   localtunnel
   meta_search (>= 1.1.0)
   mocha (= 0.10.0)
+  momentjs-rails (~> 2.5.0)
   money
   money-rails
   mysql2 (~> 0.3.11)

@@ -11,9 +11,15 @@
   
     .row
       .col-md-12= f.association :client, :collection => @clients, :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-block-level'}
+
+
     .row               
-      .col-md-6= f.input :invoice_date, :as => "string", :label => "Date", :label_html => {:class => "label_narrow"}, :input_html => {:class => 'input-small'}
-    
+      .col-md-6
+        
+        = f.input :invoice_date, as: :date_time_picker
+       
+          
+
 #form-main.col-md-12
   %strong Items
   .row

@@ -59,6 +59,8 @@ gem 'devise-async'
 gem 'country_select'
 gem 'paymill', "~> 0.3.0"
 gem 'thin'
+gem 'momentjs-rails', '~> 2.5.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 2.1.30'
 #gem 'rickshaw_rails'
 
 

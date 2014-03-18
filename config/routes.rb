@@ -39,7 +39,7 @@ VisioInvoiceV3::Application.routes.draw do
     
  
   
-    resources :schedules do
+    resources :schedule_invoices do
       collection do
         delete :delete_multiple
       end

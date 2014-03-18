@@ -8,6 +8,7 @@ class Delivery < ActiveRecord::Base
   liquid_methods :invoice_title, :company_name, :company_email, :company_fax, :company_phone, :company_website, :client_name, :invoice_id, :direct_link, :invoice_date, :invoice_title, :invoice_due_date, :invoice_total_due, :payment_instruction
 
   belongs_to :invoice
+  belongs_to :schedule_invoice
   
   has_many :sends, :as => :sendable
   has_many :contacts, :through => :sends

@@ -30,7 +30,7 @@
         =# link_to '<i class="icon-edit"></i> Copy'.html_safe, new_invoice_path(:id => invoice.id), :class => 'btnss'
         
       -if can? :create, ScheduleInvoice
-        = link_to_btn '<i class="glyphicon glyphicon-clock"></i>'.html_safe, new_schedule_path(:id => invoice), :class => 'btn-primary'
+        = link_to '<i class="glyphicon glyphicon-time"></i>'.html_safe, new_schedule_invoice_path(:invoice_id => invoice)
   
 
 

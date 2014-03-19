@@ -37,9 +37,9 @@ class Client < ActiveRecord::Base
   
   
   scope :by_open,
-  :select => "clients.company_id, clients.business_id, clients.slug, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, MIN(summaries.min_due_date) AS min_due_date, SUM(summaries.count_invoices_open) as total_open",
+  :select => "clients.company_id, clients.business_id, clients.slug, clients.id, clients.company_name, clients.address1, clients.address2, clients.zip, clients.city, clients.country, clients.phone, clients.fax, clients.email, clients.created_at,  MIN(summaries.min_due_date) AS min_due_date, SUM(summaries.count_invoices_open) as total_open",
   :joins => [" LEFT OUTER JOIN summaries ON summaries.client_id = clients.id"],
-  :group => "clients.id, clients.business_id, clients.slug,  clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email"
+  :group => "clients.id, clients.business_id, clients.slug,  clients.company_id,  clients.company_name, clients.address1, clients.address2, clients.zip, clients.city,  clients.country, clients.phone, clients.fax,clients.email, clients.created_at"
 
   
 
@@ -53,6 +53,8 @@ class Client < ActiveRecord::Base
   #:conditions => "invoices.due_date <= '#{Date.today}' and invoices.state = 'open'",
   :group => "clients.id, summaries.currency"
   
+  
+  #TODO seriously need a presenter class here, majority of these methods shouldn't be in the model
   def name
     company_name
   end
@@ -65,8 +67,6 @@ class Client < ActiveRecord::Base
     str += (country.blank? ? "" : ', ' +  country)
     str += (zip.blank? ? "" : ', ' + zip)
   end
-
-
 
   def display_phone
     "Phone: (" + phone + ")" unless phone.blank?
@@ -92,19 +92,13 @@ class Client < ActiveRecord::Base
       all_clients.each do |cl|
         val = [cl.company_name, cl.address1, cl.address2, cl.zip, cl.city, cl.country, cl.phone, cl.fax, cl.email, cl.created_at]
 
-        if cl.contacts.first
-          val += [cl.contacts.first.title, cl.contacts.first.first_name, cl.contacts.first.last_name, cl.contacts.first.job_title, cl.contacts.first.email, cl.contacts.first.phone, cl.contacts.first.mobile, cl.contacts.first.fax, cl.contacts.first.created_at]
-        end
-
         csv << val
 
         counter = 0
 
-        if cl.contacts.count > 1
+        if cl.contacts.count > 0
           cl.contacts.each do |contact|
-            if counter != 0 then
-              csv << ["", "", "", "", "", "", "", "", "", "", contact.first.title, contact.first_name, contact.last_name, contact.job_title, contact.email, contact.phone, contact.mobile, contact.fax, contact.created_at]
-            end
+              csv << ["", "", "", "", "", "", "", "", "", "", contact.title, contact.first_name, contact.last_name, contact.job_title, contact.email, contact.phone, contact.mobile, contact.fax, contact.created_at]
             counter +=1
           end
         end
@@ -113,7 +107,5 @@ class Client < ActiveRecord::Base
     end
   end
 
-#   def editable_by?(some_user)
-#     some_user.admin? || some_user == user
-#   end
+
 end

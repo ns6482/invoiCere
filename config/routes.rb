@@ -3,6 +3,8 @@ require 'no_subdomain'
 
 VisioInvoiceV3::Application.routes.draw do   
     
+  resources :activities
+
  get "gocardless/index"
 
  constraints(NoSubdomain) do    

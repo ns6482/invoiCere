@@ -1,0 +1,39 @@
+-if f.error_messages
+  .alert.alert-danger= f.error_messages
+#schedule_invoice.row.panel.panel-default
+  .panel-heading 
+    %strong Schedule Details
+  .panel-body
+    .form-group
+      .col-xs-6= f.input :business_id, :label => "Name of Schedule"
+      .col-xs-6= f.input :client_id, :as => :select, :collection => @clients,  :input_html => { :class => 'input-block' },          :include_blank =>false
+    .form-group
+      .col-xs-6= f.input :frequency_type, :label => "Freq", :as => :select, :collection => ["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"], :include_blank => false, :label_html => { :class => 'input-block' }
+      .col-xs-6= f.input :frequency, :label => "No Repeats (enter 0 to invoice forever)"
+    .form-group
+      .col-xs-6= f.input :next_send, as: :date_time_picker
+      .col-xs-6= f.input :end_date, as: :date_time_picker, :hint => "leave blank to schedule forever"
+    .form-group
+      .col-xs-3= f.input :due_on, :as => :select, :label => "Due",  :collection => ScheduleInvoice::DUE_DAYS_LIST.sort.map {|k,v| [v,k]} , :include_blank => false, :label_html => { :class => 'label_med' }        
+      .col-xs-3= f.input :payment_reminder,   :as => :boolean, :label => "Send Payment Reminder", :include_blank => false
+      .col-xs-3= f.input :send_email,   :as => :boolean, :label => "Send Email", :include_blank => false
+      .col-xs-3=#f.input :enabled,  :as => :boolean, :label => "Auto Email Sending Enabled", :include_blank => false
+#email.form-group.row.panel.panel-default
+  .panel-heading 
+    %strong Email Setup
+  .panel-body
+    .form-group= render "shared/delivery_form", :f => f, :client => @client, :type => "reminder"           
+    .form-group
+
+#invoice-setup.panel.row.panel-default
+  .panel-heading 
+    %strong Invoice Setup
+  .panel-body
+    =render "shared/invoices/form_main", :f => f , :inv => schedule  
+
+.row
+  .control-group
+    .controls
+      =link_to "Cancel", schedule_invoices_path, :class => 'btn'
+
+  

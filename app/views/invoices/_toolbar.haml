@@ -37,13 +37,13 @@
   .form-group 
     .btn-group-vertical.btn-group-sm  
       -if can? :update, @invoice and @invoice.state == "draft"
-        = link_to_btn "Open",invoice_path(:id => @invoice.id, :commit => 'open'),:method => :put,  :remote => true, :class => 'btn-danger'
+        = link_to_btn "Open",open_invoice_path(@invoice),:method => :put,  :remote => true, :class => 'btn-danger'
       
       -if can? :update, @invoice and @invoice.state == "open"
-        = link_to_btn "Revert to Draft",invoice_path(:id => @invoice.id, :commit => 'revert_draft'),:method => :put, :remote => true
+        = link_to_btn "Revert to Draft",revert_draft_invoice_path(@invoice), :method => :put,  :remote => true
     
       -if can? :update, @invoice and @invoice.state == "paid"
-        = link_to_btn "Revert to Open",invoice_path(:id => @invoice.id, :commit => 'open_again'),:method => :put, :remote => true
+        = link_to_btn "Revert to Open",reopen_invoice_path(@invoice), :method => :put,  :remote => true
                 
 -else
   =link_to_btn "View as PDF", invoice_path( @invoice.secret_id, :format => :pdf)

@@ -29,6 +29,7 @@ class Ability
       can [:manage], ScheduleInvoice
       can [:manage], Item, :company_id => user.company_id
       can [:manage], Subscription, :company_id => user.company_id
+      can [:manage], Activity, :company_id => user.company_id
     elsif user.role? :standard
       cannot [:invite], Client
       cannot [:invite], Contact
@@ -45,6 +46,7 @@ class Ability
       can [:create, :update], Feedback #TODO only apply to client once setup
       can [:read, :update], ScheduleInvoice
       can :read, Role
+      can :read, Activity, :company_id => user.company_id
     elsif user.role? :viewer
       can [:read], [Invoice, InvoiceItem, Delivery, Send, Reminder, Payment, Feedback]
       can [:read], [Client], :company_id => user.company_id
@@ -53,8 +55,9 @@ class Ability
       can :read, Company, :id => user.company_id
       can :read, Setting, :id => user.company_id
       can [:create, :read], Comment
-      can :delete, Comment, :id => user.id
+      can :delete, Comment, :user_id => user.id
       can [:read], ScheduleInvoice
+      can [:read], Activity, :company_id => user.company_id
     elsif user.role? :client
       can [:read], Company, :id => user.company_id
       can [:read, :update], Client, :id => user.client_id
@@ -64,6 +67,7 @@ class Ability
       can [:read], Invoice, :client_id => user.client_id
       can [:read, :create, :update], Feedback #TODO only apply to client once setup
       can [:create], Payment
+      can [:read], Activity, :user_id => user.client_id
     end
   end
   

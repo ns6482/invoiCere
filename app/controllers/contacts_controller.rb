@@ -20,7 +20,10 @@ class ContactsController < BaseController
     respond_to do |format|
 
       if @contact.save
+        
         flash[:notice] = "Contact was successfully created."
+        track_activity @contact
+        
         format.html{redirect_to client_path(@client)}
         format.js {render :action => 'update'}
       else
@@ -42,6 +45,8 @@ class ContactsController < BaseController
     respond_to do |format|
       if @contact.update_attributes(params[:contact])
         flash[:notice] = 'Contact was successfully updated.'
+        track_activity @contact        
+        
         format.html{redirect_to client_path(@client)}
         format.js {render :action => 'update'}
       else

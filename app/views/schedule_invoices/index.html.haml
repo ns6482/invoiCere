@@ -1,0 +1,20 @@
+- title "Reocurring Invoices"
+-if @schedules.count > 0
+
+  =form_tag delete_multiple_schedule_invoices_path, :method => :delete, :remote => true do
+    -if can? :delete, Invoice
+      = submit_tag '<i class="glyphicon glyphicon-remove"></i> Delete'.html_safe, :name =>'commit', :value => 'Delete', :confirm => 'Are you sure?', :class => 'btn btn-default btn-sm'
+
+    =render 'schedules'
+  
+  
+-else
+  -if can? :create, ScheduleInvoice
+    No Reocurring Invoices, create a new one
+    = link_to " now", new_schedule_invoice_path     
+
+=content_for :right do
+  -if can? :create, ScheduleInvoice
+    = link_to_btn '<i class="glyphicon glyphicon-plus-sign"></i> New Reocurring Invoice'.html_safe, new_schedule_invoice_path, :class => 'btn-primary'
+
+

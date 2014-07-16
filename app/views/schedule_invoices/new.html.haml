@@ -1,0 +1,5 @@
+- title "New Schedule"
+
+=simple_nested_form_for @schedule_invoice, :url => {:controller => "schedule_invoices",:action => "create"}, :html => {:novalidate => true} do |f|
+  =render "form", :f => f, :schedule => @schedule_invoice
+  

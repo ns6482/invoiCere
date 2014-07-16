@@ -37,10 +37,10 @@ gem 'delorean'
 gem "haml-rails" 
 gem "deep_cloneable", "~> 1.3.0"
 #gem 'mysql2'#, '< 0.3'
-gem "mysql2", "~> 0.3.11"
+gem "mysql2"
 
 gem "liquid"
-gem "RedCloth"
+#gem "RedCloth" "~> 4.2.9"
 gem "pdf-reader"
 gem "Ascii85"
 gem "active_hash"
@@ -54,7 +54,7 @@ gem 'money-rails'
 gem 'aws-sdk'
 gem 'resque'
 gem 'resque_mailer'
-gem  'resque-scheduler'
+gem  'resque-scheduler', "~> 1.3"
 gem 'devise-async'
 gem 'country_select'
 gem 'paymill', "~> 0.3.0"
@@ -105,11 +105,9 @@ end
 
 
 group :development, :test do
-  gem "localtunnel"
   gem 'webrat'
   #gem "mocha"
   gem 'factory_girl_rails'
   gem 'mocha', '0.10.0', :require => false
-  gem 'localtunnel'
 end
 

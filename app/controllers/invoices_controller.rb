@@ -6,10 +6,11 @@ require 'prawn/layout'
 class InvoicesController < BaseController
   before_filter :get_invoices, :only => [:index, :edit]
   before_filter :get_clients , :except =>[:index, :show]
-  before_filter :find_invoice, :only => [:show, :edit, :destroy, :update]
+  before_filter :find_invoice, :only => [:show, :edit, :destroy, :update, :revert_draft, :open, :reopen, :pay]
   #before_filter :get_countries, :only => [:edit, :new]
   before_filter :get_currencies, :only => [:edit, :new]
-  
+  before_filter :set_user, :only => [:create, :update, :revert_draft, :open, :reopen, :pay]
+
   skip_before_filter :check_logged_in, :only => [:show]
 
   #load_and_authorize_resource :except => [:show]
@@ -63,9 +64,7 @@ class InvoicesController < BaseController
   #TODO create partial buttons and put into show part, create content for
 
   def new
-    
-
-
+  
     @invoice = StandardInvoice.new 
     authorize! :create, @invoice
     
@@ -118,6 +117,7 @@ class InvoicesController < BaseController
     if  current_company.clients.exists?(@invoice.client)
       if @invoice.save
         flash[:notice] =   "Successfully created invoice."
+        track_activity @invoice
         redirect_to @invoice
       else
         flash[:error] = "Please make sure fields are completed correctly"
@@ -136,7 +136,28 @@ class InvoicesController < BaseController
     #@invoice = Invoice.find(params[:id])
     authorize! :create, @invoice
   end
-
+  
+  def revert_draft
+    @invoice.revert_draft!
+    refresh_after_status_update "Invoice is in draft status", "changed back to draft"
+  end
+  
+  def open
+    @invoice.open!
+    refresh_after_status_update "Invoice is now open and ready for payment", "made open"
+  end
+  
+  def reopen
+    @invoice.open_again!
+    refresh_after_status_update "Invoice is now open and ready for payment", "reopened from draft"
+  end
+  
+  def pay
+    @invoice.pay!
+    refresh_after_status_update "Invoice marked as paid", "paid"
+  end
+  
+  
   def update
 
     @time = Time.now
@@ -145,41 +166,16 @@ class InvoicesController < BaseController
     #redirect if draft status
 
     respond_to do |format|
-    #@invoice.read_only => false
-      @invoice.update_user = current_user.email
-      #@invoice = Invoice.find(params[:id])
-      if params[:commit] == "revert_draft"
-        @invoice.revert_draft!
-        flash[:notice] =  "Invoice is in draft status"
-        format.html {redirect_to @invoice}
-      format.js
-      elsif params[:commit] == "open"
-        @invoice.open!
-        flash[:notice] =  "Invoice is now open and ready for payment"
-        format.html {redirect_to @invoice}
-      format.js
-      elsif params[:commit] == "open_again"
-        @invoice.open_again!
-        flash[:notice] =  "Invoice is now open and ready for payment"
-        format.html {redirect_to @invoice}
-      format.js
-      elsif params[:commit] == "pay"
-        @invoice.pay!
-        flash[:notice] = "Invoice marked as paid"
-        format.html{redirect_to @invoice}
-      format.js
-      else
-        if @invoice.update_attributes(params[:invoice])
-          flash[:notice] =  "Successfully updated invoice."
-          format.html{redirect_to @invoice}
-        format.js
+     
+        if @invoice.update_attributes(params[:invoice])  
+          refresh_after_status_update "Successfully updated invoice."
         else
-        flash[:error] = "Please make sure fields are completed correctly"
+          flash[:error] = "Please make sure fields are completed correctly"
           format.html {render :action => 'edit'}
           format.js { render :action => 'edit'}
         end
       end
-    end
+  
   end
 
   def destroy
@@ -229,9 +225,7 @@ class InvoicesController < BaseController
 
   def get_clients
     
-        @clients = current_company.clients.accessible_by(current_ability)#.accessible_by(current_ability, :read)
-
-    
+        @clients = current_company.clients.accessible_by(current_ability)#.accessible_by(current_ability, :read)    
   end
   
   def get_invoices
@@ -261,6 +255,21 @@ class InvoicesController < BaseController
 
   def get_currencies
     @currencies = all_currencies(Money::Currency.table)
+  end
+  
+  def set_user
+    @invoice.user =  current_user
+  end
+  
+  def refresh_after_status_update(message, action = params[:action])
+      respond_to do |format|
+        track_activity @invoice, action        
+        format.html {redirect_to @invoice}
+        format.js { render :action => 'update.js.erb'}
+      end
+      
+      flash[:notice] =  message
+      
   end
 
 end

@@ -34,6 +34,7 @@ class Invoice < ActiveRecord::Base
   scope :open, -> { where state: 'open' }  
  
   belongs_to :client
+  belongs_to :user
   
   has_many :invoice_items, :dependent => :destroy
   has_many :payments, :dependent => :destroy

@@ -1,0 +1,4 @@
+:plain
+    $('.modal').modal('hide');
+    $("#dashboard-centre").prepend("#{escape_javascript(render "shared/flash", :name => :notice, :msg => flash.discard(:notice))}");
+    $('#contacts').html("#{escape_javascript(render :partial => "contacts/contact", :object => @client)}")

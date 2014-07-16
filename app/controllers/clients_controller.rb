@@ -59,6 +59,8 @@ class ClientsController < BaseController
     respond_to do |format|
       if @client.save
         flash[:notice] = 'Client was successfully created.'
+        track_activity @client        
+        
         format.html { redirect_to :action => :index}
         format.xml  { render :xml => @client, :status => :created, :location => @client }
       else
@@ -78,6 +80,7 @@ class ClientsController < BaseController
         flash[:notice] = 'Client was successfully updated.'
         format.html { redirect_to(@client) }
         format.xml  { head :ok }
+        track_activity @client        
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @client.errors, :status => :unprocessable_entity }

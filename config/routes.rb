@@ -19,8 +19,6 @@ VisioInvoiceV3::Application.routes.draw do
   get "gocardless/setup_merchant"
   post "gocardless/webhook"
   
-
-
  end
  
  constraints(Subdomain) do
@@ -60,6 +58,13 @@ VisioInvoiceV3::Application.routes.draw do
         delete :delete_multiple
       end
       
+      member do 
+        put :revert_draft
+        put :open
+        put :reopen
+        put :pay
+      end
+      
       resources :deliveries, :shallow =>true do 
         collection do
           delete :delete_multiple
@@ -69,6 +74,12 @@ VisioInvoiceV3::Application.routes.draw do
       resources :payments,  :shallow =>true do  
         collection do
           delete :delete_multiple
+        end
+        member do 
+          get :new_paymill
+          put :create_paymill
+          put :create_paypal
+          put :create_gocardless
         end      
       end
       

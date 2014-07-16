@@ -1,0 +1,16 @@
+%table.table.table-hover.table-striped
+  %thead
+    %tr
+      %th
+      %th Name
+      %th Description
+      %th Unit
+      %th Price
+  %tbody
+    - for item in items
+      %tr{:id => "item-row-" + item.id.to_s}
+        %td= check_box_tag "item_ids[]", item.id
+        %td= link_to item.name, edit_item_path(item)
+        %td= item.description
+        %td= item.unit
+        %td= item.price

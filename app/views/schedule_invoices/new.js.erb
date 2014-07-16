@@ -1,0 +1,5 @@
+$("#invoice-main").prepend("<%= escape_javascript(render("new")) %>");;
+$('#cancel').bind('click', function() {
+  $('#new_schedule').hide('slow').empty();
+  return false;
+ });

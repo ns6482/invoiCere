@@ -1,0 +1,4 @@
+$('.modal').modal('hide');
+$("#items").html("<%= escape_javascript(render(:partial => "items", :locals => {:items => @items})) %>")
+$("#dashboard-centre").prepend("<%= escape_javascript(render "shared/flash", :name => :notice, :msg => flash.discard(:notice) )%>");
+

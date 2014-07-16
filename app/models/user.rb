@@ -2,6 +2,12 @@ class User < ActiveRecord::Base
   belongs_to :company
   #belongs_to :clients
   has_and_belongs_to_many :roles, :autosave => true
+  
+
+  has_many :activities
+  has_many :invoices
+
+
   #has_many :payments  
 
   # Include default devise modules. Others available are:

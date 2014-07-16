@@ -11,6 +11,7 @@ class Company < ActiveRecord::Base
   has_many :schedules, :through => :clients#, :source => :invoices
   has_many :payments, :through => :invoices
   has_many :items
+  has_many :activities, :through => :users
   
   has_many :summaries
   #has_many :schedules,  :finder_sql =>

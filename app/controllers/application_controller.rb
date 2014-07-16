@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   layout 'application'
   
   before_filter :set_mailer_url_options
-
   
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -71,6 +71,13 @@ class ApplicationController < ActionController::Base
       @current_ability ||= Ability.new(current_user)
     end
   end
+  
+  private
+  
+  def record_not_found 
+    render :text => "404 Not Found", :status => 404 
+  end
+ 
 
   #def authenticate_inviter!
   #  redirect_to root_path

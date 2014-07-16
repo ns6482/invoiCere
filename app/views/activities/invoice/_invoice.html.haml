@@ -1,0 +1,9 @@
+- if activity.trackable
+  %em
+    = activity.created_at.strftime "%c"
+  \:  Invoice
+  = link_to activity.trackable.title, activity.trackable
+  = activity.action
+  by
+  = activity.user.name
+  

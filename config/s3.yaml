@@ -1,7 +1,7 @@
 development:
   bucket: bucketlogo
-  access_key_id: AKIAJAPDHBWFPMUHSXCA
-  secret_access_key: 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
+  access_key_id: xxx
+  secret_access_key: xxx
   s3_host_name: 's3-eu-west-1.amazonaws.com'
 
 test:
